@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{ef382c18-c456-428f-9c15-458a51343df7}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lucie_Engine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Camera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CameraScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Component.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Entity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Enums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Graphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Layer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Material.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Math.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Mesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_PlayScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Script.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Shader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Texture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Time.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Camera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CameraScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Component.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Layer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Material.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Math.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Mesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_PlayScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Scene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Script.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Shader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Texture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Time.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Lu_Math.inl" />
+  </ItemGroup>
+</Project>
