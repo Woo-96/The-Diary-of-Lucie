@@ -40,6 +40,14 @@ namespace Lu
 		}
 	}
 
+	void Scene::Destroy()
+	{
+		for (Layer& layer : m_Layers)
+		{
+			layer.Destory();
+		}
+	}
+
 	void Scene::AddGameObject(eLayerType _Type, GameObject* _GameObj)
 	{
 		m_Layers[(int)_Type].AddGameObject(_GameObj);

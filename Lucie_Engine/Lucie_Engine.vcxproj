@@ -157,10 +157,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Engine_SOURCE\Lu_CameraScript.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="Lu_GridScript.h" />
+    <ClInclude Include="Lu_PlayScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp" />
     <ClCompile Include="Lucie_Engine.cpp" />
+    <ClCompile Include="Lu_GridScript.cpp" />
+    <ClCompile Include="Lu_PlayScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,6 +20,10 @@ using namespace DirectX::PackedVector;
 
 namespace Lu::math
 {
+    const float	PI = 3.14159f;
+    float RadianToDegree(float Radian);
+    float DegreeToRadian(float Degree);
+
     struct Vector2;
     struct Vector4;
     struct Matrix;

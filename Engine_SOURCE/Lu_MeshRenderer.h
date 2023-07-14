@@ -26,6 +26,11 @@ namespace Lu
 			m_Material = _Material;
 		}
 
+		std::shared_ptr<Material> GetMaterial() 
+		{ 
+			return m_Material; 
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;

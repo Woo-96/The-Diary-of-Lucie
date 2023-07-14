@@ -39,6 +39,9 @@ namespace Lu::graphics
 		bool CreateVertexShader(const void* _pShaderBytecode, SIZE_T _BytecodeLength, ID3D11VertexShader** _ppVertexShader);
 		bool CreatePixelShader(const void* _pShaderBytecode, SIZE_T _BytecodeLength, ID3D11PixelShader** _ppPixelShader);
 		bool CreateSampler(const D3D11_SAMPLER_DESC* _pSamplerDesc, ID3D11SamplerState** _ppSamplerState);
+		bool CreateRasterizeState(const D3D11_RASTERIZER_DESC* _pRasterizerDesc, ID3D11RasterizerState** _ppRasterizerState);
+		bool CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* _pDepthStencilDesc, ID3D11DepthStencilState** _ppDepthStencilState);
+		bool CreateBlendState(const D3D11_BLEND_DESC* _pBlendStateDesc, ID3D11BlendState** _ppBlendState);
 
 		void BindInputLayout(ID3D11InputLayout* _pInputLayout);
 		void BindPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology);
@@ -52,6 +55,10 @@ namespace Lu::graphics
 		void BindShaderResource(eShaderStage _Stage, UINT _StartSlot, ID3D11ShaderResourceView** _ppSRV);
 		void BindSampler(eShaderStage _Stage, UINT _StartSlot, ID3D11SamplerState** _ppSamplers);
 		void BindViewPort(D3D11_VIEWPORT* _ViewPort);
+		void BindRasterizeState(ID3D11RasterizerState* _pRasterizerState);
+		void BindDepthStencilState(ID3D11DepthStencilState* _pDepthStencilState);
+		void BindBlendState(ID3D11BlendState* _pBlendState);
+
 
 		void DrawIndexed(UINT _IndexCount, UINT _StartIndexLocation, INT _BaseVertexLocation);
 		void ClearTarget();

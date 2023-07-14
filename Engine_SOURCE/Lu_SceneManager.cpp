@@ -1,5 +1,4 @@
 #include "Lu_SceneManager.h"
-#include "Lu_PlayScene.h"
 
 namespace Lu
 {
@@ -8,9 +7,7 @@ namespace Lu
 
 	void SceneManager::Initialize()
 	{
-		m_ActiveScene = new PlayScene();
-		m_Scenes.insert(std::make_pair(L"PlayScene", m_ActiveScene));
-		m_ActiveScene->Initialize();
+
 	}
 
 	void SceneManager::Update()
@@ -28,9 +25,14 @@ namespace Lu
 		m_ActiveScene->Render();
 	}
 
+	void SceneManager::Destroy()
+	{
+		m_ActiveScene->Destroy();
+	}
+
 	void SceneManager::Release()
 	{
-		for (auto iter : m_Scenes)
+		for (auto& iter : m_Scenes)
 		{
 			delete iter.second;
 			iter.second = nullptr;

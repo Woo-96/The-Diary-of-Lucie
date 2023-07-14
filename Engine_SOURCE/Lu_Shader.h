@@ -29,6 +29,31 @@ namespace Lu
 		Microsoft::WRL::ComPtr<ID3D11GeometryShader>	m_GS;
 		Microsoft::WRL::ComPtr<ID3D11PixelShader>		m_PS;
 
+		eRSType											m_RSType;
+		eDSType											m_DSType;
+		eBSType											m_BSType;
+
+	public:
+		void SetRSState(eRSType _Type) 
+		{ 
+			m_RSType = _Type;
+		}
+
+		void SetDSState(eDSType _Type)
+		{ 
+			m_DSType = _Type;
+		}
+
+		void SetBSState(eBSType _Type)
+		{ 
+			m_BSType = _Type;
+		}
+
+		void SetTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology)
+		{
+			m_Topology = _Topology;
+		}
+
 	public:
 		ID3DBlob* GetVSCode()
 		{

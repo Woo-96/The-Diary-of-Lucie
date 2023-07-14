@@ -1,3 +1,4 @@
+#include "globals.hlsli"
 
 struct VSIn
 {
@@ -13,16 +14,27 @@ struct VSOut
     float2 UV : TEXCOORD;
 };
 
-Texture2D smileTexture : register(t0);
-
-SamplerState pointSampler : register(s0);
-SamplerState anisotropicSampler : register(s1);
-
 
 float4 main(VSOut In) : SV_TARGET
 {
-    float4 color = (float) 0.0f;
-    color = smileTexture.Sample(anisotropicSampler, In.UV);
+    float4 color = (float4) 0.0f;
+    //color.r = 1.0f;
+    //color.b = 1.0f;
+    
+    //if (In.UV.y < 0.2f)
+    //{
+    //    discard;
+    //}
+    //else
+    //{
+    //    color = albedoTexture.Sample(anisotropicSampler, In.UV);
+    //}
+    
+    
+    color = albedoTexture.Sample(anisotropicSampler, In.UV);
+    
+    if (color.a <= 0.0f)
+        discard;
     
     return color;
 }

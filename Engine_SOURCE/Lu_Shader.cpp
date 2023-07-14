@@ -1,5 +1,5 @@
 #include "Lu_Shader.h"
-
+#include "Lu_Renderer.h"
 
 namespace Lu
 {
@@ -7,12 +7,18 @@ namespace Lu
 		: Resource(enums::eResourceType::Shader)
 		, m_InputLayout(nullptr)
 		, m_Topology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+		, m_RSType(eRSType::SolidBack)
+		, m_DSType(eDSType::Less)
+		, m_BSType(eBSType::AlphaBlend)
 	{
+
 	}
+
 	Shader::~Shader()
 	{
 		m_InputLayout->Release();
 	}
+
 	bool Shader::Create(const eShaderStage _Stage
 		, const std::wstring& _FileName
 		, const std::string& _FuncName)
@@ -40,6 +46,7 @@ namespace Lu
 
 		return true;
 	}
+
 	void Shader::Binds()
 	{
 		GetDevice()->BindPrimitiveTopology(m_Topology);
@@ -47,7 +54,16 @@ namespace Lu
 
 		GetDevice()->BindVertexShader(m_VS.Get());
 		GetDevice()->BindPixelShader(m_PS.Get());
+
+		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rsState = renderer::rasterizerStates[(UINT)m_RSType];
+		//Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)m_DSType];
+		Microsoft::WRL::ComPtr<ID3D11BlendState> bsState = renderer::blendStates[(UINT)m_BSType];
+
+		GetDevice()->BindRasterizeState(rsState.Get());
+		//GetDevice()->BindDepthStencilState(dsState.Get());
+		GetDevice()->BindBlendState(bsState.Get());
 	}
+
 	HRESULT Shader::Load(const std::wstring& _Path)
 	{
 		return E_NOTIMPL;

@@ -19,22 +19,56 @@ namespace Lu
 		virtual ~Camera();
 
 	private:
-		static Matrix		m_View;
-		static Matrix		m_Projection;
+		static Matrix	View;
+		static Matrix	Projection;
 
-		eProjectionType		m_Type;
-		float				m_AspectRatio;
-		float				m_Near;
-		float				m_Far;
-		float				m_Size;	// 시야 (클 수록 더 넓은 시야)
+		Matrix			m_View;
+		Matrix			m_Projection;
+
+		eProjectionType m_Type;
+		float			m_AspectRatio;
+		float			m_Near;
+		float			m_Far;
+		float			m_Scale;
+
+		std::bitset<(UINT)eLayerType::End>	m_LayerMask;
+		std::vector<GameObject*>			m_OpaqueGameObjects;
+		std::vector<GameObject*>			m_CutOutGameObjects;
+		std::vector<GameObject*>			m_TransparentGameObjects;
 
 	public:
-		static Matrix GetViewMatrix() 
+		static void SetGpuViewMatrix(Matrix view)
+		{
+			View = view;
+		}
+
+		static void SetGpuProjectionMatrix(Matrix projection)
+		{
+			Projection = projection;
+		}
+
+	public:
+		static Matrix& GetGpuViewMatrix() 
+		{ 
+			return View; 
+		}
+
+		static Matrix& GetGpuProjectionMatrix() 
+		{ 
+			return Projection; 
+		}
+
+		float GetScale() 
+		{ 
+			return m_Scale; 
+		}
+
+		Matrix& GetViewMatrix() 
 		{ 
 			return m_View; 
 		}
 
-		static Matrix GetProjectionMatrix() 
+		Matrix& GetProjectionMatrix() 
 		{ 
 			return m_Projection; 
 		}
@@ -48,5 +82,27 @@ namespace Lu
 	public:
 		bool CreateViewMatrix();
 		bool CreateProjectionMatrix(eProjectionType _Type);
+		void RegisterCameraInRenderer();
+
+		void TurnLayerMask(eLayerType _Type, bool _Enable = true);
+		void EnableLayerMasks()
+		{
+			m_LayerMask.set();
+		}
+
+		void DisableLayerMasks()
+		{
+			m_LayerMask.reset();
+		}
+
+		void AlphaSortGameObjects();
+		void ZSortTransparencyGameObjects();
+		void DivideAlphaBlendGameObjects(const std::vector<GameObject*> _GameObjs);
+		void RenderOpaque();
+		void RenderCutOut();
+		void RenderTransparent();
+
+		void EnableDepthStencilState();
+		void DisableDepthStencilState();
 	};
 }

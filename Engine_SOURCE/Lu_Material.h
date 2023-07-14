@@ -15,6 +15,8 @@ namespace Lu::graphics
 		std::shared_ptr<Shader>		m_Shader;
 		std::shared_ptr<Texture>	m_Texture;
 
+		eRenderingMode				m_Mode;
+
 	public:
 		void SetShader(std::shared_ptr<Shader> _Shader)
 		{ 
@@ -24,6 +26,17 @@ namespace Lu::graphics
 		void SetTexture(std::shared_ptr<Texture> _Texture)
 		{ 
 			m_Texture = _Texture;
+		}
+
+		void SetRenderingMode(eRenderingMode _Mode) 
+		{ 
+			m_Mode = _Mode; 
+		}
+
+	public:
+		eRenderingMode GetRenderingMode() 
+		{ 
+			return m_Mode;
 		}
 
 	public:

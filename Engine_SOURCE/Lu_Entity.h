@@ -11,7 +11,7 @@ namespace Lu
 
 	private:
 		std::wstring	m_Name;
-		UINT64			m_ID;
+		UINT64			m_ColliderID;
 
 	public:
 		void SetName(const std::wstring& _Name) 
@@ -21,7 +21,7 @@ namespace Lu
 
 		void SetID(UINT64 _ID) 
 		{ 
-			m_ID = _ID;
+			m_ColliderID = _ID;
 		}
 
 	public:
@@ -32,7 +32,7 @@ namespace Lu
 
 		UINT64 GetID() const
 		{ 
-			return m_ID; 
+			return m_ColliderID;
 		}
 	};
 }

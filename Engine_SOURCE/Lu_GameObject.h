@@ -8,7 +8,7 @@ namespace Lu
 	class GameObject : public Entity
 	{
 	public:
-		enum eState
+		enum class eState
 		{
 			Active,
 			Paused,
@@ -23,6 +23,18 @@ namespace Lu
 		eState					m_State;
 		std::vector<Component*> m_Components;
 		std::vector<Script*>	m_Scripts;
+
+	public:
+		void SetState(eState _State)
+		{ 
+			m_State = _State;
+		}
+
+	public:
+		eState GetState()
+		{ 
+			return m_State; 
+		}
 
 	public:
 		virtual void Initialize();
@@ -50,6 +62,29 @@ namespace Lu
 			}
 
 			return nullptr;
+		}
+
+		template <typename T>
+		const std::vector<T*>& GetComponents()
+		{
+			std::vector<T*> comps;
+
+			T* component;
+			for (Component* comp : m_Components)
+			{
+				component = dynamic_cast<T*>(comp);
+				if (component != nullptr)
+					comps.push_back(component);
+			}
+
+			for (Script* script : m_Scripts)
+			{
+				component = dynamic_cast<T*>(script);
+				if (component != nullptr)
+					comps.push_back(component);
+			}
+
+			return comps;
 		}
 
 		template <typename T>

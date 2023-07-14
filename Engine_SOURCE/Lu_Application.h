@@ -44,6 +44,8 @@ namespace Lu
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Destroy();
+		void Present();
 
 	public:
 		void SetWindow(HWND _hWnd, UINT _Width, UINT _Height);

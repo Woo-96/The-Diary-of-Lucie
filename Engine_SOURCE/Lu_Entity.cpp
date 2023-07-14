@@ -4,7 +4,7 @@ namespace Lu
 {
 	Entity::Entity()
 		: m_Name(L"")
-		, m_ID((UINT64)this)
+		, m_ColliderID((UINT64)this)
 	{
 
 	}

@@ -67,6 +67,27 @@
     <Filter Include="GameObject\Component\Camera">
       <UniqueIdentifier>{dfb53166-2f64-4b7c-b035-7c723b3af490}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\ConstantBuffer">
+      <UniqueIdentifier>{92ced349-ad95-4522-b533-5e114c62acc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GraphicDevice">
+      <UniqueIdentifier>{dd2d4628-a69b-4de1-9e6a-2686212d5727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{3e085398-d05c-453d-9c75-68a84f7dacaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Object">
+      <UniqueIdentifier>{e7ec1da9-d4fd-451b-a6e0-f69af1c4108e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Collider">
+      <UniqueIdentifier>{3fc83080-ce3f-4f23-a1b7-730c11a6bd1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manager\CollisionMgr">
+      <UniqueIdentifier>{10890c5d-6872-4afb-b62d-e81bf02b146f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manager\SceneMgr">
+      <UniqueIdentifier>{917def0c-b899-4528-ba8c-23ccc5d90ead}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -87,9 +108,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Time.h">
       <Filter>Common\Time</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Graphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
@@ -104,12 +122,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resources.h">
       <Filter>Resource\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Mesh.h">
       <Filter>Resource\Mesh</Filter>
@@ -129,10 +141,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Layer.h">
       <Filter>Scene\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h">
-      <Filter>Scene\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_PlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -148,9 +156,29 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Material.h">
       <Filter>Resource\Material</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CameraScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Camera.h">
       <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.h">
+      <Filter>Graphics\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.h">
+      <Filter>Graphics\GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Object.h">
+      <Filter>Common\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h">
+      <Filter>GameObject\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h">
+      <Filter>Scene\Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h">
+      <Filter>Scene\Manager\CollisionMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +191,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Time.cpp">
       <Filter>Common\Time</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Application.cpp">
       <Filter>High Level Interface</Filter>
     </ClCompile>
@@ -177,12 +202,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resources.cpp">
       <Filter>Resource\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp">
-      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Mesh.cpp">
       <Filter>Resource\Mesh</Filter>
@@ -202,10 +221,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Layer.cpp">
       <Filter>Scene\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp">
-      <Filter>Scene\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_PlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -221,9 +236,26 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Material.cpp">
       <Filter>Resource\Material</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CameraScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Camera.cpp">
       <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp">
+      <Filter>Graphics\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp">
+      <Filter>Graphics\GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp">
+      <Filter>GameObject\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp">
+      <Filter>Scene\Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp">
+      <Filter>Scene\Manager\CollisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

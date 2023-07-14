@@ -10,15 +10,17 @@ namespace Lu
 		virtual ~Transform();
 
 	private:
-		Vector3 m_Position;
-		Vector3 m_Rotation;
-		Vector3 m_Scale;
+		Vector3		m_Position;
+		Vector3		m_Rotation;
+		Vector3		m_Scale;
 
-		Vector3 m_Up;
-		Vector3 m_Foward;
-		Vector3 m_Right;
+		Vector3		m_Up;
+		Vector3		m_Foward;
+		Vector3		m_Right;
 
-		Matrix	m_World;
+		Matrix		m_World;
+
+		Transform*	m_Parent;
 
 	public:
 		void SetPosition(Vector3 position) 
@@ -51,6 +53,11 @@ namespace Lu
 			m_Scale = Vector3(x, y, z); 
 		}
 
+		void SetParent(Transform* _Transform) 
+		{
+			m_Parent = _Transform;
+		}
+
 	public:
 		Vector3 GetPosition()
 		{ 
@@ -80,6 +87,11 @@ namespace Lu
 		Vector3 Up() 
 		{ 
 			return m_Up; 
+		}
+
+		Transform* GetParent() 
+		{ 
+			return m_Parent;
 		}
 
 	public:

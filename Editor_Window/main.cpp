@@ -3,9 +3,16 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
-#include "Lu_Application.h"
-#include "Lu_Renderer.h"
-#include "Lu_SceneManager.h"
+#include "..\Engine_SOURCE\Lu_Application.h"
+#include "..\Engine_SOURCE\Lu_Renderer.h"
+#include "LoadScenes.h"
+#include "guiEditor.h"
+
+#ifdef _DEBUG
+#pragma comment(lib, "..\\x64\\Debug\\Lucie_Engine.lib")
+#else
+#pragma comment(lib, "..\\x64\\Release\\Lucie_Engine.lib")
+#endif
 
 Lu::Application application;
 
@@ -71,11 +78,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             application.Run();
+            gui::Editor::Run();
+            application.Present();
         }
     }
 
     renderer::Release();
     Lu::SceneManager::Release();
+    gui::Editor::Release();
 
     return (int) msg.wParam;
 }
@@ -101,7 +111,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_EDITORWINDOW));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EDITORWINDOW);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_STATIC);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -122,19 +132,22 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
+   // 루시 창모드 960, 540인데 너무 작다..
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, 960, 540, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, 1600, 900, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
-   application.SetWindow(hWnd, 960, 540);
+   application.SetWindow(hWnd, 1600, 900);
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
    application.Initialize();
+   Lu::InitializeScenes();
+   gui::Editor::Initialize();
 
    return TRUE;
 }

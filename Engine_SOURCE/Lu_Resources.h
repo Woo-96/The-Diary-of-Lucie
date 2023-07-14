@@ -14,8 +14,7 @@ namespace Lu
 		{
 			std::map<std::wstring, std::shared_ptr<Resource>>::iterator iter = m_Resources.find(_Key);
 
-			if (iter != 
-				m_Resources.end())
+			if (iter != m_Resources.end())
 			{
 				return std::dynamic_pointer_cast<T>(iter->second);
 			}

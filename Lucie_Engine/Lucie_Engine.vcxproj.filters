@@ -2,19 +2,49 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Lucie_Engine.cpp" />
+    <ClCompile Include="Lu_GridScript.cpp">
+      <Filter>Contents\Script\GridScript</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp">
+      <Filter>Contents\Script\CameraScript</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_PlayScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LoadScenes.h">
+      <Filter>Contents\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_GridScript.h">
+      <Filter>Contents\Script\GridScript</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine_SOURCE\Lu_CameraScript.h">
+      <Filter>Contents\Script\CameraScript</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_PlayScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Load">
-      <UniqueIdentifier>{4f2fc5ae-3b3f-426a-9d6f-739aea796745}</UniqueIdentifier>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{0eecfbb3-ca80-413e-b7ab-ea760cdc0a53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
+    <Filter Include="Contents\Script">
+      <UniqueIdentifier>{a394b86b-cc84-4e7d-ab8d-d715a1713c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
       <UniqueIdentifier>{c7f31b4a-07c9-466c-ab3b-c555f56f7e8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script">
-      <UniqueIdentifier>{a394b86b-cc84-4e7d-ab8d-d715a1713c41}</UniqueIdentifier>
+    <Filter Include="Contents\Load">
+      <UniqueIdentifier>{4f2fc5ae-3b3f-426a-9d6f-739aea796745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\GridScript">
+      <UniqueIdentifier>{a62faa5e-a96d-466a-836f-1505a6ed6cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\CameraScript">
+      <UniqueIdentifier>{2c671ee4-1313-4100-9397-7f7b1a1cac5c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

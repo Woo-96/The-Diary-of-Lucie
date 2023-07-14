@@ -1,5 +1,5 @@
 #pragma once
-#include "Lu_Scene.h"
+#include "..\Engine_SOURCE\Lu_Scene.h"
 
 namespace Lu
 {

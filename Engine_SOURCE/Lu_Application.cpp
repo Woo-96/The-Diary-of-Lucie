@@ -25,6 +25,7 @@ namespace Lu
 		Update();
 		LateUpdate();
 		Render();
+		Destroy();
 	}
 
 	void Application::Initialize()
@@ -54,9 +55,18 @@ namespace Lu
 
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
-		SceneManager::Render();
-		//graphicDevice->Draw();
 
+		renderer::Render();
+		//graphicDevice->Draw();
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
+	}
+
+	void Application::Present()
+	{
 		graphicDevice->Present();
 	}
 

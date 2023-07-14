@@ -12,6 +12,7 @@ namespace Lu
 		, m_Position(Vector3::Zero)
 		, m_Rotation(Vector3::Zero)
 		, m_Scale(Vector3::One)
+		, m_Parent(nullptr)
 	{
 	}
 
@@ -46,6 +47,11 @@ namespace Lu
 		m_Up = Vector3::TransformNormal(Vector3::Up, rotation);
 		m_Foward = Vector3::TransformNormal(Vector3::Forward, rotation);
 		m_Right = Vector3::TransformNormal(Vector3::Right, rotation);
+
+		if (m_Parent)
+		{
+			m_World *= m_Parent->m_World;
+		}
 	}
 
 	void Transform::Render()
@@ -57,10 +63,10 @@ namespace Lu
 	{
 		renderer::TransformCB trCB = {};
 		trCB.mWorld = m_World;
-		trCB.mView = Camera::GetViewMatrix();
-		trCB.mProjection = Camera::GetProjectionMatrix();
+		trCB.mView = Camera::GetGpuViewMatrix();
+		trCB.mProjection = Camera::GetGpuProjectionMatrix();
 
-		ConstantBuffer* cb = renderer::m_ConstantBuffer[(UINT)eCBType::Transform];
+		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
 		cb->SetData(&trCB);
 		cb->Bind(eShaderStage::VS);
 	}

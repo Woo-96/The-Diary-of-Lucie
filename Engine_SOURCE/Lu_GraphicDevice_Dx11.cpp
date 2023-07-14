@@ -216,6 +216,30 @@ namespace Lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateRasterizeState(const D3D11_RASTERIZER_DESC* _pRasterizerDesc, ID3D11RasterizerState** _ppRasterizerState)
+	{
+		if (FAILED(m_Device->CreateRasterizerState(_pRasterizerDesc, _ppRasterizerState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* _pDepthStencilDesc, ID3D11DepthStencilState** _ppDepthStencilState)
+	{
+		if (FAILED(m_Device->CreateDepthStencilState(_pDepthStencilDesc, _ppDepthStencilState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateBlendState(const D3D11_BLEND_DESC* _pBlendStateDesc, ID3D11BlendState** _ppBlendState)
+	{
+		if (FAILED(m_Device->CreateBlendState(_pBlendStateDesc, _ppBlendState)))
+			return false;
+
+		return true;
+	}
+
 	void GraphicDevice_Dx11::BindInputLayout(ID3D11InputLayout* _pInputLayout)
 	{
 		m_Context->IASetInputLayout(_pInputLayout);
@@ -353,6 +377,21 @@ namespace Lu::graphics
 	void GraphicDevice_Dx11::BindViewPort(D3D11_VIEWPORT* _ViewPort)
 	{
 		m_Context->RSSetViewports(1, _ViewPort);
+	}
+
+	void GraphicDevice_Dx11::BindRasterizeState(ID3D11RasterizerState* _pRasterizerState)
+	{
+		m_Context->RSSetState(_pRasterizerState);
+	}
+
+	void GraphicDevice_Dx11::BindDepthStencilState(ID3D11DepthStencilState* _pDepthStencilState)
+	{
+		m_Context->OMSetDepthStencilState(_pDepthStencilState, 0);
+	}
+
+	void GraphicDevice_Dx11::BindBlendState(ID3D11BlendState* _pBlendState)
+	{
+		m_Context->OMSetBlendState(_pBlendState, nullptr, 0xffffffff);
 	}
 
 	void GraphicDevice_Dx11::DrawIndexed(UINT _IndexCount, UINT _StartIndexLocation, INT _BaseVertexLocation)

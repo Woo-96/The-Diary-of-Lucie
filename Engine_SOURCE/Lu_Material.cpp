@@ -6,6 +6,7 @@ namespace Lu::graphics
 		: Resource(Lu::enums::eResourceType::Material)
 		, m_Shader(nullptr)
 		, m_Texture(nullptr)
+		, m_Mode(eRenderingMode::Opaque)
 	{
 
 	}
@@ -17,13 +18,17 @@ namespace Lu::graphics
 
 	void Material::Binds()
 	{
-		m_Texture->BindShader(eShaderStage::PS, 0);
-		m_Shader->Binds();
+		if (m_Texture)
+			m_Texture->BindShader(eShaderStage::PS, 0);
+
+		if (m_Shader)
+			m_Shader->Binds();
 	}
 
 	void Material::Clear()
 	{
-		m_Texture->Clear();
+		if (m_Texture)
+			m_Texture->Clear();
 	}
 
 	HRESULT Material::Load(const std::wstring& _Path)

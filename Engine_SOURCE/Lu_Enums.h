@@ -6,20 +6,21 @@ namespace Lu::enums
 	{
 		None,
 		Transform,	// 위치 정보 업데이트가 가장 먼저 이루어져야 함
-		Mesh,
-		Particle,
 		MeshRenderer,
-		Script,
+		Collider2D,
 		Camera,
+		Particle,
+		Script,
 		End,
 	};
 
 	enum class eLayerType
 	{
+		Grid,
 		Player,
 		Monster,
 		UI,
-		End,
+		End = 16,
 	};
 
 	enum class eResourceType
@@ -28,6 +29,15 @@ namespace Lu::enums
 		Shader,
 		Material,
 		Mesh,
+		End,
+	};
+
+	enum class eColliderType
+	{
+		Rect,
+		Circle,
+		Sphere,
+		Cube,
 		End,
 	};
 }
