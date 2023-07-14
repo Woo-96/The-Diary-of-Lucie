@@ -87,4 +87,17 @@ namespace Lu
 	{
 		Scene::Render();
 	}
+
+	void PlayScene::Destroy()
+	{
+		Scene::Destroy();
+	}
+
+	void PlayScene::OnEnter()
+	{
+	}
+
+	void PlayScene::OnExit()
+	{
+	}
 }

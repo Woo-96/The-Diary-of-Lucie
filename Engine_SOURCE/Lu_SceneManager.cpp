@@ -41,12 +41,11 @@ namespace Lu
 
 	Scene* SceneManager::LoadScene(std::wstring _Name)
 	{
-		std::map<std::wstring, Scene*>::iterator iter
-			= m_Scenes.find(_Name);
+		std::map<std::wstring, Scene*>::iterator iter = m_Scenes.find(_Name);
 
 		if (iter == m_Scenes.end())
 			return nullptr;
-
+		
 		m_ActiveScene->OnExit();
 		m_ActiveScene = iter->second;
 		m_ActiveScene->OnEnter();

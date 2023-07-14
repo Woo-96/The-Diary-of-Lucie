@@ -11,7 +11,8 @@ namespace Lu
 		virtual ~Scene();
 
 	private:
-		std::vector<Layer> m_Layers;
+		std::vector<Layer>	m_Layers;
+		class Camera*		m_MainCam;
 
 	public:
 		Layer& GetLayer(eLayerType type)

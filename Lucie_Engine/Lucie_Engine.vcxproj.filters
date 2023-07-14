@@ -11,6 +11,15 @@
     <ClCompile Include="Lu_PlayScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_TitleScene.cpp">
+      <Filter>Contents\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_TutorialScene.cpp">
+      <Filter>Contents\Scene\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_LobbyScene.cpp">
+      <Filter>Contents\Scene\Lobby</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -25,6 +34,15 @@
     </ClInclude>
     <ClInclude Include="Lu_PlayScene.h">
       <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TitleScene.h">
+      <Filter>Contents\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TutorialScene.h">
+      <Filter>Contents\Scene\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_LobbyScene.h">
+      <Filter>Contents\Scene\Lobby</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +63,18 @@
     </Filter>
     <Filter Include="Contents\Script\CameraScript">
       <UniqueIdentifier>{2c671ee4-1313-4100-9397-7f7b1a1cac5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Title">
+      <UniqueIdentifier>{31035cae-c1ad-4aaa-881e-2085858abd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Tutorial">
+      <UniqueIdentifier>{92e97e97-c93a-4c62-ad16-69667728df45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Lobby">
+      <UniqueIdentifier>{6b21e0a6-8745-432e-8212-46d6bb05bd89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage">
+      <UniqueIdentifier>{ce7ddf80-f313-4cca-8c3f-43262205cc57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

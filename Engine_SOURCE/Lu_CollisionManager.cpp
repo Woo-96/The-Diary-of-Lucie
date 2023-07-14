@@ -127,9 +127,9 @@ namespace Lu
 			// 분리축 테스트 4회
 			for (int i = 0; i < 4; ++i)
 			{
-				float projDist;
+				float projDist = 0.f;
 
-				float centerDist;
+				float centerDist = 0.f;
 
 				if (projDist < centerDist)
 					return false;

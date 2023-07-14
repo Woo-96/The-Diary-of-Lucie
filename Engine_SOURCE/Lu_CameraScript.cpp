@@ -6,40 +6,39 @@
 
 namespace Lu
 {
+	CameraScript::CameraScript()
+		: m_Speed(500.f)
+	{
+
+	}
+
+	CameraScript::~CameraScript()
+	{
+
+	}
+
 	void CameraScript::Update()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector3 pos = tr->GetPosition();
+		Transform* pTransform = GetOwner()->GetComponent<Transform>();
+		Vector3 vPos = pTransform->GetPosition();
 
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKey(eKeyCode::LEFT))
 		{
-			pos.z += 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			vPos.x -= m_Speed * Time::DeltaTime();
 		}
-		else if (Input::GetKey(eKeyCode::S))
+		else if (Input::GetKey(eKeyCode::RIGHT))
 		{
-			pos.z -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			vPos.x += m_Speed * Time::DeltaTime();
 		}
-		else if (Input::GetKey(eKeyCode::A))
+		else if (Input::GetKey(eKeyCode::DOWN))
 		{
-			pos.x -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			vPos.y -= m_Speed * Time::DeltaTime();
 		}
-		else if (Input::GetKey(eKeyCode::D))
+		else if (Input::GetKey(eKeyCode::UP))
 		{
-			pos.x += 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			vPos.y += m_Speed * Time::DeltaTime();
 		}
-		else if (Input::GetKey(eKeyCode::Q))
-		{
-			pos.y -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::E))
-		{
-			pos.y += 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
+
+		pTransform->SetPosition(vPos);
 	}
 }

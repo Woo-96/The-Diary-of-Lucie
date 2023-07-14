@@ -307,8 +307,7 @@ namespace renderer
 
 	void LoadMaterial()
 	{
-		std::shared_ptr<Shader> spriteShader
-			= Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 
 
 		std::shared_ptr<Texture> texture
@@ -340,6 +339,67 @@ namespace renderer
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
 
+#pragma region	Title Scene Resources
+		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		// 타이틀 백그라운드
+		std::shared_ptr<Texture> pTexture = Resources::Load<Texture>(L"TitleBG", L"..\\Resources\\Texture\\Map\\Title\\TtitleBG.png");
+		std::shared_ptr<Material> pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"TitleBGMtrl", pMaterial);
+
+		// 루시
+		pTexture = Resources::Load<Texture>(L"Lucie", L"..\\Resources\\Texture\\Map\\Title\\Lucie.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"LucieMtrl", pMaterial);
+
+		// 마리 
+		pTexture = Resources::Load<Texture>(L"Mary", L"..\\Resources\\Texture\\Map\\Title\\Mary.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MaryMtrl", pMaterial);
+
+		// 아이오네
+		pTexture = Resources::Load<Texture>(L"Ione", L"..\\Resources\\Texture\\Map\\Title\\Ione.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"IoneMtrl", pMaterial);
+
+		// 타이틀 문구
+		pTexture = Resources::Load<Texture>(L"Title", L"..\\Resources\\Texture\\Map\\Title\\Title.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"TitleMtrl", pMaterial);
+#pragma endregion
+#pragma region Tutorial Scene Resources
+		//pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		// 튜토리얼 더미
+		pTexture = Resources::Load<Texture>(L"TutoDummy", L"..\\Resources\\Texture\\Map\\Tutorial\\TutoDummy.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"TutorialBossRoomMtrl", pMaterial);
+#pragma endregion
+#pragma region Lobby Scene Resources
+		//pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		pTexture = Resources::Load<Texture>(L"Room", L"..\\Resources\\Texture\\Map\\Lobby\\Room.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"RoomMtrl", pMaterial);
+#pragma endregion
 	}
 
 	void Initialize()

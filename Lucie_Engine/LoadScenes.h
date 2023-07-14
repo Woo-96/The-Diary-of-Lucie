@@ -1,7 +1,8 @@
 #pragma once
-//#include "Lu_SceneManager.h"
 #include "..\Engine_SOURCE\Lu_SceneManager.h"
-#include "Lu_PlayScene.h"
+#include "Lu_TitleScene.h"
+#include "Lu_TutorialScene.h"
+#include "Lu_LobbyScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\Lucie_Engine.lib")
@@ -13,6 +14,10 @@ namespace Lu
 {
 	void InitializeScenes()
 	{
-		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		SceneManager::CreateScene<TitleScene>(L"TitleScene");
+		SceneManager::CreateScene<TutorialScene>(L"TutorialScene");
+		SceneManager::CreateScene<LobbyScene>(L"LobbyScene");
+
+		SceneManager::LoadScene(L"TitleScene");
 	}
 }

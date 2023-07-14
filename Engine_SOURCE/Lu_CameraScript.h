@@ -6,6 +6,13 @@ namespace Lu
 	class CameraScript : public Script
 	{
 	public:
+		CameraScript();
+		virtual ~CameraScript();
+
+	private:
+		float m_Speed;
+
+	public:
 		virtual void Update() override;
 	};
 }

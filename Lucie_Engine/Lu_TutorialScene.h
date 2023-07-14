@@ -1,14 +1,13 @@
 #pragma once
-//#include <Lu_Scene.h>
 #include "..\Engine_SOURCE\Lu_Scene.h"
 
 namespace Lu
 {
-	class PlayScene : public Scene
+	class TutorialScene : public Scene
 	{
 	public:
-		PlayScene();
-		virtual ~PlayScene();
+		TutorialScene();
+		virtual ~TutorialScene();
 
 	public:
 		virtual void Initialize() override;

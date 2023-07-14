@@ -34,16 +34,16 @@ namespace gui
 
 
 		// Grid
-		EditorObject* grid = new EditorObject();
-		grid->SetName(L"Grid");
+		//EditorObject* grid = new EditorObject();
+		//grid->SetName(L"Grid");
 
-		mr = grid->AddComponent<Lu::MeshRenderer>();
-		mr->SetMesh(Lu::Resources::Find<Lu::Mesh>(L"RectMesh"));
-		mr->SetMaterial(Lu::Resources::Find<Lu::Material>(L"GridMaterial"));
-		Lu::GridScript* gridSc = grid->AddComponent<Lu::GridScript>();
-		gridSc->SetCamera(renderer::cameras[0]);
+		//mr = grid->AddComponent<Lu::MeshRenderer>();
+		//mr->SetMesh(Lu::Resources::Find<Lu::Mesh>(L"RectMesh"));
+		//mr->SetMaterial(Lu::Resources::Find<Lu::Material>(L"GridMaterial"));
+		//Lu::GridScript* gridSc = grid->AddComponent<Lu::GridScript>();
+		//gridSc->SetCamera(renderer::cameras[0]);
 
-		m_EditorObjects.push_back(grid);
+		//m_EditorObjects.push_back(grid);
 
 	}
 	void Editor::Run()

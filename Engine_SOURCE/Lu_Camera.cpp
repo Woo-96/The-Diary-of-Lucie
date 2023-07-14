@@ -14,7 +14,7 @@ namespace Lu
 	bool CompareZSort(GameObject* a, GameObject* b)
 	{
 		if (a->GetComponent<Transform>()->GetPosition().z
-			< b->GetComponent<Transform>()->GetPosition().z)
+			<= b->GetComponent<Transform>()->GetPosition().z)
 			return false;
 
 		return true;
@@ -31,7 +31,7 @@ namespace Lu
 		, m_AspectRatio(1.0f)
 		, m_Near(1.0f)
 		, m_Far(1000.0f)
-		, m_Scale(5.f)
+		, m_Scale(1.f)
 		, m_LayerMask{}
 	{
 		EnableLayerMasks();
@@ -77,8 +77,8 @@ namespace Lu
 		Vector3 pos = tr->GetPosition();
 
 		// View Translate Matrix
-		View = Matrix::Identity;
-		View *= Matrix::CreateTranslation(-pos);
+		m_View = Matrix::Identity;
+		m_View *= Matrix::CreateTranslation(-pos);
 
 		// View Rotation Matrix
 		Vector3 up = tr->Up();
@@ -89,7 +89,7 @@ namespace Lu
 		viewRotate._11 = right.x;	viewRotate._12 = up.x;	viewRotate._13 = foward.x;
 		viewRotate._21 = right.y;	viewRotate._22 = up.y;	viewRotate._23 = foward.y;
 		viewRotate._31 = right.z;	viewRotate._32 = up.z;	viewRotate._33 = foward.z;
-		View *= viewRotate;
+		m_View *= viewRotate;
 
 		return true;
 	}
@@ -104,15 +104,15 @@ namespace Lu
 
 		if (type == eProjectionType::OrthoGraphic)
 		{
-			float OrthorGraphicRatio = m_Scale / 1000.f;
-			width *= OrthorGraphicRatio;
-			height *= OrthorGraphicRatio;
-			m_Projection = Matrix::CreateOrthographicLH(width, height, m_Near, m_Far);
+			//float OrthorGraphicRatio = m_Scale / 1000.f;
+			//width *= OrthorGraphicRatio;
+			//height *= OrthorGraphicRatio;
+			//m_Projection = Matrix::CreateOrthographicLH(width, height, m_Near, m_Far);
 
 
-			//m_Projection = XMMatrixOrthographicLH(width * (1.f / m_Scale), height * (1.f / m_Size), m_Near, m_Far);
+			//m_Projection = XMMatrixOrthographicLH(width * (1.f / m_Scale), height * (1.f / m_Scale), m_Near, m_Far);
 
-			//m_Projection = Matrix::CreateOrthographicLH(width * (1.f / m_Scale), height * (1.f / m_Scale), m_Near, m_Far);
+			m_Projection = Matrix::CreateOrthographicLH(width * (1.f / m_Scale), height * (1.f / m_Scale), m_Near, m_Far);
 		}
 		else
 		{
