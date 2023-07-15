@@ -1,4 +1,4 @@
-#include "Lu_TutorialScene.h"
+#include "Lu_StageScene.h"
 #include "Lu_Renderer.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
@@ -14,71 +14,71 @@
 
 namespace Lu
 {
-	TutorialScene::TutorialScene()
+	StageScene::StageScene()
 	{
 
 	}
 
-	TutorialScene::~TutorialScene()
+	StageScene::~StageScene()
 	{
 
 	}
 
-	void TutorialScene::Initialize()
+	void StageScene::Initialize()
 	{
 		Scene::Initialize();
 
 		{
 			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::Default);
-			pObject->SetName(L"TutorialBossRoom");
+			pObject->SetName(L"Stage");
 
 			Transform* pTransform = pObject->GetComponent<Transform>();
-			pTransform->SetScale(Vector3(1512.f, 1728.f, 100.f));
+			pTransform->SetScale(Vector3(1512.f, 1008.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"TutorialBossRoom_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Stage_Mtrl"));
 		}
 
 		CreateHUD();
 	}
 
-	void TutorialScene::Update()
+	void StageScene::Update()
 	{
 		Scene::Update();
 
 		if (Input::GetKeyUp(eKeyCode::SPACE))
 		{
-			SceneManager::LoadScene(L"LobbyScene");
+			SceneManager::LoadScene(L"TitleScene");
 		}
 	}
 
-	void TutorialScene::LateUpdate()
+	void StageScene::LateUpdate()
 	{
 		Scene::LateUpdate();
 	}
 
-	void TutorialScene::Render()
+	void StageScene::Render()
 	{
 		Scene::Render();
 	}
 
-	void TutorialScene::Destroy()
+	void StageScene::Destroy()
 	{
 		Scene::Destroy();
 	}
 
-	void TutorialScene::OnEnter()
+	void StageScene::OnEnter()
 	{
 		Scene::OnEnter();
 	}
 
-	void TutorialScene::OnExit()
+	void StageScene::OnExit()
 	{
 
 	}
 
-	void TutorialScene::CreateHUD()
+	void StageScene::CreateHUD()
 	{
 		GameObject* pObject;
 		Transform* pTransform;

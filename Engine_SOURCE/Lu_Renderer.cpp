@@ -343,62 +343,152 @@ namespace renderer
 		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
 
 		// 타이틀 백그라운드
-		std::shared_ptr<Texture> pTexture = Resources::Load<Texture>(L"TitleBG", L"..\\Resources\\Texture\\Map\\Title\\TtitleBG.png");
+		std::shared_ptr<Texture> pTexture = Resources::Load<Texture>(L"TitleBG_Tex", L"..\\Resources\\Texture\\Map\\Title\\TtitleBG.png");
 		std::shared_ptr<Material> pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"TitleBGMtrl", pMaterial);
+		Resources::Insert(L"TitleBG_Mtrl", pMaterial);
 
 		// 루시
-		pTexture = Resources::Load<Texture>(L"Lucie", L"..\\Resources\\Texture\\Map\\Title\\Lucie.png");
+		pTexture = Resources::Load<Texture>(L"Lucie_Tex", L"..\\Resources\\Texture\\Map\\Title\\Lucie.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"LucieMtrl", pMaterial);
+		Resources::Insert(L"Lucie_Mtrl", pMaterial);
 
 		// 마리 
-		pTexture = Resources::Load<Texture>(L"Mary", L"..\\Resources\\Texture\\Map\\Title\\Mary.png");
+		pTexture = Resources::Load<Texture>(L"Mary_Tex", L"..\\Resources\\Texture\\Map\\Title\\Mary.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MaryMtrl", pMaterial);
+		Resources::Insert(L"Mary_Mtrl", pMaterial);
 
 		// 아이오네
-		pTexture = Resources::Load<Texture>(L"Ione", L"..\\Resources\\Texture\\Map\\Title\\Ione.png");
+		pTexture = Resources::Load<Texture>(L"Ione_Tex", L"..\\Resources\\Texture\\Map\\Title\\Ione.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"IoneMtrl", pMaterial);
+		Resources::Insert(L"Ione_Mtrl", pMaterial);
 
 		// 타이틀 문구
-		pTexture = Resources::Load<Texture>(L"Title", L"..\\Resources\\Texture\\Map\\Title\\Title.png");
+		pTexture = Resources::Load<Texture>(L"Title_Tex", L"..\\Resources\\Texture\\Map\\Title\\Title.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"TitleMtrl", pMaterial);
+		Resources::Insert(L"Title_Mtrl", pMaterial);
+
+		// UI : None
+		pTexture = Resources::Load<Texture>(L"UI_None_Tex", L"..\\Resources\\Texture\\UI\\Title\\None.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"UI_None_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Tutorial Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
 		// 튜토리얼 더미
-		pTexture = Resources::Load<Texture>(L"TutoDummy", L"..\\Resources\\Texture\\Map\\Tutorial\\TutoDummy.png");
+		pTexture = Resources::Load<Texture>(L"TutoDummy_Tex", L"..\\Resources\\Texture\\Map\\Tutorial\\TutoDummy.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"TutorialBossRoomMtrl", pMaterial);
+		Resources::Insert(L"TutorialBossRoom_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Lobby Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
-		pTexture = Resources::Load<Texture>(L"Room", L"..\\Resources\\Texture\\Map\\Lobby\\Room.png");
+		pTexture = Resources::Load<Texture>(L"Room_Tex", L"..\\Resources\\Texture\\Map\\Lobby\\Room.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"RoomMtrl", pMaterial);
+		Resources::Insert(L"Room_Mtrl", pMaterial);
+#pragma endregion
+#pragma region Stage Scene Resources
+		//pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		pTexture = Resources::Load<Texture>(L"Stage_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Ground115.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"Stage_Mtrl", pMaterial);
+#pragma endregion
+#pragma region HUD Resources
+		//pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		pTexture = Resources::Load<Texture>(L"Layout_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Layout.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Layout_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"TP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\TP_Meter.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"TP_Meter_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"EXP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\EXP_Meter.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"HP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\HP_Icon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"HP_Icon_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MP_Icon_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"quickItem_Tex", L"..\\Resources\\Texture\\UI\\HUD\\quickItem.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"quickItem_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"weaponSlotA_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotA.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"weaponSlotA_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"weaponSlotB_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotB.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"weaponSlotB_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"Gold_A_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_A.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Gold_A_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"Gold_B_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_B.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Gold_B_Mtrl", pMaterial);
 #pragma endregion
 	}
 

@@ -30,7 +30,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"RoomMtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Room_Mtrl"));
 		}
 	}
 
@@ -40,7 +40,7 @@ namespace Lu
 
 		if (Input::GetKeyUp(eKeyCode::SPACE))
 		{
-			SceneManager::LoadScene(L"TitleScene");
+			SceneManager::LoadScene(L"StageScene");
 		}
 	}
 

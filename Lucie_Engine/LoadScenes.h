@@ -3,6 +3,7 @@
 #include "Lu_TitleScene.h"
 #include "Lu_TutorialScene.h"
 #include "Lu_LobbyScene.h"
+#include "Lu_StageScene.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\Lucie_Engine.lib")
@@ -17,6 +18,7 @@ namespace Lu
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<LobbyScene>(L"LobbyScene");
+		SceneManager::CreateScene<StageScene>(L"StageScene");
 
 		SceneManager::LoadScene(L"TitleScene");
 	}

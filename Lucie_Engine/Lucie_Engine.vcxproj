@@ -160,20 +160,40 @@
     <ClInclude Include="..\Engine_SOURCE\Lu_CameraScript.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="Lu_EXP.h" />
     <ClInclude Include="Lu_GridScript.h" />
+    <ClInclude Include="Lu_HP.h" />
+    <ClInclude Include="Lu_Layout.h" />
     <ClInclude Include="Lu_LobbyScene.h" />
+    <ClInclude Include="Lu_MP.h" />
     <ClInclude Include="Lu_PlayScene.h" />
+    <ClInclude Include="Lu_QuickItem.h" />
+    <ClInclude Include="Lu_StageScene.h" />
     <ClInclude Include="Lu_TitleScene.h" />
+    <ClInclude Include="Lu_TitleBtn.h" />
+    <ClInclude Include="Lu_TP.h" />
     <ClInclude Include="Lu_TutorialScene.h" />
+    <ClInclude Include="Lu_UIScript.h" />
+    <ClInclude Include="Lu_WeaponSlot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp" />
     <ClCompile Include="Lucie_Engine.cpp" />
+    <ClCompile Include="Lu_EXP.cpp" />
     <ClCompile Include="Lu_GridScript.cpp" />
+    <ClCompile Include="Lu_HP.cpp" />
+    <ClCompile Include="Lu_Layout.cpp" />
     <ClCompile Include="Lu_LobbyScene.cpp" />
+    <ClCompile Include="Lu_MP.cpp" />
     <ClCompile Include="Lu_PlayScene.cpp" />
+    <ClCompile Include="Lu_QuickItem.cpp" />
+    <ClCompile Include="Lu_StageScene.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
+    <ClCompile Include="Lu_TitleBtn.cpp" />
+    <ClCompile Include="Lu_TP.cpp" />
     <ClCompile Include="Lu_TutorialScene.cpp" />
+    <ClCompile Include="Lu_UIScript.cpp" />
+    <ClCompile Include="Lu_WeaponSlot.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

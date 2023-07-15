@@ -4,6 +4,7 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
+#include "Lu_TitleBtn.h"
 
 namespace Lu
 {
@@ -31,7 +32,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pTitleBG->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"TitleBGMtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"TitleBG_Mtrl"));
 		}
 
 		// 루시
@@ -44,7 +45,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pLucie->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"LucieMtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Lucie_Mtrl"));
 		}
 
 		// 마리
@@ -57,7 +58,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pMary->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"MaryMtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mary_Mtrl"));
 		}
 
 		// 아이오네
@@ -70,7 +71,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pIone->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"IoneMtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Ione_Mtrl"));
 		}
 
 		// Title 문구
@@ -83,7 +84,23 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pTitle->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"TitleMtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
+		}
+
+		// UI
+		{
+			GameObject* pNone = object::Instantiate<GameObject>(Vector3(0.f, -200.f, 100.f), eLayerType::UI);
+			pNone->SetName(L"UI_None");
+
+			Transform* pTransform = pNone->GetComponent<Transform>();
+			// 원본 크기 0.8배
+			pTransform->SetScale(Vector3(324.8f, 274.4f, 100.f));
+
+			MeshRenderer* pMeshRender = pNone->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"UI_None_Mtrl"));
+
+			pNone->AddComponent<TitleBtn>();
 		}
 	}
 

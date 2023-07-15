@@ -3,11 +3,11 @@
 
 namespace Lu
 {
-	class TutorialScene : public Scene
+	class StageScene : public Scene
 	{
 	public:
-		TutorialScene();
-		virtual ~TutorialScene();
+		StageScene();
+		virtual ~StageScene();
 
 	public:
 		virtual void Initialize() override;

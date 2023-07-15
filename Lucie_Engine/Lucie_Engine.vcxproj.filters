@@ -20,6 +20,36 @@
     <ClCompile Include="Lu_LobbyScene.cpp">
       <Filter>Contents\Scene\Lobby</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_StageScene.cpp">
+      <Filter>Contents\Scene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_TitleBtn.cpp">
+      <Filter>Contents\Script\UIScript\TitleUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_Layout.cpp">
+      <Filter>Contents\Script\UIScript\HUD\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_MP.cpp">
+      <Filter>Contents\Script\UIScript\HUD\MP</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_UIScript.cpp">
+      <Filter>Contents\Script\UIScript</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_HP.cpp">
+      <Filter>Contents\Script\UIScript\HUD\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_EXP.cpp">
+      <Filter>Contents\Script\UIScript\HUD\EXP</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_WeaponSlot.cpp">
+      <Filter>Contents\Script\UIScript\HUD\WeaponSlot</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_QuickItem.cpp">
+      <Filter>Contents\Script\UIScript\HUD\QuickItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_TP.cpp">
+      <Filter>Contents\Script\UIScript\HUD\TP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -43,6 +73,36 @@
     </ClInclude>
     <ClInclude Include="Lu_LobbyScene.h">
       <Filter>Contents\Scene\Lobby</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_StageScene.h">
+      <Filter>Contents\Scene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TitleBtn.h">
+      <Filter>Contents\Script\UIScript\TitleUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_Layout.h">
+      <Filter>Contents\Script\UIScript\HUD\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_MP.h">
+      <Filter>Contents\Script\UIScript\HUD\MP</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_UIScript.h">
+      <Filter>Contents\Script\UIScript</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_HP.h">
+      <Filter>Contents\Script\UIScript\HUD\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_EXP.h">
+      <Filter>Contents\Script\UIScript\HUD\EXP</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_WeaponSlot.h">
+      <Filter>Contents\Script\UIScript\HUD\WeaponSlot</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_QuickItem.h">
+      <Filter>Contents\Script\UIScript\HUD\QuickItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TP.h">
+      <Filter>Contents\Script\UIScript\HUD\TP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +135,39 @@
     </Filter>
     <Filter Include="Contents\Scene\Stage">
       <UniqueIdentifier>{ce7ddf80-f313-4cca-8c3f-43262205cc57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript">
+      <UniqueIdentifier>{a94603e6-5f95-4a53-ab4a-d4f46950a7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\TitleUI">
+      <UniqueIdentifier>{b71632a6-9990-4bb2-b8f1-9c3cf46f3b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD">
+      <UniqueIdentifier>{aaa4d6e8-98e9-48b1-8b8e-f3cafdf07df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\Layout">
+      <UniqueIdentifier>{35b6e371-ad3c-4739-a03e-1ab82fc79440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\EXP">
+      <UniqueIdentifier>{1fca2025-d9e6-4d41-b569-3686bc8dd298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\MP">
+      <UniqueIdentifier>{62f76408-a400-4213-9802-003ae86e3ce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\HP">
+      <UniqueIdentifier>{9bba9cce-feaf-474c-983f-c2e6027d5311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\TP">
+      <UniqueIdentifier>{862b8851-a6a4-406a-96e8-9973b0c4fed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\QuickItem">
+      <UniqueIdentifier>{ec661e94-c2fb-40dc-bab9-90e0476b7681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\WeaponSlot">
+      <UniqueIdentifier>{0c2c25ba-e8a1-42c6-96e0-b4e29e8417c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UIScript\HUD\Gold">
+      <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
