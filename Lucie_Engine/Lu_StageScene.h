@@ -22,5 +22,6 @@ namespace Lu
 
 	private:
 		void CreateHUD();
+		void CreateInventory();
 	};
 }

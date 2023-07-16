@@ -11,6 +11,7 @@
 #include "Lu_TP.h"
 #include "Lu_QuickItem.h"
 #include "Lu_WeaponSlot.h"
+#include "Lu_Inventory.h"
 
 namespace Lu
 {
@@ -41,6 +42,7 @@ namespace Lu
 		}
 
 		CreateHUD();
+		CreateInventory();
 	}
 
 	void StageScene::Update()
@@ -187,6 +189,27 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"quickItem_Mtrl"));
 
 			pObject->AddComponent<QuickItem>();
+		}
+	}
+	void StageScene::CreateInventory()
+	{
+		GameObject* pObject;
+		Transform* pTransform;
+		MeshRenderer* pMeshRender;
+
+		{
+			pObject = object::Instantiate<GameObject>(Vector3(516.f, -80.f, 0.f), eLayerType::UI);
+			pObject->SetName(L"Inventory_Layout");
+
+			pTransform = pObject->GetComponent<Transform>();
+			// 원본 사이즈 1.5배
+			pTransform->SetScale(Vector3(360.f, 444.f, 100.f));
+
+			pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"InvenBG_Mtrl"));
+
+			pObject->AddComponent<Inventory>();
 		}
 	}
 }

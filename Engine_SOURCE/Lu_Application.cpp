@@ -43,12 +43,12 @@ namespace Lu
 		Time::Update();
 		Input::Update();
 		SceneManager::Update();
-		CollisionManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		SceneManager::LateUpdate();
+		CollisionManager::Update();
 	}
 
 	void Application::Render()

@@ -3,10 +3,10 @@
   <ItemGroup>
     <ClCompile Include="Lucie_Engine.cpp" />
     <ClCompile Include="Lu_GridScript.cpp">
-      <Filter>Contents\Script\GridScript</Filter>
+      <Filter>Contents\Script\Grid</Filter>
     </ClCompile>
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp">
-      <Filter>Contents\Script\CameraScript</Filter>
+      <Filter>Contents\Script\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Lu_PlayScene.cpp">
       <Filter>Contents\Scene</Filter>
@@ -24,31 +24,40 @@
       <Filter>Contents\Scene\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Lu_Layout.cpp">
-      <Filter>Contents\Script\UIScript\HUD\Layout</Filter>
+      <Filter>Contents\Script\UI\HUD\Layout</Filter>
     </ClCompile>
     <ClCompile Include="Lu_MP.cpp">
-      <Filter>Contents\Script\UIScript\HUD\MP</Filter>
+      <Filter>Contents\Script\UI\HUD\MP</Filter>
     </ClCompile>
     <ClCompile Include="Lu_UIScript.cpp">
-      <Filter>Contents\Script\UIScript</Filter>
+      <Filter>Contents\Script\UI</Filter>
     </ClCompile>
     <ClCompile Include="Lu_HP.cpp">
-      <Filter>Contents\Script\UIScript\HUD\HP</Filter>
+      <Filter>Contents\Script\UI\HUD\HP</Filter>
     </ClCompile>
     <ClCompile Include="Lu_EXP.cpp">
-      <Filter>Contents\Script\UIScript\HUD\EXP</Filter>
+      <Filter>Contents\Script\UI\HUD\EXP</Filter>
     </ClCompile>
     <ClCompile Include="Lu_WeaponSlot.cpp">
-      <Filter>Contents\Script\UIScript\HUD\WeaponSlot</Filter>
+      <Filter>Contents\Script\UI\HUD\WeaponSlot</Filter>
     </ClCompile>
     <ClCompile Include="Lu_QuickItem.cpp">
-      <Filter>Contents\Script\UIScript\HUD\QuickItem</Filter>
+      <Filter>Contents\Script\UI\HUD\QuickItem</Filter>
     </ClCompile>
     <ClCompile Include="Lu_TP.cpp">
-      <Filter>Contents\Script\UIScript\HUD\TP</Filter>
+      <Filter>Contents\Script\UI\HUD\TP</Filter>
     </ClCompile>
     <ClCompile Include="Lu_GameOverScene.cpp">
       <Filter>Contents\Scene\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_Inventory.cpp">
+      <Filter>Contents\Script\UI\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_Gold.cpp">
+      <Filter>Contents\Script\UI\HUD\Gold</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_ButtonScript.cpp">
+      <Filter>Contents\Script\UI\Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +66,10 @@
       <Filter>Contents\Load</Filter>
     </ClInclude>
     <ClInclude Include="Lu_GridScript.h">
-      <Filter>Contents\Script\GridScript</Filter>
+      <Filter>Contents\Script\Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine_SOURCE\Lu_CameraScript.h">
-      <Filter>Contents\Script\CameraScript</Filter>
+      <Filter>Contents\Script\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Lu_PlayScene.h">
       <Filter>Contents\Scene</Filter>
@@ -78,31 +87,40 @@
       <Filter>Contents\Scene\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Lu_Layout.h">
-      <Filter>Contents\Script\UIScript\HUD\Layout</Filter>
+      <Filter>Contents\Script\UI\HUD\Layout</Filter>
     </ClInclude>
     <ClInclude Include="Lu_MP.h">
-      <Filter>Contents\Script\UIScript\HUD\MP</Filter>
+      <Filter>Contents\Script\UI\HUD\MP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_UIScript.h">
-      <Filter>Contents\Script\UIScript</Filter>
+      <Filter>Contents\Script\UI</Filter>
     </ClInclude>
     <ClInclude Include="Lu_HP.h">
-      <Filter>Contents\Script\UIScript\HUD\HP</Filter>
+      <Filter>Contents\Script\UI\HUD\HP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_EXP.h">
-      <Filter>Contents\Script\UIScript\HUD\EXP</Filter>
+      <Filter>Contents\Script\UI\HUD\EXP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_WeaponSlot.h">
-      <Filter>Contents\Script\UIScript\HUD\WeaponSlot</Filter>
+      <Filter>Contents\Script\UI\HUD\WeaponSlot</Filter>
     </ClInclude>
     <ClInclude Include="Lu_QuickItem.h">
-      <Filter>Contents\Script\UIScript\HUD\QuickItem</Filter>
+      <Filter>Contents\Script\UI\HUD\QuickItem</Filter>
     </ClInclude>
     <ClInclude Include="Lu_TP.h">
-      <Filter>Contents\Script\UIScript\HUD\TP</Filter>
+      <Filter>Contents\Script\UI\HUD\TP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_GameOverScene.h">
       <Filter>Contents\Scene\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_Inventory.h">
+      <Filter>Contents\Script\UI\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_Gold.h">
+      <Filter>Contents\Script\UI\HUD\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ButtonScript.h">
+      <Filter>Contents\Script\UI\Button</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -118,12 +136,6 @@
     <Filter Include="Contents\Load">
       <UniqueIdentifier>{4f2fc5ae-3b3f-426a-9d6f-739aea796745}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\GridScript">
-      <UniqueIdentifier>{a62faa5e-a96d-466a-836f-1505a6ed6cc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\CameraScript">
-      <UniqueIdentifier>{2c671ee4-1313-4100-9397-7f7b1a1cac5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\Title">
       <UniqueIdentifier>{31035cae-c1ad-4aaa-881e-2085858abd36}</UniqueIdentifier>
     </Filter>
@@ -136,38 +148,50 @@
     <Filter Include="Contents\Scene\Stage">
       <UniqueIdentifier>{ce7ddf80-f313-4cca-8c3f-43262205cc57}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\UIScript">
-      <UniqueIdentifier>{a94603e6-5f95-4a53-ab4a-d4f46950a7bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD">
-      <UniqueIdentifier>{aaa4d6e8-98e9-48b1-8b8e-f3cafdf07df1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\Layout">
-      <UniqueIdentifier>{35b6e371-ad3c-4739-a03e-1ab82fc79440}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\EXP">
-      <UniqueIdentifier>{1fca2025-d9e6-4d41-b569-3686bc8dd298}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\MP">
-      <UniqueIdentifier>{62f76408-a400-4213-9802-003ae86e3ce7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\HP">
-      <UniqueIdentifier>{9bba9cce-feaf-474c-983f-c2e6027d5311}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\TP">
-      <UniqueIdentifier>{862b8851-a6a4-406a-96e8-9973b0c4fed2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\QuickItem">
-      <UniqueIdentifier>{ec661e94-c2fb-40dc-bab9-90e0476b7681}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\WeaponSlot">
-      <UniqueIdentifier>{0c2c25ba-e8a1-42c6-96e0-b4e29e8417c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\UIScript\HUD\Gold">
-      <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\GameOver">
       <UniqueIdentifier>{8e082a5e-8756-432e-9540-8ded0d8a6e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Camera">
+      <UniqueIdentifier>{2c671ee4-1313-4100-9397-7f7b1a1cac5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Grid">
+      <UniqueIdentifier>{a62faa5e-a96d-466a-836f-1505a6ed6cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI">
+      <UniqueIdentifier>{a94603e6-5f95-4a53-ab4a-d4f46950a7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD">
+      <UniqueIdentifier>{aaa4d6e8-98e9-48b1-8b8e-f3cafdf07df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\Layout">
+      <UniqueIdentifier>{35b6e371-ad3c-4739-a03e-1ab82fc79440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\EXP">
+      <UniqueIdentifier>{1fca2025-d9e6-4d41-b569-3686bc8dd298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\MP">
+      <UniqueIdentifier>{62f76408-a400-4213-9802-003ae86e3ce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\HP">
+      <UniqueIdentifier>{9bba9cce-feaf-474c-983f-c2e6027d5311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\TP">
+      <UniqueIdentifier>{862b8851-a6a4-406a-96e8-9973b0c4fed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\QuickItem">
+      <UniqueIdentifier>{ec661e94-c2fb-40dc-bab9-90e0476b7681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\WeaponSlot">
+      <UniqueIdentifier>{0c2c25ba-e8a1-42c6-96e0-b4e29e8417c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\HUD\Gold">
+      <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\Inventory">
+      <UniqueIdentifier>{b6719425-543e-4b01-9712-5571d134f905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\Button">
+      <UniqueIdentifier>{f352a806-6fc1-44d2-a4a4-12b8ed42ee8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

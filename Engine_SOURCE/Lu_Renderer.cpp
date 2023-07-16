@@ -487,6 +487,15 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Gold_B_Mtrl", pMaterial);
 #pragma endregion
+#pragma region Inventory Resources
+		//pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		pTexture = Resources::Load<Texture>(L"InvenBG_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\InvenBG.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"InvenBG_Mtrl", pMaterial);
+#pragma endregion
 	}
 
 	void Initialize()

@@ -160,10 +160,13 @@
     <ClInclude Include="..\Engine_SOURCE\Lu_CameraScript.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
+    <ClInclude Include="Lu_ButtonScript.h" />
     <ClInclude Include="Lu_EXP.h" />
     <ClInclude Include="Lu_GameOverScene.h" />
+    <ClInclude Include="Lu_Gold.h" />
     <ClInclude Include="Lu_GridScript.h" />
     <ClInclude Include="Lu_HP.h" />
+    <ClInclude Include="Lu_Inventory.h" />
     <ClInclude Include="Lu_Layout.h" />
     <ClInclude Include="Lu_LobbyScene.h" />
     <ClInclude Include="Lu_MP.h" />
@@ -179,10 +182,13 @@
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp" />
     <ClCompile Include="Lucie_Engine.cpp" />
+    <ClCompile Include="Lu_ButtonScript.cpp" />
     <ClCompile Include="Lu_EXP.cpp" />
     <ClCompile Include="Lu_GameOverScene.cpp" />
+    <ClCompile Include="Lu_Gold.cpp" />
     <ClCompile Include="Lu_GridScript.cpp" />
     <ClCompile Include="Lu_HP.cpp" />
+    <ClCompile Include="Lu_Inventory.cpp" />
     <ClCompile Include="Lu_Layout.cpp" />
     <ClCompile Include="Lu_LobbyScene.cpp" />
     <ClCompile Include="Lu_MP.cpp" />

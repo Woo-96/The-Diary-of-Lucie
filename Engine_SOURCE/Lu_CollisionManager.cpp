@@ -145,33 +145,32 @@ namespace Lu
 		if (eColliderType::Circle == _Left->GetType() && eColliderType::Circle == _Right->GetType())
 		{
 			// 중심점 사이의 거리
-			// CollisionMgr가 Collision2D보다 먼저 호출되기 때문에 그대로 포지션을 가져다 쓰면 처음 1프레임은 무조건 충돌함
-			//Vector3 centerLeft = _Left->GetPosition();
-			//Vector3 centerRight = _Right->GetPosition();
+			Vector3 centerLeft = _Left->GetPosition();
+			Vector3 centerRight = _Right->GetPosition();
 
-			//float distance = Vector3::Distance(centerLeft, centerRight);
+			float distance = Vector3::Distance(centerLeft, centerRight);
 
 			Transform* LeftTransform = _Left->GetOwner()->GetComponent<Transform>();
 
-			Vector3 scale = LeftTransform->GetScale();
-			scale.x *= _Left->GetSize().x;
-			scale.y *= _Left->GetSize().y;
+			//Vector3 scale = LeftTransform->GetScale();
+			//scale.x *= _Left->GetSize().x;
+			//scale.y *= _Left->GetSize().y;
 
-			Vector3 centerLeft = LeftTransform->GetPosition();
-			centerLeft.x += _Left->GetCenter().x;
-			centerLeft.y += _Left->GetCenter().y;
+			//Vector3 centerLeft = LeftTransform->GetPosition();
+			//centerLeft.x += _Left->GetCenter().x;
+			//centerLeft.y += _Left->GetCenter().y;
 
 			Transform* RightTransform = _Right->GetOwner()->GetComponent<Transform>();
 
-			scale = RightTransform->GetScale();
-			scale.x *= _Right->GetSize().x;
-			scale.y *= _Right->GetSize().y;
+			//scale = RightTransform->GetScale();
+			//scale.x *= _Right->GetSize().x;
+			//scale.y *= _Right->GetSize().y;
 
-			Vector3 centerRight = RightTransform->GetPosition();
-			centerRight.x += _Right->GetCenter().x;
-			centerRight.y += _Right->GetCenter().y;
+			//Vector3 centerRight = RightTransform->GetPosition();
+			//centerRight.x += _Right->GetCenter().x;
+			//centerRight.y += _Right->GetCenter().y;
 
-			float distance = Vector3::Distance(centerLeft, centerRight);
+			//float distance = Vector3::Distance(centerLeft, centerRight);
 
 			// 반지름
 			float radiusLeft = (LeftTransform->GetScale().x * _Left->GetSize().x) / 2.f;
