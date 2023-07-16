@@ -3,6 +3,7 @@
 #include "Lu_Time.h"
 #include "Lu_Renderer.h"
 #include "Lu_SceneManager.h"
+#include "Lu_CollisionManager.h"
 
 namespace Lu
 {
@@ -42,6 +43,7 @@ namespace Lu
 		Time::Update();
 		Input::Update();
 		SceneManager::Update();
+		CollisionManager::Update();
 	}
 
 	void Application::LateUpdate()

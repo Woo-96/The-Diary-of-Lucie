@@ -204,15 +204,13 @@ namespace renderer
 		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
 
 		indexes.push_back(0);
-		indexes.push_back(1);
-		indexes.push_back(2);
-
-		indexes.push_back(0);
 		indexes.push_back(2);
 		indexes.push_back(3);
+
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
-
-
 
 		// Rect Debug Mesh
 		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
@@ -227,6 +225,7 @@ namespace renderer
 		Vertex center = {};
 		center.vPos = Vector3(0.0f, 0.0f, 0.0f);
 		center.vColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		center.vUV = Vector2(0.5f, 0.5f);
 		vertexes.push_back(center);
 
 		int iSlice = 40;
@@ -239,6 +238,7 @@ namespace renderer
 				, fRadius * sinf(fTheta * (float)i)
 				, 0.0f);
 			center.vColor = Vector4(0.0f, 1.0f, 0.0f, 1.f);
+			center.vUV = Vector2(center.vPos.x + 0.5f, -center.vPos.y + 0.5f);
 			vertexes.push_back(center);
 		}
 
@@ -380,14 +380,6 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Title_Mtrl", pMaterial);
-
-		// UI : None
-		pTexture = Resources::Load<Texture>(L"UI_None_Tex", L"..\\Resources\\Texture\\UI\\Title\\None.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"UI_None_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Tutorial Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
@@ -397,7 +389,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"TutorialBossRoom_Mtrl", pMaterial);
+		Resources::Insert(L"Tutorial_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Lobby Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
@@ -417,6 +409,13 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"Stage_Mtrl", pMaterial);
 #pragma endregion
+#pragma region GameOver Scene Resources
+		pTexture = Resources::Load<Texture>(L"GameOver_Tex", L"..\\Resources\\Texture\\Map\\GameOver\\Game_Over.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"GameOver_Mtrl", pMaterial);
+#pragma endregion
 #pragma region HUD Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
@@ -431,14 +430,12 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"TP_Meter_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"EXP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\EXP_Meter.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"HP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\HP_Icon.png");

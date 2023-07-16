@@ -14,6 +14,7 @@ namespace Lu::object
 		T* gameObj = new T();
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(layer, gameObj);
+		gameObj->Initialize();
 
 		return gameObj;
 	}

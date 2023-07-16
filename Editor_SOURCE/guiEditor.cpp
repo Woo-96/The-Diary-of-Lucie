@@ -32,6 +32,15 @@ namespace gui
 		mr->SetMaterial(material);
 		mr->SetMesh(mesh);
 
+		// CircleMesh
+		mesh = Lu::Resources::Find<Lu::Mesh>(L"DebugCircle");
+
+		m_DebugOjbects[(UINT)eColliderType::Circle] = new DebugOjbect();
+		m_DebugOjbects[(UINT)eColliderType::Circle]->AddComponent<Lu::Transform>();
+		mr = m_DebugOjbects[(UINT)eColliderType::Circle]->AddComponent<Lu::MeshRenderer>();
+		mr->SetMaterial(material);
+		mr->SetMesh(mesh);
+
 
 		// Grid
 		//EditorObject* grid = new EditorObject();

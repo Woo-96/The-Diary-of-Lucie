@@ -28,11 +28,12 @@ namespace Lu
 		static void Initialize();
 		static void Update();
 
-	public:
+	private:
 		static void LayerCollision(eLayerType _Left, eLayerType _Right);
 		static void ColliderCollision(Collider2D* _Left, Collider2D* _Right);
 		static bool Intersect(Collider2D* _Left, Collider2D* _Right);
 
+	public:
 		static void SetLayer(eLayerType _Left, eLayerType _Right, bool _bEnable);
 		static void Clear();
 	};

@@ -49,7 +49,7 @@ namespace Lu
 
 		if (Input::GetKeyUp(eKeyCode::SPACE))
 		{
-			SceneManager::LoadScene(L"TitleScene");
+			SceneManager::LoadScene(L"GameOverScene");
 		}
 	}
 
@@ -85,7 +85,7 @@ namespace Lu
 		MeshRenderer* pMeshRender;
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 150.f), eLayerType::UI);
 			pObject->SetName(L"UI_Layout");
 
 			pTransform = pObject->GetComponent<Transform>();

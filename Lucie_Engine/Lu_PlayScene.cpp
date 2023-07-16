@@ -10,6 +10,8 @@
 #include "Lu_Object.h"
 #include "Lu_Renderer.h"
 #include "Lu_Collider2D.h"
+#include "Lu_CollisionManager.h"
+#include "Lu_Input.h"
 
 namespace Lu
 {
@@ -28,6 +30,7 @@ namespace Lu
 			player->SetName(L"Zelda");
 
 			Collider2D* cd = player->AddComponent<Collider2D>();
+			cd->SetType(eColliderType::Circle);
 
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -36,18 +39,22 @@ namespace Lu
 			const float pi = 3.141592f;
 			float degree = pi / 8.0f;
 
-			player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
+			player->GetComponent<Transform>()->SetPosition(Vector3(-100.0f, 0.0f, 1.0001f));
 			player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
+			player->GetComponent<Transform>()->SetScale(Vector3(300.f, 300.f, 100.f));
 		}
 
 		{
 			GameObject* player = new GameObject();
 			player->SetName(L"Smile");
 			AddGameObject(eLayerType::Player, player);
+			Collider2D* cd = player->AddComponent<Collider2D>();
+			cd->SetType(eColliderType::Circle);
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+			player->GetComponent<Transform>()->SetPosition(Vector3(100.0f, 0.0f, 1.0f));
+			player->GetComponent<Transform>()->SetScale(Vector3(300.f, 300.f, 100.f));
 		}
 
 		//Main Camera
@@ -71,11 +78,18 @@ namespace Lu
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 		}
+
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Player, true);
 	}
 
 	void PlayScene::Update()
 	{
 		Scene::Update();
+
+		if (Input::GetKeyUp(eKeyCode::SPACE))
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
 	}
 
 	void PlayScene::LateUpdate()

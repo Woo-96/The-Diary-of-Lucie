@@ -4,7 +4,6 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
-#include "Lu_TitleBtn.h"
 
 namespace Lu
 {
@@ -28,6 +27,7 @@ namespace Lu
 			pTitleBG->SetName(L"TitleBG");
 
 			Transform* pTransform = pTitleBG->GetComponent<Transform>();
+			// 원본 1.5배
 			pTransform->SetScale(Vector3(1440.f, 810.f, 100.f));
 
 			MeshRenderer* pMeshRender = pTitleBG->AddComponent<MeshRenderer>();
@@ -85,22 +85,6 @@ namespace Lu
 			MeshRenderer* pMeshRender = pTitle->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
-		}
-
-		// UI
-		{
-			GameObject* pNone = object::Instantiate<GameObject>(Vector3(0.f, -200.f, 100.f), eLayerType::UI);
-			pNone->SetName(L"UI_None");
-
-			Transform* pTransform = pNone->GetComponent<Transform>();
-			// 원본 크기 0.8배
-			pTransform->SetScale(Vector3(324.8f, 274.4f, 100.f));
-
-			MeshRenderer* pMeshRender = pNone->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"UI_None_Mtrl"));
-
-			pNone->AddComponent<TitleBtn>();
 		}
 	}
 

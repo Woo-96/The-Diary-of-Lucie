@@ -23,9 +23,6 @@
     <ClCompile Include="Lu_StageScene.cpp">
       <Filter>Contents\Scene\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_TitleBtn.cpp">
-      <Filter>Contents\Script\UIScript\TitleUI</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_Layout.cpp">
       <Filter>Contents\Script\UIScript\HUD\Layout</Filter>
     </ClCompile>
@@ -49,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Lu_TP.cpp">
       <Filter>Contents\Script\UIScript\HUD\TP</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_GameOverScene.cpp">
+      <Filter>Contents\Scene\GameOver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +77,6 @@
     <ClInclude Include="Lu_StageScene.h">
       <Filter>Contents\Scene\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_TitleBtn.h">
-      <Filter>Contents\Script\UIScript\TitleUI</Filter>
-    </ClInclude>
     <ClInclude Include="Lu_Layout.h">
       <Filter>Contents\Script\UIScript\HUD\Layout</Filter>
     </ClInclude>
@@ -103,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Lu_TP.h">
       <Filter>Contents\Script\UIScript\HUD\TP</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_GameOverScene.h">
+      <Filter>Contents\Scene\GameOver</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,9 +139,6 @@
     <Filter Include="Contents\Script\UIScript">
       <UniqueIdentifier>{a94603e6-5f95-4a53-ab4a-d4f46950a7bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\UIScript\TitleUI">
-      <UniqueIdentifier>{b71632a6-9990-4bb2-b8f1-9c3cf46f3b7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\UIScript\HUD">
       <UniqueIdentifier>{aaa4d6e8-98e9-48b1-8b8e-f3cafdf07df1}</UniqueIdentifier>
     </Filter>
@@ -168,6 +165,9 @@
     </Filter>
     <Filter Include="Contents\Script\UIScript\HUD\Gold">
       <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\GameOver">
+      <UniqueIdentifier>{8e082a5e-8756-432e-9540-8ded0d8a6e05}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

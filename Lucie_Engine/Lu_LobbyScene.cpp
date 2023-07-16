@@ -22,11 +22,12 @@ namespace Lu
 		Scene::Initialize();
 
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::Default);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -95.f, 900.f), eLayerType::Default);
 			pObject->SetName(L"Room");
 
 			Transform* pTransform = pObject->GetComponent<Transform>();
-			pTransform->SetScale(Vector3(1512.f, 1584.f, 100.f));
+			// ¿øº» 2¹è
+			pTransform->SetScale(Vector3(2016.f, 2112.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

@@ -21,7 +21,7 @@ namespace Lu
 	
 	void Layer::Initialize()
 	{
-	
+
 	}
 	
 	void Layer::Update()

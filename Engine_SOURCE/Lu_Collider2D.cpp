@@ -2,6 +2,10 @@
 #include "Lu_GameObject.h"
 #include "Lu_Renderer.h"
 
+// 테스트용
+#include "Lu_Object.h"
+#include "Lu_Time.h"
+
 namespace Lu
 {
 	UINT Collider2D::m_ColliderNumber = 0;
@@ -9,7 +13,6 @@ namespace Lu
 	Collider2D::Collider2D()
 		: Component(eComponentType::Collider2D)
 		, m_Type(eColliderType::Rect)
-		, m_Transform(nullptr)
 		, m_Size(Vector2::One)
 		, m_Center(Vector2::Zero)
 	{
@@ -24,7 +27,7 @@ namespace Lu
 
 	void Collider2D::Initialize()
 	{
-		m_Transform = GetOwner()->GetComponent<Transform>();
+		
 	}
 
 	void Collider2D::Update()
@@ -50,7 +53,7 @@ namespace Lu
 		mesh.Position = pos;
 		mesh.Scale = scale;
 		mesh.Rotation = tr->GetRotation();
-		mesh.Type = eColliderType::Rect;
+		mesh.Type = eColliderType::Circle;
 
 		renderer::PushDebugMeshAttribute(mesh);
 	}
@@ -73,6 +76,17 @@ namespace Lu
 
 	void Collider2D::OnCollisionStay(Collider2D* _Other)
 	{
+		// 충돌 테스트용
+		static float chTime = 0.0f;
+		chTime += Time::DeltaTime();
+
+		if (chTime > 3.0f)
+		{
+			object::Destroy(GetOwner());
+		}
+		// 지우셈
+
+
 		const std::vector<Script*>& scripts
 			= GetOwner()->GetComponents<Script>();
 

@@ -15,7 +15,6 @@ namespace Lu
 		UINT			m_ColliderID;
 
 		eColliderType	m_Type;
-		Transform*		m_Transform;
 
 		Vector3			m_Position;
 		Vector2			m_Size;
@@ -46,11 +45,6 @@ namespace Lu
 		eColliderType GetType()
 		{
 			return m_Type;
-		}
-
-		Transform* GetTransform()
-		{
-			return m_Transform;
 		}
 
 		Vector3 GetPosition()
