@@ -94,6 +94,11 @@ namespace Lu
 			return m_Parent;
 		}
 
+		Matrix& GetWorldMatrix()
+		{
+			return m_World;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;

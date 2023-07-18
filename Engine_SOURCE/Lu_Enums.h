@@ -17,7 +17,7 @@ namespace Lu::enums
 	enum class eLayerType
 	{
 		Default,
-		Grid,
+		BackGround,
 		Player,
 		Monster,
 		UI,

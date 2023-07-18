@@ -299,9 +299,8 @@ namespace renderer
 		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
 		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
-		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
-		debugShader->SetRSState(eRSType::SolidNone);
-		//debugShader->SetDSState(eDSType::NoWrite);
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		debugShader->SetRSState(eRSType::WireframeNone);
 		Lu::Resources::Insert(L"DebugShader", debugShader);
 	}
 
@@ -385,11 +384,11 @@ namespace renderer
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
 		// 튜토리얼 더미
-		pTexture = Resources::Load<Texture>(L"TutoDummy_Tex", L"..\\Resources\\Texture\\Map\\Tutorial\\TutoDummy.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"Tutorial_Mtrl", pMaterial);
+		//pTexture = Resources::Load<Texture>(L"TutoDummy_Tex", L"..\\Resources\\Texture\\Map\\Tutorial\\TutoDummy.png");
+		//pMaterial = std::make_shared<Material>();
+		//pMaterial->SetShader(pShader);
+		//pMaterial->SetTexture(pTexture);
+		//Resources::Insert(L"Tutorial_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Lobby Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
@@ -398,16 +397,67 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"Room_Mtrl", pMaterial);
+		Resources::Insert(L"LobbyBG_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Stage Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
-		pTexture = Resources::Load<Texture>(L"Stage_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Ground115.png");
+		// WeaponChoiceScene
+		pTexture = Resources::Load<Texture>(L"WeaponChoice_Tex", L"..\\Resources\\Texture\\Map\\Stage\\WeaponChoice.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"Stage_Mtrl", pMaterial);
+		Resources::Insert(L"WeaponChoiceBG_Mtrl", pMaterial);
+
+		// DiceScene
+		pTexture = Resources::Load<Texture>(L"Dice_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Dice.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"DiceBG_Mtrl", pMaterial);
+
+		// StoreScene
+		pTexture = Resources::Load<Texture>(L"Store_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Store.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"StoreBG_Mtrl", pMaterial);
+
+		// Nomal1Scene
+		pTexture = Resources::Load<Texture>(L"Nomal1_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Nomal_1.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"Nomal1BG_Mtrl", pMaterial);
+
+		// Nomal2Scene
+		pTexture = Resources::Load<Texture>(L"Nomal2_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Nomal_2.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"Nomal2BG_Mtrl", pMaterial);
+
+		// MidBossScene
+		pTexture = Resources::Load<Texture>(L"MidBoss_Tex", L"..\\Resources\\Texture\\Map\\Stage\\MidBoss.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"MidBossBG_Mtrl", pMaterial);
+
+		// BossWayScene
+		pTexture = Resources::Load<Texture>(L"BossWay_Tex", L"..\\Resources\\Texture\\Map\\Stage\\BossWay.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"BossWayBG_Mtrl", pMaterial);
+
+		// BossScene
+		pTexture = Resources::Load<Texture>(L"Boss_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Boss.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"BossBG_Mtrl", pMaterial);
+
 #pragma endregion
 #pragma region GameOver Scene Resources
 		pTexture = Resources::Load<Texture>(L"GameOver_Tex", L"..\\Resources\\Texture\\Map\\GameOver\\Game_Over.png");

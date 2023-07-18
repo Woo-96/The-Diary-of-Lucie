@@ -1,266 +1,266 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Common">
+    <Filter Include="01. Common">
       <UniqueIdentifier>{7147ca72-e18f-4125-979c-92ed5cfd60bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Math">
+    <Filter Include="01. Common\Math">
       <UniqueIdentifier>{b4154ee6-4b19-45be-bf95-85754f8a8631}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics">
-      <UniqueIdentifier>{ff5487e5-ecb5-45eb-9f6b-f20f0ff34cfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="High Level Interface">
-      <UniqueIdentifier>{16300282-9fe6-4783-91b1-447ff751be6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Entity">
+    <Filter Include="01. Common\Entity">
       <UniqueIdentifier>{4f50f731-41c8-46c3-848d-1d3100899a86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{53075aad-7f72-44c4-acf8-3f637af401fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Time">
+    <Filter Include="01. Common\Time">
       <UniqueIdentifier>{2cefdafa-df06-4179-b150-db80b977e095}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{638050be-c7e2-4e39-af23-36c1739da042}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Resources">
-      <UniqueIdentifier>{62ccc597-e793-4dc8-bb94-8bebe3a31dcf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{2ce08846-e85e-4bf4-bde6-178da038490c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{5bfd1eea-72f9-489c-b94d-d0e4716b7f78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component">
-      <UniqueIdentifier>{c5dfeb91-95e0-4afd-99b8-6b1cdb1c1779}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Layer">
-      <UniqueIdentifier>{4158d93b-edb1-43dd-917a-ff156fd496af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Mesh">
-      <UniqueIdentifier>{44764a9d-ae9d-48ec-ac30-5fcb423d5273}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Shader">
-      <UniqueIdentifier>{9d0a053f-a163-4d15-9838-11ceb95861b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\Script">
-      <UniqueIdentifier>{1cb1e9ea-1db2-4e78-b7e9-220c0ac63182}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Manager">
-      <UniqueIdentifier>{76e67179-9842-4784-9d5f-132680103d84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\Transform">
-      <UniqueIdentifier>{0dfe8ee7-1e38-4afd-8579-2c60bfdaa7c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\MeshRenderer">
-      <UniqueIdentifier>{08e69a07-2820-4493-a979-d5b27877cc62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Texture">
-      <UniqueIdentifier>{2a6a5331-31c8-4f29-a4df-7a52641a2453}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Material">
-      <UniqueIdentifier>{fe30a786-3cb7-4dad-9ffa-2f97876679b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\Camera">
-      <UniqueIdentifier>{dfb53166-2f64-4b7c-b035-7c723b3af490}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\ConstantBuffer">
-      <UniqueIdentifier>{92ced349-ad95-4522-b533-5e114c62acc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\GraphicDevice">
-      <UniqueIdentifier>{dd2d4628-a69b-4de1-9e6a-2686212d5727}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Renderer">
-      <UniqueIdentifier>{3e085398-d05c-453d-9c75-68a84f7dacaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Object">
+    <Filter Include="01. Common\Object">
       <UniqueIdentifier>{e7ec1da9-d4fd-451b-a6e0-f69af1c4108e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\Collider">
+    <Filter Include="02. Graphics">
+      <UniqueIdentifier>{ff5487e5-ecb5-45eb-9f6b-f20f0ff34cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\ConstantBuffer">
+      <UniqueIdentifier>{92ced349-ad95-4522-b533-5e114c62acc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\GraphicDevice">
+      <UniqueIdentifier>{dd2d4628-a69b-4de1-9e6a-2686212d5727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\Renderer">
+      <UniqueIdentifier>{3e085398-d05c-453d-9c75-68a84f7dacaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. High Level Interface">
+      <UniqueIdentifier>{16300282-9fe6-4783-91b1-447ff751be6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Input">
+      <UniqueIdentifier>{53075aad-7f72-44c4-acf8-3f637af401fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject">
+      <UniqueIdentifier>{2ce08846-e85e-4bf4-bde6-178da038490c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component">
+      <UniqueIdentifier>{c5dfeb91-95e0-4afd-99b8-6b1cdb1c1779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\Script">
+      <UniqueIdentifier>{1cb1e9ea-1db2-4e78-b7e9-220c0ac63182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\Transform">
+      <UniqueIdentifier>{0dfe8ee7-1e38-4afd-8579-2c60bfdaa7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\MeshRenderer">
+      <UniqueIdentifier>{08e69a07-2820-4493-a979-d5b27877cc62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\Camera">
+      <UniqueIdentifier>{dfb53166-2f64-4b7c-b035-7c723b3af490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\Collider">
       <UniqueIdentifier>{3fc83080-ce3f-4f23-a1b7-730c11a6bd1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Manager\CollisionMgr">
+    <Filter Include="06. Resource">
+      <UniqueIdentifier>{638050be-c7e2-4e39-af23-36c1739da042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\Resources">
+      <UniqueIdentifier>{62ccc597-e793-4dc8-bb94-8bebe3a31dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\Mesh">
+      <UniqueIdentifier>{44764a9d-ae9d-48ec-ac30-5fcb423d5273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\Shader">
+      <UniqueIdentifier>{9d0a053f-a163-4d15-9838-11ceb95861b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\Texture">
+      <UniqueIdentifier>{2a6a5331-31c8-4f29-a4df-7a52641a2453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\Material">
+      <UniqueIdentifier>{fe30a786-3cb7-4dad-9ffa-2f97876679b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Scene">
+      <UniqueIdentifier>{5bfd1eea-72f9-489c-b94d-d0e4716b7f78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Scene\Layer">
+      <UniqueIdentifier>{4158d93b-edb1-43dd-917a-ff156fd496af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Scene\Manager">
+      <UniqueIdentifier>{76e67179-9842-4784-9d5f-132680103d84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Scene\Manager\CollisionMgr">
       <UniqueIdentifier>{10890c5d-6872-4afb-b62d-e81bf02b146f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Manager\SceneMgr">
+    <Filter Include="07. Scene\Manager\SceneMgr">
       <UniqueIdentifier>{917def0c-b899-4528-ba8c-23ccc5d90ead}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
-      <Filter>Common</Filter>
+      <Filter>01. Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lucie_Engine.h">
-      <Filter>Common</Filter>
+      <Filter>01. Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Enums.h">
-      <Filter>Common</Filter>
+      <Filter>01. Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Entity.h">
-      <Filter>Common\Entity</Filter>
+      <Filter>01. Common\Entity</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Math.h">
-      <Filter>Common\Math</Filter>
+      <Filter>01. Common\Math</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Time.h">
-      <Filter>Common\Time</Filter>
+      <Filter>01. Common\Time</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Graphics.h">
-      <Filter>Graphics</Filter>
+      <Filter>02. Graphics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Application.h">
-      <Filter>High Level Interface</Filter>
+      <Filter>03. High Level Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h">
-      <Filter>Input</Filter>
+      <Filter>04. Input</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resource.h">
-      <Filter>Resource</Filter>
+      <Filter>06. Resource</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resources.h">
-      <Filter>Resource\Resources</Filter>
+      <Filter>06. Resource\Resources</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Mesh.h">
-      <Filter>Resource\Mesh</Filter>
+      <Filter>06. Resource\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Shader.h">
-      <Filter>Resource\Shader</Filter>
+      <Filter>06. Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>05. GameObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Script.h">
-      <Filter>GameObject\Component\Script</Filter>
+      <Filter>05. GameObject\Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Component.h">
-      <Filter>GameObject\Component</Filter>
+      <Filter>05. GameObject\Component</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Layer.h">
-      <Filter>Scene\Layer</Filter>
+      <Filter>07. Scene\Layer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Scene.h">
-      <Filter>Scene</Filter>
+      <Filter>07. Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Transform.h">
-      <Filter>GameObject\Component\Transform</Filter>
+      <Filter>05. GameObject\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.h">
-      <Filter>GameObject\Component\MeshRenderer</Filter>
+      <Filter>05. GameObject\Component\MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Texture.h">
-      <Filter>Resource\Texture</Filter>
+      <Filter>06. Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Material.h">
-      <Filter>Resource\Material</Filter>
+      <Filter>06. Resource\Material</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Camera.h">
-      <Filter>GameObject\Component\Camera</Filter>
+      <Filter>05. GameObject\Component\Camera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.h">
-      <Filter>Graphics\ConstantBuffer</Filter>
+      <Filter>02. Graphics\ConstantBuffer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.h">
-      <Filter>Graphics\GraphicDevice</Filter>
+      <Filter>02. Graphics\GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h">
-      <Filter>Graphics\Renderer</Filter>
+      <Filter>02. Graphics\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Object.h">
-      <Filter>Common\Object</Filter>
+      <Filter>01. Common\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h">
-      <Filter>GameObject\Component\Collider</Filter>
+      <Filter>05. GameObject\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h">
-      <Filter>Scene\Manager\SceneMgr</Filter>
+      <Filter>07. Scene\Manager\SceneMgr</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h">
-      <Filter>Scene\Manager\CollisionMgr</Filter>
+      <Filter>07. Scene\Manager\CollisionMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp">
-      <Filter>Common\Entity</Filter>
+      <Filter>01. Common\Entity</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Math.cpp">
-      <Filter>Common\Math</Filter>
+      <Filter>01. Common\Math</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Time.cpp">
-      <Filter>Common\Time</Filter>
+      <Filter>01. Common\Time</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Application.cpp">
-      <Filter>High Level Interface</Filter>
+      <Filter>03. High Level Interface</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp">
-      <Filter>Input</Filter>
+      <Filter>04. Input</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resource.cpp">
-      <Filter>Resource</Filter>
+      <Filter>06. Resource</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resources.cpp">
-      <Filter>Resource\Resources</Filter>
+      <Filter>06. Resource\Resources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Mesh.cpp">
-      <Filter>Resource\Mesh</Filter>
+      <Filter>06. Resource\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Shader.cpp">
-      <Filter>Resource\Shader</Filter>
+      <Filter>06. Resource\Shader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GameObject.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>05. GameObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Script.cpp">
-      <Filter>GameObject\Component\Script</Filter>
+      <Filter>05. GameObject\Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Component.cpp">
-      <Filter>GameObject\Component</Filter>
+      <Filter>05. GameObject\Component</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Layer.cpp">
-      <Filter>Scene\Layer</Filter>
+      <Filter>07. Scene\Layer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Scene.cpp">
-      <Filter>Scene</Filter>
+      <Filter>07. Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Transform.cpp">
-      <Filter>GameObject\Component\Transform</Filter>
+      <Filter>05. GameObject\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.cpp">
-      <Filter>GameObject\Component\MeshRenderer</Filter>
+      <Filter>05. GameObject\Component\MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Texture.cpp">
-      <Filter>Resource\Texture</Filter>
+      <Filter>06. Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Material.cpp">
-      <Filter>Resource\Material</Filter>
+      <Filter>06. Resource\Material</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Camera.cpp">
-      <Filter>GameObject\Component\Camera</Filter>
+      <Filter>05. GameObject\Component\Camera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp">
-      <Filter>Graphics\ConstantBuffer</Filter>
+      <Filter>02. Graphics\ConstantBuffer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp">
-      <Filter>Graphics\GraphicDevice</Filter>
+      <Filter>02. Graphics\GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp">
-      <Filter>Graphics\Renderer</Filter>
+      <Filter>02. Graphics\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp">
-      <Filter>GameObject\Component\Collider</Filter>
+      <Filter>05. GameObject\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp">
-      <Filter>Scene\Manager\SceneMgr</Filter>
+      <Filter>07. Scene\Manager\SceneMgr</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp">
-      <Filter>Scene\Manager\CollisionMgr</Filter>
+      <Filter>07. Scene\Manager\CollisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Lu_Math.inl">
-      <Filter>Common\Math</Filter>
+      <Filter>01. Common\Math</Filter>
     </None>
   </ItemGroup>
 </Project>

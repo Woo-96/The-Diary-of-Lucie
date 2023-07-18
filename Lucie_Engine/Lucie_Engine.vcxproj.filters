@@ -59,6 +59,33 @@
     <ClCompile Include="Lu_ButtonScript.cpp">
       <Filter>Contents\Script\UI\Button</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_WeaponChoiceScene.cpp">
+      <Filter>Contents\Scene\Stage\WeaponChoice</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_DiceScene.cpp">
+      <Filter>Contents\Scene\Stage\Dice</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_StoreScene.cpp">
+      <Filter>Contents\Scene\Stage\Store</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_Nomal1Scene.cpp">
+      <Filter>Contents\Scene\Stage\NomalMonster1</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_Nomal2Scene.cpp">
+      <Filter>Contents\Scene\Stage\NomalMonster2</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_MidBossScene.cpp">
+      <Filter>Contents\Scene\Stage\MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_NextFloorScene.cpp">
+      <Filter>Contents\Scene\Stage\NextFloor</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BossWayScene.cpp">
+      <Filter>Contents\Scene\Stage\BossWay</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BossScene.cpp">
+      <Filter>Contents\Scene\Stage\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -122,13 +149,37 @@
     <ClInclude Include="Lu_ButtonScript.h">
       <Filter>Contents\Script\UI\Button</Filter>
     </ClInclude>
+    <ClInclude Include="Lu_WeaponChoiceScene.h">
+      <Filter>Contents\Scene\Stage\WeaponChoice</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_DiceScene.h">
+      <Filter>Contents\Scene\Stage\Dice</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_StoreScene.h">
+      <Filter>Contents\Scene\Stage\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_Nomal1Scene.h">
+      <Filter>Contents\Scene\Stage\NomalMonster1</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_Nomal2Scene.h">
+      <Filter>Contents\Scene\Stage\NomalMonster2</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_MidBossScene.h">
+      <Filter>Contents\Scene\Stage\MidBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_NextFloorScene.h">
+      <Filter>Contents\Scene\Stage\NextFloor</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BossWayScene.h">
+      <Filter>Contents\Scene\Stage\BossWay</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BossScene.h">
+      <Filter>Contents\Scene\Stage\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
       <UniqueIdentifier>{0eecfbb3-ca80-413e-b7ab-ea760cdc0a53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script">
-      <UniqueIdentifier>{a394b86b-cc84-4e7d-ab8d-d715a1713c41}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Scene">
       <UniqueIdentifier>{c7f31b4a-07c9-466c-ab3b-c555f56f7e8d}</UniqueIdentifier>
@@ -150,6 +201,36 @@
     </Filter>
     <Filter Include="Contents\Scene\GameOver">
       <UniqueIdentifier>{8e082a5e-8756-432e-9540-8ded0d8a6e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\Boss">
+      <UniqueIdentifier>{3b5cc994-1452-42b5-b09b-d863ab0da8eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\MidBoss">
+      <UniqueIdentifier>{f1820c20-5779-44fe-aa92-73928ec52eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\BossWay">
+      <UniqueIdentifier>{d21147dd-34bb-41ae-8358-dd47e8b2c4aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\NomalMonster1">
+      <UniqueIdentifier>{b6963ccd-74e1-49e1-b7e7-1e265490a34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\NomalMonster2">
+      <UniqueIdentifier>{a9f44eeb-996e-4427-b689-8ba5c75df48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\Dice">
+      <UniqueIdentifier>{ffecc94c-733d-44dd-b0ac-be63dac19d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\Store">
+      <UniqueIdentifier>{895a1cec-81d2-41da-afdc-c708825ff9ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\NextFloor">
+      <UniqueIdentifier>{380f9eb9-d988-4a0b-af58-87f011063c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Stage\WeaponChoice">
+      <UniqueIdentifier>{c2085ec1-4ab4-4c1a-a2b2-ca1a0c6a8135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script">
+      <UniqueIdentifier>{a394b86b-cc84-4e7d-ab8d-d715a1713c41}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\Camera">
       <UniqueIdentifier>{2c671ee4-1313-4100-9397-7f7b1a1cac5c}</UniqueIdentifier>

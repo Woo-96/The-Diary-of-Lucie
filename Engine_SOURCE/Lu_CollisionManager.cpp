@@ -109,35 +109,65 @@ namespace Lu
 		if (eColliderType::Rect == _Left->GetType()
 			&& eColliderType::Rect == _Right->GetType())
 		{
-			/* 분리축 이론
-				1. 투영 축(표면 방향 벡터) 구하기
-				2. 각 충돌체의 원점에 해당하는 중심점 구하기
-				3. 표면 방향 벡터 4개와 중심 벡터 1개로 분리축 테스트 수행
-					- 표면 방향 벡터 4개가 돌아가며 투영 축을 담당 (기준이 되는 방향)
-					- 투영 축 방향에 표면 방향 벡터를 투영하여 길이(면적) 구하기
-					- 중심 벡터도 투영 축과 내적하여 길이 구하기
-					- 최종 투영 길이와 중심 벡터 길이 비교 (중심 길이가 더 길면 false)
-				4. 4번의 테스트 중, 한번이라도 축이 분리되어 있으면 충돌하지 않음
-			*/
-
-			// 투영축 4개
-			Vector3 proj[4] = {};
-
-			// 센터 벡터
-			Vector3 center;
-
-			// 분리축 테스트 4회
-			for (int i = 0; i < 4; ++i)
+			// Rect vs Rect 
+			// 0 --- 1
+			// |     |
+			// 3 --- 2
+			Vector3 arrLocalPos[4] =
 			{
-				float projDist = 0.f;
+			   Vector3{-0.5f, 0.5f, 0.0f}
+			   ,Vector3{0.5f, 0.5f, 0.0f}
+			   ,Vector3{0.5f, -0.5f, 0.0f}
+			   ,Vector3{-0.5f, -0.5f, 0.0f}
+			};
 
-				float centerDist = 0.f;
+			Transform* leftTr = _Left->GetOwner()->GetComponent<Transform>();
+			Transform* rightTr = _Right->GetOwner()->GetComponent<Transform>();
 
-				if (projDist < centerDist)
+			Matrix leftMatrix = leftTr->GetWorldMatrix();
+			Matrix rightMatrix = rightTr->GetWorldMatrix();
+
+			Vector3 Axis[4] = {};
+
+			Vector3 leftScale = Vector3(_Left->GetSize().x, _Left->GetSize().y, 1.0f);
+			Matrix finalLeft = Matrix::CreateScale(leftScale);
+			finalLeft *= leftMatrix;
+
+			Vector3 rightScale = Vector3(_Right->GetSize().x, _Right->GetSize().y, 1.0f);
+			Matrix finalRight = Matrix::CreateScale(rightScale);
+			finalRight *= rightMatrix;
+
+			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
+			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
+			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
+			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+
+			Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+			Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+			Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
+			Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+
+			for (size_t i = 0; i < 4; i++)
+				Axis[i].z = 0.0f;
+
+			Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+			vc.z = 0.0f;
+
+			Vector3 centerDir = vc;
+			for (size_t i = 0; i < 4; i++)
+			{
+				Vector3 vA = Axis[i];
+
+				float projDistance = 0.0f;
+				for (size_t j = 0; j < 4; j++)
+				{
+					projDistance += fabsf(Axis[j].Dot(vA) / 2.0f);
+				}
+
+				if (projDistance < fabsf(centerDir.Dot(vA)))
 					return false;
 			}
 
-			// 테스트 4회를 모두 통과할 경우 충돌
 			return true;
 		}
 

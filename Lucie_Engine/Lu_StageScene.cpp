@@ -17,7 +17,7 @@ namespace Lu
 {
 	StageScene::StageScene()
 	{
-
+		SetName(L"StageSceneScript");
 	}
 
 	StageScene::~StageScene()
@@ -29,30 +29,13 @@ namespace Lu
 	{
 		Scene::Initialize();
 
-		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::Default);
-			pObject->SetName(L"Stage");
-
-			Transform* pTransform = pObject->GetComponent<Transform>();
-			pTransform->SetScale(Vector3(1512.f, 1008.f, 100.f));
-
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"Stage_Mtrl"));
-		}
-
 		CreateHUD();
-		CreateInventory();
+		//CreateInventory();
 	}
 
 	void StageScene::Update()
 	{
 		Scene::Update();
-
-		if (Input::GetKeyUp(eKeyCode::SPACE))
-		{
-			SceneManager::LoadScene(L"GameOverScene");
-		}
 	}
 
 	void StageScene::LateUpdate()

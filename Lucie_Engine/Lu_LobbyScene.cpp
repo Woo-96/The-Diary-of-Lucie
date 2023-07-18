@@ -9,7 +9,7 @@ namespace Lu
 {
 	LobbyScene::LobbyScene()
 	{
-
+		SetName(L"LobbySceneScript");
 	}
 
 	LobbyScene::~LobbyScene()
@@ -22,16 +22,16 @@ namespace Lu
 		Scene::Initialize();
 
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -95.f, 900.f), eLayerType::Default);
-			pObject->SetName(L"Room");
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -95.f, 900.f), eLayerType::BackGround);
+			pObject->SetName(L"Lobby_BG");
 
 			Transform* pTransform = pObject->GetComponent<Transform>();
-			// 원본 2배
-			pTransform->SetScale(Vector3(2016.f, 2112.f, 100.f));
+			// 원본 2.5배
+			pTransform->SetScale(Vector3(2520.f, 2640.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"Room_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"LobbyBG_Mtrl"));
 		}
 	}
 
@@ -39,9 +39,10 @@ namespace Lu
 	{
 		Scene::Update();
 
+		// 오브젝트로 입장해야함
 		if (Input::GetKeyUp(eKeyCode::SPACE))
 		{
-			SceneManager::LoadScene(L"StageScene");
+			SceneManager::LoadScene(L"WeaponChoiceScene");
 		}
 	}
 

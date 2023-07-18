@@ -9,7 +9,7 @@ namespace Lu
 {
 	TitleScene::TitleScene()
 	{
-
+		SetName(L"TitleSceneScript");
 	}
 
 	TitleScene::~TitleScene()
@@ -23,8 +23,8 @@ namespace Lu
 
 		// TitleBG
 		{
-			GameObject* pTitleBG = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::Default);
-			pTitleBG->SetName(L"TitleBG");
+			GameObject* pTitleBG = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::BackGround);
+			pTitleBG->SetName(L"Title_BG");
 
 			Transform* pTransform = pTitleBG->GetComponent<Transform>();
 			// 원본 1.5배
@@ -37,7 +37,7 @@ namespace Lu
 
 		// 루시
 		{
-			GameObject* pLucie = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 700.f), eLayerType::Default);
+			GameObject* pLucie = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 700.f), eLayerType::UI);
 			pLucie->SetName(L"Lucie");
 
 			Transform* pTransform = pLucie->GetComponent<Transform>();
@@ -50,7 +50,7 @@ namespace Lu
 
 		// 마리
 		{
-			GameObject* pMary = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 800.f), eLayerType::Default);
+			GameObject* pMary = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 800.f), eLayerType::UI);
 			pMary->SetName(L"Mary");
 
 			Transform* pTransform = pMary->GetComponent<Transform>();
@@ -63,7 +63,7 @@ namespace Lu
 
 		// 아이오네
 		{
-			GameObject* pIone = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 800.f), eLayerType::Default);
+			GameObject* pIone = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 800.f), eLayerType::UI);
 			pIone->SetName(L"Ione");
 
 			Transform* pTransform = pIone->GetComponent<Transform>();
@@ -76,7 +76,7 @@ namespace Lu
 
 		// Title 문구
 		{
-			GameObject* pTitle = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 800.f), eLayerType::Default);
+			GameObject* pTitle = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 800.f), eLayerType::UI);
 			pTitle->SetName(L"Title");
 
 			Transform* pTransform = pTitle->GetComponent<Transform>();
@@ -86,16 +86,21 @@ namespace Lu
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
 		}
+
+		// UI
+		{
+
+		}
 	}
 
 	void TitleScene::Update()
 	{
 		Scene::Update();
 
-		// 새 게임 : 튜토리얼
+		// 새 게임 : 
 		if (Input::GetKeyUp(eKeyCode::SPACE))
 		{
-			SceneManager::LoadScene(L"TutorialScene");
+			SceneManager::LoadScene(L"LobbyScene");
 		}
 
 		// 종료 : 게임 종료

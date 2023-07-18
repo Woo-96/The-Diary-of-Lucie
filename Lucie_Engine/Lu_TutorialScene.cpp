@@ -9,7 +9,7 @@ namespace Lu
 {
 	TutorialScene::TutorialScene()
 	{
-
+		SetName(L"TutorialSceneScript");
 	}
 
 	TutorialScene::~TutorialScene()
@@ -22,15 +22,15 @@ namespace Lu
 		Scene::Initialize();
 
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::Default);
-			pObject->SetName(L"Tutorial");
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::BackGround);
+			pObject->SetName(L"Tutorial_BG");
 
 			Transform* pTransform = pObject->GetComponent<Transform>();
 			pTransform->SetScale(Vector3(2160.f, 1800.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"Tutorial_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"TutorialBG_Mtrl"));
 		}
 	}
 
