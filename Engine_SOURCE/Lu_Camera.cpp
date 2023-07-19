@@ -98,8 +98,8 @@ namespace Lu
 	{
 		RECT rect = {};
 		GetClientRect(application.GetHwnd(), &rect);
-		float width = rect.right - rect.left;
-		float height = rect.bottom - rect.top;
+		float width = (float)rect.right - (float)rect.left;
+		float height = (float)rect.bottom - (float)rect.top;
 		m_AspectRatio = width / height;
 
 		if (type == eProjectionType::OrthoGraphic)
@@ -248,4 +248,16 @@ namespace Lu
 		GetDevice()->BindDepthStencilState(dsState.Get());
 	}
 
+	Vector3 Camera::ScreenToWorld(Vector2 _MousePos)
+	{
+		Viewport viewport;
+		viewport.width = application.GetWidth();
+		viewport.height = application.GetHeight();
+		viewport.x = 0;
+		viewport.y = 0;
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+		
+		return viewport.Unproject(Vector3(_MousePos.x, _MousePos.y, 0.f), View, Projection, Matrix::Identity);
+	}
 }

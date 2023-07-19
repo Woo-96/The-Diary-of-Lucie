@@ -173,10 +173,12 @@
     <ClInclude Include="Lu_Layout.h" />
     <ClInclude Include="Lu_LobbyScene.h" />
     <ClInclude Include="Lu_MidBossScene.h" />
+    <ClInclude Include="Lu_MouseScript.h" />
     <ClInclude Include="Lu_MP.h" />
     <ClInclude Include="Lu_NextFloorScene.h" />
     <ClInclude Include="Lu_Nomal1Scene.h" />
     <ClInclude Include="Lu_Nomal2Scene.h" />
+    <ClInclude Include="Lu_NumberScript.h" />
     <ClInclude Include="Lu_PlayScene.h" />
     <ClInclude Include="Lu_QuickItem.h" />
     <ClInclude Include="Lu_StageScene.h" />
@@ -204,10 +206,12 @@
     <ClCompile Include="Lu_Layout.cpp" />
     <ClCompile Include="Lu_LobbyScene.cpp" />
     <ClCompile Include="Lu_MidBossScene.cpp" />
+    <ClCompile Include="Lu_MouseScript.cpp" />
     <ClCompile Include="Lu_MP.cpp" />
     <ClCompile Include="Lu_NextFloorScene.cpp" />
     <ClCompile Include="Lu_Nomal1Scene.cpp" />
     <ClCompile Include="Lu_Nomal2Scene.cpp" />
+    <ClCompile Include="Lu_NumberScript.cpp" />
     <ClCompile Include="Lu_PlayScene.cpp" />
     <ClCompile Include="Lu_QuickItem.cpp" />
     <ClCompile Include="Lu_StageScene.cpp" />

@@ -114,9 +114,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Application.h">
       <Filter>03. High Level Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h">
-      <Filter>04. Input</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resource.h">
       <Filter>06. Resource</Filter>
     </ClInclude>
@@ -180,6 +177,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h">
       <Filter>07. Scene\Manager\CollisionMgr</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h">
+      <Filter>04. Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp">
@@ -193,9 +193,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Application.cpp">
       <Filter>03. High Level Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp">
-      <Filter>04. Input</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resource.cpp">
       <Filter>06. Resource</Filter>
@@ -256,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp">
       <Filter>07. Scene\Manager\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp">
+      <Filter>04. Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

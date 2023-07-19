@@ -33,6 +33,44 @@ namespace Lu
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossBG_Mtrl"));
 		}
+
+		// UI
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), eLayerType::UI);
+			pObject->SetName(L"MidBoss_HP_Frame");
+
+			Transform* pTransform = pObject->GetComponent<Transform>();
+			// ¿øº» 1.5¹è
+			pTransform->SetScale(Vector3(759.f, 48.f, 100.f));
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossHPFrame_Mtrl"));
+		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), eLayerType::UI);
+			pObject->SetName(L"MidBoss_HP");
+
+			Transform* pTransform = pObject->GetComponent<Transform>();
+			pTransform->SetScale(Vector3(720.f, 30.f, 100.f));
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHP_Mtrl"));
+		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), eLayerType::UI);
+			pObject->SetName(L"MidBoss_Name");
+
+			Transform* pTransform = pObject->GetComponent<Transform>();
+			pTransform->SetScale(Vector3(1440.f, 810.f, 100.f));
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
+		}
 	}
 
 	void MidBossScene::Update()

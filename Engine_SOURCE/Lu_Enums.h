@@ -21,6 +21,7 @@ namespace Lu::enums
 		Player,
 		Monster,
 		UI,
+		Mouse,
 		End = 16,
 	};
 

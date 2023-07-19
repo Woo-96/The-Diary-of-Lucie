@@ -47,6 +47,11 @@ namespace Lu
 			Projection = projection;
 		}
 
+		void SetScale(float _Scale)
+		{
+			m_Scale = _Scale;
+		}
+
 	public:
 		static Matrix& GetGpuViewMatrix() 
 		{ 
@@ -104,5 +109,7 @@ namespace Lu
 
 		void EnableDepthStencilState();
 		void DisableDepthStencilState();
+
+		Vector3 ScreenToWorld(Vector2 _MousePos);
 	};
 }

@@ -4,6 +4,7 @@
 namespace Lu
 {
 	using namespace Lu::math;
+	class GameObject;
 
 	enum class eKeyCode
 	{
@@ -38,42 +39,6 @@ namespace Lu
 		static std::vector<Key>		m_Keys;
 		static Vector2				m_MousePos;
 
-		// ========================================
-		Vector2						m_MouseWorldPos;	// 월드공간에서의 마우스 위치
-		Vector2						m_MouseMove;
-		bool						m_MouseLDown;
-		bool						m_MouseLPush;
-		bool						m_MouseLUp;
-		//CollisionProfile*			m_MouseProfile;		// 마우스 충돌 필요한가?
-		class CGameObject*			m_MouseObj;
-		bool						m_ShowCursor;
-
-	public:
-		bool GetMouseLDown()	const
-		{
-			return m_MouseLDown;
-		}
-
-		bool GetMouseLPush()	const
-		{
-			return m_MouseLPush;
-		}
-
-		bool GetMouseLUp()	const
-		{
-			return m_MouseLUp;
-		}
-
-		const Vector2& GetMouseWorldPos()	const
-		{
-			return m_MouseWorldPos;
-		}
-
-		const Vector2& GetMouseMove()	const
-		{
-			return m_MouseMove;
-		}
-
 	public:
 		inline static eKeyState GetKeyState(eKeyCode keyCode)
 		{
@@ -81,7 +46,7 @@ namespace Lu
 		};
 
 		// 키를 누르는 시간만큼 true를 반환
-		static __forceinline bool GetKey(eKeyCode keyCode)	
+		static __forceinline bool GetKey(eKeyCode keyCode)
 		{
 			return m_Keys[static_cast<UINT>(keyCode)].eState == eKeyState::Pressed;
 		}
@@ -97,10 +62,10 @@ namespace Lu
 		{
 			return m_Keys[static_cast<UINT>(keyCode)].eState == eKeyState::Up;
 		}
-		
-		static __forceinline Vector2 GetMousePos() 
-		{ 
-			return m_MousePos; 
+
+		static __forceinline Vector2 GetMousePos()
+		{
+			return m_MousePos;
 		}
 
 	public:

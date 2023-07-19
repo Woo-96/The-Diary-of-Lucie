@@ -4,6 +4,8 @@
 
 namespace Lu
 {
+	class MouseScript;
+
 	class Scene : public Entity
 	{
 	public:
@@ -13,11 +15,17 @@ namespace Lu
 	private:
 		std::vector<Layer>	m_Layers;
 		class Camera*		m_MainCam;
+		MouseScript*		m_Mouse;
 
 	public:
 		Layer& GetLayer(eLayerType type)
 		{
 			return m_Layers[(UINT)type];
+		}
+
+		MouseScript* GetMouse()	const
+		{
+			return m_Mouse;
 		}
 
 	public:

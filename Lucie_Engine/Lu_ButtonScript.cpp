@@ -2,6 +2,7 @@
 
 Lu::ButtonScript::ButtonScript()
 {
+	SetName(L"ButtonScript");
 }
 
 Lu::ButtonScript::~ButtonScript()

@@ -14,6 +14,12 @@ cbuffer Grid : register(b2)
     float2 Resolution;
 }
 
+cbuffer Number : register(b3)
+{
+    float2 vLtUV;
+    float2 vSliceUV;
+}
+
 
 Texture2D albedoTexture : register(t0);
 

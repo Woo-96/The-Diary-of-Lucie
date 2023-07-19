@@ -50,6 +50,8 @@ namespace Lu
 		template <typename T>
 		static void Insert(const std::wstring& _Key, std::shared_ptr<T> _Resource)
 		{
+			std::shared_ptr<Resource> pRes = _Resource;
+			pRes->SetKey(_Key);
 			m_Resources.insert(std::make_pair(_Key, _Resource));
 		}
 	};

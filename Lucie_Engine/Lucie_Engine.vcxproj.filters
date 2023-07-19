@@ -86,6 +86,12 @@
     <ClCompile Include="Lu_BossScene.cpp">
       <Filter>Contents\Scene\Stage\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_MouseScript.cpp">
+      <Filter>Contents\Script\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_NumberScript.cpp">
+      <Filter>Contents\Script\UI\Number</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -175,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="Lu_BossScene.h">
       <Filter>Contents\Scene\Stage\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_MouseScript.h">
+      <Filter>Contents\Script\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_NumberScript.h">
+      <Filter>Contents\Script\UI\Number</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +285,12 @@
     </Filter>
     <Filter Include="Contents\Script\UI\Button">
       <UniqueIdentifier>{f352a806-6fc1-44d2-a4a4-12b8ed42ee8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Mouse">
+      <UniqueIdentifier>{0ca3d6db-e4cc-462e-926e-c934428b13fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\UI\Number">
+      <UniqueIdentifier>{7ee7387a-f212-449b-b087-cffe681ac402}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

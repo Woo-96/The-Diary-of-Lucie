@@ -44,10 +44,7 @@ namespace renderer
 		arrLayout[2].SemanticName = "TEXCOORD";
 		arrLayout[2].SemanticIndex = 0;
 
-		std::shared_ptr<Shader> shader = Lu::Resources::Find<Shader>(L"TriangleShader");
-		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
-			, shader->GetVSCode()
-			, shader->GetInputLayoutAddressOf());
+		std::shared_ptr<Shader> shader;
 
 		shader = Lu::Resources::Find<Shader>(L"SpriteShader");
 		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
@@ -60,6 +57,11 @@ namespace renderer
 			, shader->GetInputLayoutAddressOf());
 
 		shader = Lu::Resources::Find<Shader>(L"DebugShader");
+		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = Lu::Resources::Find<Shader>(L"NumberShader");
 		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
@@ -276,16 +278,15 @@ namespace renderer
 	
 		// Grid Buffer
 		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
-		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(TransformCB));
+		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
+
+		// Number Buffer
+		constantBuffer[(UINT)eCBType::Number] = new ConstantBuffer(eCBType::Number);
+		constantBuffer[(UINT)eCBType::Number]->Create(sizeof(NumberCB));
 	}
 
 	void LoadShader()
 	{
-		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
-		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
-		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
-		Lu::Resources::Insert(L"TriangleShader", shader);
-
 		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
 		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
@@ -302,6 +303,11 @@ namespace renderer
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		debugShader->SetRSState(eRSType::WireframeNone);
 		Lu::Resources::Insert(L"DebugShader", debugShader);
+
+		std::shared_ptr<Shader> numberShader = std::make_shared<Shader>();
+		numberShader->Create(eShaderStage::VS, L"NumberVS.hlsl", "main");
+		numberShader->Create(eShaderStage::PS, L"NumberPS.hlsl", "main");
+		Lu::Resources::Insert(L"NumberShader", numberShader);
 	}
 
 	void LoadMaterial()
@@ -337,6 +343,13 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
+
+		texture = Resources::Load<Texture>(L"Mouse_Tex", L"..\\Resources\\Texture\\UI\\Mouse.png");
+		material = std::make_shared<Material>();
+		material->SetShader(spriteShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Mouse_Mtrl", material);
 
 #pragma region	Title Scene Resources
 		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
@@ -444,6 +457,26 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"MidBossBG_Mtrl", pMaterial);
 
+		pTexture = Resources::Load<Texture>(L"BossHP_Tex", L"..\\Resources\\Texture\\UI\\Boss\\BossHP.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"BossHP_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"MidBossFrame_Tex", L"..\\Resources\\Texture\\UI\\Boss\\boss_mid_Frame.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MidBossHPFrame_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"MidBossName_Tex", L"..\\Resources\\Texture\\UI\\Boss\\Boss_kingSlime.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MidBossName_Mtrl", pMaterial);
+
 		// BossWayScene
 		pTexture = Resources::Load<Texture>(L"BossWay_Tex", L"..\\Resources\\Texture\\Map\\Stage\\BossWay.png");
 		pMaterial = std::make_shared<Material>();
@@ -457,6 +490,20 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"BossBG_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"BossFrame_Tex", L"..\\Resources\\Texture\\UI\\Boss\\boss_Frame.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BossHPFrame_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"BossName_Tex", L"..\\Resources\\Texture\\UI\\Boss\\Boss_Iggdrasil.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BossName_Mtrl", pMaterial);
 
 #pragma endregion
 #pragma region GameOver Scene Resources
@@ -530,15 +577,23 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Gold_A_Mtrl", pMaterial);
 
+		pShader = Resources::Find<Shader>(L"NumberShader");
 		pTexture = Resources::Load<Texture>(L"Gold_B_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_B.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Gold_B_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"LvNumber_Tex", L"..\\Resources\\Texture\\UI\\HUD\\LV_Number.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"LvNumber_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Inventory Resources
-		//pShader = Resources::Find<Shader>(L"SpriteShader");
+		pShader = Resources::Find<Shader>(L"SpriteShader");
 
 		pTexture = Resources::Load<Texture>(L"InvenBG_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\InvenBG.png");
 		pMaterial = std::make_shared<Material>();

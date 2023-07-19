@@ -3,11 +3,18 @@
 #include "Lu_Camera.h"
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
+#include "Lu_GameObject.h"
+#include "Lu_MeshRenderer.h"
+#include "Lu_Resources.h"
+#include "..\Lucie_Engine\Lu_MouseScript.h"
+#include "Lu_Input.h"
+#include "Lu_Transform.h"
 
 namespace Lu
 {
 	Scene::Scene()
 		: m_MainCam(nullptr)
+		, m_Mouse(nullptr)
 	{
 		m_Layers.resize((int)Lu::enums::eLayerType::End);
 	}
@@ -29,19 +36,32 @@ namespace Lu
 
 			m_MainCam->EnableLayerMasks();
 			m_MainCam->TurnLayerMask(eLayerType::UI, false);
+			m_MainCam->TurnLayerMask(eLayerType::Mouse, false);
 			renderer::cameras.push_back(m_MainCam);
 			renderer::mainCamera = m_MainCam;
 		}
 
-		//UI Camera
+		//UI Camera & Mouse Obj
 		{
-			GameObject* pUICam = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), eLayerType::Default);
-			pUICam->SetName(L"UICam");
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), eLayerType::Default);
+			pObject->SetName(L"UICam");
 
-			Camera* pCameraCom = pUICam->AddComponent<Camera>();
+			Camera* pCameraCom = pObject->AddComponent<Camera>();
 			pCameraCom->DisableLayerMasks();
 			pCameraCom->TurnLayerMask(eLayerType::UI, true);
+			pCameraCom->TurnLayerMask(eLayerType::Mouse, true);
 			renderer::cameras.push_back(pCameraCom);
+
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), eLayerType::Mouse);
+			pObject->SetName(L"Mouse");
+
+			m_Mouse = pObject->AddComponent<MouseScript>();
+			m_Mouse->SetUICam(pCameraCom);
+			pObject->GetComponent<Transform>()->SetScale(Vector3(48.f, 48.f, 100.f));
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
 		}
 	}
 

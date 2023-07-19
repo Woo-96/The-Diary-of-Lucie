@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Object.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lucie_Engine.h" />
@@ -28,7 +29,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Graphics.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Layer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Material.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Math.h" />

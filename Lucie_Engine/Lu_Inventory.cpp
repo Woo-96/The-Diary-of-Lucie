@@ -4,6 +4,7 @@ namespace Lu
 {
 	Inventory::Inventory()
 	{
+		SetName(L"InventoryScript");
 	}
 
 	Inventory::~Inventory()

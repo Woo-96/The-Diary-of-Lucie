@@ -30,16 +30,16 @@ namespace Lu
 
 	void GridScript::Update()
 	{
-		static float chTime = 0.0f;
-		chTime += Time::DeltaTime();
-		
-		if (chTime > 3.0f)
-		{
-			object::Destroy(GetOwner());
-		}
+		//static float chTime = 0.0f;
+		//chTime += Time::DeltaTime();
+		//
+		//if (chTime > 3.0f)
+		//{
+		//	object::Destroy(GetOwner());
+		//}
 
-		if (m_Camera == nullptr)
-			return;
+		//if (m_Camera == nullptr)
+		//	return;
 
 
 		GameObject* gameObj = m_Camera->GetOwner();
@@ -54,8 +54,8 @@ namespace Lu
 		RECT winRect = {};
 		GetClientRect(hWnd, &winRect);
 
-		float width = winRect.right - winRect.left;
-		float height = winRect.bottom - winRect.top;
+		float width = (float)winRect.right - (float)winRect.left;
+		float height = (float)winRect.bottom - (float)winRect.top;
 		Vector2 resolution(width, height);
 
 		///cs buffer
