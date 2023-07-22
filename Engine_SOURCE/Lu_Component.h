@@ -7,7 +7,6 @@ namespace Lu
 	using namespace Lu::math;
 
 	class GameObject;
-
 	class Component : public Entity
 	{
 	public:

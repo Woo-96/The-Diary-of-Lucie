@@ -1,7 +1,5 @@
 #include "Lu_Input.h"
 #include "Lu_Application.h"
-#include "Lu_Object.h"
-#include "Lu_GameObject.h"
 
 extern Lu::Application application;
 
@@ -32,7 +30,7 @@ namespace Lu
 			m_Keys.push_back(keyInfo);
 		}
 
-		//ShowCursor(FALSE);
+		ShowCursor(FALSE);
 	}
 
 	void Input::Update()

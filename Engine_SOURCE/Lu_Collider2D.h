@@ -63,10 +63,7 @@ namespace Lu
 		}
 
 	public:
-		virtual void Initialize() override;
-		virtual void Update() override;
 		virtual void LateUpdate() override;
-		virtual void Render() override;
 
 	public:
 		void OnCollisionEnter(Collider2D* _Other);

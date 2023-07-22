@@ -12,6 +12,8 @@
 #include "Lu_Collider2D.h"
 #include "Lu_CollisionManager.h"
 #include "Lu_Input.h"
+#include "Lu_Animator.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -30,38 +32,35 @@ namespace Lu
 			player->SetName(L"Zelda");
 
 			Collider2D* cd = player->AddComponent<Collider2D>();
-			cd->SetType(eColliderType::Circle);
+			cd->SetSize(Vector2(1.2f, 1.2f));
 
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
 
 			const float pi = 3.141592f;
 			float degree = pi / 8.0f;
 
-			player->GetComponent<Transform>()->SetPosition(Vector3(-100.0f, 0.0f, 1.0001f));
-			player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
-			player->GetComponent<Transform>()->SetScale(Vector3(300.f, 300.f, 100.f));
-		}
+			player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
+			player->GetComponent<Transform>()->SetScale(Vector3(100.f, 100.f, 100.f));
 
-		{
-			GameObject* player = new GameObject();
-			player->SetName(L"Smile");
-			AddGameObject(eLayerType::Player, player);
-			Collider2D* cd = player->AddComponent<Collider2D>();
-			cd->SetType(eColliderType::Circle);
-			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			player->GetComponent<Transform>()->SetPosition(Vector3(100.0f, 0.0f, 1.0f));
-			player->GetComponent<Transform>()->SetScale(Vector3(300.f, 300.f, 100.f));
+			std::shared_ptr<Texture> atlas
+				= Resources::Load<Texture>(L"LinkSprite", L"..\\Resources\\Texture\\linkSprites.png");
+
+			Animator* at = player->AddComponent<Animator>();
+			at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3);
+
+			//at->CompleteEvent(L"Idle") = std::bind();
+
+			at->PlayAnimation(L"Idle", true);
+			player->AddComponent<PlayerScript>();
 		}
 
 		//Main Camera
 		Camera* cameraComp = nullptr;
 		{
 			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
+			AddGameObject(eLayerType::Default, camera);
 			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
@@ -70,16 +69,7 @@ namespace Lu
 			renderer::mainCamera = cameraComp;
 		}
 
-		//UI Camera
-		{
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			cameraComp->TurnLayerMask(eLayerType::Player, false);
-		}
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Player, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 
 	void PlayScene::Update()

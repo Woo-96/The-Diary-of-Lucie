@@ -40,38 +40,8 @@
     <Filter Include="05. GameObject\Component">
       <UniqueIdentifier>{c5dfeb91-95e0-4afd-99b8-6b1cdb1c1779}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05. GameObject\Component\Script">
-      <UniqueIdentifier>{1cb1e9ea-1db2-4e78-b7e9-220c0ac63182}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. GameObject\Component\Transform">
-      <UniqueIdentifier>{0dfe8ee7-1e38-4afd-8579-2c60bfdaa7c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. GameObject\Component\MeshRenderer">
-      <UniqueIdentifier>{08e69a07-2820-4493-a979-d5b27877cc62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. GameObject\Component\Camera">
-      <UniqueIdentifier>{dfb53166-2f64-4b7c-b035-7c723b3af490}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. GameObject\Component\Collider">
-      <UniqueIdentifier>{3fc83080-ce3f-4f23-a1b7-730c11a6bd1a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="06. Resource">
       <UniqueIdentifier>{638050be-c7e2-4e39-af23-36c1739da042}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Resource\Resources">
-      <UniqueIdentifier>{62ccc597-e793-4dc8-bb94-8bebe3a31dcf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Resource\Mesh">
-      <UniqueIdentifier>{44764a9d-ae9d-48ec-ac30-5fcb423d5273}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Resource\Shader">
-      <UniqueIdentifier>{9d0a053f-a163-4d15-9838-11ceb95861b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Resource\Texture">
-      <UniqueIdentifier>{2a6a5331-31c8-4f29-a4df-7a52641a2453}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. Resource\Material">
-      <UniqueIdentifier>{fe30a786-3cb7-4dad-9ffa-2f97876679b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="07. Scene">
       <UniqueIdentifier>{5bfd1eea-72f9-489c-b94d-d0e4716b7f78}</UniqueIdentifier>
@@ -82,11 +52,47 @@
     <Filter Include="07. Scene\Manager">
       <UniqueIdentifier>{76e67179-9842-4784-9d5f-132680103d84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="07. Scene\Manager\CollisionMgr">
-      <UniqueIdentifier>{10890c5d-6872-4afb-b62d-e81bf02b146f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Scene\Manager\SceneMgr">
       <UniqueIdentifier>{917def0c-b899-4528-ba8c-23ccc5d90ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\03. Camera">
+      <UniqueIdentifier>{dfb53166-2f64-4b7c-b035-7c723b3af490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\04. Collider">
+      <UniqueIdentifier>{3fc83080-ce3f-4f23-a1b7-730c11a6bd1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\09. Script">
+      <UniqueIdentifier>{1cb1e9ea-1db2-4e78-b7e9-220c0ac63182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\01. Transform">
+      <UniqueIdentifier>{0dfe8ee7-1e38-4afd-8579-2c60bfdaa7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\02. MeshRenderer">
+      <UniqueIdentifier>{08e69a07-2820-4493-a979-d5b27877cc62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\05. Animator">
+      <UniqueIdentifier>{ecdfa199-4261-45cf-bc93-bb7034617a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\02. Material">
+      <UniqueIdentifier>{fe30a786-3cb7-4dad-9ffa-2f97876679b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\03. Shader">
+      <UniqueIdentifier>{9d0a053f-a163-4d15-9838-11ceb95861b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\04. Texture">
+      <UniqueIdentifier>{2a6a5331-31c8-4f29-a4df-7a52641a2453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\01. Mesh">
+      <UniqueIdentifier>{44764a9d-ae9d-48ec-ac30-5fcb423d5273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\Resources">
+      <UniqueIdentifier>{62ccc597-e793-4dc8-bb94-8bebe3a31dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\05. Animation">
+      <UniqueIdentifier>{1125b166-4f74-4150-b147-18eabb65b6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\04. Collider\CollisionMgr">
+      <UniqueIdentifier>{10890c5d-6872-4afb-b62d-e81bf02b146f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -121,16 +127,16 @@
       <Filter>06. Resource\Resources</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Mesh.h">
-      <Filter>06. Resource\Mesh</Filter>
+      <Filter>06. Resource\01. Mesh</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Shader.h">
-      <Filter>06. Resource\Shader</Filter>
+      <Filter>06. Resource\03. Shader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GameObject.h">
       <Filter>05. GameObject</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Script.h">
-      <Filter>05. GameObject\Component\Script</Filter>
+      <Filter>05. GameObject\Component\09. Script</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Component.h">
       <Filter>05. GameObject\Component</Filter>
@@ -142,19 +148,19 @@
       <Filter>07. Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Transform.h">
-      <Filter>05. GameObject\Component\Transform</Filter>
+      <Filter>05. GameObject\Component\01. Transform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.h">
-      <Filter>05. GameObject\Component\MeshRenderer</Filter>
+      <Filter>05. GameObject\Component\02. MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Texture.h">
-      <Filter>06. Resource\Texture</Filter>
+      <Filter>06. Resource\04. Texture</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Material.h">
-      <Filter>06. Resource\Material</Filter>
+      <Filter>06. Resource\02. Material</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Camera.h">
-      <Filter>05. GameObject\Component\Camera</Filter>
+      <Filter>05. GameObject\Component\03. Camera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.h">
       <Filter>02. Graphics\ConstantBuffer</Filter>
@@ -169,16 +175,22 @@
       <Filter>01. Common\Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h">
-      <Filter>05. GameObject\Component\Collider</Filter>
+      <Filter>05. GameObject\Component\04. Collider</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h">
       <Filter>07. Scene\Manager\SceneMgr</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h">
-      <Filter>07. Scene\Manager\CollisionMgr</Filter>
+      <Filter>05. GameObject\Component\04. Collider\CollisionMgr</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h">
       <Filter>04. Input</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animator.h">
+      <Filter>05. GameObject\Component\05. Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animation.h">
+      <Filter>06. Resource\05. Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -201,16 +213,16 @@
       <Filter>06. Resource\Resources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Mesh.cpp">
-      <Filter>06. Resource\Mesh</Filter>
+      <Filter>06. Resource\01. Mesh</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Shader.cpp">
-      <Filter>06. Resource\Shader</Filter>
+      <Filter>06. Resource\03. Shader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GameObject.cpp">
       <Filter>05. GameObject</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Script.cpp">
-      <Filter>05. GameObject\Component\Script</Filter>
+      <Filter>05. GameObject\Component\09. Script</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Component.cpp">
       <Filter>05. GameObject\Component</Filter>
@@ -222,19 +234,19 @@
       <Filter>07. Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Transform.cpp">
-      <Filter>05. GameObject\Component\Transform</Filter>
+      <Filter>05. GameObject\Component\01. Transform</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.cpp">
-      <Filter>05. GameObject\Component\MeshRenderer</Filter>
+      <Filter>05. GameObject\Component\02. MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Texture.cpp">
-      <Filter>06. Resource\Texture</Filter>
+      <Filter>06. Resource\04. Texture</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Material.cpp">
-      <Filter>06. Resource\Material</Filter>
+      <Filter>06. Resource\02. Material</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Camera.cpp">
-      <Filter>05. GameObject\Component\Camera</Filter>
+      <Filter>05. GameObject\Component\03. Camera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp">
       <Filter>02. Graphics\ConstantBuffer</Filter>
@@ -246,16 +258,22 @@
       <Filter>02. Graphics\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp">
-      <Filter>05. GameObject\Component\Collider</Filter>
+      <Filter>05. GameObject\Component\04. Collider</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp">
       <Filter>07. Scene\Manager\SceneMgr</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp">
-      <Filter>07. Scene\Manager\CollisionMgr</Filter>
+      <Filter>05. GameObject\Component\04. Collider\CollisionMgr</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp">
       <Filter>04. Input</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animator.cpp">
+      <Filter>05. GameObject\Component\05. Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animation.cpp">
+      <Filter>06. Resource\05. Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

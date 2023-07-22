@@ -32,11 +32,6 @@ namespace Lu
 		}
 	}
 
-	void GameObject::Initialize()
-	{
-
-	}
-
 	void GameObject::Update()
 	{
 		for (Component* comp : m_Components)

@@ -9,6 +9,7 @@ namespace Lu::enums
 		MeshRenderer,
 		Collider2D,
 		Camera,
+		Animator,
 		Particle,
 		Script,
 		End,
@@ -31,6 +32,7 @@ namespace Lu::enums
 		Shader,
 		Material,
 		Mesh,
+		Animation,
 		End,
 	};
 

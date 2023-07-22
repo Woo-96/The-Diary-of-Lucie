@@ -65,7 +65,7 @@ namespace Lu
 		}
 
 		template <typename T>
-		const std::vector<T*>& GetComponents()
+		const std::vector<T*> GetComponents()
 		{
 			std::vector<T*> comps;
 
@@ -106,6 +106,7 @@ namespace Lu
 				m_Scripts.push_back(script);
 
 			comp->SetOwner(this);
+			comp->Initialize();
 
 			return comp;
 		}

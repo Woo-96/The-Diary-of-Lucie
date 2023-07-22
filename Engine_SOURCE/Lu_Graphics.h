@@ -16,6 +16,7 @@
 #define CBSLOT_PARTICLE			1
 #define CBSLOT_GRID				2
 #define	CBSLOT_NUMBER			3
+#define CBSLOT_ANIMATION2D		4
 
 namespace Lu::graphics
 {
@@ -36,6 +37,7 @@ namespace Lu::graphics
 		Material,
 		Grid,
 		Number,
+		Animator,
 		End,
 	};
 

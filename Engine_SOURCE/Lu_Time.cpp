@@ -24,7 +24,7 @@ namespace Lu
 	{
 		QueryPerformanceCounter(&m_CurFrequency);
 
-		double differnceFrequency = (m_CurFrequency.QuadPart - m_PrevFrequency.QuadPart);
+		double differnceFrequency = (double)(m_CurFrequency.QuadPart - m_PrevFrequency.QuadPart);
 
 		m_DeltaTime = (differnceFrequency / m_CpuFrequency.QuadPart);
 		

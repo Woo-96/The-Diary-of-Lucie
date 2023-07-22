@@ -14,6 +14,8 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h" />
@@ -46,6 +48,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Application.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp" />

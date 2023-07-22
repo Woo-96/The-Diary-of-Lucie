@@ -16,6 +16,7 @@ namespace Lu
 		, m_Size(Vector2::One)
 		, m_Center(Vector2::Zero)
 	{
+		SetName(L"Collier2D");
 		m_ColliderNumber++;
 		m_ColliderID = m_ColliderNumber;
 	}

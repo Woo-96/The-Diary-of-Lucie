@@ -14,6 +14,7 @@ namespace Lu
 		, m_Scale(Vector3::One)
 		, m_Parent(nullptr)
 	{
+		SetName(L"Transform");
 	}
 
 	Transform::~Transform()

@@ -2,12 +2,14 @@
 #include "Lu_GameObject.h"
 #include "Lu_Transform.h"
 #include "Lu_Renderer.h"
+#include "Lu_Animator.h"
 
 namespace Lu
 {
 	MeshRenderer::MeshRenderer()
 		: Component(eComponentType::MeshRenderer)
 	{
+		SetName(L"MeshRender");
 	}
 	MeshRenderer::~MeshRenderer()
 	{
@@ -28,6 +30,13 @@ namespace Lu
 
 		m_Mesh->BindBuffer();
 		m_Material->Binds();
+
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+		if (animator)
+		{
+			animator->Binds();
+		}
+
 		m_Mesh->Render();
 
 		m_Material->Clear();

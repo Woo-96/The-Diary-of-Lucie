@@ -26,6 +26,17 @@ namespace Lu::graphics
 		D3D11_TEXTURE2D_DESC								m_Desc;
 
 	public:
+		size_t GetWidth() 
+		{ 
+			return m_Image.GetMetadata().width; 
+		}
+
+		size_t GetHeight() 
+		{ 
+			return m_Image.GetMetadata().height; 
+		}
+
+	public:
 		void BindShader(eShaderStage _Stage, UINT _StartSlot);
 		void Clear();
 

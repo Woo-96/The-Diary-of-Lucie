@@ -37,6 +37,15 @@ namespace renderer
 		Vector2 vSliceUV;
 	};
 
+	CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
+	{
+		Vector2 SpriteLeftTop;
+		Vector2 SpriteSize;
+		Vector2 SpriteOffset;
+		Vector2 AtlasSize;
+		UINT	AnimationType;
+	};
+
 	extern Lu::graphics::ConstantBuffer*					constantBuffer[(UINT)eCBType::End];
 
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState>		samplerState[];

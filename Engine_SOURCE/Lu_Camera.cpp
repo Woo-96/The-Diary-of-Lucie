@@ -34,6 +34,7 @@ namespace Lu
 		, m_Scale(1.f)
 		, m_LayerMask{}
 	{
+		SetName(L"Camera");
 		EnableLayerMasks();
 	}
 
@@ -251,8 +252,8 @@ namespace Lu
 	Vector3 Camera::ScreenToWorld(Vector2 _MousePos)
 	{
 		Viewport viewport;
-		viewport.width = application.GetWidth();
-		viewport.height = application.GetHeight();
+		viewport.width = (float)application.GetWidth();
+		viewport.height = (float)application.GetHeight();
 		viewport.x = 0;
 		viewport.y = 0;
 		viewport.minDepth = 0.0f;

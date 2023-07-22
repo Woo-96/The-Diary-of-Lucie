@@ -53,7 +53,6 @@ namespace Lu::graphics
 		{
 			if (FAILED(LoadFromWICFile(_Path.c_str(), WIC_FLAGS::WIC_FLAGS_NONE, nullptr, m_Image)))
 				return S_FALSE;
-
 		}
 
 		CreateShaderResourceView

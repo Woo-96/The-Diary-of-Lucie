@@ -92,6 +92,9 @@
     <ClCompile Include="Lu_NumberScript.cpp">
       <Filter>Contents\Script\UI\Number</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_PlayerScript.cpp">
+      <Filter>Contents\Script\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Lu_NumberScript.h">
       <Filter>Contents\Script\UI\Number</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_PlayerScript.h">
+      <Filter>Contents\Script\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +297,9 @@
     </Filter>
     <Filter Include="Contents\Script\UI\Number">
       <UniqueIdentifier>{7ee7387a-f212-449b-b087-cffe681ac402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player">
+      <UniqueIdentifier>{9747fd66-5e25-4945-b174-342f5e0fe176}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

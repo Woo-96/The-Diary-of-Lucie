@@ -66,6 +66,11 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = Lu::Resources::Find<Shader>(L"SpriteAnimationShader");
+		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 #pragma endregion
 #pragma region Sampler State
 		D3D11_SAMPLER_DESC desc = {};
@@ -181,7 +186,9 @@ namespace renderer
 		std::vector<Vertex> vertexes = {};
 		std::vector<UINT> indexes = {};
 
-		//RECT
+		// ================
+		// == Rect Mesh ===
+		// ================
 		vertexes.resize(4);
 		vertexes[0].vPos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].vColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -199,11 +206,9 @@ namespace renderer
 		vertexes[3].vColor = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 		vertexes[3].vUV = Vector2(0.0f, 1.0f);
 
-		// Vertex Buffer
 		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
-
-		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		mesh->CreateVertexBuffer(vertexes.data(), (UINT)vertexes.size());
 
 		indexes.push_back(0);
 		indexes.push_back(2);
@@ -212,62 +217,92 @@ namespace renderer
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
-		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		mesh->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
 
-		// Rect Debug Mesh
+		indexes.clear();
+
+		// ======================
+		// == Debug Rect Mesh ===
+		// ======================
+		indexes.clear();
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(2);
+		indexes.push_back(3);
+		indexes.push_back(0);
 		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
 		Resources::Insert(L"DebugRect", rectDebug);
-		rectDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
-		rectDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+		rectDebug->CreateVertexBuffer(vertexes.data(), (UINT)vertexes.size());
+		rectDebug->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
 
-		// Circle Debug Mesh
+		// =================
+		// == Circle Mesh ==
+		// =================
 		vertexes.clear();
 		indexes.clear();
 
-		Vertex center = {};
-		center.vPos = Vector3(0.0f, 0.0f, 0.0f);
-		center.vColor = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		center.vUV = Vector2(0.5f, 0.5f);
-		vertexes.push_back(center);
+		Vertex v;
 
-		int iSlice = 40;
+		// 반지름
 		float fRadius = 0.5f;
-		float fTheta = XM_2PI / (float)iSlice;
 
-		for (int i = 0; i < iSlice; ++i)
+		// 원을 몇 개의 삼각형으로 나눌 것인지 (잘게 나눌 수록 원에 가까운 형태)
+		UINT Slice = 40;
+		// 각도
+		float fTheta = XM_2PI / (float)Slice;
+
+		// 중심점
+		v.vPos = Vector3(0.f, 0.f, 0.f);
+		v.vColor = Vector4(1.f, 1.f, 1.f, 1.f);
+		v.vUV = Vector2(0.5f, 0.5f);
+		vertexes.push_back(v);
+
+		// 정점 위치 지정 (반시계 방향)
+		for (UINT i = 0; i < Slice; ++i)
 		{
-			center.vPos = Vector3(fRadius * cosf(fTheta * (float)i)
-				, fRadius * sinf(fTheta * (float)i)
-				, 0.0f);
-			center.vColor = Vector4(0.0f, 1.0f, 0.0f, 1.f);
-			center.vUV = Vector2(center.vPos.x + 0.5f, -center.vPos.y + 0.5f);
-			vertexes.push_back(center);
+			v.vPos = Vector3(fRadius * cosf(fTheta * (float)i), fRadius * sinf(fTheta * (float)i), 0.f);
+
+			// 중심점 좌표는 (0, 0)인데 UV 좌표의 원점은 (0.5, 0.5)
+			// 각 정점에서 0.5만큼 이동하면 UV 좌표
+			// 단, 윈도우 좌표에서 y는 반대이므로 -y에 0.5 이동
+			v.vUV = Vector2(v.vPos.x + 0.5f, -v.vPos.y + 0.5f);
+			vertexes.push_back(v);
 		}
 
-		//for (UINT i = 0; i < (UINT)iSlice; ++i)
-		//{
-		//	indexes.push_back(0);
-		//	if (i == iSlice - 1)
-		//	{
-		//		indexes.push_back(1);
-		//	}
-		//	else
-		//	{
-		//		indexes.push_back(i + 2);
-		//	}
-		//	indexes.push_back(i + 1);
-		//}
+		// 인덱스 설정
+		for (UINT i = 0; i < Slice - 1; ++i)
+		{
+			indexes.push_back(0);
+			indexes.push_back(i + 2);
+			indexes.push_back(i + 1);
+		}
 
-		for (int i = 0; i < vertexes.size() - 2; ++i)
+		// 마지막 삼각형 인덱스는 수동으로 설정 (정점 재사용)
+		indexes.push_back(0);
+		indexes.push_back(1);
+		indexes.push_back(Slice);
+
+		mesh = std::make_shared<Mesh>();
+		Resources::Insert(L"CircleMesh", mesh);
+		mesh->CreateVertexBuffer(vertexes.data(), (UINT)vertexes.size());
+		mesh->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
+
+		// =======================
+		// == Debug Circle Mesh ==
+		// =======================
+		indexes.clear();
+		for (UINT i = 0; i < Slice; ++i)
 		{
 			indexes.push_back(i + 1);
+
+			// 혹은 반복문을 1부터 시작해서 Slice + 1까지 반복하여 i를 넣어도 가능
 		}
 		indexes.push_back(1);
 
 		std::shared_ptr<Mesh> circleDebug = std::make_shared<Mesh>();
 		Resources::Insert(L"DebugCircle", circleDebug);
-		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
-		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+		circleDebug->CreateVertexBuffer(vertexes.data(), (UINT)vertexes.size());
+		circleDebug->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
 	}
 
 	void LoadBuffer()
@@ -283,6 +318,10 @@ namespace renderer
 		// Number Buffer
 		constantBuffer[(UINT)eCBType::Number] = new ConstantBuffer(eCBType::Number);
 		constantBuffer[(UINT)eCBType::Number]->Create(sizeof(NumberCB));
+	
+		// Animator Buffer
+		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
+		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
 	}
 
 	void LoadShader()
@@ -291,6 +330,11 @@ namespace renderer
 		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		Lu::Resources::Insert(L"SpriteShader", spriteShader);
+
+		std::shared_ptr<Shader> spriteAniShader = std::make_shared<Shader>();
+		spriteAniShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		spriteAniShader->Create(eShaderStage::PS, L"SpriteAnimationPS.hlsl", "main");
+		Lu::Resources::Insert(L"SpriteAnimationShader", spriteAniShader);
 
 		std::shared_ptr<Shader> girdShader = std::make_shared<Shader>();
 		girdShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
@@ -322,6 +366,13 @@ namespace renderer
 		material->SetShader(spriteShader);
 		material->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", material);
+
+		spriteShader
+			= Resources::Find<Shader>(L"SpriteAnimationShader");
+		material = std::make_shared<Material>();
+		material->SetShader(spriteShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteAnimaionMaterial", material);
 
 		texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
 		material = std::make_shared<Material>();
