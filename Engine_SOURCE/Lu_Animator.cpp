@@ -24,11 +24,6 @@ namespace Lu
 		}
 	}
 
-	void Animator::Initialize()
-	{
-
-	}
-
 	void Animator::Update()
 	{
 		if (m_ActiveAnimation == nullptr)
@@ -47,17 +42,8 @@ namespace Lu
 		m_ActiveAnimation->LateUpdate();
 	}
 
-	void Animator::LateUpdate()
-	{
-
-	}
-
-	void Animator::Render()
-	{
-
-	}
-
-	void Animator::Create(const std::wstring& _Name, std::shared_ptr<graphics::Texture> _Atlas, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength, Vector2 _Offset, float _Duration)
+	void Animator::Create(const std::wstring& _Name, std::shared_ptr<graphics::Texture> _Atlas, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength
+		, Vector2 _BackSize, Vector2 _Offset, float _Duration, bool _Reverse)
 	{
 		Animation* animation = FindAnimation(_Name);
 		if (nullptr != animation)
@@ -66,7 +52,7 @@ namespace Lu
 		animation = new Animation();
 		animation->SetKey(_Name);
 
-		animation->Create(_Name, _Atlas, _LeftTop, _Size, _ColumnLength, _Offset, _Duration);
+		animation->Create(_Name, _Atlas, _LeftTop, _Size, _ColumnLength, _BackSize, _Offset, _Duration, _Reverse);
 
 		m_Animations.insert(std::make_pair(_Name, animation));
 
@@ -100,18 +86,21 @@ namespace Lu
 
 	void Animator::PlayAnimation(const std::wstring& _Name, bool _Loop)
 	{
+		Animation* animation = FindAnimation(_Name);
+
+		if (m_ActiveAnimation == animation)
+			return;
+
 		Animation* prevAnimation = m_ActiveAnimation;
 
 		Events* events;
 		if (prevAnimation != nullptr)
 		{
-
 			events = FindEvents(prevAnimation->GetKey());
 			if (events)
 				events->endEvent();
 		}
 
-		Animation* animation = FindAnimation(_Name);
 		if (animation)
 		{
 			m_ActiveAnimation = animation;

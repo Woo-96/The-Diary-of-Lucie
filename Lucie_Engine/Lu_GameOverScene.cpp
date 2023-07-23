@@ -40,7 +40,7 @@ namespace Lu
 		Scene::Update();
 
 		// 다시하기 : 
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"PlayScene");
 		}

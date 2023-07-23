@@ -186,9 +186,9 @@ namespace renderer
 		std::vector<Vertex> vertexes = {};
 		std::vector<UINT> indexes = {};
 
-		// ================
-		// == Rect Mesh ===
-		// ================
+		//// ================
+		//// == Rect Mesh ===
+		//// ================
 		vertexes.resize(4);
 		vertexes[0].vPos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].vColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -219,8 +219,6 @@ namespace renderer
 		indexes.push_back(2);
 		mesh->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
 
-		indexes.clear();
-
 		// ======================
 		// == Debug Rect Mesh ===
 		// ======================
@@ -234,6 +232,7 @@ namespace renderer
 		Resources::Insert(L"DebugRect", rectDebug);
 		rectDebug->CreateVertexBuffer(vertexes.data(), (UINT)vertexes.size());
 		rectDebug->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
+
 
 		// =================
 		// == Circle Mesh ==
@@ -344,7 +343,7 @@ namespace renderer
 		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
 		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
-		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 		debugShader->SetRSState(eRSType::WireframeNone);
 		Lu::Resources::Insert(L"DebugShader", debugShader);
 
@@ -358,19 +357,25 @@ namespace renderer
 	{
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 
+		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Mouse_Tex", L"..\\Resources\\Texture\\UI\\Mouse.png");
+		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material->SetShader(spriteShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Mouse_Mtrl", material);
 
-		std::shared_ptr<Texture> texture
+		texture
 			= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 
-		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material = std::make_shared<Material>();
 		material->SetShader(spriteShader);
 		material->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", material);
 
-		spriteShader
+		std::shared_ptr<Shader> animationShader
 			= Resources::Find<Shader>(L"SpriteAnimationShader");
 		material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
+		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimaionMaterial", material);
 
@@ -394,14 +399,6 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
-
-		texture = Resources::Load<Texture>(L"Mouse_Tex", L"..\\Resources\\Texture\\UI\\Mouse.png");
-		material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Mouse_Mtrl", material);
-
 #pragma region	Title Scene Resources
 		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
 

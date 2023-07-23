@@ -38,7 +38,7 @@ namespace Lu
 	{
 		Scene::Update();
 
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"LobbyScene");
 		}

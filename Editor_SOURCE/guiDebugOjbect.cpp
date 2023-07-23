@@ -14,6 +14,7 @@ namespace gui
 
 	void DebugOjbect::Initialize()
 	{
+
 	}
 
 	void DebugOjbect::Update()

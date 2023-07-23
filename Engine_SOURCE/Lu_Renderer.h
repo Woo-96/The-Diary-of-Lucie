@@ -44,6 +44,8 @@ namespace renderer
 		Vector2 SpriteOffset;
 		Vector2 AtlasSize;
 		UINT	AnimationType;
+		UINT	Reverse;
+		UINT	Padding[2];
 	};
 
 	extern Lu::graphics::ConstantBuffer*					constantBuffer[(UINT)eCBType::End];

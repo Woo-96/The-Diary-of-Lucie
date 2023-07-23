@@ -13,6 +13,7 @@ namespace Lu
 
 		VK_UP, VK_DOWN, VK_LEFT ,VK_RIGHT, VK_SPACE,
 		VK_LBUTTON, VK_RBUTTON,
+		VK_CONTROL, VK_MENU, VK_RETURN
 	};
 
 	std::vector<Input::Key> Input::m_Keys;

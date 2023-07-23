@@ -4,6 +4,8 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
+#include "Lu_Animator.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -33,6 +35,25 @@ namespace Lu
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"LobbyBG_Mtrl"));
 		}
+
+		{
+			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), eLayerType::Player);
+			pPlayer->SetName(L"Player");
+
+			Transform* pTransform = pPlayer->GetComponent<Transform>();
+			pTransform->SetScale(Vector3(200.f, 200.f, 100.f)); // 원본 2배
+
+			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+
+			Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pCollider->SetSize(Vector2(0.2f, 0.4f));
+
+			Animator* pAnimator = pPlayer->AddComponent<Animator>();
+			pPlayer->AddComponent<PlayerScript>();
+		}
 	}
 
 	void LobbyScene::Update()
@@ -40,7 +61,7 @@ namespace Lu
 		Scene::Update();
 
 		// 오브젝트로 입장해야함
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"WeaponChoiceScene");
 		}

@@ -42,14 +42,6 @@ namespace Lu
 	{
 	}
 
-	void Camera::Initialize()
-	{
-	}
-
-	void Camera::Update()
-	{
-	}
-
 	void Camera::LateUpdate()
 	{
 		CreateViewMatrix();

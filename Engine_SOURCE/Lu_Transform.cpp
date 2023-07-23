@@ -21,14 +21,6 @@ namespace Lu
 	{
 	}
 
-	void Transform::Initialize()
-	{
-	}
-
-	void Transform::Update()
-	{
-	}
-
 	void Transform::LateUpdate()
 	{
 		m_World = Matrix::Identity;
@@ -53,11 +45,6 @@ namespace Lu
 		{
 			m_World *= m_Parent->m_World;
 		}
-	}
-
-	void Transform::Render()
-	{
-
 	}
 
 	void Transform::BindConstantBuffer()

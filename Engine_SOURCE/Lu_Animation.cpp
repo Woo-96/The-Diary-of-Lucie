@@ -48,25 +48,23 @@ namespace Lu
 
 	}
 
-	void Animation::Create(std::wstring _Name, std::shared_ptr<graphics::Texture> _Atlas, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength, Vector2 _Offset, float _Duration)
+	void Animation::Create(std::wstring _Name, std::shared_ptr<graphics::Texture> _Atlas, Vector2 _LeftTop, Vector2 _Size
+		, UINT _ColumnLength, Vector2 _BackSize, Vector2 _Offset, float _Duration, bool _Reverse)
 	{
 		SetKey(_Name);
 		m_Atlas = _Atlas;
 
-
-		float width = (float)_Atlas->GetWidth();
-		float height = (float)_Atlas->GetHeight();
+		Vector2 vResolution = Vector2(m_Atlas->GetWidth(), m_Atlas->GetHeight());
 
 		for (size_t i = 0; i < _ColumnLength; i++)
 		{
 			Sprite sprite = {};
-			sprite.LeftTop.x = _LeftTop.x + (i * _Size.x) / width;
-			sprite.LeftTop.y = _LeftTop.y / height;
-			sprite.Size.x = _Size.x / width;
-			sprite.Size.y = _Size.y / height;
-			sprite.Offset = _Offset;
-			sprite.AtlasSize = Vector2(200.0f / width, 200.0f / height);
+			sprite.LeftTop = Vector2(_LeftTop.x + _Size.x * i, _LeftTop.y) / vResolution;
+			sprite.Size = _Size / vResolution;
+			sprite.Offset = _Offset / vResolution;
+			sprite.AtlasSize = _BackSize / vResolution;
 			sprite.Duration = _Duration;
+			sprite.Reverse = _Reverse;
 
 			m_Sprites.push_back(sprite);
 		}
@@ -83,6 +81,7 @@ namespace Lu
 		data.SpriteOffset = m_Sprites[m_Index].Offset;
 		data.AtlasSize = m_Sprites[m_Index].AtlasSize;
 		data.AnimationType = 1;
+		data.Reverse = m_Sprites[m_Index].Reverse;
 
 		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Animator];
 		cb->SetData(&data);

@@ -95,6 +95,24 @@
     <ClCompile Include="Lu_PlayerScript.cpp">
       <Filter>Contents\Script\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_StateScript.cpp">
+      <Filter>Contents\Script\Player\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_IdleState.cpp">
+      <Filter>Contents\Script\Player\FSM\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_MoveState.cpp">
+      <Filter>Contents\Script\Player\FSM\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_AttackState.cpp">
+      <Filter>Contents\Script\Player\FSM\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_DeadState.cpp">
+      <Filter>Contents\Script\Player\FSM\Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_DashState.cpp">
+      <Filter>Contents\Script\Player\FSM\Dash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -193,6 +211,24 @@
     </ClInclude>
     <ClInclude Include="Lu_PlayerScript.h">
       <Filter>Contents\Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_StateScript.h">
+      <Filter>Contents\Script\Player\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_IdleState.h">
+      <Filter>Contents\Script\Player\FSM\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_MoveState.h">
+      <Filter>Contents\Script\Player\FSM\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_AttackState.h">
+      <Filter>Contents\Script\Player\FSM\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_DeadState.h">
+      <Filter>Contents\Script\Player\FSM\Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_DashState.h">
+      <Filter>Contents\Script\Player\FSM\Dash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +336,24 @@
     </Filter>
     <Filter Include="Contents\Script\Player">
       <UniqueIdentifier>{9747fd66-5e25-4945-b174-342f5e0fe176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM">
+      <UniqueIdentifier>{164854fa-d38e-4796-b9b3-17810db52fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Idle">
+      <UniqueIdentifier>{be7d1ce4-d193-4c28-86ff-86a121ae5228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Move">
+      <UniqueIdentifier>{ef8afebc-6a0c-4505-8cf1-2b576414aa17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Attack">
+      <UniqueIdentifier>{e2dd2710-d1ad-4dc7-9353-a19db5decace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Dead">
+      <UniqueIdentifier>{e656649f-0629-43b9-98f3-e71a1e584fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Dash">
+      <UniqueIdentifier>{6b783da7-5bab-43d3-8800-87262ee6dbce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -26,16 +26,6 @@ namespace Lu
 
 	}
 
-	void Collider2D::Initialize()
-	{
-		
-	}
-
-	void Collider2D::Update()
-	{
-
-	}
-
 	void Collider2D::LateUpdate()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
@@ -54,14 +44,9 @@ namespace Lu
 		mesh.Position = pos;
 		mesh.Scale = scale;
 		mesh.Rotation = tr->GetRotation();
-		mesh.Type = eColliderType::Circle;
+		mesh.Type = m_Type;
 
 		renderer::PushDebugMeshAttribute(mesh);
-	}
-
-	void Collider2D::Render()
-	{
-
 	}
 
 	void Collider2D::OnCollisionEnter(Collider2D* _Other)

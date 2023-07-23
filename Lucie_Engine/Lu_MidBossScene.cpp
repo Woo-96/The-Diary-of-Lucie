@@ -78,7 +78,7 @@ namespace Lu
 		StageScene::Update();
 
 		// юс╫ц
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"NextFloorScene");
 		}

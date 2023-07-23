@@ -48,7 +48,7 @@ namespace Lu
 				= Resources::Load<Texture>(L"LinkSprite", L"..\\Resources\\Texture\\linkSprites.png");
 
 			Animator* at = player->AddComponent<Animator>();
-			at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3);
+			at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3, Vector2(200.f, 200.f), Vector2(50.f, 50.f));
 
 			//at->CompleteEvent(L"Idle") = std::bind();
 
@@ -76,7 +76,7 @@ namespace Lu
 	{
 		Scene::Update();
 
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}

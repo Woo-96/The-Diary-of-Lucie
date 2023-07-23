@@ -41,16 +41,13 @@ namespace Lu
 		bool								m_bLoop;
 
 	public:
-		virtual void Initialize();
 		virtual void Update();
-		virtual void LateUpdate();
-		virtual void Render();
 
 	public:
 		void Create(const std::wstring& _Name
 			, std::shared_ptr<graphics::Texture> _Atlas
-			, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength
-			, Vector2 _Offset = Vector2::Zero, float _Duration = 0.1f);
+			, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength, Vector2 _BackSize
+			, Vector2 _Offset = Vector2::Zero, float _Duration = 0.1f, bool _Reverse = false);
 		Animation* FindAnimation(const std::wstring& _Name);
 		Events* FindEvents(const std::wstring& _Name);
 		void PlayAnimation(const std::wstring& _Name, bool _Loop);

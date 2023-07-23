@@ -23,11 +23,13 @@ cbuffer Number : register(b3)
 
 cbuffer Animator : register(b4)
 {
-    float2 SpriteLeftTop;
-    float2 SpriteSize;
-    float2 SpriteOffset;
-    float2 AtlasSize;
-    uint AnimationType;
+    float2  SpriteLeftTop;
+    float2  SpriteSize;
+    float2  SpriteOffset;
+    float2  AtlasSize;
+    uint    AnimationType;
+    uint    Reverse;
+    uint2   Padding;
 }
 
 // =============

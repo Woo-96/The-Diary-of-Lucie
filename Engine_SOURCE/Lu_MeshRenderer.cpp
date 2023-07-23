@@ -11,18 +11,12 @@ namespace Lu
 	{
 		SetName(L"MeshRender");
 	}
+
 	MeshRenderer::~MeshRenderer()
 	{
+
 	}
-	void MeshRenderer::Initialize()
-	{
-	}
-	void MeshRenderer::Update()
-	{
-	}
-	void MeshRenderer::LateUpdate()
-	{
-	}
+
 	void MeshRenderer::Render()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();

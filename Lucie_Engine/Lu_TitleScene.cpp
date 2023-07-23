@@ -98,7 +98,7 @@ namespace Lu
 		Scene::Update();
 
 		// ªı ∞‘¿” : 
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"LobbyScene");
 		}

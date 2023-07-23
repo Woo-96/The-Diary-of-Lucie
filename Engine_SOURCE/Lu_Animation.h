@@ -17,7 +17,8 @@ namespace Lu
 			Vector2 Size;
 			Vector2 Offset;
 			Vector2 AtlasSize;
-			float Duration;
+			float	Duration;
+			bool	Reverse;
 
 			Sprite()
 				: LeftTop(Vector2::Zero)
@@ -25,6 +26,7 @@ namespace Lu
 				, Offset(Vector2::Zero)
 				, AtlasSize(Vector2::Zero)
 				, Duration(0.0f)
+				, Reverse(false)
 			{
 
 			}
@@ -56,8 +58,8 @@ namespace Lu
 	public:
 		void Create(std::wstring _Name
 			, std::shared_ptr<graphics::Texture> _Atlas
-			, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength
-			, Vector2 _Offset = Vector2::Zero, float _Duration = 0.0f);
+			, Vector2 _LeftTop, Vector2 _Size, UINT _ColumnLength, Vector2 _BackSize
+			, Vector2 _Offset = Vector2::Zero, float _Duration = 0.0f, bool _Reverse = false);
 
 		void Binds();
 		void Reset();

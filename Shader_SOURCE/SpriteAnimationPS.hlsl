@@ -17,15 +17,13 @@ struct VSOut
 
 float4 main(VSOut In) : SV_TARGET
 {
-    float4 color = (float4) 0.0f;
-    
-    // 1200 1032 // 120 130
-    // 1080 -> 540
-    // -540 + 1200 
-    color = albedoTexture.Sample(anisotropicSampler, In.UV);
+    float4 color = float4(1.f, 0.f, 1.f, 1.f);
     
     if (AnimationType == 1)
     {
+        if (Reverse == 1)
+            In.UV.x = 1 - In.UV.x;
+        
         float2 diff = (AtlasSize - SpriteSize) / 2.0f;
         float2 UV = (SpriteLeftTop - diff - SpriteOffset)
                 + (AtlasSize * In.UV);
@@ -34,7 +32,11 @@ float4 main(VSOut In) : SV_TARGET
             || UV.y < SpriteLeftTop.y || UV.y > SpriteLeftTop.y + SpriteSize.y)
             discard;
         
-        color = atlasTexture.Sample(anisotropicSampler, UV);
+        color = atlasTexture.Sample(pointSampler, UV);
+    }
+    else
+    {
+        color = albedoTexture.Sample(anisotropicSampler, In.UV);
     }
     
     return color;

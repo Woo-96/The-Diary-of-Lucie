@@ -37,7 +37,7 @@ namespace Lu
 		}
 
 	public:
-		virtual void Initialize();
+		virtual void Initialize() {};
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render();
