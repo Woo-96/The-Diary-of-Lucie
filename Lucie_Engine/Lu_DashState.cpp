@@ -36,12 +36,12 @@ namespace Lu
 
 	void DashState::Enter()
 	{
-		GetOwner()->SetAction(true);
+		GetPlayerScript()->SetAction(true);
 		CalDirToMouse();
 	}
 
 	void DashState::Exit()
 	{
-		GetOwner()->SetAction(false);
+		GetPlayerScript()->SetAction(false);
 	}
 }

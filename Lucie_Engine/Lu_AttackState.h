@@ -3,6 +3,7 @@
 
 namespace Lu
 {
+	class PlayerScript;
 	class AttackState : public StateScript
 	{
 	public:
@@ -16,5 +17,8 @@ namespace Lu
 	public:
 		virtual void Enter() override;
 		virtual void Exit() override;
+
+	private:
+		void CreateProjectile();
 	};
 }

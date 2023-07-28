@@ -2,7 +2,6 @@
 #include "Lu_Input.h"
 #include "Lu_GameObject.h"
 #include "Lu_Transform.h"
-#include "Lu_Camera.h"
 
 namespace Lu
 {

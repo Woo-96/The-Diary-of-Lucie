@@ -9,8 +9,6 @@ namespace Lu
 		UIScript();
 		virtual ~UIScript();
 
-	private:
-
 	public:
 		virtual void Update() override;
 	};

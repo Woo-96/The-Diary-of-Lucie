@@ -76,6 +76,11 @@ namespace Lu
 			return m_MoveType;
 		}
 
+		eWeaponType GetWeaponType()	const
+		{
+			return m_CurWeapon;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;

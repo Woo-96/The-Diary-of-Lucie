@@ -24,12 +24,12 @@ namespace Lu
     {
         float fCurSpeed;
 
-        if (PlayerScript::eMoveType::Walk == GetOwner()->GetMoveType())
+        if (PlayerScript::eMoveType::Walk == GetPlayerScript()->GetMoveType())
             fCurSpeed = 200.f;
         else
             fCurSpeed = 400.f;
 
-        PlayerScript::ePlayerDir eCurDir = GetOwner()->GetDir();
+        PlayerScript::ePlayerDir eCurDir = GetPlayerScript()->GetDir();
         Vector3 vPos = GetTransform()->GetPosition();
 
         float diagonalFactor = 1.0f / sqrt(2.0f); // Normalize the diagonal movement vector

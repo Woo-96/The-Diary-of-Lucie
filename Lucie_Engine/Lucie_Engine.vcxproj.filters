@@ -113,6 +113,21 @@
     <ClCompile Include="Lu_DashState.cpp">
       <Filter>Contents\Script\Player\FSM\Dash</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_SnabyScript.cpp">
+      <Filter>Contents\Script\Monster\Snaby</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_HitState.cpp">
+      <Filter>Contents\Script\Player\FSM\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BowProjectile.cpp">
+      <Filter>Contents\Script\Player\Projectile\Bow</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_WandProjectile.cpp">
+      <Filter>Contents\Script\Player\Projectile\Wand</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_ProjectileScript.cpp">
+      <Filter>Contents\Script\Player\Projectile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -229,6 +244,21 @@
     </ClInclude>
     <ClInclude Include="Lu_DashState.h">
       <Filter>Contents\Script\Player\FSM\Dash</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SnabyScript.h">
+      <Filter>Contents\Script\Monster\Snaby</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_HitState.h">
+      <Filter>Contents\Script\Player\FSM\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BowProjectile.h">
+      <Filter>Contents\Script\Player\Projectile\Bow</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_WandProjectile.h">
+      <Filter>Contents\Script\Player\Projectile\Wand</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ProjectileScript.h">
+      <Filter>Contents\Script\Player\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +384,39 @@
     </Filter>
     <Filter Include="Contents\Script\Player\FSM\Dash">
       <UniqueIdentifier>{6b783da7-5bab-43d3-8800-87262ee6dbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster">
+      <UniqueIdentifier>{e8b73468-a077-4e5c-a880-eb218b6adf14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby">
+      <UniqueIdentifier>{be40be08-7f93-4148-b007-67747b2cacc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Hit">
+      <UniqueIdentifier>{1b964b24-6e76-4c5e-a81c-e989a417894f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby\Snaby_FSM">
+      <UniqueIdentifier>{4245e5c9-f0ea-4d39-8c1a-d936d027a4d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Idle">
+      <UniqueIdentifier>{a17c6261-a6f4-45fd-b8a7-ead0794070f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Attack">
+      <UniqueIdentifier>{a75efe9b-6d89-479b-93a6-8e28b53c7e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Dead">
+      <UniqueIdentifier>{f9f79031-bf54-4281-8904-a0f6d9430f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Patrol">
+      <UniqueIdentifier>{c9847857-a4fc-47ed-82ca-af1cec4a3503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\Projectile">
+      <UniqueIdentifier>{b2c563bf-7451-4b19-a4c9-b17920755298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\Projectile\Bow">
+      <UniqueIdentifier>{2caccef1-ba09-457a-975a-bab3cdee6729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\Projectile\Wand">
+      <UniqueIdentifier>{1a78ceb3-bfc8-4c26-b5b7-5195016dded0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

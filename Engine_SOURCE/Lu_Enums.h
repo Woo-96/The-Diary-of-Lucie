@@ -19,8 +19,10 @@ namespace Lu::enums
 	{
 		Default,
 		BackGround,
-		Player,
 		Monster,
+		Player,
+		MonsterProjectile,
+		PlayerProjectile,
 		UI,
 		Mouse,
 		End = 16,

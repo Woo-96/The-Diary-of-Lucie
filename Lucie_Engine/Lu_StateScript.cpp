@@ -9,7 +9,7 @@ namespace Lu
 {
 	StateScript::StateScript()
 		: m_StateType(eState::End)
-		, m_Owner(nullptr)
+		, m_PlayerScript(nullptr)
 		, m_Transform(nullptr)
 		, m_ActionSpeed(0.f)
 		, m_ActionDir(Vector3::Zero)
@@ -24,7 +24,7 @@ namespace Lu
 
 	void StateScript::Initialize()
 	{
-		m_Transform = GetOwner()->GetOwner()->GetComponent<Transform>();
+		m_Transform = GetPlayerScript()->GetOwner()->GetComponent<Transform>();
 	}
 
 	void StateScript::CalDirToMouse()

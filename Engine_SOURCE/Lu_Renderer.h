@@ -48,6 +48,12 @@ namespace renderer
 		UINT	Padding[2];
 	};
 
+	CBUFFER(ButtonCB, CBSLOT_NUMBER)
+	{
+		Vector2 vLtUV;
+		Vector2 vSliceUV;
+	};
+
 	extern Lu::graphics::ConstantBuffer*					constantBuffer[(UINT)eCBType::End];
 
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState>		samplerState[];

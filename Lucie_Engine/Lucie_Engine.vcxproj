@@ -163,6 +163,7 @@
     <ClInclude Include="Lu_AttackState.h" />
     <ClInclude Include="Lu_BossScene.h" />
     <ClInclude Include="Lu_BossWayScene.h" />
+    <ClInclude Include="Lu_BowProjectile.h" />
     <ClInclude Include="Lu_ButtonScript.h" />
     <ClInclude Include="Lu_DashState.h" />
     <ClInclude Include="Lu_DeadState.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Lu_GameOverScene.h" />
     <ClInclude Include="Lu_Gold.h" />
     <ClInclude Include="Lu_GridScript.h" />
+    <ClInclude Include="Lu_HitState.h" />
     <ClInclude Include="Lu_HP.h" />
     <ClInclude Include="Lu_IdleState.h" />
     <ClInclude Include="Lu_Inventory.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="Lu_NumberScript.h" />
     <ClInclude Include="Lu_PlayerScript.h" />
     <ClInclude Include="Lu_PlayScene.h" />
+    <ClInclude Include="Lu_ProjectileScript.h" />
     <ClInclude Include="Lu_QuickItem.h" />
     <ClInclude Include="Lu_StageScene.h" />
     <ClInclude Include="Lu_StateScript.h" />
@@ -194,8 +197,10 @@
     <ClInclude Include="Lu_TP.h" />
     <ClInclude Include="Lu_TutorialScene.h" />
     <ClInclude Include="Lu_UIScript.h" />
+    <ClInclude Include="Lu_WandProjectile.h" />
     <ClInclude Include="Lu_WeaponChoiceScene.h" />
     <ClInclude Include="Lu_WeaponSlot.h" />
+    <ClInclude Include="Lu_SnabyScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp" />
@@ -203,6 +208,7 @@
     <ClCompile Include="Lu_AttackState.cpp" />
     <ClCompile Include="Lu_BossScene.cpp" />
     <ClCompile Include="Lu_BossWayScene.cpp" />
+    <ClCompile Include="Lu_BowProjectile.cpp" />
     <ClCompile Include="Lu_ButtonScript.cpp" />
     <ClCompile Include="Lu_DashState.cpp" />
     <ClCompile Include="Lu_DeadState.cpp" />
@@ -211,6 +217,7 @@
     <ClCompile Include="Lu_GameOverScene.cpp" />
     <ClCompile Include="Lu_Gold.cpp" />
     <ClCompile Include="Lu_GridScript.cpp" />
+    <ClCompile Include="Lu_HitState.cpp" />
     <ClCompile Include="Lu_HP.cpp" />
     <ClCompile Include="Lu_IdleState.cpp" />
     <ClCompile Include="Lu_Inventory.cpp" />
@@ -226,6 +233,7 @@
     <ClCompile Include="Lu_NumberScript.cpp" />
     <ClCompile Include="Lu_PlayerScript.cpp" />
     <ClCompile Include="Lu_PlayScene.cpp" />
+    <ClCompile Include="Lu_ProjectileScript.cpp" />
     <ClCompile Include="Lu_QuickItem.cpp" />
     <ClCompile Include="Lu_StageScene.cpp" />
     <ClCompile Include="Lu_StateScript.cpp" />
@@ -234,8 +242,10 @@
     <ClCompile Include="Lu_TP.cpp" />
     <ClCompile Include="Lu_TutorialScene.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
+    <ClCompile Include="Lu_WandProjectile.cpp" />
     <ClCompile Include="Lu_WeaponChoiceScene.cpp" />
     <ClCompile Include="Lu_WeaponSlot.cpp" />
+    <ClCompile Include="Lu_SnabyScript.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -49,7 +49,8 @@ namespace Lu
 
 			Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetSize(Vector2(0.2f, 0.4f));
+			pCollider->SetCenter(Vector2(0.f, -30.f));
+			pCollider->SetSize(Vector2(0.1f, 0.1f));
 
 			Animator* pAnimator = pPlayer->AddComponent<Animator>();
 			pPlayer->AddComponent<PlayerScript>();

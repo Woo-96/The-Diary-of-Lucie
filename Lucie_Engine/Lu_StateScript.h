@@ -14,6 +14,7 @@ namespace Lu
 			Move,
 			Dash,
 			Attack,
+			Hit,
 			Dead,
 			End
 		};
@@ -24,7 +25,7 @@ namespace Lu
 
 	private:
 		eState				m_StateType;
-		PlayerScript*		m_Owner;
+		PlayerScript*		m_PlayerScript;
 		Transform*			m_Transform;
 		float				m_ActionSpeed;
 		Vector3				m_ActionDir;
@@ -35,9 +36,14 @@ namespace Lu
 			m_StateType = _StateType;
 		}
 
-		void SetOwner(PlayerScript* _Owner)
+		void SetPlayerScript(PlayerScript* _PlayerScript)
 		{
-			m_Owner = _Owner;
+			m_PlayerScript = _PlayerScript;
+		}
+
+		void SetTransform(Transform* _Transform)
+		{
+			m_Transform = _Transform;
 		}
 
 		void SetSpeed(float _Speed)
@@ -67,9 +73,9 @@ namespace Lu
 			return m_StateType;
 		}
 
-		PlayerScript* GetOwner()	const
+		PlayerScript* GetPlayerScript()	const
 		{
-			return m_Owner;
+			return m_PlayerScript;
 		}
 
 	public:

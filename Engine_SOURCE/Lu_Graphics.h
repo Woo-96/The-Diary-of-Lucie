@@ -38,6 +38,7 @@ namespace Lu::graphics
 		Grid,
 		Number,
 		Animator,
+		Button,
 		End,
 	};
 

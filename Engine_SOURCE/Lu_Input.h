@@ -14,7 +14,7 @@ namespace Lu
 
 		UP, DOWN, LEFT, RIGHT, SPACE,
 		LBUTTON, RBUTTON,
-		CTRL, ALT, ENTER,
+		CTRL, ALT, ENTER, SHIFT,
 		END,
 	};
 

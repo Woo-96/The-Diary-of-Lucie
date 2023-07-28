@@ -8,8 +8,9 @@
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
-#include "Lu_AttackState.h"
 #include "Lu_DashState.h"
+#include "Lu_AttackState.h"
+#include "Lu_HitState.h"
 #include "Lu_DeadState.h"
 
 namespace Lu
@@ -45,8 +46,9 @@ namespace Lu
 
 		AddState(new IdleState);
 		AddState(new MoveState);
-		AddState(new AttackState);
 		AddState(new DashState);
+		AddState(new AttackState);
+		AddState(new HitState);
 		AddState(new DeadState);
 
 		m_CurState = GetStateScript(StateScript::eState::Idle);
@@ -111,9 +113,23 @@ namespace Lu
 		m_Animator->Create(L"Player_Run_LeftDown", pAtlas, Vector2(0.f, 3200.f), Vector2(100.f, 100.f), 4, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
 		m_Animator->Create(L"Player_Run_RightDown", pAtlas, Vector2(0.f, 3300.f), Vector2(100.f, 100.f), 4, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
 
-
-		// Attack - Sword
-
+		// Dash
+		m_Animator->Create(L"Player_Dash_Left", pAtlas, Vector2(0.f, 4300.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_Left") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_Right", pAtlas, Vector2(0.f, 4400.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_Right") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_Up", pAtlas, Vector2(0.f, 4600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_Up") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_Down", pAtlas, Vector2(0.f, 4100.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_Down") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_LeftUp", pAtlas, Vector2(0.f, 4500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_RightUp", pAtlas, Vector2(0.f, 4700.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_LeftDown", pAtlas, Vector2(0.f, 4000.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_Dash_RightDown", pAtlas, Vector2(0.f, 4200.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_Dash_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 		// Attack - Bow
 		m_Animator->Create(L"Player_Bow_Left", pAtlas, Vector2(300.f, 1500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
@@ -133,7 +149,6 @@ namespace Lu
 		m_Animator->Create(L"Player_Bow_RightDown", pAtlas, Vector2(0.f, 1500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->CompleteEvent(L"Player_Bow_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
-
 		// Attack - Wand
 		m_Animator->Create(L"Player_Wand_Left", pAtlas, Vector2(0.f, 5600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
 		m_Animator->CompleteEvent(L"Player_Wand_Left") = std::bind(&PlayerScript::CompleteAction, this);
@@ -151,25 +166,6 @@ namespace Lu
 		m_Animator->CompleteEvent(L"Player_Wand_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
 		m_Animator->Create(L"Player_Wand_RightDown", pAtlas, Vector2(0.f, 5500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
 		m_Animator->CompleteEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
-
-
-		// Dash
-		m_Animator->Create(L"Player_Dash_Left", pAtlas, Vector2(0.f, 4300.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Left") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_Right", pAtlas, Vector2(0.f, 4400.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Right") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_Up", pAtlas, Vector2(0.f, 4600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Up") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_Down", pAtlas, Vector2(0.f, 4100.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Down") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_LeftUp", pAtlas, Vector2(0.f, 4500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_RightUp", pAtlas, Vector2(0.f, 4700.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_LeftDown", pAtlas, Vector2(0.f, 4000.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
-		m_Animator->Create(L"Player_Dash_RightDown", pAtlas, Vector2(0.f, 4200.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 		// Dead
 		m_Animator->Create(L"Player_Dead", pAtlas, Vector2(400.f, 2300.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.4f, false);
@@ -190,7 +186,7 @@ namespace Lu
 		if (nullptr == _State)
 			return;
 
-		_State->SetOwner(this);
+		_State->SetPlayerScript(this);
 		_State->Initialize();
 		StateScript::eState eState = _State->GetStateType();
 		m_State.insert(std::make_pair(eState, _State));
@@ -204,7 +200,7 @@ namespace Lu
 			return;
 
 		// 이동 모드
-		if (Input::GetKeyDown(eKeyCode::CTRL))
+		if (Input::GetKeyDown(eKeyCode::SHIFT))
 		{
 			if (eMoveType::Walk == m_MoveType)
 				m_MoveType = eMoveType::Run;
@@ -213,7 +209,7 @@ namespace Lu
 		}
 
 		// 공격 모드 (임시)
-		if (Input::GetKeyDown(eKeyCode::ALT))
+		if (Input::GetKeyDown(eKeyCode::R))
 		{
 			if (eWeaponType::Wand == m_CurWeapon)
 				m_CurWeapon = eWeaponType::Bow;
@@ -414,6 +410,37 @@ namespace Lu
 			}
 		}
 			break;
+		case StateScript::eState::Dash:
+		{
+			switch (m_Dir)
+			{
+			case Lu::PlayerScript::ePlayerDir::Left:
+				m_Animator->PlayAnimation(L"Player_Dash_Left", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::Right:
+				m_Animator->PlayAnimation(L"Player_Dash_Right", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::Up:
+				m_Animator->PlayAnimation(L"Player_Dash_Up", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::Down:
+				m_Animator->PlayAnimation(L"Player_Dash_Down", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::LeftUp:
+				m_Animator->PlayAnimation(L"Player_Dash_LeftUp", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::RightUp:
+				m_Animator->PlayAnimation(L"Player_Dash_RightUp", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::LeftDown:
+				m_Animator->PlayAnimation(L"Player_Dash_LeftDown", true);
+				break;
+			case Lu::PlayerScript::ePlayerDir::RightDown:
+				m_Animator->PlayAnimation(L"Player_Dash_RightDown", true);
+				break;
+			}
+		}
+		break;
 		case StateScript::eState::Attack:
 		{
 			switch (m_CurWeapon)
@@ -485,36 +512,7 @@ namespace Lu
 			}
 		}
 			break;
-		case StateScript::eState::Dash:
-		{
-			switch (m_Dir)
-			{
-			case Lu::PlayerScript::ePlayerDir::Left:
-				m_Animator->PlayAnimation(L"Player_Dash_Left", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::Right:
-				m_Animator->PlayAnimation(L"Player_Dash_Right", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::Up:
-				m_Animator->PlayAnimation(L"Player_Dash_Up", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::Down:
-				m_Animator->PlayAnimation(L"Player_Dash_Down", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::LeftUp:
-				m_Animator->PlayAnimation(L"Player_Dash_LeftUp", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::RightUp:
-				m_Animator->PlayAnimation(L"Player_Dash_RightUp", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::LeftDown:
-				m_Animator->PlayAnimation(L"Player_Dash_LeftDown", true);
-				break;
-			case Lu::PlayerScript::ePlayerDir::RightDown:
-				m_Animator->PlayAnimation(L"Player_Dash_RightDown", true);
-				break;
-			}
-		}
+		case StateScript::eState::Hit:
 			break;
 		case StateScript::eState::Dead:
 			m_Animator->PlayAnimation(L"Player_Dead", false);

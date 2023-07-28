@@ -33,15 +33,11 @@ namespace Lu
 
     public:
         void SetNumbersLT(Vector2 _arrLT[], int _Count);
+        void SetCurNumber(int _CurNumber);
 
         void SetSliceSize(Vector2 _SliceSize)
         {
             m_SliceSize = _SliceSize;
-        }
-
-        void SetCurNumber(int _CurNumber)
-        {
-            m_CurNumber = _CurNumber;
         }
 
         void SetTexResolution(Vector2 _TexResolution)
@@ -51,6 +47,9 @@ namespace Lu
 
     public:
         virtual void Update() override;
+
+    public:
+        void Binds();
     };
 }
 

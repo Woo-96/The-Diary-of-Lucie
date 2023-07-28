@@ -201,7 +201,6 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Gold_B_Mtrl"));
 		
 			NumberScript* pNum = pObject->AddComponent<NumberScript>();
-			pNum->SetCurNumber(3);
 			pNum->SetTexResolution(Vector2(140.f, 20.f));
 			pNum->SetSliceSize(Vector2(14.f, 20.f));
 			
@@ -211,6 +210,7 @@ namespace Lu
 				arrLT[i] = Vector2(14.f * i, 0.f);
 			}
 			pNum->SetNumbersLT(arrLT, 10);
+			pNum->SetCurNumber(3);
 		}
 
 		{
@@ -226,7 +226,6 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"LvNumber_Mtrl"));
 
 			NumberScript* pNum = pObject->AddComponent<NumberScript>();
-			pNum->SetCurNumber(3);
 			pNum->SetTexResolution(Vector2(320.f, 19.f));
 			pNum->SetSliceSize(Vector2(32.f, 19.f));
 
@@ -236,6 +235,7 @@ namespace Lu
 				arrLT[i] = Vector2(32.f * i, 0.f);
 			}
 			pNum->SetNumbersLT(arrLT, 10);
+			pNum->SetCurNumber(1);
 		}
 	}
 	void StageScene::CreateInventory()

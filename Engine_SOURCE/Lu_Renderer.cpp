@@ -71,6 +71,11 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = Lu::Resources::Find<Shader>(L"ButtonShader");
+		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 #pragma endregion
 #pragma region Sampler State
 		D3D11_SAMPLER_DESC desc = {};
@@ -321,6 +326,10 @@ namespace renderer
 		// Animator Buffer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
+	
+		// Button Buffer
+		constantBuffer[(UINT)eCBType::Button] = new ConstantBuffer(eCBType::Button);
+		constantBuffer[(UINT)eCBType::Button]->Create(sizeof(ButtonCB));
 	}
 
 	void LoadShader()
@@ -351,6 +360,11 @@ namespace renderer
 		numberShader->Create(eShaderStage::VS, L"NumberVS.hlsl", "main");
 		numberShader->Create(eShaderStage::PS, L"NumberPS.hlsl", "main");
 		Lu::Resources::Insert(L"NumberShader", numberShader);
+
+		std::shared_ptr<Shader> buttonShader = std::make_shared<Shader>();
+		buttonShader->Create(eShaderStage::VS, L"ButtonVS.hlsl", "main");
+		buttonShader->Create(eShaderStage::PS, L"ButtonPS.hlsl", "main");
+		Lu::Resources::Insert(L"ButtonShader", buttonShader);
 	}
 
 	void LoadMaterial()
@@ -648,7 +662,31 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"InvenBG_Mtrl", pMaterial);
+
+		pShader = Resources::Find<Shader>(L"ButtonShader");
+		pTexture = Resources::Load<Texture>(L"EquipBtn", L"..\\Resources\\Texture\\UI\\Inventory\\.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"EquipBtn_Mtrl", pMaterial);
 #pragma endregion
+
+		pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		texture = Resources::Load<Texture>(L"BowProjectile_Tex", L"..\\Resources\\Texture\\Player\\BowProjectile.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BowProjectile_Mtrl", material);
+
+		texture = Resources::Load<Texture>(L"WandProjectile_Tex", L"..\\Resources\\Texture\\Player\\WandProjectile.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"WandProjectile_Mtrl", material);
 	}
 
 	void Initialize()

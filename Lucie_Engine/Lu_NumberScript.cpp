@@ -8,9 +8,9 @@ namespace Lu
 {
 	NumberScript::NumberScript()
 		: m_arrLT{}
-		, m_SliceSize(Vector2(0.f, 0.f))
+		, m_SliceSize(Vector2::Zero)
 		, m_CurNumber(-1)
-		, m_TexResolution(Vector2(0.f, 0.f))
+		, m_TexResolution(Vector2::Zero)
 	{
 
 	}
@@ -31,7 +31,18 @@ namespace Lu
 		}
 	}
 
+	void NumberScript::SetCurNumber(int _CurNumber)
+	{
+		m_CurNumber = _CurNumber;
+		Binds();
+	}
+
 	void NumberScript::Update()
+	{
+
+	}
+
+	void NumberScript::Binds()
 	{
 		graphics::ConstantBuffer* cb
 			= renderer::constantBuffer[(int)eCBType::Number];
