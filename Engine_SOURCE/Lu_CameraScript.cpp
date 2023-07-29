@@ -4,11 +4,17 @@
 #include "Lu_Time.h"
 #include "Lu_Input.h"
 #include "Lu_Camera.h"
+#include "Lu_Application.h"
+
+extern Lu::Application application;
 
 namespace Lu
 {
 	CameraScript::CameraScript()
 		: m_Speed(500.f)
+		, m_WindowResolution(Vector2::Zero)
+		, m_WorldResolution(Vector2::Zero)
+		, m_Target(nullptr)
 	{
 		SetName(L"CameraScript");
 	}
@@ -18,44 +24,104 @@ namespace Lu
 
 	}
 
+	void CameraScript::Initialize()
+	{
+		m_WindowResolution = Vector2((float)application.GetWidth(), (float)application.GetHeight());
+	}
+
 	void CameraScript::Update()
 	{
-		Transform* pTransform = GetOwner()->GetComponent<Transform>();
-		Vector3 vPos = pTransform->GetPosition();
+		if (nullptr == m_Target)
+		{
+			Transform* pTransform = GetOwner()->GetComponent<Transform>();
+			Vector3 vPos = pTransform->GetPosition();
 
-		if (Input::GetKey(eKeyCode::LEFT))
-		{
-			vPos.x -= m_Speed * (float)Time::DeltaTime();
-		}
-		else if (Input::GetKey(eKeyCode::RIGHT))
-		{
-			vPos.x += m_Speed * (float)Time::DeltaTime();
-		}
-		else if (Input::GetKey(eKeyCode::DOWN))
-		{
-			vPos.y -= m_Speed * (float)Time::DeltaTime();
-		}
-		else if (Input::GetKey(eKeyCode::UP))
-		{
-			vPos.y += m_Speed * (float)Time::DeltaTime();
+			if (Input::GetKey(eKeyCode::LEFT))
+			{
+				vPos.x -= m_Speed * (float)Time::DeltaTime();
+			}
+			else if (Input::GetKey(eKeyCode::RIGHT))
+			{
+				vPos.x += m_Speed * (float)Time::DeltaTime();
+			}
+			else if (Input::GetKey(eKeyCode::DOWN))
+			{
+				vPos.y -= m_Speed * (float)Time::DeltaTime();
+			}
+			else if (Input::GetKey(eKeyCode::UP))
+			{
+				vPos.y += m_Speed * (float)Time::DeltaTime();
+			}
+
+			Camera* pCamera = GetOwner()->GetComponent<Camera>();
+
+			if (Input::GetKey(eKeyCode::Z))
+			{
+				float fScale = pCamera->GetScale();
+				fScale += (float)Time::DeltaTime();
+				pCamera->SetScale(fScale);
+			}
+
+			if (Input::GetKey(eKeyCode::X))
+			{
+				float fScale = pCamera->GetScale();
+				fScale -= (float)Time::DeltaTime();
+				pCamera->SetScale(fScale);
+			}
+
+			pTransform->SetPosition(vPos);
 		}
 
-		Camera* pCamera = GetOwner()->GetComponent<Camera>();
-
-		if (Input::GetKey(eKeyCode::Z))
+		else
 		{
-			float fScale = pCamera->GetScale();
-			fScale += (float)Time::DeltaTime();
-			pCamera->SetScale(fScale);
-		}
+			static float fSpeed = 2.f;
 
-		if (Input::GetKey(eKeyCode::X))
-		{
-			float fScale = pCamera->GetScale();
-			fScale -= (float)Time::DeltaTime();
-			pCamera->SetScale(fScale);
-		}
+			Vector3 vPlayerPos = m_Target->GetComponent<Transform>()->GetPosition();
+			Vector3 vPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+			Vector3 vMoveDist = vPlayerPos - vPos;
+			if (abs(vMoveDist.x) <= 30.f && abs(vMoveDist.y) <= 30.f)
+			{
+				vMoveDist.x = 0.f;
+				vMoveDist.y = 0.f;
+			}
 
-		pTransform->SetPosition(vPos);
+			vPos.x += vMoveDist.x * fSpeed * (float)Time::DeltaTime();
+			vPos.y += vMoveDist.y * fSpeed * (float)Time::DeltaTime();
+
+			if (0.f != m_WorldResolution.x && 0.f != m_WorldResolution.y)
+			{
+				float Left = -m_WorldResolution.x / 2.f;
+				float Right = m_WorldResolution.x / 2.f;
+				float Top = m_WorldResolution.y / 2.f;
+				float Bottom = -m_WorldResolution.y / 2.f;
+
+				Vector2 vDiff_RT = Vector2(Right - (vPos.x + m_WindowResolution.x / 2),
+					Top - (vPos.y + m_WindowResolution.y / 2));
+				Vector2 vDiff_LB = Vector2(Left - (vPos.x - m_WindowResolution.x / 2),
+					Bottom - (vPos.y - m_WindowResolution.y / 2));
+
+				if (vDiff_RT.x <= 0.f)
+				{
+					vPos.x = Right - (m_WindowResolution.x / 2);;
+				}
+
+				if (vDiff_LB.x >= 0.f)
+				{
+					vPos.x = Left + (m_WindowResolution.x / 2);
+				}
+
+				if (vDiff_RT.y <= 0.f)
+				{
+					vPos.y = Top - (m_WindowResolution.y / 2);
+				}
+
+				if (vDiff_LB.y >= 0.f)
+				{
+					vPos.y = Bottom + (m_WindowResolution.y / 2);
+				}
+			}
+
+			GetOwner()->GetComponent<Transform>()->SetPosition(vPos);
+		}
 	}
 }

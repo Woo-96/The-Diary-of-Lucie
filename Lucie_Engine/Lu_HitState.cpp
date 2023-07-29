@@ -1,4 +1,5 @@
 #include "Lu_HitState.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -15,7 +16,7 @@ namespace Lu
 
 	void HitState::Enter()
 	{
-
+		GetPlayerScript()->GetPlayerInfo().HP -= 1;
 	}
 
 	void HitState::Exit()

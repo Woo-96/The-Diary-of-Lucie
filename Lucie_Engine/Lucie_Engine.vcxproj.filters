@@ -14,9 +14,6 @@
     <ClCompile Include="Lu_TitleScene.cpp">
       <Filter>Contents\Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_TutorialScene.cpp">
-      <Filter>Contents\Scene\Tutorial</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_LobbyScene.cpp">
       <Filter>Contents\Scene\Lobby</Filter>
     </ClCompile>
@@ -128,6 +125,24 @@
     <ClCompile Include="Lu_ProjectileScript.cpp">
       <Filter>Contents\Script\Player\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_SnabyStateScript.cpp">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SnabyAttackState.cpp">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SnabyDeadState.cpp">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SnabyIdleState.cpp">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SnabyPatrolState.cpp">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Patrol</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_MonsterScript.cpp">
+      <Filter>Contents\Script\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -145,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="Lu_TitleScene.h">
       <Filter>Contents\Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_TutorialScene.h">
-      <Filter>Contents\Scene\Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="Lu_LobbyScene.h">
       <Filter>Contents\Scene\Lobby</Filter>
@@ -260,6 +272,27 @@
     <ClInclude Include="Lu_ProjectileScript.h">
       <Filter>Contents\Script\Player\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="Lu_SnabyStateScript.h">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SnabyAttackState.h">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SnabyDeadState.h">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SnabyIdleState.h">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SnabyPatrolState.h">
+      <Filter>Contents\Script\Monster\Snaby\Snaby_FSM\Snaby_Patrol</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ScriptEnums.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_MonsterScript.h">
+      <Filter>Contents\Script\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -273,9 +306,6 @@
     </Filter>
     <Filter Include="Contents\Scene\Title">
       <UniqueIdentifier>{31035cae-c1ad-4aaa-881e-2085858abd36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Tutorial">
-      <UniqueIdentifier>{92e97e97-c93a-4c62-ad16-69667728df45}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Scene\Lobby">
       <UniqueIdentifier>{6b21e0a6-8745-432e-8212-46d6bb05bd89}</UniqueIdentifier>
@@ -367,32 +397,11 @@
     <Filter Include="Contents\Script\Player">
       <UniqueIdentifier>{9747fd66-5e25-4945-b174-342f5e0fe176}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\Player\FSM">
-      <UniqueIdentifier>{164854fa-d38e-4796-b9b3-17810db52fdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Idle">
-      <UniqueIdentifier>{be7d1ce4-d193-4c28-86ff-86a121ae5228}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Move">
-      <UniqueIdentifier>{ef8afebc-6a0c-4505-8cf1-2b576414aa17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Attack">
-      <UniqueIdentifier>{e2dd2710-d1ad-4dc7-9353-a19db5decace}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Dead">
-      <UniqueIdentifier>{e656649f-0629-43b9-98f3-e71a1e584fac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Dash">
-      <UniqueIdentifier>{6b783da7-5bab-43d3-8800-87262ee6dbce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\Monster">
       <UniqueIdentifier>{e8b73468-a077-4e5c-a880-eb218b6adf14}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\Monster\Snaby">
       <UniqueIdentifier>{be40be08-7f93-4148-b007-67747b2cacc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Hit">
-      <UniqueIdentifier>{1b964b24-6e76-4c5e-a81c-e989a417894f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\Monster\Snaby\Snaby_FSM">
       <UniqueIdentifier>{4245e5c9-f0ea-4d39-8c1a-d936d027a4d4}</UniqueIdentifier>
@@ -417,6 +426,30 @@
     </Filter>
     <Filter Include="Contents\Script\Player\Projectile\Wand">
       <UniqueIdentifier>{1a78ceb3-bfc8-4c26-b5b7-5195016dded0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM">
+      <UniqueIdentifier>{164854fa-d38e-4796-b9b3-17810db52fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Idle">
+      <UniqueIdentifier>{be7d1ce4-d193-4c28-86ff-86a121ae5228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Move">
+      <UniqueIdentifier>{ef8afebc-6a0c-4505-8cf1-2b576414aa17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Attack">
+      <UniqueIdentifier>{e2dd2710-d1ad-4dc7-9353-a19db5decace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Dead">
+      <UniqueIdentifier>{e656649f-0629-43b9-98f3-e71a1e584fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Dash">
+      <UniqueIdentifier>{6b783da7-5bab-43d3-8800-87262ee6dbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\FSM\Hit">
+      <UniqueIdentifier>{1b964b24-6e76-4c5e-a81c-e989a417894f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Snaby\SnabyProjectile">
+      <UniqueIdentifier>{c8f1a89d-13a2-4201-8afe-f1aac4ebdbea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

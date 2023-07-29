@@ -60,67 +60,11 @@ namespace Lu
 		{
 		case Lu::PlayerScript::eWeaponType::Bow:
 		{
-			GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), eLayerType::PlayerProjectile);
+			Vector3 vDir = GetDir();
+			float angle = std::atan2(vDir.y, vDir.x);
+
+			GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(50.f, 50.f, 100.f), Vector3(0.f, 0.f, angle + PI / 2.0f), eLayerType::PlayerProjectile);
 			pProjectile->SetName(L"BowProjectile");
-
-			Transform* pTransform = pProjectile->GetComponent<Transform>();
-			pTransform->SetScale(Vector3(50.f, 50.f, 100.f));
-		
-			Vector3 rot = pTransform->GetRotation();
-
-			switch (GetPlayerScript()->GetDir())
-			{
-			case Lu::PlayerScript::ePlayerDir::Up:
-			{
-				rot.z = float(0.0f + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::LeftUp:
-			{
-
-				rot.z = float(0.78 * 1 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::Left:
-			{
-				rot.z = float(0.78 * 2 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::LeftDown:
-			{
-				rot.z = float(0.78 * 3 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::Down:
-			{
-				rot.z = float(0.78 * 4 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::RightDown:
-			{
-				rot.z = float(0.78 * 5 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::Right:
-			{
-				rot.z = float(0.78 * 6 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			case Lu::PlayerScript::ePlayerDir::RightUp:
-			{
-				rot.z = float(0.78 * 7 + 1.56f);
-				pTransform->SetRotation(rot);
-			}
-			break;
-			}
-
 
 			MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -132,17 +76,14 @@ namespace Lu
 
 			BowProjectile* pBowProjectile = pProjectile->AddComponent<BowProjectile>();
 			pBowProjectile->SetPlayerScript(GetPlayerScript());
-			pBowProjectile->SetTransform(pTransform);
+			pBowProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 			pBowProjectile->SetDir(GetDir());
 		}
 			break;
 		case Lu::PlayerScript::eWeaponType::Wand:
 		{
-			GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), eLayerType::PlayerProjectile);
+			GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(50.f, 50.f, 100.f), eLayerType::PlayerProjectile);
 			pProjectile->SetName(L"WandProjectile");
-
-			Transform* pTransform = pProjectile->GetComponent<Transform>();
-			pTransform->SetScale(Vector3(50.f, 50.f, 100.f));
 
 			MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -154,7 +95,7 @@ namespace Lu
 
 			WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
 			pWandProjectile->SetPlayerScript(GetPlayerScript());
-			pWandProjectile->SetTransform(pTransform);
+			pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 			pWandProjectile->SetDir(GetDir());
 		}
 			break;

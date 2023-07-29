@@ -18,8 +18,8 @@ namespace Lu
 	PlayerScript::PlayerScript()
 		: m_CurState(nullptr)
 		, m_PrevState(StateScript::eState::End)
-		, m_Dir(ePlayerDir::Down)
-		, m_PrevDir(ePlayerDir::None)
+		, m_Dir(eDir::Down)
+		, m_PrevDir(eDir::None)
 		, m_MoveType(eMoveType::Walk)
 		, m_CurWeapon(eWeaponType::None)
 		, m_bAction(false)
@@ -59,6 +59,9 @@ namespace Lu
 
 	void PlayerScript::Update()
 	{
+		if (GetOwner()->IsDead())
+			return;
+
 		StateUpdate();
  		m_CurState->Update();
 		AnimationUpdate();
@@ -66,15 +69,24 @@ namespace Lu
 		m_PrevState = m_CurState->GetStateType();
 	}
 
-	void PlayerScript::OnCollisionEnter(Collider2D* other)
+	void PlayerScript::OnCollisionEnter(Collider2D* _Other)
+	{
+		if (StateScript::eState::Dead == m_CurState->GetStateType())
+			return;
+
+		ChangeState(StateScript::eState::Hit);
+
+		if (m_PlayerInfo.HP <= 0.f)
+		{
+			ChangeState(StateScript::eState::Dead);
+		}
+	}
+
+	void PlayerScript::OnCollisionStay(Collider2D* _Other)
 	{
 	}
 
-	void PlayerScript::OnCollisionStay(Collider2D* other)
-	{
-	}
-
-	void PlayerScript::OnCollisionExit(Collider2D* other)
+	void PlayerScript::OnCollisionExit(Collider2D* _Other)
 	{
 	}
 
@@ -168,7 +180,8 @@ namespace Lu
 		m_Animator->CompleteEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 		// Dead
-		m_Animator->Create(L"Player_Dead", pAtlas, Vector2(400.f, 2300.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.4f, false);
+		m_Animator->Create(L"Player_Dead", pAtlas, Vector2(400.f, 2300.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 2.f, false);
+		m_Animator->CompleteEvent(L"Player_Dead") = std::bind(&PlayerScript::CompleteAction, this);
 	}
 
 	StateScript* PlayerScript::GetStateScript(StateScript::eState _State)
@@ -196,7 +209,7 @@ namespace Lu
 	{
 		StateScript::eState eCurState = m_CurState->GetStateType();
 
-		if (m_bAction)
+		if (m_bAction || StateScript::eState::Dead == eCurState)
 			return;
 
 		// 이동 모드
@@ -248,57 +261,57 @@ namespace Lu
 			&& Input::GetKey(eKeyCode::W))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::LeftUp;
+			m_Dir = eDir::LeftUp;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::A)
 			&& Input::GetKey(eKeyCode::S))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::LeftDown;
+			m_Dir = eDir::LeftDown;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::D)
 			&& Input::GetKey(eKeyCode::S))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::RightDown;
+			m_Dir = eDir::RightDown;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::D)
 			&& Input::GetKey(eKeyCode::W))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::RightUp;
+			m_Dir = eDir::RightUp;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::A))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::Left;
+			m_Dir = eDir::Left;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::D))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::Right;
+			m_Dir = eDir::Right;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::S))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::Down;
+			m_Dir = eDir::Down;
 			ChangeState(StateScript::eState::Move);
 		}
 		else if (Input::GetKey(eKeyCode::W))
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = ePlayerDir::Up;
+			m_Dir = eDir::Up;
 			ChangeState(StateScript::eState::Move);
 		}
 		else
 		{
-			if (m_bAction)
+			if (m_bAction || StateScript::eState::Dead == eCurState)
 				return;
 
 			ChangeState(StateScript::eState::Idle);
@@ -319,28 +332,28 @@ namespace Lu
 		{
 			switch (m_Dir)
 			{
-			case Lu::PlayerScript::ePlayerDir::Left:
+			case eDir::Left:
 				m_Animator->PlayAnimation(L"Player_Idle_Left", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::Right:
+			case eDir::Right:
 				m_Animator->PlayAnimation(L"Player_Idle_Right", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::Up:
+			case eDir::Up:
 				m_Animator->PlayAnimation(L"Player_Idle_Up", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::Down:
+			case eDir::Down:
 				m_Animator->PlayAnimation(L"Player_Idle_Down", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::LeftUp:
+			case eDir::LeftUp:
 				m_Animator->PlayAnimation(L"Player_Idle_LeftUp", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::RightUp:
+			case eDir::RightUp:
 				m_Animator->PlayAnimation(L"Player_Idle_RightUp", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::LeftDown:
+			case eDir::LeftDown:
 				m_Animator->PlayAnimation(L"Player_Idle_LeftDown", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::RightDown:
+			case eDir::RightDown:
 				m_Animator->PlayAnimation(L"Player_Idle_RightDown", true);
 				break;
 			}
@@ -352,28 +365,28 @@ namespace Lu
 			{
 				switch (m_Dir)
 				{
-				case Lu::PlayerScript::ePlayerDir::Left:
+				case eDir::Left:
 					m_Animator->PlayAnimation(L"Player_Walk_Left", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Right:
+				case eDir::Right:
 					m_Animator->PlayAnimation(L"Player_Walk_Right", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Up:
+				case eDir::Up:
 					m_Animator->PlayAnimation(L"Player_Walk_Up", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Down:
+				case eDir::Down:
 					m_Animator->PlayAnimation(L"Player_Walk_Down", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftUp:
+				case eDir::LeftUp:
 					m_Animator->PlayAnimation(L"Player_Walk_LeftUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightUp:
+				case eDir::RightUp:
 					m_Animator->PlayAnimation(L"Player_Walk_RightUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftDown:
+				case eDir::LeftDown:
 					m_Animator->PlayAnimation(L"Player_Walk_LeftDown", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightDown:
+				case eDir::RightDown:
 					m_Animator->PlayAnimation(L"Player_Walk_RightDown", true);
 					break;
 				}
@@ -382,28 +395,28 @@ namespace Lu
 			{
 				switch (m_Dir)
 				{
-				case Lu::PlayerScript::ePlayerDir::Left:
+				case eDir::Left:
 					m_Animator->PlayAnimation(L"Player_Run_Left", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Right:
+				case eDir::Right:
 					m_Animator->PlayAnimation(L"Player_Run_Right", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Up:
+				case eDir::Up:
 					m_Animator->PlayAnimation(L"Player_Run_Up", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Down:
+				case eDir::Down:
 					m_Animator->PlayAnimation(L"Player_Run_Down", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftUp:
+				case eDir::LeftUp:
 					m_Animator->PlayAnimation(L"Player_Run_LeftUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightUp:
+				case eDir::RightUp:
 					m_Animator->PlayAnimation(L"Player_Run_RightUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftDown:
+				case eDir::LeftDown:
 					m_Animator->PlayAnimation(L"Player_Run_LeftDown", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightDown:
+				case eDir::RightDown:
 					m_Animator->PlayAnimation(L"Player_Run_RightDown", true);
 					break;
 				}
@@ -414,28 +427,28 @@ namespace Lu
 		{
 			switch (m_Dir)
 			{
-			case Lu::PlayerScript::ePlayerDir::Left:
+			case eDir::Left:
 				m_Animator->PlayAnimation(L"Player_Dash_Left", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::Right:
+			case eDir::Right:
 				m_Animator->PlayAnimation(L"Player_Dash_Right", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::Up:
+			case eDir::Up:
 				m_Animator->PlayAnimation(L"Player_Dash_Up", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::Down:
+			case eDir::Down:
 				m_Animator->PlayAnimation(L"Player_Dash_Down", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::LeftUp:
+			case eDir::LeftUp:
 				m_Animator->PlayAnimation(L"Player_Dash_LeftUp", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::RightUp:
+			case eDir::RightUp:
 				m_Animator->PlayAnimation(L"Player_Dash_RightUp", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::LeftDown:
+			case eDir::LeftDown:
 				m_Animator->PlayAnimation(L"Player_Dash_LeftDown", true);
 				break;
-			case Lu::PlayerScript::ePlayerDir::RightDown:
+			case eDir::RightDown:
 				m_Animator->PlayAnimation(L"Player_Dash_RightDown", true);
 				break;
 			}
@@ -451,28 +464,28 @@ namespace Lu
 			{
 				switch (m_Dir)
 				{
-				case Lu::PlayerScript::ePlayerDir::Left:
+				case eDir::Left:
 					m_Animator->PlayAnimation(L"Player_Bow_Left", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Right:
+				case eDir::Right:
 					m_Animator->PlayAnimation(L"Player_Bow_Right", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Up:
+				case eDir::Up:
 					m_Animator->PlayAnimation(L"Player_Bow_Up", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Down:
+				case eDir::Down:
 					m_Animator->PlayAnimation(L"Player_Bow_Down", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftUp:
+				case eDir::LeftUp:
 					m_Animator->PlayAnimation(L"Player_Bow_LeftUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightUp:
+				case eDir::RightUp:
 					m_Animator->PlayAnimation(L"Player_Bow_RightUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftDown:
+				case eDir::LeftDown:
 					m_Animator->PlayAnimation(L"Player_Bow_LeftDown", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightDown:
+				case eDir::RightDown:
 					m_Animator->PlayAnimation(L"Player_Bow_RightDown", true);
 					break;
 				}
@@ -482,28 +495,28 @@ namespace Lu
 			{
 				switch (m_Dir)
 				{
-				case Lu::PlayerScript::ePlayerDir::Left:
+				case eDir::Left:
 					m_Animator->PlayAnimation(L"Player_Wand_Left", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Right:
+				case eDir::Right:
 					m_Animator->PlayAnimation(L"Player_Wand_Right", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Up:
+				case eDir::Up:
 					m_Animator->PlayAnimation(L"Player_Wand_Up", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::Down:
+				case eDir::Down:
 					m_Animator->PlayAnimation(L"Player_Wand_Down", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftUp:
+				case eDir::LeftUp:
 					m_Animator->PlayAnimation(L"Player_Wand_LeftUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightUp:
+				case eDir::RightUp:
 					m_Animator->PlayAnimation(L"Player_Wand_RightUp", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::LeftDown:
+				case eDir::LeftDown:
 					m_Animator->PlayAnimation(L"Player_Wand_LeftDown", true);
 					break;
-				case Lu::PlayerScript::ePlayerDir::RightDown:
+				case eDir::RightDown:
 					m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
 					break;
 				}
@@ -512,15 +525,13 @@ namespace Lu
 			}
 		}
 			break;
-		case StateScript::eState::Hit:
-			break;
 		case StateScript::eState::Dead:
-			m_Animator->PlayAnimation(L"Player_Dead", false);
+			m_Animator->PlayAnimation(L"Player_Dead", true);
 			break;
 		}
 	}
 
-	PlayerScript::ePlayerDir PlayerScript::CalDirToMouse()
+	eDir PlayerScript::CalDirToMouse()
 	{
 		Vector2 vScreenPos = Lu::Input::GetMousePos();
 		Vector3 vMouseWorldPos = renderer::mainCamera->ScreenToWorld(vScreenPos);
@@ -532,23 +543,23 @@ namespace Lu
 		float angle = atan2(vDir.y, vDir.x) * (180.0f / math::PI);
 
 		if (angle > -22.5f && angle <= 22.5f)
-			return ePlayerDir::Right;
+			return eDir::Right;
 		else if (angle > 22.5f && angle <= 67.5f)
-			return ePlayerDir::RightUp;
+			return eDir::RightUp;
 		else if (angle > 67.5f && angle <= 112.5f)
-			return ePlayerDir::Up;
+			return eDir::Up;
 		else if (angle > 112.5f && angle <= 157.5f)
-			return ePlayerDir::LeftUp;
+			return eDir::LeftUp;
 		else if (angle > 157.5f || angle <= -157.5f)
-			return ePlayerDir::Left;
+			return eDir::Left;
 		else if (angle > -157.5f && angle <= -112.5f)
-			return ePlayerDir::LeftDown;
+			return eDir::LeftDown;
 		else if (angle > -112.5f && angle <= -67.5f)
-			return ePlayerDir::Down;
+			return eDir::Down;
 		else if (angle > -67.5f && angle <= -22.5f)
-			return ePlayerDir::RightDown;
+			return eDir::RightDown;
 
-		return ePlayerDir::None;
+		return eDir::None;
 	}
 
 	void PlayerScript::CompleteAction()

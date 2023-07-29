@@ -6,6 +6,7 @@
 #include "Lu_Input.h"
 #include "Lu_Animator.h"
 #include "Lu_PlayerScript.h"
+#include "Lu_CameraScript.h"
 
 namespace Lu
 {
@@ -23,25 +24,20 @@ namespace Lu
 	{
 		Scene::Initialize();
 
+		// BG : 크기 원본 2.5배
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -95.f, 900.f), eLayerType::BackGround);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -95.f, 900.f), Vector3(2520.f, 2640.f, 100.f), eLayerType::BackGround);
 			pObject->SetName(L"Lobby_BG");
-
-			Transform* pTransform = pObject->GetComponent<Transform>();
-			// 원본 2.5배
-			pTransform->SetScale(Vector3(2520.f, 2640.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"LobbyBG_Mtrl"));
 		}
 
+		// Player : 크기 원본 2배
 		{
-			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), eLayerType::Player);
+			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
 			pPlayer->SetName(L"Player");
-
-			Transform* pTransform = pPlayer->GetComponent<Transform>();
-			pTransform->SetScale(Vector3(200.f, 200.f, 100.f)); // 원본 2배
 
 			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -54,6 +50,10 @@ namespace Lu
 
 			Animator* pAnimator = pPlayer->AddComponent<Animator>();
 			pPlayer->AddComponent<PlayerScript>();
+
+			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+			pMainCamScript->SetTarget(pPlayer);
+			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
 		}
 	}
 

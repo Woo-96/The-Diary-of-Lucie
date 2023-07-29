@@ -1,4 +1,6 @@
 #include "Lu_DeadState.h"
+#include "Lu_Object.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -20,6 +22,7 @@ namespace Lu
 
 	void DeadState::Exit()
 	{
-
+		object::Destroy(GetPlayerScript()->GetOwner());
+		SceneManager::LoadScene(L"GameOverScene");
 	}
 }

@@ -20,14 +20,10 @@ namespace Lu
 	{
 		StageScene::Initialize();
 
-		// Back
+		// Back : 크기 원본 2배
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::BackGround);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), Vector3(1920.f, 1152.f, 100.f), eLayerType::BackGround);
 			pObject->SetName(L"Store_BG");
-
-			Transform* pTransform = pObject->GetComponent<Transform>();
-			// 원본 2배
-			pTransform->SetScale(Vector3(1920.f, 1152.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

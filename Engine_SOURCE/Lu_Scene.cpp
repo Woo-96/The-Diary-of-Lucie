@@ -52,12 +52,11 @@ namespace Lu
 			pCameraCom->TurnLayerMask(eLayerType::Mouse, true);
 			renderer::cameras.push_back(pCameraCom);
 
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), eLayerType::Mouse);
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
 			pObject->SetName(L"Mouse");
 
 			m_Mouse = pObject->AddComponent<MouseScript>();
 			m_Mouse->SetUICam(pCameraCom);
-			pObject->GetComponent<Transform>()->SetScale(Vector3(48.f, 48.f, 100.f));
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

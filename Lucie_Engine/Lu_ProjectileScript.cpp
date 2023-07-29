@@ -45,17 +45,17 @@ namespace Lu
 		m_Transform->SetPosition(vPos);
 	}
 
-	void ProjectileScript::OnCollisionEnter(Collider2D* other)
+	void ProjectileScript::OnCollisionEnter(Collider2D* _Other)
 	{
 		object::Destroy(GetOwner());
 	}
 
-	void ProjectileScript::OnCollisionStay(Collider2D* other)
+	void ProjectileScript::OnCollisionStay(Collider2D* _Other)
 	{
 
 	}
 
-	void ProjectileScript::OnCollisionExit(Collider2D* other)
+	void ProjectileScript::OnCollisionExit(Collider2D* _Other)
 	{
 
 	}

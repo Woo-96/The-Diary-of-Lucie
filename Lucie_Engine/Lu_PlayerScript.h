@@ -1,5 +1,6 @@
 #pragma once
 #include "..\\Engine_SOURCE\\Lu_Script.h"
+#include "Lu_ScriptEnums.h"
 #include "Lu_StateScript.h"
 
 namespace Lu
@@ -8,19 +9,6 @@ namespace Lu
 	class PlayerScript : public Script
 	{
 	public:
-		enum class ePlayerDir
-		{
-			None,
-			Left,
-			Right,
-			Up,
-			Down,
-			LeftUp,
-			RightUp,
-			LeftDown,
-			RightDown
-		};
-
 		enum class eMoveType
 		{
 			Walk,
@@ -40,6 +28,17 @@ namespace Lu
 			End
 		};
 
+		struct tPlayerInfo
+		{
+			int HP;
+
+			tPlayerInfo()
+				: HP(3)
+			{
+
+			}
+		};
+
 	public:
 		PlayerScript();
 		virtual ~PlayerScript();
@@ -49,11 +48,13 @@ namespace Lu
 		StateScript*		m_CurState;
 		StateScript::eState	m_PrevState;
 
-		ePlayerDir			m_Dir;
-		ePlayerDir			m_PrevDir;
+		eDir				m_Dir;
+		eDir				m_PrevDir;
 
 		eMoveType			m_MoveType;
 		eWeaponType			m_CurWeapon;
+
+		tPlayerInfo			m_PlayerInfo;
 
 		bool				m_bAction;
 
@@ -66,7 +67,7 @@ namespace Lu
 		}
 
 	public:
-		ePlayerDir GetDir()	const
+		eDir GetDir()	const
 		{
 			return m_Dir;
 		}
@@ -81,14 +82,19 @@ namespace Lu
 			return m_CurWeapon;
 		}
 
+		tPlayerInfo& GetPlayerInfo()
+		{
+			return m_PlayerInfo;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
 
 	public:
-		virtual void OnCollisionEnter(Collider2D* other) override;
-		virtual void OnCollisionStay(Collider2D* other) override;
-		virtual void OnCollisionExit(Collider2D* other) override;
+		virtual void OnCollisionEnter(Collider2D* _Other) override;
+		virtual void OnCollisionStay(Collider2D* _Other) override;
+		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:
 		void CreatePlayerAnimation();
@@ -96,7 +102,7 @@ namespace Lu
 		void AddState(StateScript* _State);
 		void StateUpdate();
 		void AnimationUpdate();
-		ePlayerDir CalDirToMouse();
+		eDir CalDirToMouse();
 		void CompleteAction();
 
 	public:

@@ -67,16 +67,12 @@ namespace Lu
 	void StageScene::CreateHUD()
 	{
 		GameObject* pObject;
-		Transform* pTransform;
 		MeshRenderer* pMeshRender;
 
+		// 크기 원본 1.5배
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 150.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 150.f), Vector3(345.f, 135.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_Layout");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(345.f, 135.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -86,12 +82,8 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(-100.f, -280.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(-100.f, -280.f, 100.f), Vector3(72.f, 33.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_HPIcon");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(72.f, 33.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -101,12 +93,8 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(85.f, -280.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(85.f, -280.f, 100.f), Vector3(72.f, 33.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_MPIcon");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(72.f, 33.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -116,12 +104,8 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(15.f, -315.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(15.f, -315.f, 100.f), Vector3(190.5f, 10.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_EXP");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(190.5f, 10.5f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -131,12 +115,8 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(-7.f, -336.5f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(-7.f, -336.5f, 100.f), Vector3(249.f, 21.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_TP");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(249.f, 21.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -146,12 +126,8 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(640.f, -330.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(640.f, -330.f, 100.f), Vector3(105.f, 102.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_WeaponSlot");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(105.f, 102.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -161,12 +137,8 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(66.f, 66.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_QuickItem");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(66.f, 66.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -176,25 +148,18 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(685.f, 355.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(685.f, 355.f, 100.f), Vector3(21.f, 28.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Gold_G");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(21.f, 28.5f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Gold_A_Mtrl"));
 		}
 
+		// 원본 사이즈 1.5배 (y축 조금 작은거같아서 약간 늘림)
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(662.f, 354.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(662.f, 354.f, 100.f), Vector3(21.f, 30.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Gold_Num");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배 (y축 조금 작은거같아서 약간 늘림)
-			pTransform->SetScale(Vector3(21.f, 30.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -210,16 +175,12 @@ namespace Lu
 				arrLT[i] = Vector2(14.f * i, 0.f);
 			}
 			pNum->SetNumbersLT(arrLT, 10);
-			pNum->SetCurNumber(3);
+			pNum->SetCurNumber(0);
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(-113.f, -313.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(-113.f, -313.f, 100.f), Vector3(48.f, 28.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Level");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(48.f, 28.5f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -241,16 +202,12 @@ namespace Lu
 	void StageScene::CreateInventory()
 	{
 		GameObject* pObject;
-		Transform* pTransform;
 		MeshRenderer* pMeshRender;
 
+		// 원본 사이즈 1.5배
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(516.f, -80.f, 0.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(516.f, -80.f, 0.f), Vector3(360.f, 444.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Inventory_Layout");
-
-			pTransform = pObject->GetComponent<Transform>();
-			// 원본 사이즈 1.5배
-			pTransform->SetScale(Vector3(360.f, 444.f, 100.f));
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

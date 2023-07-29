@@ -54,7 +54,7 @@ namespace Lu
 		SetKey(_Name);
 		m_Atlas = _Atlas;
 
-		Vector2 vResolution = Vector2(m_Atlas->GetWidth(), m_Atlas->GetHeight());
+		Vector2 vResolution = Vector2((float)m_Atlas->GetWidth(), (float)m_Atlas->GetHeight());
 
 		for (size_t i = 0; i < _ColumnLength; i++)
 		{

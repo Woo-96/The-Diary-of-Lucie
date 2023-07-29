@@ -29,44 +29,44 @@ namespace Lu
         else
             fCurSpeed = 400.f;
 
-        PlayerScript::ePlayerDir eCurDir = GetPlayerScript()->GetDir();
+        eDir eCurDir = GetPlayerScript()->GetDir();
         Vector3 vPos = GetTransform()->GetPosition();
 
         float diagonalFactor = 1.0f / sqrt(2.0f); // Normalize the diagonal movement vector
 
         switch (eCurDir)
         {
-        case Lu::PlayerScript::ePlayerDir::Left:
+        case eDir::Left:
             vPos.x -= fCurSpeed * (float)Time::DeltaTime();
             break;
-        case Lu::PlayerScript::ePlayerDir::Right:
+        case eDir::Right:
             vPos.x += fCurSpeed * (float)Time::DeltaTime();
             break;
-        case Lu::PlayerScript::ePlayerDir::Up:
+        case eDir::Up:
             vPos.y += fCurSpeed * (float)Time::DeltaTime();
             break;
-        case Lu::PlayerScript::ePlayerDir::Down:
+        case eDir::Down:
             vPos.y -= fCurSpeed * (float)Time::DeltaTime();
             break;
-        case Lu::PlayerScript::ePlayerDir::LeftUp:
+        case eDir::LeftUp:
         {
             vPos.x -= fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
             vPos.y += fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
         }
         break;
-        case Lu::PlayerScript::ePlayerDir::RightUp:
+        case eDir::RightUp:
         {
             vPos.x += fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
             vPos.y += fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
         }
         break;
-        case Lu::PlayerScript::ePlayerDir::LeftDown:
+        case eDir::LeftDown:
         {
             vPos.x -= fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
             vPos.y -= fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
         }
         break;
-        case Lu::PlayerScript::ePlayerDir::RightDown:
+        case eDir::RightDown:
         {
             vPos.x += fCurSpeed * diagonalFactor * (float)Time::DeltaTime();
             vPos.y -= fCurSpeed * diagonalFactor * (float)Time::DeltaTime();

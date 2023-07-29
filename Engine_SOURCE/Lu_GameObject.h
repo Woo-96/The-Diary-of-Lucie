@@ -24,16 +24,33 @@ namespace Lu
 		std::vector<Component*> m_Components;
 		std::vector<Script*>	m_Scripts;
 
+		int                     m_LayerIdx;
+
 	public:
 		void SetState(eState _State)
 		{ 
 			m_State = _State;
 		}
 
+		void SetLayerIndex(int _Layer)
+		{
+			m_LayerIdx = _Layer;
+		}
+
 	public:
 		eState GetState()
 		{ 
 			return m_State; 
+		}
+
+		bool IsDead() const
+		{
+			return eState::Dead == m_State;
+		}
+
+		int GetLayerIndex() const
+		{
+			return m_LayerIdx;
 		}
 
 	public:

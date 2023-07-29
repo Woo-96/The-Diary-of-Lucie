@@ -455,16 +455,6 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Title_Mtrl", pMaterial);
 #pragma endregion
-#pragma region Tutorial Scene Resources
-		//pShader = Resources::Find<Shader>(L"SpriteShader");
-
-		// 튜토리얼 더미
-		//pTexture = Resources::Load<Texture>(L"TutoDummy_Tex", L"..\\Resources\\Texture\\Map\\Tutorial\\TutoDummy.png");
-		//pMaterial = std::make_shared<Material>();
-		//pMaterial->SetShader(pShader);
-		//pMaterial->SetTexture(pTexture);
-		//Resources::Insert(L"Tutorial_Mtrl", pMaterial);
-#pragma endregion
 #pragma region Lobby Scene Resources
 		//pShader = Resources::Find<Shader>(L"SpriteShader");
 

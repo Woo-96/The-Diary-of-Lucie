@@ -9,60 +9,67 @@
 namespace Lu::object
 {
 	template <typename T>
-	static __forceinline T* Instantiate(enums::eLayerType layer)
+	static __forceinline T* Instantiate(enums::eLayerType _Layer)
 	{
 		T* gameObj = new T();
 		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObject(layer, gameObj);
+		scene->AddGameObject(_Layer, gameObj);
+		gameObj->SetLayerIndex((int)_Layer);
 		gameObj->Initialize();
 
 		return gameObj;
 	}
 
 	template <typename T>
-	static __forceinline T* Instantiate(Vector3 pos, enums::eLayerType layer)
+	static __forceinline T* Instantiate(Vector3 _Pos, enums::eLayerType _Layer)
 	{
 		T* gameObj = new T();
 		Transform* tr = gameObj->GetComponent<Transform>();
-		tr->SetPosition(pos);
+		tr->SetPosition(_Pos);
 
 		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObject(layer, gameObj);
+		scene->AddGameObject(_Layer, gameObj);
+		gameObj->SetLayerIndex((int)_Layer);
+		gameObj->Initialize();
 
 		return gameObj;
 	}
 
 	template <typename T>
-	static __forceinline T* Instantiate(Vector3 pos, Vector3 rotate, enums::eLayerType layer)
+	static __forceinline T* Instantiate(Vector3 _Pos, Vector3 _Scale, enums::eLayerType _Layer)
 	{
 		T* gameObj = new T();
 		Transform* tr = gameObj->GetComponent<Transform>();
-		tr->SetPosition(pos);
-		tr->SetRotation(rotate);
+		tr->SetPosition(_Pos);
+		tr->SetScale(_Scale);
 
 		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObject(layer, gameObj);
+		scene->AddGameObject(_Layer, gameObj);
+		gameObj->SetLayerIndex((int)_Layer);
+		gameObj->Initialize();
 
 		return gameObj;
 	}
 
 	template <typename T>
-	static __forceinline T* Instantiate(Vector3 pos, Vector3 rotate, Vector3 scale, enums::eLayerType layer)
+	static __forceinline T* Instantiate(Vector3 _Pos, Vector3 _Scale, Vector3 _Rot, enums::eLayerType _Layer)
 	{
 		T* gameObj = new T();
 		Transform* tr = gameObj->GetComponent<Transform>();
-		tr->SetPosition(pos);
-		tr->SetRotation(rotate);
-		tr->SetScale(scale);
+		tr->SetPosition(_Pos);
+		tr->SetScale(_Scale);
+		tr->SetRotation(_Rot);
 
 		Scene* scene = SceneManager::GetActiveScene();
-		scene->AddGameObject(layer, gameObj);
+		scene->AddGameObject(_Layer, gameObj);
+		gameObj->SetLayerIndex((int)_Layer);
+		gameObj->Initialize();
 
 		return gameObj;
 	}
 
-	static __forceinline void Destroy(GameObject* gameObj)
+	static __forceinline void Destroy(GameObject* _GameObj)
 	{
-		gameObj->SetState(Lu::GameObject::eState::Dead);
+		_GameObj->SetState(Lu::GameObject::eState::Dead);
 	}
 }

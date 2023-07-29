@@ -1,13 +1,13 @@
 #pragma once
-#include "Lu_StateScript.h"
+#include "Lu_SnabyStateScript.h"
 
 namespace Lu
 {
-	class AttackState : public StateScript
+	class SnabyAttackState : public SnabyStateScript
 	{
 	public:
-		AttackState();
-		virtual ~AttackState();
+		SnabyAttackState();
+		virtual ~SnabyAttackState();
 
 	public:
 		virtual void Initialize() override;

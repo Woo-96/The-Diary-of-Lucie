@@ -404,7 +404,7 @@ namespace Lu::graphics
 		// render target clear
 		FLOAT bgColor[4] = { 0.f, 0.f, 0.f, 1.0f };
 		m_Context->ClearRenderTargetView(m_RenderTargetView.Get(), bgColor);
-		m_Context->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0.0f);
+		m_Context->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, (UINT8)0.0f);
 		m_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
 	}
 

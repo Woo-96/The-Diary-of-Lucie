@@ -7,6 +7,7 @@ namespace Lu
 {
 	GameObject::GameObject()
 		: m_State(eState::Active)
+		, m_LayerIdx(-1)
 	{
 		AddComponent<Transform>();
 	}

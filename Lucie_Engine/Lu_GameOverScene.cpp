@@ -21,13 +21,10 @@ namespace Lu
 	{
 		Scene::Initialize();
 
+		// Back : 크기 원본 1.5배
 		{
-			GameObject* pGameOver = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), eLayerType::Default);
+			GameObject* pGameOver = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), Vector3(1440.f, 810.f, 100.f), eLayerType::Default);
 			pGameOver->SetName(L"GameOver");
-
-			Transform* pTransform = pGameOver->GetComponent<Transform>();
-			// 원본 1.5배
-			pTransform->SetScale(Vector3(1440.f, 810.f, 100.f));
 
 			MeshRenderer* pMeshRender = pGameOver->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

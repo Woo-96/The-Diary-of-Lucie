@@ -1,7 +1,6 @@
 #pragma once
 #include "..\Engine_SOURCE\Lu_SceneManager.h"
 #include "Lu_TitleScene.h"
-#include "Lu_TutorialScene.h"
 #include "Lu_LobbyScene.h"
 #include "Lu_WeaponChoiceScene.h"
 #include "Lu_DiceScene.h"
@@ -28,7 +27,6 @@ namespace Lu
 	void InitializeScenes()
 	{
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
-		//SceneManager::CreateScene<TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<LobbyScene>(L"LobbyScene");
 
 		SceneManager::CreateScene<WeaponChoiceScene>(L"WeaponChoiceScene");
