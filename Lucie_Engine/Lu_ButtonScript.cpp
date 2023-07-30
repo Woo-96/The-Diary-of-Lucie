@@ -36,16 +36,6 @@ void Lu::ButtonScript::Update()
 
 void Lu::ButtonScript::Binds()
 {
-	graphics::ConstantBuffer* cb
-		= renderer::constantBuffer[(int)eCBType::Button];
-
-	renderer::ButtonCB data;
-	data.vLtUV = m_arrLT[(int)m_ButtonState] / m_TexResolution;
-	data.vSliceUV = m_SliceSize / m_TexResolution;
-
-	cb->SetData(&data);
-	cb->Bind(eShaderStage::VS);
-	cb->Bind(eShaderStage::PS);
 }
 
 void Lu::ButtonScript::CollisionMouseHoveredCallback(const Vector2& Pos)

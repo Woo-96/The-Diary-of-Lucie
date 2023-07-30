@@ -14,7 +14,6 @@ namespace Lu
 			Move,
 			Dash,
 			Attack,
-			Hit,
 			Dead,
 			End
 		};

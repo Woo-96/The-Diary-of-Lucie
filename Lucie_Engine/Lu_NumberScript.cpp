@@ -39,20 +39,23 @@ namespace Lu
 
 	void NumberScript::Update()
 	{
-
 	}
 
 	void NumberScript::Binds()
 	{
-		graphics::ConstantBuffer* cb
-			= renderer::constantBuffer[(int)eCBType::Number];
+		//graphics::ConstantBuffer* cb = renderer::constantBuffer[(int)eCBType::Number];
+		//renderer::NumberCB data;
+		//data.vLtUV = m_arrLT[m_CurNumber] / m_TexResolution;
+		//data.vSliceUV = m_SliceSize / m_TexResolution;
 
-		renderer::NumberCB data;
-		data.vLtUV = m_arrLT[m_CurNumber] / m_TexResolution;
-		data.vSliceUV = m_SliceSize / m_TexResolution;
+		//cb->SetData(&data);
+		//cb->Bind(eShaderStage::VS);
+		//cb->Bind(eShaderStage::PS);
 
-		cb->SetData(&data);
-		cb->Bind(eShaderStage::VS);
-		cb->Bind(eShaderStage::PS);
+
+		Vector2 vLT = m_arrLT[m_CurNumber] / m_TexResolution;
+		Vector2 vSlice = m_SliceSize / m_TexResolution;
+		GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_0, &vLT);
+		GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_1, &vSlice);
 	}
 }

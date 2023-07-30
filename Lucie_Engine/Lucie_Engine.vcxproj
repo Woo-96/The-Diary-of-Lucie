@@ -171,8 +171,6 @@
     <ClInclude Include="Lu_EXP.h" />
     <ClInclude Include="Lu_GameOverScene.h" />
     <ClInclude Include="Lu_Gold.h" />
-    <ClInclude Include="Lu_GridScript.h" />
-    <ClInclude Include="Lu_HitState.h" />
     <ClInclude Include="Lu_HP.h" />
     <ClInclude Include="Lu_IdleState.h" />
     <ClInclude Include="Lu_Inventory.h" />
@@ -222,8 +220,6 @@
     <ClCompile Include="Lu_EXP.cpp" />
     <ClCompile Include="Lu_GameOverScene.cpp" />
     <ClCompile Include="Lu_Gold.cpp" />
-    <ClCompile Include="Lu_GridScript.cpp" />
-    <ClCompile Include="Lu_HitState.cpp" />
     <ClCompile Include="Lu_HP.cpp" />
     <ClCompile Include="Lu_IdleState.cpp" />
     <ClCompile Include="Lu_Inventory.cpp" />

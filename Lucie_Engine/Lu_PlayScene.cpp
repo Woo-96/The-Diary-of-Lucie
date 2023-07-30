@@ -6,7 +6,6 @@
 #include "Lu_CameraScript.h"
 #include "Lu_Camera.h"
 #include "Lu_SceneManager.h"
-#include "Lu_GridScript.h"
 #include "Lu_Object.h"
 #include "Lu_Renderer.h"
 #include "Lu_Collider2D.h"

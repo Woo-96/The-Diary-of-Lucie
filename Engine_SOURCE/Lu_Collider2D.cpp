@@ -15,6 +15,7 @@ namespace Lu
 		, m_Type(eColliderType::Rect)
 		, m_Size(Vector2::One)
 		, m_Center(Vector2::Zero)
+		, m_CollisionCount(0)
 	{
 		SetName(L"Collier2D");
 		m_ColliderNumber++;
@@ -28,6 +29,8 @@ namespace Lu
 
 	void Collider2D::LateUpdate()
 	{
+		assert(0 <= m_CollisionCount);
+
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 
 		Vector3 scale = tr->GetScale();
@@ -46,11 +49,21 @@ namespace Lu
 		mesh.Rotation = tr->GetRotation();
 		mesh.Type = m_Type;
 
+		Vector4 vColor;
+		if(0 < m_CollisionCount)
+			vColor = Vector4(1.f, 0.f, 0.f, 1.f);
+		else
+			vColor = Vector4(0.f, 1.f, 0.f, 1.f);
+
+		mesh.Color = vColor;
+
 		renderer::PushDebugMeshAttribute(mesh);
 	}
 
 	void Collider2D::OnCollisionEnter(Collider2D* _Other)
 	{
+		++m_CollisionCount;
+
 		const std::vector<Script*>& scripts
 			= GetOwner()->GetComponents<Script>();
 
@@ -73,6 +86,8 @@ namespace Lu
 
 	void Collider2D::OnCollisionExit(Collider2D* _Other)
 	{
+		--m_CollisionCount;
+
 		const std::vector<Script*>& scripts
 			= GetOwner()->GetComponents<Script>();
 

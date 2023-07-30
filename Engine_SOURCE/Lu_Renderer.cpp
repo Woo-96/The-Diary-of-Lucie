@@ -51,11 +51,6 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
-		shader = Lu::Resources::Find<Shader>(L"GridShader");
-		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
-			, shader->GetVSCode()
-			, shader->GetInputLayoutAddressOf());
-
 		shader = Lu::Resources::Find<Shader>(L"DebugShader");
 		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
@@ -71,10 +66,10 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
-		shader = Lu::Resources::Find<Shader>(L"ButtonShader");
-		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
-			, shader->GetVSCode()
-			, shader->GetInputLayoutAddressOf());
+		//shader = Lu::Resources::Find<Shader>(L"ButtonShader");
+		//Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+		//	, shader->GetVSCode()
+		//	, shader->GetInputLayoutAddressOf());
 
 #pragma endregion
 #pragma region Sampler State
@@ -311,25 +306,17 @@ namespace renderer
 
 	void LoadBuffer()
 	{
-		// Constant Buffer
+		// Transform Buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
-	
-		// Grid Buffer
-		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
-		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
 
-		// Number Buffer
-		constantBuffer[(UINT)eCBType::Number] = new ConstantBuffer(eCBType::Number);
-		constantBuffer[(UINT)eCBType::Number]->Create(sizeof(NumberCB));
+		// Mtrl Const Buffer
+		constantBuffer[(UINT)eCBType::Material] = new ConstantBuffer(eCBType::Material);
+		constantBuffer[(UINT)eCBType::Material]->Create(sizeof(MaterialCB));
 	
 		// Animator Buffer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
-	
-		// Button Buffer
-		constantBuffer[(UINT)eCBType::Button] = new ConstantBuffer(eCBType::Button);
-		constantBuffer[(UINT)eCBType::Button]->Create(sizeof(ButtonCB));
 	}
 
 	void LoadShader()
@@ -344,11 +331,6 @@ namespace renderer
 		spriteAniShader->Create(eShaderStage::PS, L"SpriteAnimationPS.hlsl", "main");
 		Lu::Resources::Insert(L"SpriteAnimationShader", spriteAniShader);
 
-		std::shared_ptr<Shader> girdShader = std::make_shared<Shader>();
-		girdShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
-		girdShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
-		Lu::Resources::Insert(L"GridShader", girdShader);
-
 		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
 		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
@@ -361,37 +343,46 @@ namespace renderer
 		numberShader->Create(eShaderStage::PS, L"NumberPS.hlsl", "main");
 		Lu::Resources::Insert(L"NumberShader", numberShader);
 
-		std::shared_ptr<Shader> buttonShader = std::make_shared<Shader>();
-		buttonShader->Create(eShaderStage::VS, L"ButtonVS.hlsl", "main");
-		buttonShader->Create(eShaderStage::PS, L"ButtonPS.hlsl", "main");
-		Lu::Resources::Insert(L"ButtonShader", buttonShader);
+		//std::shared_ptr<Shader> buttonShader = std::make_shared<Shader>();
+		//buttonShader->Create(eShaderStage::VS, L"ButtonVS.hlsl", "main");
+		//buttonShader->Create(eShaderStage::PS, L"ButtonPS.hlsl", "main");
+		//Lu::Resources::Insert(L"ButtonShader", buttonShader);
 	}
 
 	void LoadMaterial()
 	{
+		// 애니메이션 Mtrl
+		std::shared_ptr<Shader> animationShader
+			= Resources::Find<Shader>(L"SpriteAnimationShader");
+		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteAnimaionMaterial", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"PlayerAnimation_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SnabyAnimation_Mtrl", material);
+
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 
 		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Mouse_Tex", L"..\\Resources\\Texture\\UI\\Mouse.png");
-		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material = std::make_shared<Material>();
 		material->SetShader(spriteShader);
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Mouse_Mtrl", material);
 
-		texture
-			= Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
-
+		texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
 		material = std::make_shared<Material>();
 		material->SetShader(spriteShader);
 		material->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", material);
-
-		std::shared_ptr<Shader> animationShader
-			= Resources::Find<Shader>(L"SpriteAnimationShader");
-		material = std::make_shared<Material>();
-		material->SetShader(animationShader);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"SpriteAnimaionMaterial", material);
 
 		texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
 		material = std::make_shared<Material>();
@@ -400,12 +391,6 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", material);
 
-		std::shared_ptr<Shader> gridShader
-			= Resources::Find<Shader>(L"GridShader");
-
-		material = std::make_shared<Material>();
-		material->SetShader(gridShader);
-		Resources::Insert(L"GridMaterial", material);
 
 		std::shared_ptr<Shader> debugShader
 			= Resources::Find<Shader>(L"DebugShader");

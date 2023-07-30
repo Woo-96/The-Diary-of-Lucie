@@ -24,17 +24,12 @@ namespace renderer
 		Matrix mProjection;
 	};
 
-	CBUFFER(GridCB, CBSLOT_GRID)
+	CBUFFER(MaterialCB, CBSLOT_Material)
 	{
-		Vector4 CameraPosition;
-		Vector2 CameraScale;
-		Vector2 Resolution;
-	};
-
-	CBUFFER(NumberCB, CBSLOT_NUMBER)
-	{
-		Vector2 vLtUV;
-		Vector2 vSliceUV;
+		int		arrInt[4];
+		float	arrFloat[4];
+		Vector2 arrV2[4];
+		Vector4 arrV4[4];
 	};
 
 	CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
@@ -46,12 +41,6 @@ namespace renderer
 		UINT	AnimationType;
 		UINT	Reverse;
 		UINT	Padding[2];
-	};
-
-	CBUFFER(ButtonCB, CBSLOT_NUMBER)
-	{
-		Vector2 vLtUV;
-		Vector2 vSliceUV;
 	};
 
 	extern Lu::graphics::ConstantBuffer*					constantBuffer[(UINT)eCBType::End];

@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Lucie_Engine.cpp" />
-    <ClCompile Include="Lu_GridScript.cpp">
-      <Filter>Contents\Script\Grid</Filter>
-    </ClCompile>
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp">
       <Filter>Contents\Script\Camera</Filter>
     </ClCompile>
@@ -113,9 +110,6 @@
     <ClCompile Include="Lu_SnabyScript.cpp">
       <Filter>Contents\Script\Monster\Snaby</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_HitState.cpp">
-      <Filter>Contents\Script\Player\FSM\Hit</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_BowProjectile.cpp">
       <Filter>Contents\Script\Player\Projectile\Bow</Filter>
     </ClCompile>
@@ -148,9 +142,6 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h">
       <Filter>Contents\Load</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_GridScript.h">
-      <Filter>Contents\Script\Grid</Filter>
     </ClInclude>
     <ClInclude Include="..\Engine_SOURCE\Lu_CameraScript.h">
       <Filter>Contents\Script\Camera</Filter>
@@ -260,9 +251,6 @@
     <ClInclude Include="Lu_SnabyScript.h">
       <Filter>Contents\Script\Monster\Snaby</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_HitState.h">
-      <Filter>Contents\Script\Player\FSM\Hit</Filter>
-    </ClInclude>
     <ClInclude Include="Lu_BowProjectile.h">
       <Filter>Contents\Script\Player\Projectile\Bow</Filter>
     </ClInclude>
@@ -348,9 +336,6 @@
     </Filter>
     <Filter Include="Contents\Script\Camera">
       <UniqueIdentifier>{2c671ee4-1313-4100-9397-7f7b1a1cac5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Grid">
-      <UniqueIdentifier>{a62faa5e-a96d-466a-836f-1505a6ed6cc3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\UI">
       <UniqueIdentifier>{a94603e6-5f95-4a53-ab4a-d4f46950a7bb}</UniqueIdentifier>
@@ -444,9 +429,6 @@
     </Filter>
     <Filter Include="Contents\Script\Player\FSM\Dash">
       <UniqueIdentifier>{6b783da7-5bab-43d3-8800-87262ee6dbce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Player\FSM\Hit">
-      <UniqueIdentifier>{1b964b24-6e76-4c5e-a81c-e989a417894f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\Monster\Snaby\SnabyProjectile">
       <UniqueIdentifier>{c8f1a89d-13a2-4201-8afe-f1aac4ebdbea}</UniqueIdentifier>

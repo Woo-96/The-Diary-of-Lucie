@@ -14,6 +14,8 @@ struct VSOut
     float2 UV : TEXCOORD;
 };
 
+#define bINVINCIBLE     g_int_3
+#define BLINK           g_float_3
 
 float4 main(VSOut In) : SV_TARGET
 {
@@ -27,12 +29,18 @@ float4 main(VSOut In) : SV_TARGET
         float2 diff = (AtlasSize - SpriteSize) / 2.0f;
         float2 UV = (SpriteLeftTop - diff - SpriteOffset)
                 + (AtlasSize * In.UV);
-    
+   
         if (UV.x < SpriteLeftTop.x || UV.x > SpriteLeftTop.x + SpriteSize.x
             || UV.y < SpriteLeftTop.y || UV.y > SpriteLeftTop.y + SpriteSize.y)
             discard;
         
-        color = atlasTexture.Sample(pointSampler, UV);
+        if (bINVINCIBLE)
+        {
+            color = atlasTexture.Sample(pointSampler, UV);
+            color.a *= BLINK;
+        }
+        else
+            color = atlasTexture.Sample(pointSampler, UV);
     }
     else
     {

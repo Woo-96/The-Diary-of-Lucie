@@ -5,12 +5,13 @@
 #include "Lu_Resources.h"
 #include "Lu_Renderer.h"
 #include "Lu_Camera.h"
+#include "Lu_Time.h"
+#include "Lu_MeshRenderer.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
 #include "Lu_DashState.h"
 #include "Lu_AttackState.h"
-#include "Lu_HitState.h"
 #include "Lu_DeadState.h"
 
 namespace Lu
@@ -23,6 +24,8 @@ namespace Lu
 		, m_MoveType(eMoveType::Walk)
 		, m_CurWeapon(eWeaponType::None)
 		, m_bAction(false)
+		, m_bInvincible(false)
+		, m_BlinkTime(0.f)
 		, m_Animator(nullptr)
 	{
 		SetName(L"PlayerScript");
@@ -48,7 +51,6 @@ namespace Lu
 		AddState(new MoveState);
 		AddState(new DashState);
 		AddState(new AttackState);
-		AddState(new HitState);
 		AddState(new DeadState);
 
 		m_CurState = GetStateScript(StateScript::eState::Idle);
@@ -62,6 +64,37 @@ namespace Lu
 		if (GetOwner()->IsDead())
 			return;
 
+		if (m_bInvincible)
+		{
+			m_BlinkTime -= (float)Time::DeltaTime();
+
+			if (m_BlinkTime >= 0.f && ((int)(m_BlinkTime * 10) % 2) == 0)
+			{
+				int bInvincible = m_bInvincible;
+				float fAlpha = 0.3f;
+				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
+				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+			}
+			else
+			{
+				int bInvincible = m_bInvincible;
+				float fAlpha = 1.f;
+				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
+				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+			}
+
+			if (m_BlinkTime <= 0.f)
+			{
+				m_bInvincible = false;
+				m_BlinkTime = 0.f;
+				
+				int bInvincible = m_bInvincible;
+				float fAlpha = 1.f;
+				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
+				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+			}
+		}
+
 		StateUpdate();
  		m_CurState->Update();
 		AnimationUpdate();
@@ -74,11 +107,19 @@ namespace Lu
 		if (StateScript::eState::Dead == m_CurState->GetStateType())
 			return;
 
-		ChangeState(StateScript::eState::Hit);
+		m_PlayerInfo.HP -= 1;
 
-		if (m_PlayerInfo.HP <= 0.f)
+		if (m_PlayerInfo.HP <= 0)
 		{
+			m_PlayerInfo.HP = 0;
+			m_bInvincible = false;
+			m_BlinkTime = 0.f;
 			ChangeState(StateScript::eState::Dead);
+		}
+		else
+		{
+			m_bInvincible = true;
+			m_BlinkTime = 1.5f;
 		}
 	}
 

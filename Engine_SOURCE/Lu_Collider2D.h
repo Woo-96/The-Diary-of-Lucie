@@ -20,6 +20,8 @@ namespace Lu
 		Vector2			m_Size;
 		Vector2			m_Center;
 
+		int             m_CollisionCount;
+
 	public:
 		void SetType(eColliderType _Type) 
 		{ 

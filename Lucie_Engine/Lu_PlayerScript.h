@@ -57,6 +57,8 @@ namespace Lu
 		tPlayerInfo			m_PlayerInfo;
 
 		bool				m_bAction;
+		bool				m_bInvincible;
+		float				m_BlinkTime;
 
 		Animator*			m_Animator;
 

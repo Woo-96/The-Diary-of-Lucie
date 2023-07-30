@@ -5,8 +5,6 @@
 #include "..\\Engine_SOURCE\\Lu_MeshRenderer.h"
 #include "..\\Engine_SOURCE\\Lu_Material.h"
 #include "..\\Engine_SOURCE\\Lu_Renderer.h"
-#include "..\\Lucie_Engine\\Lu_GridScript.h"
-#include "Lu_GridScript.h"
 
 namespace gui
 {
@@ -40,27 +38,15 @@ namespace gui
 		mr = m_DebugOjbects[(UINT)eColliderType::Circle]->AddComponent<Lu::MeshRenderer>();
 		mr->SetMaterial(material);
 		mr->SetMesh(mesh);
-
-
-		// Grid
-		//EditorObject* grid = new EditorObject();
-		//grid->SetName(L"Grid");
-
-		//mr = grid->AddComponent<Lu::MeshRenderer>();
-		//mr->SetMesh(Lu::Resources::Find<Lu::Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Lu::Resources::Find<Lu::Material>(L"GridMaterial"));
-		//Lu::GridScript* gridSc = grid->AddComponent<Lu::GridScript>();
-		//gridSc->SetCamera(renderer::cameras[0]);
-
-		//m_EditorObjects.push_back(grid);
-
 	}
+
 	void Editor::Run()
 	{
 		Update();
 		LateUpdate();
 		Render();
 	}
+
 	void Editor::Update()
 	{
 		for (EditorObject* obj : m_EditorObjects)
@@ -68,6 +54,7 @@ namespace gui
 			obj->Update();
 		}
 	}
+
 	void Editor::LateUpdate()
 	{
 		for (EditorObject* obj : m_EditorObjects)
@@ -75,6 +62,7 @@ namespace gui
 			obj->LateUpdate();
 		}
 	}
+
 	void Editor::Render()
 	{
 		for (EditorObject* obj : m_EditorObjects)
@@ -90,6 +78,7 @@ namespace gui
 
 		renderer::debugMeshs.clear();
 	}
+
 	void Editor::Release()
 	{
 		for (auto widget : m_Widgets)
@@ -127,6 +116,9 @@ namespace gui
 		tr->SetRotation(_Mesh.Rotation);
 
 		tr->LateUpdate();
+
+		Lu::MeshRenderer* mr = debugObj->GetComponent<Lu::MeshRenderer>();
+		mr->GetMaterial()->SetScalarParam(VEC4_0, &_Mesh.Color);
 
 		/*ya::MeshRenderer * mr
 			= debugObj->GetComponent<ya::MeshRenderer>();*/

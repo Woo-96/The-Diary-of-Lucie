@@ -41,7 +41,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
 
 			Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);

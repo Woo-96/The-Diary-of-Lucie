@@ -8,20 +8,7 @@ cbuffer Transform : register(b0)
     row_major matrix ProjectionMatrix;
 }
 
-cbuffer Grid : register(b2)
-{
-    float4 CameraPosition;
-    float2 CameraScale;
-    float2 Resolution;
-}
-
-cbuffer Number : register(b3)
-{
-    float2 vLtUV;
-    float2 vSliceUV;
-}
-
-cbuffer Animator : register(b4)
+cbuffer Animator : register(b2)
 {
     float2  SpriteLeftTop;
     float2  SpriteSize;
@@ -30,6 +17,29 @@ cbuffer Animator : register(b4)
     uint    AnimationType;
     uint    Reverse;
     uint2   Padding;
+}
+
+cbuffer Material : register(b1)
+{
+    int g_int_0;
+    int g_int_1;
+    int g_int_2;
+    int g_int_3;
+    
+    float g_float_0;
+    float g_float_1;
+    float g_float_2;
+    float g_float_3;
+    
+    float2 g_vec2_0;
+    float2 g_vec2_1;
+    float2 g_vec2_2;
+    float2 g_vec2_3;
+
+    float4 g_vec4_0;
+    float4 g_vec4_1;
+    float4 g_vec4_2;
+    float4 g_vec4_3;
 }
 
 // =============

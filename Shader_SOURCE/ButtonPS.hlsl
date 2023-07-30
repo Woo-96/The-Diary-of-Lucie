@@ -10,7 +10,7 @@ float4 main(VSOut _In) : SV_TARGET
 {
     float4 vOutColor = float4(1.0f, 0.f, 1.0f, 1.0f);
     
-    float2 vUV = vLtUV + (vSliceUV * _In.vUV);
+    float2 vUV = g_vec2_0 + (g_vec2_1 * _In.vUV);
     
     vOutColor = albedoTexture.Sample(anisotropicSampler, vUV);
     

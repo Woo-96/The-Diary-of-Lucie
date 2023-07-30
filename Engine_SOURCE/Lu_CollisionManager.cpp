@@ -11,10 +11,6 @@ namespace Lu
 	std::bitset<LAYER_MAX> CollisionManager::m_Matrix[LAYER_MAX] = {};
 	std::map<UINT64, bool> CollisionManager::m_CollisionMap = {};
 
-	void CollisionManager::Initialize()
-	{
-	}
-
 	void CollisionManager::Update()
 	{
 		for (UINT column = 0; column < (UINT)eLayerType::End; column++)
@@ -73,29 +69,45 @@ namespace Lu
 			iter = m_CollisionMap.find(id.id);
 		}
 
+		// 둘 중 하나라도 삭제 예정 상태라면(Dead 상태)
+		bool bDead = false;
+		if (_Left->GetOwner()->IsDead() || _Right->GetOwner()->IsDead())
+		{
+			bDead = true;
+		}
+
+		// 두 충돌체가 지금 충돌 중인지 확인
 		if (Intersect(_Left, _Right))
 		{
-			// 충돌
-			if (iter->second == false)
+			// 이전에 충돌한 적이 있고, 둘중 하나 이상이 삭제 예정이라면
+			if (bDead && iter->second)
 			{
-				//최초 충돌
-				_Left->OnCollisionEnter(_Right);
-				_Right->OnCollisionEnter(_Left);
-				iter->second = true;
+				_Left->OnCollisionExit(_Right);
+				_Right->OnCollisionExit(_Left);
 			}
-			else
+			else if (iter->second)
 			{
-				// 충돌 중
+				// 계속 충돌 중
 				_Left->OnCollisionStay(_Right);
 				_Right->OnCollisionStay(_Left);
 			}
+			else
+			{
+				// 이번 프레임에 충돌
+				if (!bDead) // 둘중 하나라도 Dead 상태면 충돌을 무시한다.
+				{
+					_Left->OnCollisionEnter(_Right);
+					_Right->OnCollisionEnter(_Left);
+					iter->second = true;
+				}
+			}
 		}
+
 		else
 		{
-			// 충돌 X
-			if (iter->second == true)
+			// 충돌 해제
+			if (iter->second)
 			{
-				// 충돌하고 있다가 나갈떄
 				_Left->OnCollisionExit(_Right);
 				_Right->OnCollisionExit(_Left);
 				iter->second = false;
@@ -181,26 +193,7 @@ namespace Lu
 			float distance = Vector3::Distance(centerLeft, centerRight);
 
 			Transform* LeftTransform = _Left->GetOwner()->GetComponent<Transform>();
-
-			//Vector3 scale = LeftTransform->GetScale();
-			//scale.x *= _Left->GetSize().x;
-			//scale.y *= _Left->GetSize().y;
-
-			//Vector3 centerLeft = LeftTransform->GetPosition();
-			//centerLeft.x += _Left->GetCenter().x;
-			//centerLeft.y += _Left->GetCenter().y;
-
 			Transform* RightTransform = _Right->GetOwner()->GetComponent<Transform>();
-
-			//scale = RightTransform->GetScale();
-			//scale.x *= _Right->GetSize().x;
-			//scale.y *= _Right->GetSize().y;
-
-			//Vector3 centerRight = RightTransform->GetPosition();
-			//centerRight.x += _Right->GetCenter().x;
-			//centerRight.y += _Right->GetCenter().y;
-
-			//float distance = Vector3::Distance(centerLeft, centerRight);
 
 			// 반지름
 			float radiusLeft = (LeftTransform->GetScale().x * _Left->GetSize().x) / 2.f;

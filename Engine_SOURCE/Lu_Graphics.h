@@ -13,10 +13,8 @@
 #define CBUFFER(name, slot) static const int CB_GETBINDSLOT(name) = slot; struct alignas(16) name 
 
 #define CBSLOT_TRANSFORM		0
-#define CBSLOT_PARTICLE			1
-#define CBSLOT_GRID				2
-#define	CBSLOT_NUMBER			3
-#define CBSLOT_ANIMATION2D		4
+#define CBSLOT_Material			1
+#define CBSLOT_ANIMATION2D		2
 
 namespace Lu::graphics
 {
@@ -35,10 +33,7 @@ namespace Lu::graphics
 	{
 		Transform,
 		Material,
-		Grid,
-		Number,
 		Animator,
-		Button,
 		End,
 	};
 
@@ -107,5 +102,39 @@ namespace Lu::graphics
 		float					Radius;
 		float					Duration;
 		float					Time;
+		math::Vector4			Color;
+	};
+
+	struct tMtrlConst
+	{
+		int				arrInt[4];
+		float			arrFloat[4];
+		math::Vector2	arrV2[4];
+		math::Vector4	arrV4[4];
+	};
+
+	enum SCALAR_PARAM
+	{
+		INT_0,
+		INT_1,
+		INT_2,
+		INT_3,
+
+		FLOAT_0,
+		FLOAT_1,
+		FLOAT_2,
+		FLOAT_3,
+
+		VEC2_0,
+		VEC2_1,
+		VEC2_2,
+		VEC2_3,
+
+		VEC4_0,
+		VEC4_1,
+		VEC4_2,
+		VEC4_3,
+
+		SCALAR_END,
 	};
 }

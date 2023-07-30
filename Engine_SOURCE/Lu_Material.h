@@ -14,8 +14,9 @@ namespace Lu::graphics
 	private:
 		std::shared_ptr<Shader>		m_Shader;
 		std::shared_ptr<Texture>	m_Texture;
-
 		eRenderingMode				m_Mode;
+
+		tMtrlConst                  m_Const;
 
 	public:
 		void SetShader(std::shared_ptr<Shader> _Shader)
@@ -33,11 +34,15 @@ namespace Lu::graphics
 			m_Mode = _Mode; 
 		}
 
+		void SetScalarParam(SCALAR_PARAM _Param, const void* _Src);
+
 	public:
 		eRenderingMode GetRenderingMode() 
 		{ 
 			return m_Mode;
 		}
+
+		void GetScalarParam(SCALAR_PARAM _param, void* _pData);
 
 	public:
 		void Binds();
