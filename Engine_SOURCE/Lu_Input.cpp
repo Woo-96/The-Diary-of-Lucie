@@ -31,7 +31,7 @@ namespace Lu
 			m_Keys.push_back(keyInfo);
 		}
 
-		//ShowCursor(FALSE);
+		ShowCursor(FALSE);
 	}
 
 	void Input::Update()

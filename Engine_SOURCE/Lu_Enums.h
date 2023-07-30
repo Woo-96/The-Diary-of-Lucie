@@ -19,6 +19,7 @@ namespace Lu::enums
 	{
 		Default,
 		BackGround,
+		Immovable,
 		Monster,
 		Player,
 		MonsterProjectile,

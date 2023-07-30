@@ -3,8 +3,7 @@
 #include "Lu_Renderer.h"
 
 // 테스트용
-#include "Lu_Object.h"
-#include "Lu_Time.h"
+#include "Lu_Input.h"
 
 namespace Lu
 {
@@ -16,6 +15,7 @@ namespace Lu
 		, m_Size(Vector2::One)
 		, m_Center(Vector2::Zero)
 		, m_CollisionCount(0)
+		, m_bRender(true)
 	{
 		SetName(L"Collier2D");
 		m_ColliderNumber++;
@@ -25,6 +25,17 @@ namespace Lu
 	Collider2D::~Collider2D()
 	{
 
+	}
+
+	void Collider2D::Update()
+	{
+		if (Input::GetKeyDown(eKeyCode::K))
+		{
+			if (m_bRender)
+				m_bRender = false;
+			else
+				m_bRender = true;
+		}
 	}
 
 	void Collider2D::LateUpdate()
@@ -57,7 +68,8 @@ namespace Lu
 
 		mesh.Color = vColor;
 
-		renderer::PushDebugMeshAttribute(mesh);
+		if(m_bRender)
+			renderer::PushDebugMeshAttribute(mesh);
 	}
 
 	void Collider2D::OnCollisionEnter(Collider2D* _Other)

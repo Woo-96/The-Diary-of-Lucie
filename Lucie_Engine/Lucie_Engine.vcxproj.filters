@@ -137,6 +137,9 @@
     <ClCompile Include="Lu_MonsterScript.cpp">
       <Filter>Contents\Script\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_ImmovableScript.cpp">
+      <Filter>Contents\Script\Immovable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -280,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="Lu_MonsterScript.h">
       <Filter>Contents\Script\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ImmovableScript.h">
+      <Filter>Contents\Script\Immovable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -432,6 +438,9 @@
     </Filter>
     <Filter Include="Contents\Script\Monster\Snaby\SnabyProjectile">
       <UniqueIdentifier>{c8f1a89d-13a2-4201-8afe-f1aac4ebdbea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Immovable">
+      <UniqueIdentifier>{4f7c3805-3e93-43be-ae7b-30a12e18cadd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

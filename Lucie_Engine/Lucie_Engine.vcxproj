@@ -173,6 +173,7 @@
     <ClInclude Include="Lu_Gold.h" />
     <ClInclude Include="Lu_HP.h" />
     <ClInclude Include="Lu_IdleState.h" />
+    <ClInclude Include="Lu_ImmovableScript.h" />
     <ClInclude Include="Lu_Inventory.h" />
     <ClInclude Include="Lu_Layout.h" />
     <ClInclude Include="Lu_LobbyScene.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Lu_Gold.cpp" />
     <ClCompile Include="Lu_HP.cpp" />
     <ClCompile Include="Lu_IdleState.cpp" />
+    <ClCompile Include="Lu_ImmovableScript.cpp" />
     <ClCompile Include="Lu_Inventory.cpp" />
     <ClCompile Include="Lu_Layout.cpp" />
     <ClCompile Include="Lu_LobbyScene.cpp" />

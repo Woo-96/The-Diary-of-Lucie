@@ -22,6 +22,8 @@ namespace Lu
 
 		int             m_CollisionCount;
 
+		bool			m_bRender;
+
 	public:
 		void SetType(eColliderType _Type) 
 		{ 
@@ -65,6 +67,7 @@ namespace Lu
 		}
 
 	public:
+		virtual void Update() override;
 		virtual void LateUpdate() override;
 
 	public:

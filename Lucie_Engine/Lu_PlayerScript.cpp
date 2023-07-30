@@ -107,6 +107,10 @@ namespace Lu
 		if (StateScript::eState::Dead == m_CurState->GetStateType())
 			return;
 
+		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
+			return;
+
+		// Hit & Dead
 		m_PlayerInfo.HP -= 1;
 
 		if (m_PlayerInfo.HP <= 0)
@@ -125,10 +129,14 @@ namespace Lu
 
 	void PlayerScript::OnCollisionStay(Collider2D* _Other)
 	{
+		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
+			return;
 	}
 
 	void PlayerScript::OnCollisionExit(Collider2D* _Other)
 	{
+		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
+			return;
 	}
 
 	void PlayerScript::CreatePlayerAnimation()
