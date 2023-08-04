@@ -25,7 +25,8 @@ namespace Lu
 		, m_CurWeapon(eWeaponType::None)
 		, m_bAction(false)
 		, m_bInvincible(false)
-		, m_BlinkTime(0.f)
+		, m_bHitEffect(false)
+		, m_InvincibleTime(0.f)
 		, m_Animator(nullptr)
 	{
 		SetName(L"PlayerScript");
@@ -66,32 +67,40 @@ namespace Lu
 
 		if (m_bInvincible)
 		{
-			m_BlinkTime -= (float)Time::DeltaTime();
+			m_InvincibleTime -= (float)Time::DeltaTime();
 
-			if (m_BlinkTime >= 0.f && ((int)(m_BlinkTime * 10) % 2) == 0)
+			if (m_bHitEffect)
 			{
-				int bInvincible = m_bInvincible;
-				float fAlpha = 0.3f;
-				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
-				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
-			}
-			else
-			{
-				int bInvincible = m_bInvincible;
-				float fAlpha = 1.f;
-				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
-				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+				if (m_InvincibleTime >= 0.f && ((int)(m_InvincibleTime * 10) % 2) == 0)
+				{
+					int bInvincible = m_bInvincible;
+					float fAlpha = 0.3f;
+					GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
+					GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+				}
+				else
+				{
+					int bInvincible = m_bInvincible;
+					float fAlpha = 1.f;
+					GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
+					GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+				}
 			}
 
-			if (m_BlinkTime <= 0.f)
+			if (m_InvincibleTime <= 0.f)
 			{
 				m_bInvincible = false;
-				m_BlinkTime = 0.f;
+				m_InvincibleTime = 0.f;
 				
-				int bInvincible = m_bInvincible;
-				float fAlpha = 1.f;
-				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
-				GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+				if (m_bHitEffect)
+				{
+					int bInvincible = m_bInvincible;
+					float fAlpha = 1.f;
+					GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_3, &bInvincible);
+					GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
+
+					m_bHitEffect = false;
+				}
 			}
 		}
 
@@ -111,19 +120,24 @@ namespace Lu
 			return;
 
 		// Hit & Dead
-		m_PlayerInfo.HP -= 1;
+		if (!m_bInvincible)
+		{
+			m_PlayerInfo.HP -= 1;
 
-		if (m_PlayerInfo.HP <= 0)
-		{
-			m_PlayerInfo.HP = 0;
-			m_bInvincible = false;
-			m_BlinkTime = 0.f;
-			ChangeState(StateScript::eState::Dead);
-		}
-		else
-		{
-			m_bInvincible = true;
-			m_BlinkTime = 1.5f;
+			if (m_PlayerInfo.HP <= 0)
+			{
+				m_PlayerInfo.HP = 0;
+				m_bInvincible = false;
+				m_bHitEffect = false;
+				m_InvincibleTime = 0.f;
+				ChangeState(StateScript::eState::Dead);
+			}
+			else
+			{
+				m_bInvincible = true;
+				m_bHitEffect = true;
+				m_InvincibleTime = 1.f;		// 피격 무적
+			}
 		}
 	}
 
@@ -131,6 +145,27 @@ namespace Lu
 	{
 		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
 			return;
+
+		// Hit & Dead
+		if (!m_bInvincible)
+		{
+			m_PlayerInfo.HP -= 1;
+
+			if (m_PlayerInfo.HP <= 0)
+			{
+				m_PlayerInfo.HP = 0;
+				m_bInvincible = false;
+				m_bHitEffect = false;
+				m_InvincibleTime = 0.f;
+				ChangeState(StateScript::eState::Dead);
+			}
+			else
+			{
+				m_bInvincible = true;
+				m_bHitEffect = true;
+				m_InvincibleTime = 1.f;
+			}
+		}
 	}
 
 	void PlayerScript::OnCollisionExit(Collider2D* _Other)
@@ -284,6 +319,8 @@ namespace Lu
 		{
 			m_PrevDir = m_Dir;
 			m_Dir = CalDirToMouse();
+			m_bInvincible = true;
+			m_InvincibleTime = 0.6f;
 			ChangeState(StateScript::eState::Dash);
 		}
 
@@ -295,75 +332,78 @@ namespace Lu
 			ChangeState(StateScript::eState::Attack);
 		}
 
-		// 이동
-		if (Input::GetKey(eKeyCode::A)
-			&& Input::GetKey(eKeyCode::D))
+		if (!m_bAction)
 		{
-			ChangeState(StateScript::eState::Idle);
-		}
-		else if (Input::GetKey(eKeyCode::W)
-			&& Input::GetKey(eKeyCode::S))
-		{
-			ChangeState(StateScript::eState::Idle);
-		}
-		else if (Input::GetKey(eKeyCode::A)
-			&& Input::GetKey(eKeyCode::W))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::LeftUp;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::A)
-			&& Input::GetKey(eKeyCode::S))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::LeftDown;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::D)
-			&& Input::GetKey(eKeyCode::S))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::RightDown;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::D)
-			&& Input::GetKey(eKeyCode::W))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::RightUp;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::A))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::Left;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::D))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::Right;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::S))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::Down;
-			ChangeState(StateScript::eState::Move);
-		}
-		else if (Input::GetKey(eKeyCode::W))
-		{
-			m_PrevDir = m_Dir;
-			m_Dir = eDir::Up;
-			ChangeState(StateScript::eState::Move);
-		}
-		else
-		{
-			if (m_bAction || StateScript::eState::Dead == eCurState)
-				return;
+			// 이동
+			if (Input::GetKey(eKeyCode::A)
+				&& Input::GetKey(eKeyCode::D))
+			{
+				ChangeState(StateScript::eState::Idle);
+			}
+			else if (Input::GetKey(eKeyCode::W)
+				&& Input::GetKey(eKeyCode::S))
+			{
+				ChangeState(StateScript::eState::Idle);
+			}
+			else if (Input::GetKey(eKeyCode::A)
+				&& Input::GetKey(eKeyCode::W))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::LeftUp;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::A)
+				&& Input::GetKey(eKeyCode::S))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::LeftDown;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::D)
+				&& Input::GetKey(eKeyCode::S))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::RightDown;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::D)
+				&& Input::GetKey(eKeyCode::W))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::RightUp;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::A))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::Left;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::D))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::Right;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::S))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::Down;
+				ChangeState(StateScript::eState::Move);
+			}
+			else if (Input::GetKey(eKeyCode::W))
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = eDir::Up;
+				ChangeState(StateScript::eState::Move);
+			}
+			else
+			{
+				if (m_bAction || StateScript::eState::Dead == eCurState)
+					return;
 
-			ChangeState(StateScript::eState::Idle);
+				ChangeState(StateScript::eState::Idle);
+			}
 		}
 	}
 

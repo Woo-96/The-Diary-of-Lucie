@@ -48,14 +48,13 @@ float4 main(VSOut In) : SV_TARGET
         color = albedoTexture.Sample(anisotropicSampler, In.UV);
     }
     
-    // 아직 라이팅 안써서 1로 초기화
-    float4 lightColor = float4(1.f, 1.f, 1.f, 1.f);
+    //float4 lightColor = float4(1.f, 1.f, 1.f, 1.f);
     
-    for (int i = 0; i < 2; i++)
-    {
-        CalculateLight2D(lightColor, In.WorldPos, i);
-    }
+    //for (int i = 0; i < 2; i++)
+    //{
+    //    CalculateLight2D(lightColor, In.WorldPos, i);
+    //}
     
-    color *= lightColor;
+    //color *= lightColor;
     return color;
 }

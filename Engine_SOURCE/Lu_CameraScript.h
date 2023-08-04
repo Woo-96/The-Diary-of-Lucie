@@ -35,5 +35,6 @@ namespace Lu
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
+		virtual void LateUpdate() override;
 	};
 }

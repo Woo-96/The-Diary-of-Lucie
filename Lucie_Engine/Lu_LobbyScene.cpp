@@ -62,9 +62,9 @@ namespace Lu
 			Animator* pAnimator = pPlayer->AddComponent<Animator>();
 			pPlayer->AddComponent<PlayerScript>();
 
-			//CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
-			//pMainCamScript->SetTarget(pPlayer);
-			//pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
+			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+			pMainCamScript->SetTarget(pPlayer);
+			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
 		}
 
 		// Ã¥»ó

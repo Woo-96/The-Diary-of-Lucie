@@ -33,7 +33,7 @@ namespace Lu
 			int HP;
 
 			tPlayerInfo()
-				: HP(3)
+				: HP(2)
 			{
 
 			}
@@ -58,7 +58,8 @@ namespace Lu
 
 		bool				m_bAction;
 		bool				m_bInvincible;
-		float				m_BlinkTime;
+		bool				m_bHitEffect;
+		float				m_InvincibleTime;
 
 		Animator*			m_Animator;
 
