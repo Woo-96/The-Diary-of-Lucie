@@ -18,7 +18,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Light2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Object.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lucie_Engine.h" />
@@ -36,6 +38,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Math.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Mesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_PaintShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resources.h" />
@@ -43,6 +47,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Script.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Shader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_StructedBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Texture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Time.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Transform.h" />
@@ -55,16 +60,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Component.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Layer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Light2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Material.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Math.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Mesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_PaintShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resources.cpp" />
@@ -72,6 +81,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Script.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Shader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_StructedBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Texture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Time.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Transform.cpp" />

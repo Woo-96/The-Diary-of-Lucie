@@ -64,6 +64,11 @@ namespace Lu
 		GetDevice()->DrawIndexed(m_IndexCount, 0, 0);
 	}
 
+	void Mesh::RenderInstanced(UINT _StartIndexLocation)
+	{
+		GetDevice()->DrawIndexedInstanced(m_IndexCount, _StartIndexLocation, 0, 0, 0);
+	}
+
 	HRESULT Mesh::Load(const std::wstring& _Path)
 	{
 		return E_NOTIMPL;

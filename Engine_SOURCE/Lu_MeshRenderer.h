@@ -26,9 +26,15 @@ namespace Lu
 			m_Material = _Material;
 		}
 
+	public:
 		std::shared_ptr<Material> GetMaterial() 
 		{ 
 			return m_Material; 
+		}
+
+		std::shared_ptr<Mesh> GetMesh() 
+		{ 
+			return m_Mesh;
 		}
 
 	public:

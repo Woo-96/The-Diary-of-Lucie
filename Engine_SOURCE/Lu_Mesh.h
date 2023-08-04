@@ -33,6 +33,7 @@ namespace Lu
 
 		void BindBuffer();
 		void Render();
+		void RenderInstanced(UINT _StartIndexLocation);
 
 	public:
 		virtual HRESULT Load(const std::wstring& _Path) override;

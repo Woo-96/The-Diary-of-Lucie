@@ -95,7 +95,7 @@ namespace Lu::graphics
 	void Material::Binds()
 	{
 		if (m_Texture)
-			m_Texture->BindShader(eShaderStage::PS, 0);
+			m_Texture->BindShaderResource(eShaderStage::PS, 0);
 
 		if (m_Shader)
 			m_Shader->Binds();

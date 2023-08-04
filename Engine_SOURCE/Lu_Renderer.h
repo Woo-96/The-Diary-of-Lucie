@@ -5,6 +5,7 @@
 #include "Lu_Shader.h"
 #include "Lu_ConstantBuffer.h"
 #include "Lu_Camera.h"
+#include "Lu_Light2D.h"
 
 using namespace Lu::math;
 using namespace Lu::graphics;
@@ -43,6 +44,14 @@ namespace renderer
 		UINT	Padding[2];
 	};
 
+	//CBUFFER(ParticleCB, CBSLOT_PARTICLE)
+	//{
+	//	UINT elementCount;
+	//	float elpasedTime;
+	//	int padd;
+	//	int padd2;
+	//};
+
 	extern Lu::graphics::ConstantBuffer*					constantBuffer[(UINT)eCBType::End];
 
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState>		samplerState[];
@@ -50,11 +59,13 @@ namespace renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState>	depthStencilStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState>			blendStates[];
 
+	extern std::vector<Lu::Light2D*>						lights;
 	extern Lu::Camera*										mainCamera;
 	extern std::vector<Lu::Camera*>							cameras;
 	extern std::vector<DebugMesh>							debugMeshs;
 
 	void Initialize();
+	void BindLights();
 	void Render();
 	void Release();
 

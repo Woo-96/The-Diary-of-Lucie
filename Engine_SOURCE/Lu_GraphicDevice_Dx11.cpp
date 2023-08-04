@@ -38,13 +38,28 @@ namespace Lu::graphics
 			return;
 
 		// SwapChain으로부터 RT 얻어오기
+		//if (FAILED(m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D)
+		//	, (void**)m_RenderTarget.GetAddressOf())))
+		//	return;
+
+		m_RenderTarget = std::make_shared<Texture>();
+		m_DepthStencil = std::make_shared<Texture>();
+
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> renderTarget = nullptr;
 		if (FAILED(m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D)
-			, (void**)m_RenderTarget.GetAddressOf())))
+			, (void**)renderTarget.GetAddressOf())))
 			return;
+		m_RenderTarget->SetTexture(renderTarget);
 
 		// RT View 생성
-		m_Device->CreateRenderTargetView((ID3D11Resource*)m_RenderTarget.Get()
-			, nullptr, m_RenderTargetView.GetAddressOf());
+		//m_Device->CreateRenderTargetView((ID3D11Resource*)m_RenderTarget.Get()
+		//	, nullptr, m_RenderTargetView.GetAddressOf());
+
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView = nullptr;
+		m_Device->CreateRenderTargetView((ID3D11Resource*)m_RenderTarget->GetTexture().Get()
+			, nullptr, renderTargetView.GetAddressOf());
+		m_RenderTarget->SetRTV(renderTargetView);
+
 
 		// CreateTexture 함수에서 DS, DS View 생성
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
@@ -63,9 +78,19 @@ namespace Lu::graphics
 		depthStencilDesc.MipLevels = 0;
 		depthStencilDesc.MiscFlags = 0;
 
-		D3D11_SUBRESOURCE_DATA data;
-		if (!CreateTexture(&depthStencilDesc, &data))
+		//D3D11_SUBRESOURCE_DATA data;
+		//if (!CreateTexture(&depthStencilDesc, &data))
+		//	return;
+
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer = nullptr;
+		if (!CreateTexture2D(&depthStencilDesc, nullptr, depthStencilBuffer.GetAddressOf()))
 			return;
+		m_DepthStencil->SetTexture(depthStencilBuffer);
+
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView = nullptr;
+		if (!CraeteDepthStencilView(depthStencilBuffer.Get(), nullptr, mDepthStencilView.GetAddressOf()))
+			return;
+		m_DepthStencil->SetDSV(mDepthStencilView);
 
 
 		RECT winRect = {};
@@ -81,9 +106,10 @@ namespace Lu::graphics
 
 		BindViewPort(&m_ViewPort);
 
-		// OM Set : 출력 대상(RT) 설정
-		m_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
-	}
+		//// OM Set : 출력 대상(RT) 설정
+		//m_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+		m_Context->OMSetRenderTargets(1, m_RenderTarget->GetRTV().GetAddressOf(), m_DepthStencil->GetDSV().Get());
+}
 
 	GraphicDevice_Dx11::~GraphicDevice_Dx11()
 	{
@@ -130,28 +156,33 @@ namespace Lu::graphics
 		return true;
 	}
 
-	bool GraphicDevice_Dx11::CreateTexture(const D3D11_TEXTURE2D_DESC* _Desc, void* _Data)
+	bool GraphicDevice_Dx11::CreateTexture2D(const D3D11_TEXTURE2D_DESC* _Desc, void* _Data, ID3D11Texture2D** _ppTexture2D)
 	{
-		D3D11_TEXTURE2D_DESC dxgiDesc = {};
-		dxgiDesc.BindFlags = _Desc->BindFlags;
-		dxgiDesc.Usage = _Desc->Usage;
-		dxgiDesc.CPUAccessFlags = 0;
+		//D3D11_TEXTURE2D_DESC dxgiDesc = {};
+		//dxgiDesc.BindFlags = _Desc->BindFlags;
+		//dxgiDesc.Usage = _Desc->Usage;
+		//dxgiDesc.CPUAccessFlags = 0;
 
-		dxgiDesc.Format = _Desc->Format;
-		dxgiDesc.Width = _Desc->Width;
-		dxgiDesc.Height = _Desc->Height;
-		dxgiDesc.ArraySize = _Desc->ArraySize;
+		//dxgiDesc.Format = _Desc->Format;
+		//dxgiDesc.Width = _Desc->Width;
+		//dxgiDesc.Height = _Desc->Height;
+		//dxgiDesc.ArraySize = _Desc->ArraySize;
 
-		dxgiDesc.SampleDesc.Count = _Desc->SampleDesc.Count;
-		dxgiDesc.SampleDesc.Quality = 0;
+		//dxgiDesc.SampleDesc.Count = _Desc->SampleDesc.Count;
+		//dxgiDesc.SampleDesc.Quality = 0;
 
-		dxgiDesc.MipLevels = _Desc->MipLevels;
-		dxgiDesc.MiscFlags = _Desc->MiscFlags;
+		//dxgiDesc.MipLevels = _Desc->MipLevels;
+		//dxgiDesc.MiscFlags = _Desc->MiscFlags;
 
-		if (FAILED(m_Device->CreateTexture2D(&dxgiDesc, nullptr, m_DepthStencilBuffer.ReleaseAndGetAddressOf())))
-			return false;
+		//if (FAILED(m_Device->CreateTexture2D(&dxgiDesc, nullptr, m_DepthStencilBuffer.ReleaseAndGetAddressOf())))
+		//	return false;
 
-		if (FAILED(m_Device->CreateDepthStencilView(m_DepthStencilBuffer.Get(), nullptr, m_DepthStencilView.GetAddressOf())))
+		//if (FAILED(m_Device->CreateDepthStencilView(m_DepthStencilBuffer.Get(), nullptr, m_DepthStencilView.GetAddressOf())))
+		//	return false;
+
+		//return true;
+
+		if (FAILED(m_Device->CreateTexture2D(_Desc, nullptr, _ppTexture2D)))
 			return false;
 
 		return true;
@@ -200,9 +231,25 @@ namespace Lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CreateGeometryShader(const void* _pShaderBytecode, SIZE_T _BytecodeLength, ID3D11GeometryShader** _ppGeometryShader)
+	{
+		if (FAILED(m_Device->CreateGeometryShader(_pShaderBytecode, _BytecodeLength, nullptr, _ppGeometryShader)))
+			return false;
+
+		return true;
+	}
+
 	bool GraphicDevice_Dx11::CreatePixelShader(const void* _pShaderBytecode, SIZE_T _BytecodeLength, ID3D11PixelShader** _ppPixelShader)
 	{
 		if (FAILED(m_Device->CreatePixelShader(_pShaderBytecode, _BytecodeLength, nullptr, _ppPixelShader)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateComputeShader(const void* _pShaderBytecode, SIZE_T _BytecodeLength, ID3D11ComputeShader** _ppComputeShader)
+	{
+		if (FAILED(m_Device->CreateComputeShader(_pShaderBytecode, _BytecodeLength, nullptr, _ppComputeShader)))
 			return false;
 
 		return true;
@@ -240,6 +287,38 @@ namespace Lu::graphics
 		return true;
 	}
 
+	bool GraphicDevice_Dx11::CraeteDepthStencilView(ID3D11Resource* _pResource, const D3D11_DEPTH_STENCIL_VIEW_DESC* _pDesc, ID3D11DepthStencilView** _ppDepthStencilView)
+	{
+		if (FAILED(m_Device->CreateDepthStencilView(_pResource, _pDesc, _ppDepthStencilView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateShaderResourceView(ID3D11Resource* _pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* _pDesc, ID3D11ShaderResourceView** _ppSRView)
+	{
+		if (FAILED(m_Device->CreateShaderResourceView(_pResource, _pDesc, _ppSRView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateRenderTargetView(ID3D11Resource* _pResource, const D3D11_RENDER_TARGET_VIEW_DESC* _pDesc, ID3D11RenderTargetView** _ppRTView)
+	{
+		if (FAILED(m_Device->CreateRenderTargetView(_pResource, _pDesc, _ppRTView)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_Dx11::CreateUnordedAccessView(ID3D11Resource* _pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* _pDesc, ID3D11UnorderedAccessView** _ppUAView)
+	{
+		if (FAILED(m_Device->CreateUnorderedAccessView(_pResource, _pDesc, _ppUAView)))
+			return false;
+
+		return true;
+	}
+
 	void GraphicDevice_Dx11::BindInputLayout(ID3D11InputLayout* _pInputLayout)
 	{
 		m_Context->IASetInputLayout(_pInputLayout);
@@ -265,9 +344,24 @@ namespace Lu::graphics
 		m_Context->VSSetShader(_pVetexShader, 0, 0);
 	}
 
+	void GraphicDevice_Dx11::BindGeometryShader(ID3D11GeometryShader* _pGeometryShader)
+	{
+		m_Context->GSSetShader(_pGeometryShader, 0, 0);
+	}
+
 	void GraphicDevice_Dx11::BindPixelShader(ID3D11PixelShader* _pPixelShader)
 	{
 		m_Context->PSSetShader(_pPixelShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::BindComputeShader(ID3D11ComputeShader* _pComputeShader)
+	{
+		m_Context->CSSetShader(_pComputeShader, 0, 0);
+	}
+
+	void GraphicDevice_Dx11::Dispatch(UINT _ThreadGroupCountX, UINT _ThreadGroupCountY, UINT _ThreadGroupCountZ)
+	{
+		m_Context->Dispatch(_ThreadGroupCountX, _ThreadGroupCountY, _ThreadGroupCountZ);
 	}
 
 	void GraphicDevice_Dx11::SetConstantBuffer(ID3D11Buffer* _Buffer, void* _Data, UINT _Size)
@@ -316,6 +410,14 @@ namespace Lu::graphics
 		m_Context->CSSetConstantBuffers((UINT)_Type, 1, &_Buffer);
 	}
 
+	void GraphicDevice_Dx11::BindBuffer(ID3D11Buffer* _Buffer, void* _Data, UINT _Size)
+	{
+		D3D11_MAPPED_SUBRESOURCE sub = {};
+		m_Context->Map(_Buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &sub);
+		memcpy(sub.pData, _Data, _Size);
+		m_Context->Unmap(_Buffer, 0);
+	}
+
 	void GraphicDevice_Dx11::BindShaderResource(eShaderStage _Stage, UINT _StartSlot, ID3D11ShaderResourceView** _ppSRV)
 	{
 		switch (_Stage)
@@ -343,6 +445,11 @@ namespace Lu::graphics
 		default:
 			break;
 		}
+	}
+
+	void GraphicDevice_Dx11::BindUnorderedAccess(UINT _Slot, ID3D11UnorderedAccessView** _ppUnorderedAccessViews, const UINT* _pUAVInitialCounts)
+	{
+		m_Context->CSSetUnorderedAccessViews(_Slot, 1, _ppUnorderedAccessViews, _pUAVInitialCounts);
 	}
 
 	void GraphicDevice_Dx11::BindSampler(eShaderStage _Stage, UINT _StartSlot, ID3D11SamplerState** _ppSamplers)
@@ -399,13 +506,23 @@ namespace Lu::graphics
 		m_Context->DrawIndexed(_IndexCount, _StartIndexLocation, _BaseVertexLocation);
 	}
 
+	void GraphicDevice_Dx11::DrawIndexedInstanced(UINT _IndexCountPerInstance, UINT _InstanceCount, UINT _StartIndexLocation, INT _BaseVertexLocation, UINT _StartInstanceLocation)
+	{
+		m_Context->DrawIndexedInstanced(_IndexCountPerInstance, _InstanceCount, _StartIndexLocation, _BaseVertexLocation, _StartInstanceLocation);
+	}
+
 	void GraphicDevice_Dx11::ClearTarget()
 	{
 		// render target clear
-		FLOAT bgColor[4] = { 0.f, 0.f, 0.f, 1.0f };
-		m_Context->ClearRenderTargetView(m_RenderTargetView.Get(), bgColor);
-		m_Context->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, (UINT8)0.0f);
-		m_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+		//FLOAT bgColor[4] = { 0.f, 0.f, 0.f, 1.0f };
+		//m_Context->ClearRenderTargetView(m_RenderTargetView.Get(), bgColor);
+		//m_Context->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, (UINT8)0.0f);
+		//m_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+
+		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+		m_Context->ClearRenderTargetView(m_RenderTarget->GetRTV().Get(), bgColor);
+		m_Context->ClearDepthStencilView(m_DepthStencil->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, (UINT8)0.0f);
+		m_Context->OMSetRenderTargets(1, m_RenderTarget->GetRTV().GetAddressOf(), m_DepthStencil->GetDSV().Get());
 	}
 
 	void GraphicDevice_Dx11::UpdateViewPort()

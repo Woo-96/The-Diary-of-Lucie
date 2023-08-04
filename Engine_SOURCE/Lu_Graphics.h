@@ -15,6 +15,7 @@
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_Material			1
 #define CBSLOT_ANIMATION2D		2
+//#define CBSLOT_PARTICLE			4
 
 namespace Lu::graphics
 {
@@ -34,6 +35,7 @@ namespace Lu::graphics
 		Transform,
 		Material,
 		Animator,
+		Particle,
 		End,
 	};
 
@@ -78,6 +80,14 @@ namespace Lu::graphics
 		End,
 	};
 
+	enum class eViewType
+	{
+		None,
+		SRV,
+		UAV,
+		End,
+	};
+
 	struct GpuBuffer
 	{
 		Microsoft::WRL::ComPtr<ID3D11Buffer>	Buffer;
@@ -103,6 +113,18 @@ namespace Lu::graphics
 		float					Duration;
 		float					Time;
 		math::Vector4			Color;
+	};
+
+	struct LightAttribute
+	{
+		math::Vector4 Color;
+		math::Vector4 Position;
+		math::Vector4 Direction;
+
+		enums::eLightType Type;
+		float Radius;
+		float Angle;
+		int Padding;
 	};
 
 	struct tMtrlConst
@@ -136,5 +158,16 @@ namespace Lu::graphics
 		VEC4_3,
 
 		SCALAR_END,
+	};
+
+	struct Particle
+	{
+		math::Vector4 Position;
+		math::Vector4 Direction;
+
+		float EndTime;
+		float Time;
+		float Speed;
+		UINT Active;
 	};
 }

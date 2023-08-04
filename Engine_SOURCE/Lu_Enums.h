@@ -10,6 +10,7 @@ namespace Lu::enums
 		Collider2D,
 		Camera,
 		Animator,
+		Light,
 		Particle,
 		Script,
 		End,
@@ -24,6 +25,7 @@ namespace Lu::enums
 		Player,
 		MonsterProjectile,
 		PlayerProjectile,
+		Light,
 		UI,
 		Mouse,
 		End = 16,
@@ -36,6 +38,7 @@ namespace Lu::enums
 		Material,
 		Mesh,
 		Animation,
+		ComputeShader,
 		End,
 	};
 
@@ -45,6 +48,14 @@ namespace Lu::enums
 		Circle,
 		Sphere,
 		Cube,
+		End,
+	};
+
+	enum class eLightType
+	{
+		Directional,
+		Point,
+		Spot,
 		End,
 	};
 }

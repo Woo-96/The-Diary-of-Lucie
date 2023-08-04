@@ -19,15 +19,6 @@
     <Filter Include="02. Graphics">
       <UniqueIdentifier>{ff5487e5-ecb5-45eb-9f6b-f20f0ff34cfc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Graphics\ConstantBuffer">
-      <UniqueIdentifier>{92ced349-ad95-4522-b533-5e114c62acc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Graphics\GraphicDevice">
-      <UniqueIdentifier>{dd2d4628-a69b-4de1-9e6a-2686212d5727}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Graphics\Renderer">
-      <UniqueIdentifier>{3e085398-d05c-453d-9c75-68a84f7dacaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. High Level Interface">
       <UniqueIdentifier>{16300282-9fe6-4783-91b1-447ff751be6a}</UniqueIdentifier>
     </Filter>
@@ -93,6 +84,30 @@
     </Filter>
     <Filter Include="05. GameObject\Component\04. Collider\CollisionMgr">
       <UniqueIdentifier>{10890c5d-6872-4afb-b62d-e81bf02b146f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\04. StructedBuffer">
+      <UniqueIdentifier>{f973b65b-aa26-4ef9-84dd-7c0d54a17cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\02. Renderer">
+      <UniqueIdentifier>{3e085398-d05c-453d-9c75-68a84f7dacaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\03. ConstantBuffer">
+      <UniqueIdentifier>{92ced349-ad95-4522-b533-5e114c62acc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Graphics\01. GraphicDevice">
+      <UniqueIdentifier>{dd2d4628-a69b-4de1-9e6a-2686212d5727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\06. Light">
+      <UniqueIdentifier>{6053857a-7d6b-40df-b5ab-264406c53130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\03. Shader\ComputeShader">
+      <UniqueIdentifier>{0162f9d3-c8a8-437d-b7c2-fa7a58fa11a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\03. Shader\ComputeShader\PaintShader">
+      <UniqueIdentifier>{d423d762-a512-4413-bc05-1f3195521f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\03. Shader\ComputeShader\ParticleShader">
+      <UniqueIdentifier>{9d3ecec3-4a3f-45c7-8ec5-c1fc47319c30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,13 +178,13 @@
       <Filter>05. GameObject\Component\03. Camera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.h">
-      <Filter>02. Graphics\ConstantBuffer</Filter>
+      <Filter>02. Graphics\03. ConstantBuffer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.h">
-      <Filter>02. Graphics\GraphicDevice</Filter>
+      <Filter>02. Graphics\01. GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h">
-      <Filter>02. Graphics\Renderer</Filter>
+      <Filter>02. Graphics\02. Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Object.h">
       <Filter>01. Common\Object</Filter>
@@ -191,6 +206,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animation.h">
       <Filter>06. Resource\05. Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_StructedBuffer.h">
+      <Filter>02. Graphics\04. StructedBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Light2D.h">
+      <Filter>05. GameObject\Component\06. Light</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ComputeShader.h">
+      <Filter>06. Resource\03. Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_PaintShader.h">
+      <Filter>06. Resource\03. Shader\ComputeShader\PaintShader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.h">
+      <Filter>06. Resource\03. Shader\ComputeShader\ParticleShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,13 +279,13 @@
       <Filter>05. GameObject\Component\03. Camera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp">
-      <Filter>02. Graphics\ConstantBuffer</Filter>
+      <Filter>02. Graphics\03. ConstantBuffer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp">
-      <Filter>02. Graphics\GraphicDevice</Filter>
+      <Filter>02. Graphics\01. GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp">
-      <Filter>02. Graphics\Renderer</Filter>
+      <Filter>02. Graphics\02. Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp">
       <Filter>05. GameObject\Component\04. Collider</Filter>
@@ -274,6 +304,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animation.cpp">
       <Filter>06. Resource\05. Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_StructedBuffer.cpp">
+      <Filter>02. Graphics\04. StructedBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Light2D.cpp">
+      <Filter>05. GameObject\Component\06. Light</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ComputeShader.cpp">
+      <Filter>06. Resource\03. Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_PaintShader.cpp">
+      <Filter>06. Resource\03. Shader\ComputeShader\PaintShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.cpp">
+      <Filter>06. Resource\03. Shader\ComputeShader\ParticleShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

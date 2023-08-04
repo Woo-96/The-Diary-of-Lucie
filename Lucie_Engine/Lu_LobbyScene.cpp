@@ -69,7 +69,7 @@ namespace Lu
 
 		// Ã¥»ó
 		{
-			GameObject* pObj = object::Instantiate<GameObject>(Vector3(2.f, -82.f, 500.f), Vector3(230.f, 130.f, 100.f), eLayerType::Immovable);
+			GameObject* pObj = object::Instantiate<GameObject>(Vector3(3.f, -80.f, 500.f), Vector3(220.f, 120.f, 100.f), eLayerType::Immovable);
 			pObj->SetName(L"Desk");
 
 			Collider2D* pCollider = pObj->AddComponent<Collider2D>();

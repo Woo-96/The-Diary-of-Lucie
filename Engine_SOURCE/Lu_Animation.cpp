@@ -72,7 +72,7 @@ namespace Lu
 
 	void Animation::Binds()
 	{
-		m_Atlas->BindShader(graphics::eShaderStage::PS, 12);
+		m_Atlas->BindShaderResource(graphics::eShaderStage::PS, 12);
 
 		renderer::AnimatorCB data = {};
 

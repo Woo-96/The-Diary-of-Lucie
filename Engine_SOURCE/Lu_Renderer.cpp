@@ -2,6 +2,9 @@
 #include "Lu_Resources.h"
 #include "Lu_Texture.h"
 #include "Lu_Material.h"
+#include "Lu_StructedBuffer.h"
+#include "Lu_PaintShader.h"
+#include "Lu_ParticleShader.h"
 
 namespace renderer
 {
@@ -13,6 +16,10 @@ namespace renderer
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[(UINT)eRSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
+
+	// light
+	std::vector<Light2D*> lights = {};
+	StructedBuffer* lightsBuffer = nullptr;
 
 	Lu::Camera* mainCamera = nullptr;
 	std::vector<Lu::Camera*> cameras = {};	
@@ -66,10 +73,10 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
-		//shader = Lu::Resources::Find<Shader>(L"ButtonShader");
-		//Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
-		//	, shader->GetVSCode()
-		//	, shader->GetInputLayoutAddressOf());
+		shader = Lu::Resources::Find<Shader>(L"ParticleShader");
+		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 
 #pragma endregion
 #pragma region Sampler State
@@ -186,9 +193,24 @@ namespace renderer
 		std::vector<Vertex> vertexes = {};
 		std::vector<UINT> indexes = {};
 
-		//// ================
-		//// == Rect Mesh ===
-		//// ================
+		// ================
+		// == Point Mesh ==
+		// ================
+		Vertex vertex = {};
+		vertex.vPos = Vector3(0.0f, 0.0f, 0.0f);
+		vertexes.push_back(vertex);
+		indexes.push_back(0);
+		std::shared_ptr<Mesh> pMesh = std::make_shared<Mesh>();
+		pMesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		pMesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		Resources::Insert(L"PointMesh", pMesh);
+
+		// ===============
+		// == Rect Mesh ==
+		// ===============
+		vertexes.clear();
+		indexes.clear();
+
 		vertexes.resize(4);
 		vertexes[0].vPos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].vColor = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -219,9 +241,9 @@ namespace renderer
 		indexes.push_back(2);
 		mesh->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
 
-		// ======================
-		// == Debug Rect Mesh ===
-		// ======================
+		// =====================
+		// == Debug Rect Mesh ==
+		// =====================
 		indexes.clear();
 		indexes.push_back(0);
 		indexes.push_back(1);
@@ -306,6 +328,10 @@ namespace renderer
 
 	void LoadBuffer()
 	{
+		// ==================
+		// == Const Buffer ==
+		// ==================
+
 		// Transform Buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
@@ -317,6 +343,19 @@ namespace renderer
 		// Animator Buffer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
+	
+		//ParticleCB
+		//constantBuffer[(UINT)eCBType::Particle] = new ConstantBuffer(eCBType::Particle);
+		//constantBuffer[(UINT)eCBType::Particle]->Create(sizeof(ParticleCB));
+
+
+		// =====================
+		// == Structed Buffer ==
+		// =====================
+
+		// light structed buffer
+		lightsBuffer = new StructedBuffer();
+		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr);
 	}
 
 	void LoadShader()
@@ -343,10 +382,27 @@ namespace renderer
 		numberShader->Create(eShaderStage::PS, L"NumberPS.hlsl", "main");
 		Lu::Resources::Insert(L"NumberShader", numberShader);
 
-		//std::shared_ptr<Shader> buttonShader = std::make_shared<Shader>();
-		//buttonShader->Create(eShaderStage::VS, L"ButtonVS.hlsl", "main");
-		//buttonShader->Create(eShaderStage::PS, L"ButtonPS.hlsl", "main");
-		//Lu::Resources::Insert(L"ButtonShader", buttonShader);
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		Lu::Resources::Insert(L"PaintShader", paintShader);
+
+		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
+		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
+		paritcleShader->Create(eShaderStage::GS, L"ParticleGS.hlsl", "main");
+		paritcleShader->Create(eShaderStage::PS, L"ParticlePS.hlsl", "main");
+		paritcleShader->SetRSState(eRSType::SolidNone);
+		paritcleShader->SetDSState(eDSType::NoWrite);
+		paritcleShader->SetBSState(eBSType::AlphaBlend);
+		paritcleShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+		Lu::Resources::Insert(L"ParticleShader", paritcleShader);
+	}
+
+	void LoadTexture()
+	{
+		//paint texture
+		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
+		uavTexture->Create(1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+		Lu::Resources::Insert(L"PaintTexuture", uavTexture);
 	}
 
 	void LoadMaterial()
@@ -384,7 +440,9 @@ namespace renderer
 		material->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", material);
 
+
 		texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		//texture = Resources::Find<Texture>(L"PaintTexuture");
 		material = std::make_shared<Material>();
 		material->SetShader(spriteShader);
 		material->SetTexture(texture);
@@ -398,6 +456,14 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(debugShader);
 		Resources::Insert(L"DebugMaterial", material);
+
+		std::shared_ptr<Shader> particleShader
+			= Resources::Find<Shader>(L"ParticleShader");
+		material = std::make_shared<Material>();
+		material->SetShader(particleShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"ParticleMaterial", material);
+
 #pragma region	Title Scene Resources
 		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
 
@@ -670,7 +736,22 @@ namespace renderer
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+		LoadTexture();
 		LoadMaterial();
+	}
+
+	void BindLights()
+	{
+		std::vector<LightAttribute> lightsAttributes = {};
+		for (Light2D* light : lights)
+		{
+			LightAttribute attribute = light->GetAttribute();
+			lightsAttributes.push_back(attribute);
+		}
+
+		lightsBuffer->SetData(lightsAttributes.data(), (UINT)lightsAttributes.size());
+		lightsBuffer->BindSRV(eShaderStage::VS, 13);
+		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}
 
 	void PushDebugMeshAttribute(DebugMesh _Mesh)
@@ -680,6 +761,8 @@ namespace renderer
 
 	void Render()
 	{
+		BindLights();
+
 		for (Camera* cam : cameras)
 		{
 			if (cam == nullptr)
@@ -689,6 +772,7 @@ namespace renderer
 		}
 
 		cameras.clear();
+		lights.clear();
 	}
 
 	void Release()
@@ -701,5 +785,8 @@ namespace renderer
 			delete buff;
 			buff = nullptr;
 		}
+
+		delete lightsBuffer;
+		lightsBuffer = nullptr;
 	}
 }
