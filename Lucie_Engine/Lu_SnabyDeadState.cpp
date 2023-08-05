@@ -17,7 +17,8 @@ namespace Lu
 
 	void SnabyDeadState::Enter()
 	{
-
+		if (!(GetSnabyScript()->GetOwner()->DeleteComponent<Collider2D>()))
+			assert(nullptr);
 	}
 
 	void SnabyDeadState::Exit()

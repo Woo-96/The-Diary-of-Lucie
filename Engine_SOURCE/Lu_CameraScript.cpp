@@ -31,48 +31,48 @@ namespace Lu
 
 	void CameraScript::Update()
 	{
-		//Transform* pTransform = GetOwner()->GetComponent<Transform>();
-		//Vector3 vPos = pTransform->GetPosition();
+		if (nullptr == m_Target)
+		{
+			Transform* pTransform = GetOwner()->GetComponent<Transform>();
+			Vector3 vPos = pTransform->GetPosition();
 
-		//if (Input::GetKey(eKeyCode::LEFT))
-		//{
-		//	vPos.x -= m_Speed * (float)Time::DeltaTime();
-		//}
-		//else if (Input::GetKey(eKeyCode::RIGHT))
-		//{
-		//	vPos.x += m_Speed * (float)Time::DeltaTime();
-		//}
-		//else if (Input::GetKey(eKeyCode::DOWN))
-		//{
-		//	vPos.y -= m_Speed * (float)Time::DeltaTime();
-		//}
-		//else if (Input::GetKey(eKeyCode::UP))
-		//{
-		//	vPos.y += m_Speed * (float)Time::DeltaTime();
-		//}
+			if (Input::GetKey(eKeyCode::LEFT))
+			{
+				vPos.x -= m_Speed * (float)Time::DeltaTime();
+			}
+			else if (Input::GetKey(eKeyCode::RIGHT))
+			{
+				vPos.x += m_Speed * (float)Time::DeltaTime();
+			}
+			else if (Input::GetKey(eKeyCode::DOWN))
+			{
+				vPos.y -= m_Speed * (float)Time::DeltaTime();
+			}
+			else if (Input::GetKey(eKeyCode::UP))
+			{
+				vPos.y += m_Speed * (float)Time::DeltaTime();
+			}
 
-		//Camera* pCamera = GetOwner()->GetComponent<Camera>();
+			Camera* pCamera = GetOwner()->GetComponent<Camera>();
 
-		//if (Input::GetKey(eKeyCode::Z))
-		//{
-		//	float fScale = pCamera->GetScale();
-		//	fScale += (float)Time::DeltaTime();
-		//	pCamera->SetScale(fScale);
-		//}
+			if (Input::GetKey(eKeyCode::Z))
+			{
+				float fScale = pCamera->GetScale();
+				fScale += (float)Time::DeltaTime();
+				pCamera->SetScale(fScale);
+			}
 
-		//if (Input::GetKey(eKeyCode::X))
-		//{
-		//	float fScale = pCamera->GetScale();
-		//	fScale -= (float)Time::DeltaTime();
-		//	pCamera->SetScale(fScale);
-		//}
+			if (Input::GetKey(eKeyCode::X))
+			{
+				float fScale = pCamera->GetScale();
+				fScale -= (float)Time::DeltaTime();
+				pCamera->SetScale(fScale);
+			}
 
-		//pTransform->SetPosition(vPos);
-	}
+			pTransform->SetPosition(vPos);
+		}
 
-	void CameraScript::LateUpdate()
-	{
-		if(m_Target)
+		else
 		{
 			static float fSpeed = 2.f;
 

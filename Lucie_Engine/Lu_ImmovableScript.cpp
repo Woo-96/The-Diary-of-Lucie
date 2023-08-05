@@ -14,12 +14,12 @@ namespace Lu
 
 	void ImmovableScript::OnCollisionEnter(Collider2D* _Other)
 	{
-		int PlayerLayer = _Other->GetOwner()->GetLayerIndex();
+		int iLayer = _Other->GetOwner()->GetLayerIndex();
 
-		if ((int)eLayerType::Player == PlayerLayer
+		if ((int)eLayerType::Player == iLayer
 			|| (int)eLayerType::Monster == _Other->GetOwner()->GetLayerIndex())
 		{
-			if ((int)eLayerType::Player == PlayerLayer)
+			if ((int)eLayerType::Player == iLayer)
 			{
 				if (!(L"ImmovableCollider" == _Other->GetName()))
 					return;

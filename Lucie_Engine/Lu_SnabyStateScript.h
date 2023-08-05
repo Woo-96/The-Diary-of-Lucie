@@ -26,8 +26,8 @@ namespace Lu
 		SnabyScript*		m_SnabyScript;
 		Transform*			m_Transform;
 		PlayerScript*		m_Target;
-		float				m_ActionSpeed;
 		Vector3				m_ActionDir;
+		float				m_Time;
 
 	public:
 		void SetStateType(eState _StateType)
@@ -50,30 +50,14 @@ namespace Lu
 			m_Target = _Target;
 		}
 
-		void SetSpeed(float _Speed)
+		void SetDir(Vector3 _Dir)
 		{
-			m_ActionSpeed = _Speed;
+			m_ActionDir = _Dir;
 		}
 
-	public:
-		Transform* GetTransform()	const
+		void SetTime(float _Time)
 		{
-			return m_Transform;
-		}
-
-		PlayerScript* GetTarget()	const
-		{
-			return m_Target;
-		}
-
-		float GetSpeed()	const
-		{
-			return m_ActionSpeed;
-		}
-
-		Vector3 GetDir()	const
-		{
-			return m_ActionDir;
+			m_Time = _Time;
 		}
 
 	public:
@@ -85,6 +69,26 @@ namespace Lu
 		SnabyScript* GetSnabyScript()	const
 		{
 			return m_SnabyScript;
+		}
+
+		Transform* GetTransform()	const
+		{
+			return m_Transform;
+		}
+
+		PlayerScript* GetTarget()	const
+		{
+			return m_Target;
+		}
+
+		Vector3 GetDir()	const
+		{
+			return m_ActionDir;
+		}
+
+		float GetTime()	const
+		{
+			return m_Time;
 		}
 
 	public:

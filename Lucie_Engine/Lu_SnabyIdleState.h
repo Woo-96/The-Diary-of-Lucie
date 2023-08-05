@@ -10,6 +10,9 @@ namespace Lu
 		virtual ~SnabyIdleState();
 
 	public:
+		virtual void Update() override;
+
+	public:
 		virtual void Enter() override;
 		virtual void Exit() override;
 	};

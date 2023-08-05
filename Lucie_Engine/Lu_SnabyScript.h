@@ -5,7 +5,6 @@
 
 namespace Lu
 {
-	class Animator;
 	class SnabyScript : public MonsterScript
 	{
 	public:
@@ -19,9 +18,6 @@ namespace Lu
 		std::map<SnabyStateScript::eState, SnabyStateScript*> m_State;
 		SnabyStateScript*			m_CurState;
 		SnabyStateScript::eState	m_PrevState;
-		eDir						m_Dir;
-		eDir						m_PrevDir;
-		Animator*					m_Animator;
 
 	public:
 		virtual void Initialize() override;
@@ -33,12 +29,13 @@ namespace Lu
 		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:
-		void CreateSnabyAnimation();
 		SnabyStateScript* GetStateScript(SnabyStateScript::eState _State);
 		void AddState(SnabyStateScript* _State);
-		void AnimationUpdate();
-		eDir CalDirToPlayer();
 		void CompleteAction();
+
+	protected:
+		virtual void CreateAnimation() override;
+		virtual void AnimationUpdate() override;
 
 	public:
 		void ChangeState(SnabyStateScript::eState _NextState);

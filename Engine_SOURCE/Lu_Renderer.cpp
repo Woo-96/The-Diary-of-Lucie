@@ -201,8 +201,8 @@ namespace renderer
 		vertexes.push_back(vertex);
 		indexes.push_back(0);
 		std::shared_ptr<Mesh> pMesh = std::make_shared<Mesh>();
-		pMesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
-		pMesh->CreateIndexBuffer(indexes.data(), indexes.size());
+		pMesh->CreateVertexBuffer(vertexes.data(), (UINT)vertexes.size());
+		pMesh->CreateIndexBuffer(indexes.data(), (UINT)indexes.size());
 		Resources::Insert(L"PointMesh", pMesh);
 
 		// ===============
@@ -728,6 +728,13 @@ namespace renderer
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WandProjectile_Mtrl", material);
+
+		texture = Resources::Load<Texture>(L"MonsterProjectileA_Tex", L"..\\Resources\\Texture\\Monster\\MonsterProjectile_A.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterProjectileA_Mtrl", material);
 	}
 
 	void Initialize()

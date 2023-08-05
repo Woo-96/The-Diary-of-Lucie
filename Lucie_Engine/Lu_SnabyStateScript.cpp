@@ -7,8 +7,8 @@ Lu::SnabyStateScript::SnabyStateScript()
 	, m_SnabyScript(nullptr)
 	, m_Transform(nullptr)
 	, m_Target(nullptr)
-	, m_ActionSpeed(300.f)
 	, m_ActionDir(Vector3::Zero)
+	, m_Time(0.f)
 {
 	SetName(L"SnabyStateScript");
 }

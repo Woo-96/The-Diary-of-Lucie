@@ -14,11 +14,12 @@ namespace Lu
 	SnabyScript::SnabyScript()
 		: m_CurState(nullptr)
 		, m_PrevState(SnabyStateScript::eState::End)
-		, m_Dir(eDir::Down)
-		, m_PrevDir(eDir::None)
-		, m_Animator(nullptr)
 	{
 		SetName(L"SnabyScript");
+
+		GetInfo().HP = 100;
+		GetInfo().DetectRange = 300.f;
+		GetInfo().MoveSpeed = 100.f;
 	}
 
 	SnabyScript::~SnabyScript()
@@ -34,8 +35,7 @@ namespace Lu
 
 	void SnabyScript::Initialize()
 	{
-		m_Animator = GetOwner()->GetComponent<Animator>();
-		CreateSnabyAnimation();
+		MonsterScript::Initialize();
 
 		AddState(new SnabyIdleState);
 		AddState(new SnabyPatrolState);
@@ -59,6 +59,9 @@ namespace Lu
 
 	void SnabyScript::OnCollisionEnter(Collider2D* _Other)
 	{
+		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
+			ChangeState(SnabyStateScript::eState::Idle);
+
 		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
 		{
 			if (SnabyStateScript::eState::Dead == m_CurState->GetStateType())
@@ -81,21 +84,32 @@ namespace Lu
 	{
 	}
 
-	void SnabyScript::CreateSnabyAnimation()
+	void SnabyScript::CreateAnimation()
 	{
 		std::shared_ptr<Texture> pAtlas
 			= Resources::Load<Texture>(L"SnabySprite", L"..\\Resources\\Texture\\Monster\\Normal\\Snaby.png");
 
 		// Idle
-		m_Animator->Create(L"Snbay_Idle_Left", pAtlas, Vector2(0.f, 432.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
-		m_Animator->Create(L"Snbay_Idle_Right", pAtlas, Vector2(0.f, 480.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
-		m_Animator->Create(L"Snbay_Idle_Up", pAtlas, Vector2(0.f, 528.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
-		m_Animator->Create(L"Snbay_Idle_Down", pAtlas, Vector2(0.f, 384.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Snbay_Idle_Left", pAtlas, Vector2(0.f, 432.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Snbay_Idle_Right", pAtlas, Vector2(0.f, 480.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Snbay_Idle_Up", pAtlas, Vector2(0.f, 528.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Snbay_Idle_Down", pAtlas, Vector2(0.f, 384.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
 	
-	
+		// Move
+		GetAnimator()->Create(L"Snbay_Move_Left", pAtlas, Vector2(0.f, 48.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Snbay_Move_Right", pAtlas, Vector2(0.f, 96.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Snbay_Move_Up", pAtlas, Vector2(0.f, 144.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Snbay_Move_Down", pAtlas, Vector2(0.f, 0.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+
+		// Attack
+		GetAnimator()->Create(L"Snbay_Attack_Left", pAtlas, Vector2(0.f, 240.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Snbay_Attack_Right", pAtlas, Vector2(0.f, 288.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Snbay_Attack_Up", pAtlas, Vector2(0.f, 336.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Snbay_Attack_Down", pAtlas, Vector2(0.f, 192.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+
 		// Dead
-		m_Animator->Create(L"Snbay_Dead", pAtlas, Vector2(0.f, 576.f), Vector2(48.f, 48.f), 1, Vector2(48.f, 48.f), Vector2::Zero, 1.f);
-		m_Animator->CompleteEvent(L"Snbay_Dead") = std::bind(&SnabyScript::CompleteAction, this);
+		GetAnimator()->Create(L"Snbay_Dead", pAtlas, Vector2(0.f, 576.f), Vector2(48.f, 48.f), 1, Vector2(48.f, 48.f), Vector2::Zero, 1.f);
+		GetAnimator()->CompleteEvent(L"Snbay_Dead") = std::bind(&SnabyScript::CompleteAction, this);
 	}
 
 	SnabyStateScript* SnabyScript::GetStateScript(SnabyStateScript::eState _State)
@@ -119,82 +133,89 @@ namespace Lu
 		m_State.insert(std::make_pair(eState, _State));
 	}
 
+	void SnabyScript::CompleteAction()
+	{
+		ChangeState(SnabyStateScript::eState::Idle);
+	}
+
 	void SnabyScript::AnimationUpdate()
 	{
 		SnabyStateScript::eState eCurState = m_CurState->GetStateType();
+		eAnimDir eCurDir = GetCurDir();
 
 		if (m_PrevState == eCurState
-			&& m_PrevDir == m_Dir)
+			&& GetPrevDir() == eCurDir)
 			return;
 
 		switch (eCurState)
 		{
 		case SnabyStateScript::eState::Idle:
 		{
-			switch (m_Dir)
+			switch (eCurDir)
 			{
-			case Lu::eDir::Left:
-				m_Animator->PlayAnimation(L"Snbay_Idle_Left", true);
+			case Lu::MonsterScript::eAnimDir::Left:
+				GetAnimator()->PlayAnimation(L"Snbay_Idle_Left", true);
 				break;
-			case Lu::eDir::Right:
-				m_Animator->PlayAnimation(L"Snbay_Idle_Right", true);
+			case Lu::MonsterScript::eAnimDir::Right:
+				GetAnimator()->PlayAnimation(L"Snbay_Idle_Right", true);
 				break;
-			case Lu::eDir::Up:
-			case Lu::eDir::LeftUp:
-			case Lu::eDir::RightUp:
-				m_Animator->PlayAnimation(L"Snbay_Idle_Up", true);
+			case Lu::MonsterScript::eAnimDir::Up:
+				GetAnimator()->PlayAnimation(L"Snbay_Idle_Up", true);
 				break;
-			case Lu::eDir::Down:
-			case Lu::eDir::LeftDown:
-			case Lu::eDir::RightDown:
-				m_Animator->PlayAnimation(L"Snbay_Idle_Down", true);
+			case Lu::MonsterScript::eAnimDir::Down:
+				GetAnimator()->PlayAnimation(L"Snbay_Idle_Down", true);
+				break;
+			default:
 				break;
 			}
 		}
 			break;
 		case SnabyStateScript::eState::Patrol:
+		{
+			switch (eCurDir)
+			{
+			case Lu::MonsterScript::eAnimDir::Left:
+				GetAnimator()->PlayAnimation(L"Snbay_Move_Left", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Right:
+				GetAnimator()->PlayAnimation(L"Snbay_Move_Right", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Up:
+				GetAnimator()->PlayAnimation(L"Snbay_Move_Up", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Down:
+				GetAnimator()->PlayAnimation(L"Snbay_Move_Down", true);
+				break;
+			default:
+				break;
+			}
+		}
 			break;
 		case SnabyStateScript::eState::Attack:
+		{
+			switch (eCurDir)
+			{
+			case Lu::MonsterScript::eAnimDir::Left:
+				GetAnimator()->PlayAnimation(L"Snbay_Attack_Left", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Right:
+				GetAnimator()->PlayAnimation(L"Snbay_Attack_Right", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Up:
+				GetAnimator()->PlayAnimation(L"Snbay_Attack_Up", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Down:
+				GetAnimator()->PlayAnimation(L"Snbay_Attack_Down", true);
+				break;
+			default:
+				break;
+			}
+		}
 			break;
 		case SnabyStateScript::eState::Dead:
-			m_Animator->PlayAnimation(L"Snbay_Dead", true);
+			GetAnimator()->PlayAnimation(L"Snbay_Dead", true);
 			break;
 		}
-	}
-
-	eDir SnabyScript::CalDirToPlayer()
-	{
-		Vector3 vPlayerPos = m_CurState->GetTarget()->GetOwner()->GetComponent<Transform>()->GetPosition();
-		Vector3 vSnabyPos = GetOwner()->GetComponent<Transform>()->GetPosition();
-
-		Vector3 vDir = vPlayerPos - vSnabyPos;
-		vDir.Normalize();
-
-		float angle = atan2(vDir.y, vDir.x) * (180.0f / math::PI);
-
-		if (angle > -22.5f && angle <= 22.5f)
-			return eDir::Right;
-		else if (angle > 22.5f && angle <= 67.5f)
-			return eDir::RightUp;
-		else if (angle > 67.5f && angle <= 112.5f)
-			return eDir::Up;
-		else if (angle > 112.5f && angle <= 157.5f)
-			return eDir::LeftUp;
-		else if (angle > 157.5f || angle <= -157.5f)
-			return eDir::Left;
-		else if (angle > -157.5f && angle <= -112.5f)
-			return eDir::LeftDown;
-		else if (angle > -112.5f && angle <= -67.5f)
-			return eDir::Down;
-		else if (angle > -67.5f && angle <= -22.5f)
-			return eDir::RightDown;
-
-		return eDir::None;
-	}
-
-	void SnabyScript::CompleteAction()
-	{
-		ChangeState(SnabyStateScript::eState::Idle);
 	}
 
 	void SnabyScript::ChangeState(SnabyStateScript::eState _NextState)

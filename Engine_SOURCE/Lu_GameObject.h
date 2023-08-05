@@ -127,5 +127,48 @@ namespace Lu
 
 			return comp;
 		}
+
+		template <typename T>
+		bool DeleteComponent()
+		{
+			bool bResult = false;
+
+			{
+				auto iter = m_Components.begin();
+				auto iterEnd = m_Components.end();
+
+				for (; iter != iterEnd; ++iter)
+				{
+					T* component = dynamic_cast<T*>(*iter);
+					if (component != nullptr)
+					{
+						delete component;
+						m_Components.erase(iter);
+						bResult = true;
+						break;
+					}
+				}
+			}
+
+			if (!bResult)
+			{
+				auto iter = m_Scripts.begin();
+				auto iterEnd = m_Scripts.end();
+
+				for (; iter != iterEnd; ++iter)
+				{
+					T* component = dynamic_cast<T*>(*iter);
+					if (component != nullptr)
+					{
+						delete component;
+						m_Scripts.erase(iter);
+						bResult = true;
+						break;
+					}
+				}
+			}
+
+			return bResult;
+		}
 	};
 }

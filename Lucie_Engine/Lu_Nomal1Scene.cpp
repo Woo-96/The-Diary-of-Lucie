@@ -78,8 +78,9 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SnabyAnimation_Mtrl"));
 
 			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
-			pCollider->SetCenter(Vector2(3.f, -10.f));
-			pCollider->SetSize(Vector2(0.3f, 0.7f));
+			pCollider->SetType(eColliderType::Rect);
+			pCollider->SetCenter(Vector2(3.f, -7.f));
+			pCollider->SetSize(Vector2(0.3f, 0.8f));
 
 			Animator* pAnimator = pMonster->AddComponent<Animator>();
 			pMonster->AddComponent<SnabyScript>();
@@ -95,8 +96,8 @@ namespace Lu
 
 			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(3.f, -10.f));
-			pCollider->SetSize(Vector2(0.3f, 0.7f));
+			pCollider->SetCenter(Vector2(3.f, -7.f));
+			pCollider->SetSize(Vector2(0.3f, 0.8f));
 
 			Animator* pAnimator = pMonster->AddComponent<Animator>();
 			pMonster->AddComponent<SnabyScript>();
@@ -125,6 +126,7 @@ namespace Lu
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);	// 나중에 몬스터 투사체 구현하고 바꿔야함
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
 	}
 
