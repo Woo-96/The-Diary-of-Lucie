@@ -1,6 +1,8 @@
 #include "Lu_SnabyIdleState.h"
 #include "Lu_Time.h"
 #include "Lu_SnabyScript.h"
+#include "Lu_PlayerScript.h"
+#include "Lu_GameObject.h"
 
 namespace Lu
 {
@@ -17,12 +19,14 @@ namespace Lu
 
 	void SnabyIdleState::Update()
 	{
-		SetTime(GetTime() + (float)Time::DeltaTime());
+		// 아이들 -> 패트롤
+		ChangeStateAfterTime(2.f, eState::Patrol);
 
-		if (GetTime() >= 5.f)
+
+		// 아이들 -> 어택
+		if (CalDirToPlayer().Length() < GetSnabyScript()->GetInfo().DetectRange)
 		{
-			SetTime(0.f);
-			GetSnabyScript()->ChangeState(eState::Patrol);
+			GetSnabyScript()->ChangeState(eState::Attack);
 		}
 	}
 
@@ -33,6 +37,6 @@ namespace Lu
 
 	void SnabyIdleState::Exit()
 	{
-
+		SetTime(0.f);
 	}
 }

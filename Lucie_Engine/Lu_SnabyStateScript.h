@@ -45,11 +45,6 @@ namespace Lu
 			m_Transform = _Transform;
 		}
 
-		void SetTarget(PlayerScript* _Target)
-		{
-			m_Target = _Target;
-		}
-
 		void SetDir(Vector3 _Dir)
 		{
 			m_ActionDir = _Dir;
@@ -76,10 +71,7 @@ namespace Lu
 			return m_Transform;
 		}
 
-		PlayerScript* GetTarget()	const
-		{
-			return m_Target;
-		}
+		PlayerScript* GetTarget();
 
 		Vector3 GetDir()	const
 		{
@@ -98,5 +90,11 @@ namespace Lu
 	public:
 		virtual void Enter() = 0;
 		virtual void Exit() = 0;
+
+	protected:
+		void DetermineAnimDir(float _Angle);
+		void DetermineAnimDir(Vector3 _Dir);
+		void ChangeStateAfterTime(float _Time, eState _State);
+		Vector2 CalDirToPlayer();
 	};
 }

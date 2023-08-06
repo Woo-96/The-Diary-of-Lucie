@@ -729,12 +729,12 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WandProjectile_Mtrl", material);
 
-		texture = Resources::Load<Texture>(L"MonsterProjectileA_Tex", L"..\\Resources\\Texture\\Monster\\MonsterProjectile_A.png");
+		texture = Resources::Load<Texture>(L"MonsterProjectile_Circle_Tex", L"..\\Resources\\Texture\\Monster\\MonsterProjectile_Circle.png");
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MonsterProjectileA_Mtrl", material);
+		Resources::Insert(L"MonsterProjectile_Circle_Mtrl", material);
 	}
 
 	void Initialize()

@@ -17,8 +17,7 @@ namespace Lu
 
 	void DeadState::Enter()
 	{
-		//if (!(GetPlayerScript()->GetOwner()->DeleteComponent<Collider2D>()))
-		//	assert(nullptr);
+
 	}
 
 	void DeadState::Exit()

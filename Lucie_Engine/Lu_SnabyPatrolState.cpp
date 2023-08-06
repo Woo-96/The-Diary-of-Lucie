@@ -2,6 +2,8 @@
 #include "Lu_Time.h"
 #include "Lu_SnabyScript.h"
 #include <cstdlib>
+#include "Lu_PlayerScript.h"
+#include "Lu_GameObject.h"
 
 namespace Lu
 {
@@ -16,38 +18,34 @@ namespace Lu
 
 	void SnabyPatrolState::Update()
 	{
-		SetTime(GetTime() + (float)Time::DeltaTime());
-
-		if (GetTime() >= 1.5f)
-		{
-			SetTime(0.f);
-			GetSnabyScript()->ChangeState(eState::Idle);
-		}
-
+		// 패트롤
 		Vector3 vPos = GetTransform()->GetPosition();
 		float fSpeed = GetSnabyScript()->GetInfo().MoveSpeed;
-
 		float distanceToMove = fSpeed * (float)Time::DeltaTime();
 		Vector3 moveVector = GetDir() * distanceToMove;
-
 		vPos += moveVector;
-
 		GetTransform()->SetPosition(vPos);
+
+
+		// 패트롤 -> 아이들
+		ChangeStateAfterTime(1.f, eState::Idle);
+
+
+		// 패트롤 -> 어택
+		if (CalDirToPlayer().Length() < GetSnabyScript()->GetInfo().DetectRange)
+		{
+			GetSnabyScript()->ChangeState(eState::Attack);
+		}
 	}
 
 	void SnabyPatrolState::Enter()
 	{
+		// 애니메이션 방향 결정
+		int rand = std::rand();
 		int iMoveAngle = std::rand() % 360;
+		DetermineAnimDir(iMoveAngle);
 
-		if (45 < iMoveAngle && iMoveAngle <= 135)
-			GetSnabyScript()->SetCurDir(MonsterScript::eAnimDir::Up);
-		else if (135 < iMoveAngle && iMoveAngle <= 225)
-			GetSnabyScript()->SetCurDir(MonsterScript::eAnimDir::Left);
-		else if (225 < iMoveAngle && iMoveAngle <= 315)
-			GetSnabyScript()->SetCurDir(MonsterScript::eAnimDir::Down);
-		else
-			GetSnabyScript()->SetCurDir(MonsterScript::eAnimDir::Right);
-
+		// 진행 방향 계산
 		float Radian = math::DegreeToRadian((float)iMoveAngle);
 
 		float moveX = std::cos(Radian);
@@ -61,6 +59,6 @@ namespace Lu
 
 	void SnabyPatrolState::Exit()
 	{
-
+		SetTime(0.f);
 	}
 }

@@ -60,6 +60,7 @@ namespace Lu
 		bool				m_bInvincible;
 		bool				m_bHitEffect;
 		float				m_InvincibleTime;
+		int					m_Damage;
 
 		Animator*			m_Animator;
 

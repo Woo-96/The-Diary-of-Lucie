@@ -9,8 +9,10 @@ namespace Lu
 		SnabyAttackState();
 		virtual ~SnabyAttackState();
 
+	private:
+		float m_ChangeDist;
+
 	public:
-		virtual void Initialize() override;
 		virtual void Update() override;
 
 	public:
@@ -18,6 +20,6 @@ namespace Lu
 		virtual void Exit() override;
 
 	private:
-		void CreateProjectile();
+		void CreateProjectile(Vector3 _Dir);
 	};
 }

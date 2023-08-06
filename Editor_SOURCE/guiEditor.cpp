@@ -5,6 +5,7 @@
 #include "..\\Engine_SOURCE\\Lu_MeshRenderer.h"
 #include "..\\Engine_SOURCE\\Lu_Material.h"
 #include "..\\Engine_SOURCE\\Lu_Renderer.h"
+#include "..\\Engine_SOURCE\\Lu_Enums.h"
 
 namespace gui
 {
@@ -103,26 +104,31 @@ namespace gui
 	void Editor::DebugRender(const Lu::graphics::DebugMesh& _Mesh)
 	{
 		DebugOjbect* debugObj = m_DebugOjbects[(UINT)_Mesh.Type];
-
-		// 위치 크기 회전 정보를 받아와서
-		// 해당 게임오브젝트위에 그려주면된다.
 		Lu::Transform* tr = debugObj->GetComponent<Lu::Transform>();
 
 		Vector3 pos = _Mesh.Position;
 		pos.z -= 0.01f;
-
 		tr->SetPosition(pos);
-		tr->SetScale(_Mesh.Scale);
 		tr->SetRotation(_Mesh.Rotation);
 
+		if (_Mesh.Type == Lu::enums::eColliderType::Rect)
+		{
+			tr->SetScale(_Mesh.Scale);
+		}
+		else
+		{
+			float radius = _Mesh.Radius;
+			Vector3 scale(radius * 2, radius * 2, 1.0f); // 원의 지름을 스케일로 설정
+			tr->SetScale(scale);
+		}
+
+		// 트랜스폼 업데이트
 		tr->LateUpdate();
 
+		// 색상 결정
 		Lu::MeshRenderer* mr = debugObj->GetComponent<Lu::MeshRenderer>();
 		mr->GetMaterial()->SetScalarParam(VEC4_0, &_Mesh.Color);
 
-		/*ya::MeshRenderer * mr
-			= debugObj->GetComponent<ya::MeshRenderer>();*/
-			// main camera
 		Lu::Camera* mainCamara = renderer::mainCamera;
 
 		Lu::Camera::SetGpuViewMatrix(mainCamara->GetViewMatrix());

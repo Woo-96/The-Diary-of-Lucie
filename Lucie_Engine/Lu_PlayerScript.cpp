@@ -27,6 +27,7 @@ namespace Lu
 		, m_bInvincible(false)
 		, m_bHitEffect(false)
 		, m_InvincibleTime(0.f)
+		, m_Damage(1)
 		, m_Animator(nullptr)
 	{
 		SetName(L"PlayerScript");
@@ -122,7 +123,7 @@ namespace Lu
 		// Hit & Dead
 		if (!m_bInvincible)
 		{
-			m_PlayerInfo.HP -= 1;
+			m_PlayerInfo.HP -= m_Damage;
 
 			if (m_PlayerInfo.HP <= 0)
 			{
@@ -291,6 +292,15 @@ namespace Lu
 
 	void PlayerScript::StateUpdate()
 	{
+		// ġƮ
+		if (Input::GetKeyDown(eKeyCode::G))
+		{
+			if (1 == m_Damage)
+				m_Damage = 0;
+			else
+				m_Damage = 1;
+		}
+
 		StateScript::eState eCurState = m_CurState->GetStateType();
 
 		if (m_bAction || StateScript::eState::Dead == eCurState)

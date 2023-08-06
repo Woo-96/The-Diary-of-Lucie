@@ -61,46 +61,46 @@ namespace Lu
 
 
 			Animator* pAnimator = pPlayer->AddComponent<Animator>();
-			pPlayer->AddComponent<PlayerScript>();
+			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
 
 			//CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 			//pMainCamScript->SetTarget(pPlayer);
 			//pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
-		}
+		
 
-		// Monster : 크기 원본 2배
-		{
+			// Monster : 크기 원본 2배
 			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(-200.f, 200.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
 			pMonster->SetName(L"Snaby");
 
-			MeshRenderer* pMeshRender = pMonster->AddComponent<MeshRenderer>();
+			pMeshRender = pMonster->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SnabyAnimation_Mtrl"));
 
-			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
+			pCollider = pMonster->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(3.f, -7.f));
 			pCollider->SetSize(Vector2(0.3f, 0.8f));
 
-			Animator* pAnimator = pMonster->AddComponent<Animator>();
-			pMonster->AddComponent<SnabyScript>();
-		}
+			pAnimator = pMonster->AddComponent<Animator>();
+			SnabyScript* pSnabyScript = pMonster->AddComponent<SnabyScript>();
+			pSnabyScript->SetTarget(pPlayerScript);
 
-		{
-			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(250.f, -250.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
+	
+			pMonster = object::Instantiate<GameObject>(Vector3(250.f, -250.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
 			pMonster->SetName(L"Snaby2");
 
-			MeshRenderer* pMeshRender = pMonster->AddComponent<MeshRenderer>();
+			pMeshRender = pMonster->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SnabyAnimation_Mtrl"));
 
-			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
+			pCollider = pMonster->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(3.f, -7.f));
 			pCollider->SetSize(Vector2(0.3f, 0.8f));
 
-			Animator* pAnimator = pMonster->AddComponent<Animator>();
-			pMonster->AddComponent<SnabyScript>();
+			pAnimator = pMonster->AddComponent<Animator>();
+			pSnabyScript = pMonster->AddComponent<SnabyScript>();
+			pSnabyScript->SetTarget(pPlayerScript);
 		}
 
 		// 맵 가운데 나무
@@ -123,11 +123,10 @@ namespace Lu
 			pObj->AddComponent<ImmovableScript>();
 		}
 
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);	// 나중에 몬스터 투사체 구현하고 바꿔야함
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);
 	}
 
 	void Nomal1Scene::Update()

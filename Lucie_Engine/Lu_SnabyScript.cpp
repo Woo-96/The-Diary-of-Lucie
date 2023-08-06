@@ -18,7 +18,7 @@ namespace Lu
 		SetName(L"SnabyScript");
 
 		GetInfo().HP = 100;
-		GetInfo().DetectRange = 300.f;
+		GetInfo().DetectRange = 200.f;
 		GetInfo().MoveSpeed = 100.f;
 	}
 
@@ -48,6 +48,8 @@ namespace Lu
 
 	void SnabyScript::Update()
 	{
+		MonsterScript::Update();
+
 		if (GetOwner()->IsDead())
 			return;
 
