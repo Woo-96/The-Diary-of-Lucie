@@ -5,7 +5,7 @@
 namespace Lu
 {
 	class MouseScript;
-
+	class Camera;
 	class Scene : public Entity
 	{
 	public:
@@ -14,7 +14,7 @@ namespace Lu
 
 	private:
 		std::vector<Layer>	m_Layers;
-		class Camera*		m_MainCam;
+		Camera*				m_MainCam;
 		MouseScript*		m_Mouse;
 
 	public:

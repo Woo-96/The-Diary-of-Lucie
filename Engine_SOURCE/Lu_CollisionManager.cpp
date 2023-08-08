@@ -121,66 +121,58 @@ namespace Lu
 		if (eColliderType::Rect == _Left->GetType()
 			&& eColliderType::Rect == _Right->GetType())
 		{
-			// Rect vs Rect 
 			// 0 --- 1
-			// |     |
-			// 3 --- 2
-			Vector3 arrLocalPos[4] =
+			// |  \  | 
+			// 3 --- 2   
+			static const Vector3 arrLocalPos[4]
+				=
 			{
-			   Vector3{-0.5f, 0.5f, 0.0f}
-			   ,Vector3{0.5f, 0.5f, 0.0f}
-			   ,Vector3{0.5f, -0.5f, 0.0f}
-			   ,Vector3{-0.5f, -0.5f, 0.0f}
+			   Vector3(-0.5f, 0.5f, 0.f),
+			   Vector3(0.5f, 0.5f, 0.f),
+			   Vector3(0.5f, -0.5f, 0.f),
+			   Vector3(-0.5f, -0.5f, 0.f)
 			};
 
-			Transform* leftTr = _Left->GetOwner()->GetComponent<Transform>();
-			Transform* rightTr = _Right->GetOwner()->GetComponent<Transform>();
 
-			Matrix leftMatrix = leftTr->GetWorldMatrix();
-			Matrix rightMatrix = rightTr->GetWorldMatrix();
+			// 분리축 구하기
+			Vector3 vAxis[4] = {};
 
-			Vector3 Axis[4] = {};
+			const Matrix& matLeft = _Left->GetFinalTransform();
+			const Matrix& matRight = _Right->GetFinalTransform();
 
-			Vector3 leftScale = Vector3(_Left->GetSize().x, _Left->GetSize().y, 1.0f);
-			Matrix finalLeft = Matrix::CreateScale(leftScale);
-			finalLeft *= leftMatrix;
+			// 분리축 벡터 == 투영벡터
+			vAxis[0] = XMVectorSubtract(XMVector3TransformCoord(arrLocalPos[1], matLeft), XMVector3TransformCoord(arrLocalPos[0], matLeft));
+			vAxis[1] = XMVectorSubtract(XMVector3TransformCoord(arrLocalPos[3], matLeft), XMVector3TransformCoord(arrLocalPos[0], matLeft));
+			vAxis[2] = XMVectorSubtract(XMVector3TransformCoord(arrLocalPos[1], matRight), XMVector3TransformCoord(arrLocalPos[0], matRight));
+			vAxis[3] = XMVectorSubtract(XMVector3TransformCoord(arrLocalPos[3], matRight), XMVector3TransformCoord(arrLocalPos[0], matRight));
 
-			Vector3 rightScale = Vector3(_Right->GetSize().x, _Right->GetSize().y, 1.0f);
-			Matrix finalRight = Matrix::CreateScale(rightScale);
-			finalRight *= rightMatrix;
+			for (int i = 0; i < 4; ++i)
+				vAxis[i].z = 0.f;
 
-			Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
-			Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
-			Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
-			Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
 
-			Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-			Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
-			Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
-			Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+			Vector3 vC = _Left->GetPosition() - _Right->GetPosition();
+			Vector3 vCenterDir = Vector3(vC.x, vC.y, 0.f);
 
-			for (size_t i = 0; i < 4; i++)
-				Axis[i].z = 0.0f;
 
-			Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
-			vc.z = 0.0f;
-
-			Vector3 centerDir = vc;
-			for (size_t i = 0; i < 4; i++)
+			for (int i = 0; i < 4; ++i)
 			{
-				Vector3 vA = Axis[i];
+				Vector3 vA = vAxis[i];
+				vA.Normalize();
 
-				float projDistance = 0.0f;
-				for (size_t j = 0; j < 4; j++)
+				float fProjDist = 0.f;
+				for (int j = 0; j < 4; ++j)
 				{
-					projDistance += fabsf(Axis[j].Dot(vA) / 2.0f);
+					fProjDist += fabsf(vAxis[j].Dot(vA)) / 2.f;
 				}
 
-				if (projDistance < fabsf(centerDir.Dot(vA)))
+				if (fProjDist < fabsf(vCenterDir.Dot(vA)))
+				{
 					return false;
+				}
 			}
 
 			return true;
+
 		}
 
 		// Circle to Circle

@@ -43,7 +43,7 @@ namespace Lu
 		// 애니메이션 방향 결정
 		int rand = std::rand();
 		int iMoveAngle = std::rand() % 360;
-		DetermineAnimDir(iMoveAngle);
+		DetermineAnimDir((float)iMoveAngle);
 
 		// 진행 방향 계산
 		float Radian = math::DegreeToRadian((float)iMoveAngle);

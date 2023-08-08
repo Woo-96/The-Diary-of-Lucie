@@ -6,7 +6,7 @@
 namespace Lu
 {
 	MouseScript::MouseScript()
-		: m_UICam(nullptr)
+		: m_Cam(nullptr)
 		, m_OffsetPos(Vector2(21.f, -23.f))
 	{
 		SetName(L"MouseScript");
@@ -19,14 +19,14 @@ namespace Lu
 
 	void MouseScript::Update()
 	{
-		
+
 	}
 
 	void MouseScript::LateUpdate()
 	{
 		Transform* pTransform = GetOwner()->GetComponent<Transform>();
 		Vector2 vScreenPos = Lu::Input::GetMousePos();
-		Vector3 vWorldPos = m_UICam->ScreenToWorld(vScreenPos);
+		Vector3 vWorldPos = m_Cam->ScreenToWorld(vScreenPos);
 		pTransform->SetPosition(Vector3(vWorldPos.x + m_OffsetPos.x, vWorldPos.y + m_OffsetPos.y, 0.f));
 	}
 }

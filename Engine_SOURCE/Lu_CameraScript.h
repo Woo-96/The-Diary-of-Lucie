@@ -27,10 +27,7 @@ namespace Lu
 			m_WorldResolution = _WorldResolution;
 		}
 
-		void SetTarget(GameObject* _Target)
-		{
-			m_Target = _Target;
-		}
+		void SetTarget(GameObject* _Target);
 
 	public:
 		virtual void Initialize() override;

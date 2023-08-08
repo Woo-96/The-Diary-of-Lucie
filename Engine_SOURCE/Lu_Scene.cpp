@@ -46,19 +46,19 @@ namespace Lu
 			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), eLayerType::Default);
 			pObject->SetName(L"UICam");
 
-			Camera* pCameraCom = pObject->AddComponent<Camera>();
-			pCameraCom->DisableLayerMasks();
-			pCameraCom->TurnLayerMask(eLayerType::UI, true);
-			pCameraCom->TurnLayerMask(eLayerType::Mouse, true);
-			renderer::cameras.push_back(pCameraCom);
+			Camera* pCam = pObject->AddComponent<Camera>();
+			pCam->DisableLayerMasks();
+			pCam->TurnLayerMask(eLayerType::UI, true);
+			pCam->TurnLayerMask(eLayerType::Mouse, true);
+			renderer::cameras.push_back(pCam);
 
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
-			pObject->SetName(L"Mouse");
+			GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
+			pMouse->SetName(L"Mouse");
 
-			m_Mouse = pObject->AddComponent<MouseScript>();
-			m_Mouse->SetUICam(pCameraCom);
+			m_Mouse = pMouse->AddComponent<MouseScript>();
+			m_Mouse->SetCam(pCam);
 
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
 		}

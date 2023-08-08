@@ -11,19 +11,13 @@ namespace Lu
 		virtual ~MouseScript();
 
 	private:
-		Camera* m_UICam;
+		Camera* m_Cam;
 		Vector2 m_OffsetPos;
-		//Vector2	m_MousePos;
-		//Vector2	m_Resolution;
-		//Vector2	m_MouseMove;
-		//bool	m_MouseLDown;
-		//bool	m_MouseLPush;
-		//bool	m_MouseLUp;
 
 	public:
-		void SetUICam(Camera* _UICam)
+		void SetCam(Camera* _Cam)
 		{
-			m_UICam = _UICam;
+			m_Cam = _Cam;
 		}
 
 	public:

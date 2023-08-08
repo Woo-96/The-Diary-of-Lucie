@@ -15,7 +15,7 @@ namespace Lu
 		, m_Size(Vector2::One)
 		, m_Center(Vector2::Zero)
 		, m_CollisionCount(0)
-		, m_bRender(true)
+		, m_FinalTransform(Matrix::Identity)
 	{
 		SetName(L"Collier2D");
 		m_ColliderNumber++;
@@ -27,33 +27,35 @@ namespace Lu
 
 	}
 
-	void Collider2D::Update()
-	{
-		if (Input::GetKeyDown(eKeyCode::K))
-		{
-			if (m_bRender)
-				m_bRender = false;
-			else
-				m_bRender = true;
-		}
-	}
-
 	void Collider2D::LateUpdate()
 	{
 		assert(0 <= m_CollisionCount);
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 
+		// 크기 배율 적용
 		Vector3 scale = tr->GetScale();
 		scale.x *= m_Size.x;
 		scale.y *= m_Size.y;
 
+		// 위치 오프셋 적용
 		Vector3 pos = tr->GetPosition();
 		pos.x += m_Center.x;
 		pos.y += m_Center.y;
 
 		m_Position = pos;
 
+		// 최종 행렬
+		Vector3 rotation = tr->GetRotation();
+		Matrix scaleMatrix = Matrix::CreateScale(scale.x, scale.y, 1.0f); // 스케일 행렬
+		Matrix rotationMatrix = Matrix::CreateRotationX(rotation.x) * // X 축 회전
+			Matrix::CreateRotationY(rotation.y) * // Y 축 회전
+			Matrix::CreateRotationZ(rotation.z);  // Z 축 회전
+		Matrix translationMatrix = Matrix::CreateTranslation(pos.x, pos.y, pos.z); // 이동 행렬
+		m_FinalTransform = scaleMatrix * rotationMatrix * translationMatrix; // 최종 변환 행렬
+
+
+		// 디버그 렌더링 요청
 		graphics::DebugMesh mesh = {};
 		mesh.Position = pos;
 		mesh.Scale = scale;
@@ -68,8 +70,7 @@ namespace Lu
 
 		mesh.Color = vColor;
 
-		if(m_bRender)
-			renderer::PushDebugMeshAttribute(mesh);
+		renderer::PushDebugMeshAttribute(mesh);
 	}
 
 	void Collider2D::OnCollisionEnter(Collider2D* _Other)

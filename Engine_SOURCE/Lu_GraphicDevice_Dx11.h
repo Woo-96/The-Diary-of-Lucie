@@ -34,6 +34,11 @@ namespace Lu::graphics
 			return m_Device.Get();
 		}
 
+		D3D11_VIEWPORT GetViewPort()
+		{
+			return m_ViewPort;
+		}
+
 	public:
 		bool CreateSwapChain(const DXGI_SWAP_CHAIN_DESC* _Desc, HWND _hWnd);
 		bool CreateTexture2D(const D3D11_TEXTURE2D_DESC* _Desc, void* _Data, ID3D11Texture2D** _ppTexture2D);

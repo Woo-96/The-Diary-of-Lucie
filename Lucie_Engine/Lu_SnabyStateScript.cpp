@@ -46,7 +46,7 @@ namespace Lu
 	void SnabyStateScript::DetermineAnimDir(Vector3 _Dir)
 	{
 		float fRadian = atan2(_Dir.y, _Dir.x);
-		int iDegree = math::RadianToDegree(fRadian);
+		int iDegree = (int)(math::RadianToDegree(fRadian));
 
 		if (iDegree > -45 && iDegree <= 45)
 			GetSnabyScript()->SetCurDir(MonsterScript::eAnimDir::Right);

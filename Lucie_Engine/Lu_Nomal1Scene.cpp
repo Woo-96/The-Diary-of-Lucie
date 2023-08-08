@@ -63,10 +63,10 @@ namespace Lu
 			Animator* pAnimator = pPlayer->AddComponent<Animator>();
 			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
 
-			//CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
-			//pMainCamScript->SetTarget(pPlayer);
-			//pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
-		
+			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
+			pMainCamScript->SetTarget(pPlayer);
+
 
 			// Monster : 크기 원본 2배
 			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(-200.f, 200.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);

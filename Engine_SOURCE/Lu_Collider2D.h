@@ -21,8 +21,7 @@ namespace Lu
 		Vector2			m_Center;
 
 		int             m_CollisionCount;
-
-		bool			m_bRender;
+		Matrix			m_FinalTransform;
 
 	public:
 		void SetType(eColliderType _Type) 
@@ -66,8 +65,12 @@ namespace Lu
 			return m_Center;
 		}
 
+		Matrix GetFinalTransform()
+		{
+			return m_FinalTransform;
+		}
+
 	public:
-		virtual void Update() override;
 		virtual void LateUpdate() override;
 
 	public:

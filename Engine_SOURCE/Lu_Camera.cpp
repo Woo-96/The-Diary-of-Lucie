@@ -243,14 +243,14 @@ namespace Lu
 
 	Vector3 Camera::ScreenToWorld(Vector2 _MousePos)
 	{
-		Viewport viewport;
-		viewport.width = (float)application.GetWidth();
-		viewport.height = (float)application.GetHeight();
-		viewport.x = 0;
-		viewport.y = 0;
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-		
-		return viewport.Unproject(Vector3(_MousePos.x, _MousePos.y, 0.f), View, Projection, Matrix::Identity);
+		Matrix mWolrd = Matrix::Identity;
+		D3D11_VIEWPORT DeviceViewPort = graphics::GetDevice()->GetViewPort();
+		Viewport View = Viewport(DeviceViewPort.TopLeftX, DeviceViewPort.TopLeftY, DeviceViewPort.Width, DeviceViewPort.Height, DeviceViewPort.MinDepth, DeviceViewPort.MaxDepth);
+
+		Matrix mProj = GetProjectionMatrix();
+		Matrix mView = GetViewMatrix();
+		Vector3 vMousePos = Vector3(_MousePos.x, _MousePos.y, 0.f);
+
+		return View.Unproject(vMousePos, mProj, mView, mWolrd);
 	}
 }

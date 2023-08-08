@@ -16,8 +16,8 @@ namespace Lu::graphics
 	{
 		m_Target->BindUnorderedAccessViews(0);
 		 
-		m_GroupX = m_Target->GetWidth() / m_ThreadGroupCountX + 1;
-		m_GroupY = m_Target->GetHeight() / m_ThreadGroupCountY + 1;
+		m_GroupX = (UINT)m_Target->GetWidth() / m_ThreadGroupCountX + 1;
+		m_GroupY = (UINT)m_Target->GetHeight() / m_ThreadGroupCountY + 1;
 		m_GroupZ = 1;
 	}
 

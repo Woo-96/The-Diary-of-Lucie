@@ -24,6 +24,22 @@ namespace Lu
 
 	}
 
+	void CameraScript::SetTarget(GameObject* _Target)
+	{
+		m_Target = _Target;
+
+		m_Speed = 3.f;
+
+		if (m_Target != nullptr)
+		{
+			Transform* pCameraTransform = GetOwner()->GetComponent<Transform>();
+			Vector3 vPlayerPos = m_Target->GetComponent<Transform>()->GetPosition();
+
+			// 카메라 위치 설정
+			pCameraTransform->SetPosition(vPlayerPos);
+		}
+	}
+
 	void CameraScript::Initialize()
 	{
 		m_WindowResolution = Vector2((float)application.GetWidth(), (float)application.GetHeight());
@@ -74,8 +90,6 @@ namespace Lu
 
 		else
 		{
-			static float fSpeed = 2.f;
-
 			Vector3 vPlayerPos = m_Target->GetComponent<Transform>()->GetPosition();
 			Vector3 vPos = GetOwner()->GetComponent<Transform>()->GetPosition();
 			Vector3 vMoveDist = vPlayerPos - vPos;
@@ -85,8 +99,8 @@ namespace Lu
 				vMoveDist.y = 0.f;
 			}
 
-			vPos.x += vMoveDist.x * fSpeed * (float)Time::DeltaTime();
-			vPos.y += vMoveDist.y * fSpeed * (float)Time::DeltaTime();
+			vPos.x += vMoveDist.x * m_Speed * (float)Time::DeltaTime();
+			vPos.y += vMoveDist.y * m_Speed * (float)Time::DeltaTime();
 
 			if (0.f != m_WorldResolution.x && 0.f != m_WorldResolution.y)
 			{
