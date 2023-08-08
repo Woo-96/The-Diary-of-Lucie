@@ -11,8 +11,9 @@ namespace Lu
 		enum class eState
 		{
 			Idle,
-			Patrol,
-			Attack,
+			Trace,
+			Attack_Bubble,
+			Attack_Circle,
 			Dead,
 			End
 		};

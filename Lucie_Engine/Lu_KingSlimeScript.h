@@ -17,10 +17,10 @@ namespace Lu
 
 	private:
 		std::map<KingSlimeStateScript::eState, KingSlimeStateScript*> m_State;
-		KingSlimeStateScript* m_CurState;
+		KingSlimeStateScript*			m_CurState;
 		KingSlimeStateScript::eState	m_PrevState;
 
-		PlayerScript* m_Target;
+		PlayerScript*					m_Target;
 
 	public:
 		void SetTarget(PlayerScript* _Target)

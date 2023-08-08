@@ -2,6 +2,8 @@
 #include "Lu_Object.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
+#include "Lu_Collider2D.h"
+#include "Lu_KingSlimeScript.h"
 
 #include "Lu_Input.h"
 
@@ -56,6 +58,25 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
+		}
+
+		// KingSlime
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 200.f, 500.f), Vector3(720.f, 720.f, 100.f), eLayerType::Monster);
+			pObject->SetName(L"KingSlime");
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"KingSlimeAnimation_Mtrl"));
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pCollider->SetCenter(Vector2(0.f, -200.f));
+			pCollider->SetSize(Vector2(0.5f, 0.4f));
+
+			Animator* pAnimator = pObject->AddComponent<Animator>();
+			KingSlimeScript* pKingSlimeScript = pObject->AddComponent<KingSlimeScript>();
+			//pKingSlimeScript->SetTarget(pPlayerScript);
 		}
 	}
 

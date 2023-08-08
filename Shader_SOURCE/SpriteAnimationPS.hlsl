@@ -15,6 +15,7 @@ struct VSOut
     float2 UV : TEXCOORD;
 };
 
+#define bSampler        g_int_2
 #define bINVINCIBLE     g_int_3
 #define BLINK           g_float_3
 
@@ -41,7 +42,12 @@ float4 main(VSOut In) : SV_TARGET
             color.a *= BLINK;
         }
         else
-            color = atlasTexture.Sample(pointSampler, UV);
+        {
+            if (bSampler)
+                color = atlasTexture.Sample(anisotropicSampler, UV);
+            else
+                color = atlasTexture.Sample(pointSampler, UV);
+        }
     }
     else
     {
