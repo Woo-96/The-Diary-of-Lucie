@@ -4,12 +4,18 @@
 #include "Lu_Resources.h"
 #include "Lu_Collider2D.h"
 #include "Lu_KingSlimeScript.h"
+#include "Lu_Time.h"
+#include "Lu_Object.h"
+#include "Lu_CameraScript.h"
+#include "Lu_Renderer.h"
 
 #include "Lu_Input.h"
 
 namespace Lu
 {
 	MidBossScene::MidBossScene()
+		: m_BossName(nullptr)
+		, m_Time(0.f)
 	{
 		SetName(L"MidBossSceneScript");
 	}
@@ -52,31 +58,60 @@ namespace Lu
 		}
 
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"MidBoss_Name");
+			m_BossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			m_BossName->SetName(L"MidBoss_Name");
 
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			MeshRenderer* pMeshRender = m_BossName->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
 		}
 
-		// KingSlime
+		// Player & KingSlime
 		{
+			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(600.f, -150.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
+			pPlayer->SetName(L"Player");
+
+			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
+
+			// 피격 판정용 충돌체
+			Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
+			pCollider->SetName(L"ImmovableCollider");
+			pCollider->SetType(eColliderType::Rect);
+			pCollider->SetCenter(Vector2(2.f, 3.f));
+			pCollider->SetSize(Vector2(0.2f, 0.42f));
+
+			pCollider = pPlayer->AddComponent<Collider2D>();
+			pCollider->SetName(L"HitCollider");
+			pCollider->SetType(eColliderType::Rect);
+			pCollider->SetCenter(Vector2(2.f, -29.f));
+			pCollider->SetSize(Vector2(0.1f, 0.1f));
+
+			Animator* pAnimator = pPlayer->AddComponent<Animator>();
+			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
+
+			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
+			pMainCamScript->SetTarget(pPlayer);
+
+
+			// Boss
 			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 200.f, 500.f), Vector3(720.f, 720.f, 100.f), eLayerType::Monster);
 			pObject->SetName(L"KingSlime");
 
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"KingSlimeAnimation_Mtrl"));
 
-			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider = pObject->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(0.f, -200.f));
 			pCollider->SetSize(Vector2(0.5f, 0.4f));
 
-			Animator* pAnimator = pObject->AddComponent<Animator>();
+			pAnimator = pObject->AddComponent<Animator>();
 			KingSlimeScript* pKingSlimeScript = pObject->AddComponent<KingSlimeScript>();
-			//pKingSlimeScript->SetTarget(pPlayerScript);
+			pKingSlimeScript->SetTarget(pPlayerScript);
 		}
 	}
 
@@ -88,6 +123,18 @@ namespace Lu
 		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
 			SceneManager::LoadScene(L"NextFloorScene");
+		}
+
+		// 임시, 이름이 서서히 나타났다가 서서히 사라져야하는 것으로 알고있음..
+		if (nullptr != m_BossName)
+		{
+			m_Time += (float)Time::DeltaTime();
+			if (3.f <= m_Time)
+			{
+				m_Time = 0.f;
+				object::Destroy(m_BossName);
+				m_BossName = nullptr;
+			}
 		}
 	}
 

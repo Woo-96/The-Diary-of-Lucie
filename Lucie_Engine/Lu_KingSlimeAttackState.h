@@ -3,11 +3,11 @@
 
 namespace Lu
 {
-	class KingSlimeAttackCircleState : public KingSlimeStateScript
+	class KingSlimeAttackState : public KingSlimeStateScript
 	{
 	public:
-		KingSlimeAttackCircleState();
-		virtual ~KingSlimeAttackCircleState();
+		KingSlimeAttackState();
+		virtual ~KingSlimeAttackState();
 
 	public:
 		virtual void Update() override;

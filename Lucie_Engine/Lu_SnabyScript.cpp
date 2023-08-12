@@ -19,6 +19,7 @@ namespace Lu
 		SetName(L"SnabyScript");
 
 		GetInfo().HP = 100;
+		GetInfo().MaxHP = 100;
 		GetInfo().DetectRange = 200.f;
 		GetInfo().MoveSpeed = 100.f;
 	}

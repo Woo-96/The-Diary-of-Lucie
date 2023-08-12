@@ -15,7 +15,8 @@ namespace Lu
 
 	void KingSlimeIdleState::Update()
 	{
-
+		// 아이들 -> 트레이스
+		ChangeStateAfterTime(3.f, eState::Trace);
 	}
 
 	void KingSlimeIdleState::Enter()
@@ -25,6 +26,6 @@ namespace Lu
 
 	void KingSlimeIdleState::Exit()
 	{
-
+		SetTime(0.f);
 	}
 }

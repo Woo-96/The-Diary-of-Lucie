@@ -3,11 +3,16 @@
 
 namespace Lu
 {
+	class GameObject;
 	class MidBossScene : public StageScene
 	{
 	public:
 		MidBossScene();
 		virtual ~MidBossScene();
+
+	private:
+		GameObject* m_BossName;
+		float		m_Time;
 
 	public:
 		virtual void Initialize() override;

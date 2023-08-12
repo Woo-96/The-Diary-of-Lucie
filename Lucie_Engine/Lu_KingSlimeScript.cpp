@@ -7,8 +7,7 @@
 
 #include "Lu_KingSlimeIdleState.h"
 #include "Lu_KingSlimeTraceState.h"
-#include "Lu_KingSlimeAttackBubbleState.h"
-#include "Lu_KingSlimeAttackCircleState.h"
+#include "Lu_KingSlimeAttackState.h"
 #include "Lu_KingSlimeDeadState.h"
 
 namespace Lu
@@ -20,7 +19,8 @@ namespace Lu
 	{
 		SetName(L"KingSlimeScript");
 
-		GetInfo().HP = 100;
+		GetInfo().HP = 300;
+		GetInfo().MaxHP = 300;
 		GetInfo().DetectRange = 200.f;
 		GetInfo().MoveSpeed = 100.f;
 	}
@@ -42,8 +42,7 @@ namespace Lu
 
 		AddState(new KingSlimeIdleState);
 		AddState(new KingSlimeTraceState);
-		AddState(new KingSlimeAttackBubbleState);
-		AddState(new KingSlimeAttackCircleState);
+		AddState(new KingSlimeAttackState);
 		AddState(new KingSlimeDeadState);
 
 		m_CurState = GetStateScript(KingSlimeStateScript::eState::Idle);
@@ -59,9 +58,6 @@ namespace Lu
 		AnimationUpdate();
 
 		m_PrevState = m_CurState->GetStateType();
-
-
-		GetAnimator()->PlayAnimation(L"KingSlime_Dead", true);
 	}
 
 	void KingSlimeScript::OnCollisionEnter(Collider2D* _Other)
@@ -109,10 +105,14 @@ namespace Lu
 		GetAnimator()->Create(L"KingSlime_Move_Down", pAtlas, Vector2(0.f, 1440.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 
 		// Jump
-		GetAnimator()->Create(L"KingSlime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.1f);
-		GetAnimator()->Create(L"KingSlime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.1f);
-		GetAnimator()->Create(L"KingSlime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.1f);
-		GetAnimator()->Create(L"KingSlime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.1f);
+		GetAnimator()->Create(L"KingSlime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Left") = std::bind(&KingSlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"KingSlime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Right") = std::bind(&KingSlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"KingSlime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Up") = std::bind(&KingSlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"KingSlime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Down") = std::bind(&KingSlimeScript::CompleteAction, this);
 
 		// Dead
 		GetAnimator()->Create(L"KingSlime_Dead", pAtlas, Vector2(0.f, 7200.f), Vector2(360.f, 360.f), 1, Vector2(360.f, 360.f), Vector2::Zero, 1.f);
@@ -142,7 +142,7 @@ namespace Lu
 
 	void KingSlimeScript::CompleteAction()
 	{
-		ChangeState(KingSlimeStateScript::eState::Idle);
+		ChangeState(KingSlimeStateScript::eState::Trace);
 	}
 
 	void KingSlimeScript::AnimationUpdate()
@@ -198,7 +198,7 @@ namespace Lu
 			}
 		}
 		break;
-		case KingSlimeStateScript::eState::Attack_Bubble:
+		case KingSlimeStateScript::eState::Attack:
 		{
 			switch (eCurDir)
 			{
@@ -223,9 +223,6 @@ namespace Lu
 			GetAnimator()->PlayAnimation(L"KingSlime_Dead", true);
 			break;
 		}
-
-		bool bSamplerChange = true;
-		//GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_2, &bSamplerChange);
 	}
 
 	void KingSlimeScript::ChangeState(KingSlimeStateScript::eState _NextState)

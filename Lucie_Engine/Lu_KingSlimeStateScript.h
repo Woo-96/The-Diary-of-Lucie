@@ -12,8 +12,7 @@ namespace Lu
 		{
 			Idle,
 			Trace,
-			Attack_Bubble,
-			Attack_Circle,
+			Attack,
 			Dead,
 			End
 		};

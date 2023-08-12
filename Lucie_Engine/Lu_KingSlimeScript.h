@@ -22,6 +22,9 @@ namespace Lu
 
 		PlayerScript*					m_Target;
 
+		float							m_Time;
+		bool							m_bAttack;
+
 	public:
 		void SetTarget(PlayerScript* _Target)
 		{
@@ -47,6 +50,7 @@ namespace Lu
 		KingSlimeStateScript* GetStateScript(KingSlimeStateScript::eState _State);
 		void AddState(KingSlimeStateScript* _State);
 		void CompleteAction();
+		void CircleAttack();
 
 	protected:
 		virtual void CreateAnimation() override;

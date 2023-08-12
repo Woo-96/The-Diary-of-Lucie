@@ -158,11 +158,8 @@
     <ClCompile Include="Lu_KingSlimeTraceState.cpp">
       <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Trace</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_KingSlimeAttackBubbleState.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack_Bubble</Filter>
-    </ClCompile>
-    <ClCompile Include="Lu_KingSlimeAttackCircleState.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack_Circle</Filter>
+    <ClCompile Include="Lu_KingSlimeAttackState.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeDeadState.cpp">
       <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State</Filter>
@@ -332,11 +329,8 @@
     <ClInclude Include="Lu_KingSlimeTraceState.h">
       <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Trace</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_KingSlimeAttackBubbleState.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack_Bubble</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_KingSlimeAttackCircleState.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack_Circle</Filter>
+    <ClInclude Include="Lu_KingSlimeAttackState.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeDeadState.h">
       <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State</Filter>
@@ -523,14 +517,11 @@
     <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Trace">
       <UniqueIdentifier>{525618f1-0998-44b8-bc2e-ce80e2e11e90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack_Bubble">
-      <UniqueIdentifier>{a8d15d26-13d5-4965-aba0-463e76bab7b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack_Circle">
-      <UniqueIdentifier>{b24adfc5-48c1-4d01-9bf5-40ed5970a793}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State">
       <UniqueIdentifier>{45a9242f-9578-4506-a683-9581a58de092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack">
+      <UniqueIdentifier>{a8d15d26-13d5-4965-aba0-463e76bab7b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

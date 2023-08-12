@@ -10,6 +10,7 @@ namespace Lu
         struct tMonsterInfo
         {
             int     HP;
+            int     MaxHP;
             float   DetectRange;
             float   MoveSpeed;
         };

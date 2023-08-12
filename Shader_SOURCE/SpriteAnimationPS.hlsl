@@ -43,10 +43,7 @@ float4 main(VSOut In) : SV_TARGET
         }
         else
         {
-            if (bSampler)
-                color = atlasTexture.Sample(anisotropicSampler, UV);
-            else
-                color = atlasTexture.Sample(pointSampler, UV);
+            color = atlasTexture.Sample(pointSampler, UV);
         }
     }
     else

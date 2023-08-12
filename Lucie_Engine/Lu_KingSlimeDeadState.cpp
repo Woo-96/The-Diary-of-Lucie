@@ -1,4 +1,7 @@
 #include "Lu_KingSlimeDeadState.h"
+#include "Lu_KingSlimeScript.h"
+#include "Lu_GameObject.h"
+#include "Lu_Object.h"
 
 namespace Lu
 {
@@ -20,11 +23,12 @@ namespace Lu
 
 	void KingSlimeDeadState::Enter()
 	{
-
+		if (!(GetKingSlimeScript()->GetOwner()->DeleteComponent<Collider2D>()))
+			assert(nullptr);
 	}
 
 	void KingSlimeDeadState::Exit()
 	{
-
+		object::Destroy(GetKingSlimeScript()->GetOwner());
 	}
 }
