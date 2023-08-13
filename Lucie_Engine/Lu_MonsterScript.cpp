@@ -9,7 +9,7 @@ namespace Lu
 		: m_Animator(nullptr)
 		, m_MonsterInfo{}
 		, m_AnimDir(eAnimDir::Down)
-		, m_PrevAnimDir(eAnimDir::Down)
+		, m_PrevAnimDir(eAnimDir::None)
 	{
 		SetName(L"MonsterScript");
 	}

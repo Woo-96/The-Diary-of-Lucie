@@ -30,5 +30,8 @@ namespace Lu
 	void KingSlimeDeadState::Exit()
 	{
 		object::Destroy(GetKingSlimeScript()->GetOwner());
+
+		// 빅 슬라임 2마리 스폰
+
 	}
 }

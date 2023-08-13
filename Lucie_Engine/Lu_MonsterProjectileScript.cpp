@@ -35,12 +35,8 @@ namespace Lu
 		}
 
 		Vector3 vPos = m_Transform->GetPosition();
-
-		float distanceToMove = m_AttackSpeed * (float)Time::DeltaTime();
-		Vector3 moveVector = m_AttackDir * distanceToMove;
-
+		Vector3 moveVector = m_AttackDir * m_AttackSpeed * (float)Time::DeltaTime();
 		vPos += moveVector;
-
 		m_Transform->SetPosition(vPos);
 	}
 

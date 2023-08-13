@@ -161,9 +161,11 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h" />
     <ClInclude Include="Lu_AttackState.h" />
+    <ClInclude Include="Lu_BossCircleProjectile.h" />
     <ClInclude Include="Lu_BossScene.h" />
     <ClInclude Include="Lu_BossWayScene.h" />
     <ClInclude Include="Lu_BowProjectile.h" />
+    <ClInclude Include="Lu_BubbleProjectile.h" />
     <ClInclude Include="Lu_ButtonScript.h" />
     <ClInclude Include="Lu_CircleProjectile.h" />
     <ClInclude Include="Lu_DashState.h" />
@@ -219,9 +221,11 @@
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp" />
     <ClCompile Include="Lucie_Engine.cpp" />
     <ClCompile Include="Lu_AttackState.cpp" />
+    <ClCompile Include="Lu_BossCircleProjectile.cpp" />
     <ClCompile Include="Lu_BossScene.cpp" />
     <ClCompile Include="Lu_BossWayScene.cpp" />
     <ClCompile Include="Lu_BowProjectile.cpp" />
+    <ClCompile Include="Lu_BubbleProjectile.cpp" />
     <ClCompile Include="Lu_ButtonScript.cpp" />
     <ClCompile Include="Lu_CircleProjectile.cpp" />
     <ClCompile Include="Lu_DashState.cpp" />

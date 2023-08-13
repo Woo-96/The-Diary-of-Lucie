@@ -3,11 +3,20 @@
 
 namespace Lu
 {
-	class CircleProjectile : public MonsterProjectileScript
-	{
-	public:
-		CircleProjectile();
-		virtual ~CircleProjectile();
+    class BossCircleProjectile : public MonsterProjectileScript
+    {
+    public:
+        BossCircleProjectile();
+        virtual ~BossCircleProjectile();
+
+    private:
+        Vector3 m_CenterPos;
+
+    public:
+        void SetCenterPos(Vector3 _CenterPos)
+        {
+            m_CenterPos = _CenterPos;
+        }
 
     public:
         virtual void Initialize() override;
@@ -17,5 +26,5 @@ namespace Lu
         virtual void OnCollisionEnter(Collider2D* other) override;
         virtual void OnCollisionStay(Collider2D* other) override;
         virtual void OnCollisionExit(Collider2D* other) override;
-	};
+    };
 }

@@ -4,6 +4,9 @@
 #include "Lu_Resources.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_MeshRenderer.h"
+#include "Lu_Time.h"
+#include "Lu_Object.h"
+#include "Lu_CircleProjectile.h"
 
 #include "Lu_KingSlimeIdleState.h"
 #include "Lu_KingSlimeTraceState.h"
@@ -16,13 +19,15 @@ namespace Lu
 		: m_CurState(nullptr)
 		, m_PrevState(KingSlimeStateScript::eState::End)
 		, m_Target(nullptr)
+		, m_Time(13.f)
+		, m_bAttack(false)
 	{
 		SetName(L"KingSlimeScript");
 
 		GetInfo().HP = 300;
 		GetInfo().MaxHP = 300;
 		GetInfo().DetectRange = 200.f;
-		GetInfo().MoveSpeed = 100.f;
+		GetInfo().MoveSpeed = 150.f;
 	}
 
 	KingSlimeScript::~KingSlimeScript()
@@ -55,9 +60,11 @@ namespace Lu
 			return;
 
 		m_CurState->Update();
+		CircleAttack();
 		AnimationUpdate();
 
 		m_PrevState = m_CurState->GetStateType();
+		SetPrevDir(GetCurDir());
 	}
 
 	void KingSlimeScript::OnCollisionEnter(Collider2D* _Other)
@@ -105,13 +112,13 @@ namespace Lu
 		GetAnimator()->Create(L"KingSlime_Move_Down", pAtlas, Vector2(0.f, 1440.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 
 		// Jump
-		GetAnimator()->Create(L"KingSlime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"KingSlime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Left") = std::bind(&KingSlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"KingSlime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"KingSlime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Right") = std::bind(&KingSlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"KingSlime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"KingSlime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Up") = std::bind(&KingSlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"KingSlime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"KingSlime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->CompleteEvent(L"KingSlime_Jump_Down") = std::bind(&KingSlimeScript::CompleteAction, this);
 
 		// Dead
@@ -143,6 +150,64 @@ namespace Lu
 	void KingSlimeScript::CompleteAction()
 	{
 		ChangeState(KingSlimeStateScript::eState::Trace);
+	}
+
+	void KingSlimeScript::CircleAttack()
+	{
+		if (!m_bAttack)
+		{
+			// 최초 스폰 13초 후 Circle 첫 공격
+			m_Time -= (float)Time::DeltaTime();
+			if (m_Time <= 0.f)
+			{
+				m_bAttack = true;
+				m_Time = 0.f;
+			}
+		}
+		else
+		{
+			// 첫 공격 이후 3초마다 Circle 발사
+			m_Time += (float)Time::DeltaTime();
+			if (m_Time >= 3.f)
+			{
+				m_Time = 0.f;
+
+				Vector3 vBossPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+				vBossPos.y -= 150.f;
+				vBossPos.z = 600.f;
+
+				const int numProjectiles = 8;
+				const float angleIncrement = 360.0f / numProjectiles; // 8방향으로 퍼지도록 각도 간격 계산
+
+				// 써클 투사체 생성
+				for (int i = 0; i < numProjectiles; ++i)
+				{
+					GameObject* pProjectile = object::Instantiate<GameObject>(vBossPos, Vector3(80.f, 80.f, 100.f), eLayerType::MonsterProjectile);
+					pProjectile->SetName(L"CircleProjectile");
+
+					MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
+					pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+					pMeshRender->SetMaterial(Resources::Find<Material>(L"MonsterProjectile_BossCircle_Mtrl"));
+
+					Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
+					pCollider->SetType(eColliderType::Rect);
+					pCollider->SetSize(Vector2(0.6f, 0.6f));
+
+					CircleProjectile* pProjectileScript = pProjectile->AddComponent<CircleProjectile>();
+					pProjectileScript->SetMonsterScript((MonsterScript*)this);
+					pProjectileScript->SetTransform(pProjectile->GetComponent<Transform>());
+					pProjectileScript->SetSpeed(300.f);
+
+					float angle = i * angleIncrement; // 투사체의 방향을 결정하는 각도 계산
+					float angleInRadians = DegreeToRadian(angle); // 각도를 라디안으로 변환
+					// 삼각함수를 이용하여 방향 벡터 계산
+					float cosAngle = cos(angleInRadians);
+					float sinAngle = sin(angleInRadians);
+					Vector3 forwardDirection(cosAngle, sinAngle, 0.f); // 투사체가 전진할 방향 벡터 계산
+					pProjectileScript->SetDir(forwardDirection);
+				}
+			}
+		}
 	}
 
 	void KingSlimeScript::AnimationUpdate()

@@ -29,7 +29,6 @@ namespace Lu
 		// 애니메이션 업데이트
 		DetermineAnimDir(vMoveDir);
 
-
 		// 트레이스 -> 어택
 		ChangeStateAfterTime(10.f, eState::Attack);
 	}

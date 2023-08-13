@@ -164,6 +164,12 @@
     <ClCompile Include="Lu_KingSlimeDeadState.cpp">
       <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_BubbleProjectile.cpp">
+      <Filter>Contents\Script\Monster\MonsterProjectile\Bubble</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BossCircleProjectile.cpp">
+      <Filter>Contents\Script\Monster\MonsterProjectile\BossCircle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -334,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeDeadState.h">
       <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BubbleProjectile.h">
+      <Filter>Contents\Script\Monster\MonsterProjectile\Bubble</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BossCircleProjectile.h">
+      <Filter>Contents\Script\Monster\MonsterProjectile\BossCircle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -522,6 +534,12 @@
     </Filter>
     <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack">
       <UniqueIdentifier>{a8d15d26-13d5-4965-aba0-463e76bab7b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\MonsterProjectile\Bubble">
+      <UniqueIdentifier>{56de495d-b637-4eb9-af6a-00a37ac84c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\MonsterProjectile\BossCircle">
+      <UniqueIdentifier>{a014b8bc-313a-4118-b0b3-971058c9e489}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

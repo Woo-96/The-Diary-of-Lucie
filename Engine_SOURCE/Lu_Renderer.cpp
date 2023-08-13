@@ -740,7 +740,21 @@ namespace renderer
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MonsterProjectile_Circle_Mtrl", material);
-	}
+	
+		texture = Resources::Load<Texture>(L"MonsterProjectile_Bubble_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\Bubble.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterProjectile_Bubble_Mtrl", material);
+
+		texture = Resources::Load<Texture>(L"MonsterProjectile_BossCircle_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\BossCircle.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterProjectile_BossCircle_Mtrl", material);
+}
 
 	void Initialize()
 	{

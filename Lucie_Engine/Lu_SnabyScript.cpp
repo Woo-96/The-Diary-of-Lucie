@@ -59,6 +59,7 @@ namespace Lu
 		AnimationUpdate();
 
 		m_PrevState = m_CurState->GetStateType();
+		SetPrevDir(GetCurDir());
 	}
 
 	void SnabyScript::OnCollisionEnter(Collider2D* _Other)

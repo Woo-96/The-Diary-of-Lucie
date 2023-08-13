@@ -17,6 +17,7 @@ namespace Lu
 
         enum class eAnimDir
         {
+            None,
             Left,
             Right,
             Up,
@@ -37,6 +38,11 @@ namespace Lu
         void SetCurDir(eAnimDir _Dir)
         {
             m_AnimDir = _Dir;
+        }
+
+        void SetPrevDir(eAnimDir _Dir)
+        {
+            m_PrevAnimDir = _Dir;
         }
 
     public:
