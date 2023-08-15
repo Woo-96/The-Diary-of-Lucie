@@ -146,29 +146,65 @@
     <ClCompile Include="Lu_CircleProjectile.cpp">
       <Filter>Contents\Script\Monster\MonsterProjectile\Circle</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_KingSlimeScript.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_KingSlimeStateScript.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeIdleState.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Idle</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Idle</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeTraceState.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Trace</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Trace</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeAttackState.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Attack</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeDeadState.cpp">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Dead</Filter>
     </ClCompile>
     <ClCompile Include="Lu_BubbleProjectile.cpp">
       <Filter>Contents\Script\Monster\MonsterProjectile\Bubble</Filter>
     </ClCompile>
     <ClCompile Include="Lu_BossCircleProjectile.cpp">
       <Filter>Contents\Script\Monster\MonsterProjectile\BossCircle</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_KingSlimeScript.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BigSlimeScript.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BigSlimeStateScript.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BigSlimeIdleState.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BigSlimeAttackState.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BigSlimeTraceState.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Trace</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_BigSlimeDeadState.cpp">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Dead</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimeScript.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimeStateScript.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimeIdleState.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimePatrolState.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Patrol</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimeAttackState.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimeDeadState.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Dead</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,29 +359,65 @@
     <ClInclude Include="Lu_CircleProjectile.h">
       <Filter>Contents\Script\Monster\MonsterProjectile\Circle</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_KingSlimeScript.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime</Filter>
-    </ClInclude>
     <ClInclude Include="Lu_KingSlimeStateScript.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeIdleState.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Idle</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Idle</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeTraceState.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Trace</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Trace</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeAttackState.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Attack</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeDeadState.h">
-      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State</Filter>
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Dead</Filter>
     </ClInclude>
     <ClInclude Include="Lu_BubbleProjectile.h">
       <Filter>Contents\Script\Monster\MonsterProjectile\Bubble</Filter>
     </ClInclude>
     <ClInclude Include="Lu_BossCircleProjectile.h">
       <Filter>Contents\Script\Monster\MonsterProjectile\BossCircle</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_KingSlimeScript.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\KingSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BigSlimeScript.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BigSlimeStateScript.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BigSlimeIdleState.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BigSlimeAttackState.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BigSlimeTraceState.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_BigSlimeDeadState.h">
+      <Filter>Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeScript.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeStateScript.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeIdleState.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimePatrolState.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Patrol</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeAttackState.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeDeadState.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Dead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -517,29 +589,65 @@
     <Filter Include="Contents\Script\Monster\Boss\KingSlime">
       <UniqueIdentifier>{bef7b297-5352-4e8b-b68b-4adba66e9c00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM">
-      <UniqueIdentifier>{a256a324-f0c4-4f60-a05d-b9275250fd1d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\Monster\Boss\Ent">
       <UniqueIdentifier>{400690c1-48c3-43fe-aa82-c3a2e0b99730}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Idle">
-      <UniqueIdentifier>{9fa809f4-7c04-462c-8d40-3b01026e8eb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Trace">
-      <UniqueIdentifier>{525618f1-0998-44b8-bc2e-ce80e2e11e90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Dead_State">
-      <UniqueIdentifier>{45a9242f-9578-4506-a683-9581a58de092}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime_FSM\KingSlime_Attack">
-      <UniqueIdentifier>{a8d15d26-13d5-4965-aba0-463e76bab7b8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\Monster\MonsterProjectile\Bubble">
       <UniqueIdentifier>{56de495d-b637-4eb9-af6a-00a37ac84c50}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\Monster\MonsterProjectile\BossCircle">
       <UniqueIdentifier>{a014b8bc-313a-4118-b0b3-971058c9e489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\BigSlime">
+      <UniqueIdentifier>{1ff0d9dd-2bee-4c0c-97ea-9302b29235d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime">
+      <UniqueIdentifier>{34f9a04f-75b1-4662-9793-a99e99a39ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM">
+      <UniqueIdentifier>{a256a324-f0c4-4f60-a05d-b9275250fd1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Idle">
+      <UniqueIdentifier>{9fa809f4-7c04-462c-8d40-3b01026e8eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Trace">
+      <UniqueIdentifier>{525618f1-0998-44b8-bc2e-ce80e2e11e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Attack">
+      <UniqueIdentifier>{a8d15d26-13d5-4965-aba0-463e76bab7b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM">
+      <UniqueIdentifier>{375ff85e-f01e-4462-8d0a-37c1fcc81f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Idle">
+      <UniqueIdentifier>{3560b947-5f1f-4edd-8c82-486ce0aa771a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Attack">
+      <UniqueIdentifier>{3296b4e8-134e-4b91-9238-45a3f5271985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Trace">
+      <UniqueIdentifier>{4773f192-22cd-41b2-ab10-413160fd7be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\BigSlime\BigSlime_FSM\BigSlime_Dead">
+      <UniqueIdentifier>{f7dce8b2-1ed5-4740-a32f-3b11670f0b18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Dead">
+      <UniqueIdentifier>{45a9242f-9578-4506-a683-9581a58de092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM">
+      <UniqueIdentifier>{0306f5d6-2954-4141-83bd-c85f71add0b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Idle">
+      <UniqueIdentifier>{7e0d2ad1-827b-41bb-b6f5-40b0eeeedd4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Patrol">
+      <UniqueIdentifier>{7d668733-47f9-4b9e-9fc7-41a302ff11b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Attack">
+      <UniqueIdentifier>{13488631-c35a-48f7-a441-11d78b37884d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Dead">
+      <UniqueIdentifier>{22fe5110-f5ec-425c-8b33-d4a002b4fffb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

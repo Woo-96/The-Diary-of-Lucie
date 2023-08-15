@@ -428,7 +428,7 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"KingSlimeAnimation_Mtrl", material);
+		Resources::Insert(L"SlimeAnimation_Mtrl", material);
 
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 
@@ -748,12 +748,19 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MonsterProjectile_Bubble_Mtrl", material);
 
-		texture = Resources::Load<Texture>(L"MonsterProjectile_BossCircle_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\BossCircle.png");
+		texture = Resources::Load<Texture>(L"MonsterProjectile_BossCircle_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\SlimeCircle.png");
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MonsterProjectile_BossCircle_Mtrl", material);
+
+		texture = Resources::Load<Texture>(L"BigSlimeJump_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\BigSlimeJump.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BigSlimeJump_Mtrl", material);
 }
 
 	void Initialize()

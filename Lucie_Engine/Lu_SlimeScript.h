@@ -1,26 +1,26 @@
 #pragma once
 #include "Lu_MonsterScript.h"
 #include "Lu_ScriptEnums.h"
-#include "Lu_KingSlimeStateScript.h"
+#include "Lu_SlimeStateScript.h"
 
 namespace Lu
 {
 	class PlayerScript;
-	class KingSlimeScript : public MonsterScript
+	class SlimeScript : public MonsterScript
 	{
 	public:
-		KingSlimeScript();
-		virtual ~KingSlimeScript();
+
+
+	public:
+		SlimeScript();
+		virtual ~SlimeScript();
 
 	private:
-		std::map<KingSlimeStateScript::eState, KingSlimeStateScript*> m_State;
-		KingSlimeStateScript*			m_CurState;
-		KingSlimeStateScript::eState	m_PrevState;
+		std::map<SlimeStateScript::eState, SlimeStateScript*> m_State;
+		SlimeStateScript* m_CurState;
+		SlimeStateScript::eState	m_PrevState;
 
-		PlayerScript*					m_Target;
-
-		float							m_Time;
-		bool							m_bAttack;
+		PlayerScript* m_Target;
 
 	public:
 		void SetTarget(PlayerScript* _Target)
@@ -44,18 +44,15 @@ namespace Lu
 		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:
-		KingSlimeStateScript* GetStateScript(KingSlimeStateScript::eState _State);
-		void AddState(KingSlimeStateScript* _State);
+		SlimeStateScript* GetStateScript(SlimeStateScript::eState _State);
+		void AddState(SlimeStateScript* _State);
 		void CompleteAction();
-		void CircleAttack();
 
 	protected:
 		virtual void CreateAnimation() override;
 		virtual void AnimationUpdate() override;
 
 	public:
-		void ChangeState(KingSlimeStateScript::eState _NextState);
+		void ChangeState(SlimeStateScript::eState _NextState);
 	};
 }
-
-

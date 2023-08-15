@@ -102,7 +102,7 @@ namespace Lu
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"KingSlimeAnimation_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
 			pCollider = pObject->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);

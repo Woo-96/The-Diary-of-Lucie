@@ -1,23 +1,23 @@
 #pragma once
 #include "Lu_MonsterScript.h"
 #include "Lu_ScriptEnums.h"
-#include "Lu_KingSlimeStateScript.h"
+#include "Lu_BigSlimeStateScript.h"
 
 namespace Lu
 {
 	class PlayerScript;
-	class KingSlimeScript : public MonsterScript
+	class BigSlimeScript : public MonsterScript
 	{
 	public:
-		KingSlimeScript();
-		virtual ~KingSlimeScript();
+		BigSlimeScript();
+		virtual ~BigSlimeScript();
 
 	private:
-		std::map<KingSlimeStateScript::eState, KingSlimeStateScript*> m_State;
-		KingSlimeStateScript*			m_CurState;
-		KingSlimeStateScript::eState	m_PrevState;
+		std::map<BigSlimeStateScript::eState, BigSlimeStateScript*> m_State;
+		BigSlimeStateScript* m_CurState;
+		BigSlimeStateScript::eState	m_PrevState;
 
-		PlayerScript*					m_Target;
+		PlayerScript* m_Target;
 
 		float							m_Time;
 		bool							m_bAttack;
@@ -44,8 +44,8 @@ namespace Lu
 		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:
-		KingSlimeStateScript* GetStateScript(KingSlimeStateScript::eState _State);
-		void AddState(KingSlimeStateScript* _State);
+		BigSlimeStateScript* GetStateScript(BigSlimeStateScript::eState _State);
+		void AddState(BigSlimeStateScript* _State);
 		void CompleteAction();
 		void CircleAttack();
 
@@ -54,8 +54,6 @@ namespace Lu
 		virtual void AnimationUpdate() override;
 
 	public:
-		void ChangeState(KingSlimeStateScript::eState _NextState);
+		void ChangeState(BigSlimeStateScript::eState _NextState);
 	};
 }
-
-

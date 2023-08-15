@@ -97,7 +97,7 @@ namespace Lu
 	void KingSlimeScript::CreateAnimation()
 	{
 		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"KingSlimeSprite", L"..\\Resources\\Texture\\Monster\\MidBoss\\KingSlime.png");
+			= Resources::Load<Texture>(L"KingSlimeSprite", L"..\\Resources\\Texture\\Monster\\MidBoss\\Slime.png");
 
 		// Idle
 		GetAnimator()->Create(L"KingSlime_Idle_Left", pAtlas, Vector2(0.f, 360.f), Vector2(360.f, 360.f), 2, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);

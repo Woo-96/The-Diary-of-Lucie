@@ -43,40 +43,20 @@ namespace Lu
 			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Right);
 	}
 
-	//void KingSlimeStateScript::DetermineAnimDir(Vector3 _Dir)
-	//{
-	//	float fRadian = atan2(_Dir.y, _Dir.x);
-	//	int iDegree = (int)(math::RadianToDegree(fRadian));
-
-	//	if (iDegree > -45 && iDegree <= 45)
-	//		GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Right);
-	//	else if (iDegree > 45 && iDegree <= 135)
-	//		GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Up);
-	//	else if (iDegree > 135 || iDegree <= -135)
-	//		GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Left);
-	//	else
-	//		GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Down);
-	//}
-
 	void KingSlimeStateScript::DetermineAnimDir(Vector3 _Dir)
 	{
 		float fRadian = atan2(_Dir.y, _Dir.x);
 		int iDegree = (int)(math::RadianToDegree(fRadian));
 
-		// 음수 각도에 대한 보정
-		if (iDegree < 0)
-			iDegree += 360;
-
-		if (iDegree > 45 && iDegree <= 135)
-			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Up);
-		else if (iDegree > 135 && iDegree <= 225)
-			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Left);
-		else if (iDegree > 225 && iDegree <= 315)
-			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Down);
-		else
+		if (iDegree > -45 && iDegree <= 45)
 			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Right);
+		else if (iDegree > 45 && iDegree <= 135)
+			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Up);
+		else if (iDegree > 135 || iDegree <= -135)
+			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Left);
+		else
+			GetKingSlimeScript()->SetCurDir(MonsterScript::eAnimDir::Down);
 	}
-
 
 	void KingSlimeStateScript::ChangeStateAfterTime(float _Time, eState _State)
 	{

@@ -44,7 +44,7 @@ namespace Lu
 			BubbleProjectile* pProjectileScript = pProjectile->AddComponent<BubbleProjectile>();
 			pProjectileScript->SetMonsterScript((MonsterScript*)this);
 			pProjectileScript->SetTransform(pProjectile->GetComponent<Transform>());
-			pProjectileScript->SetSpeed(250.f);
+			pProjectileScript->SetSpeed(200.f);
 
 			float angle = i * angleIncrement; // 투사체의 방향을 결정하는 각도 계산
 			float angleInRadians = DegreeToRadian(angle); // 각도를 라디안으로 변환
