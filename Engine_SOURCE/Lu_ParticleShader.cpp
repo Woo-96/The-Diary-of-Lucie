@@ -7,43 +7,40 @@ namespace Lu::graphics
 {
 	ParticleShader::ParticleShader()
 		: ComputeShader(128, 1, 1)
-		, mParticleBuffer(nullptr)
+		, m_ParticleBuffer(nullptr)
+		, m_ModuleData(nullptr)
+		, m_RWBuffer(nullptr)
 	{
 	}
 
 	ParticleShader::~ParticleShader()
 	{
+
+	}
+
+	void ParticleShader::SetParticleBuffer(StructedBuffer* _Buffer)
+	{
+		m_ParticleBuffer = _Buffer;
+		m_Const.arrInt[0] = m_ParticleBuffer->GetStride();
 	}
 
 	void ParticleShader::Binds()
 	{
-		mParticleBuffer->BindUAV(0);
+		m_ParticleBuffer->BindUAV(0);
+		m_RWBuffer->BindUAV(1);
+		m_ModuleData->BindSRV(eShaderStage::CS, 20);
+		m_NoiseTex->BindShaderResource(eShaderStage::CS, 21);
 
-		m_GroupX = mParticleBuffer->GetStride() / m_ThreadGroupCountX + 1;
+		m_GroupX = m_ParticleBuffer->GetStride() / m_ThreadGroupCountX + 1;
 		m_GroupY = 1;
 		m_GroupZ = 1;
 	}
 
 	void ParticleShader::Clear()
 	{
-		mParticleBuffer->Clear();
+		m_ParticleBuffer->Clear();
+		m_RWBuffer->Clear();
+		m_ModuleData->Clear();
+		m_NoiseTex->Clear();
 	}
-
-	void ParticleShader::SetParticleBuffer(StructedBuffer* particleBuffer)
-	{
-		//mParticleBuffer = particleBuffer;
-
-		//ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Particle];
-
-		//static float elapsedTime = 0.0f;
-		//elapsedTime += Time::DeltaTime();
-
-		//renderer::ParticleCB data = {};
-		//data.elementCount = mParticleBuffer->GetStride();
-		//data.elpasedTime = Time::DeltaTime();
-
-		//cb->SetData(&data);
-		//cb->Bind(eShaderStage::CS);
-	}
-
 }

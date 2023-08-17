@@ -58,4 +58,19 @@ namespace Lu::enums
 		Spot,
 		End,
 	};
+
+	enum class PARTICLE_MODULE
+	{
+		PARTICLE_SPAWN,
+		COLOR_CHANGE,
+		SCALE_CHANGE,
+		ADD_VELOCITY,
+
+		DRAG,
+		NOISE_FORCE,
+		RENDER,
+		DUMMY_3,
+
+		END,
+	};
 }

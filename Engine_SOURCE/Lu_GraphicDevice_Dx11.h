@@ -82,7 +82,7 @@ namespace Lu::graphics
 		void BindRasterizeState(ID3D11RasterizerState* _pRasterizerState);
 		void BindDepthStencilState(ID3D11DepthStencilState* _pDepthStencilState);
 		void BindBlendState(ID3D11BlendState* _pBlendState);
-
+		void CopyResource(ID3D11Resource* _pDstResource, ID3D11Resource* _pSrcResource);
 
 		void DrawIndexed(UINT _IndexCount, UINT _StartIndexLocation, INT _BaseVertexLocation);
 		void DrawIndexedInstanced(UINT _IndexCountPerInstance, UINT _InstanceCount

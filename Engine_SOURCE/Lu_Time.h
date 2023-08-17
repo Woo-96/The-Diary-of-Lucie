@@ -7,6 +7,7 @@ namespace Lu
 	{
 	private:
 		static double			m_DeltaTime;
+		static double			m_AccTime;
 		static double			m_Second;
 		static LARGE_INTEGER	m_CpuFrequency;
 		static LARGE_INTEGER	m_PrevFrequency;

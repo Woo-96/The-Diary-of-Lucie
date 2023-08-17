@@ -26,7 +26,6 @@ namespace Lu
 
 		GetInfo().HP = 300;
 		GetInfo().MaxHP = 300;
-		GetInfo().DetectRange = 200.f;
 		GetInfo().MoveSpeed = 150.f;
 	}
 

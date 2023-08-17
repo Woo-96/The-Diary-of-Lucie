@@ -21,8 +21,8 @@ namespace Lu::graphics
 
 	}
 
-	bool StructedBuffer::Create(UINT _Size, UINT _Stride, eViewType _Type, void* _Data)
-	{
+    bool StructedBuffer::Create(UINT _Size, UINT _Stride, eViewType _Type, void* _Data, bool _bCPUAccess)
+    {
         m_Type = _Type;
 
         m_Size = _Size;
@@ -31,8 +31,8 @@ namespace Lu::graphics
         Desc.ByteWidth = m_Size * m_Stride;
         Desc.StructureByteStride = m_Size;
 
-        Desc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-        Desc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+        Desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+        Desc.CPUAccessFlags = 0;
         Desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE;	// Texture Register Binding
         Desc.MiscFlags = D3D11_RESOURCE_MISC_FLAG::D3D11_RESOURCE_MISC_BUFFER_STRUCTURED; // 구조화 버퍼 추가 플래그 설정
 
@@ -75,16 +75,58 @@ namespace Lu::graphics
                 return false;
         }
 
-        return true;
-	}
+        if (_bCPUAccess)
+            CreateRWBuffer();
 
-	void StructedBuffer::SetData(void* _Data, UINT _Stride)
+        return true;
+    }
+
+    bool StructedBuffer::CreateRWBuffer()
+    {
+        D3D11_BUFFER_DESC wDesc(Desc);
+
+        wDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED; // 구조화 버퍼 추가 플래그 설정
+        wDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;	// Texture Register Binding	
+
+        wDesc.Usage = D3D11_USAGE_DYNAMIC;
+        wDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+        if (!GetDevice()->CreateBuffer(m_WriteBuffer.GetAddressOf(), &wDesc, nullptr))
+            return false;
+
+        D3D11_BUFFER_DESC rDesc(Desc);
+
+        rDesc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED; // 구조화 버퍼 추가 플래그 설정
+        rDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;	// Texture Register Binding	
+
+        rDesc.Usage = D3D11_USAGE_DEFAULT;
+        rDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+
+        if (!GetDevice()->CreateBuffer(m_ReadBuffer.GetAddressOf(), &rDesc, nullptr))
+            return false;
+
+        return true;
+    }
+
+    void StructedBuffer::SetData(void* _Data, UINT _Stride)
 	{
         if (m_Stride < _Stride)
             Create(m_Size, _Stride, m_Type, _Data);
         else
-            GetDevice()->BindBuffer(Buffer.Get(), _Data, m_Size * _Stride);
+            GetDevice()->BindBuffer(m_WriteBuffer.Get(), _Data, m_Size * _Stride);
+
+        GetDevice()->CopyResource(Buffer.Get(), m_WriteBuffer.Get());
 	}
+
+    void StructedBuffer::GetData(void* _Data, UINT _Size)
+    {
+        GetDevice()->CopyResource(m_ReadBuffer.Get(), Buffer.Get());
+
+        if (_Size == 0)
+            GetDevice()->BindBuffer(m_ReadBuffer.Get(), _Data, m_Size * m_Stride);
+        else
+            GetDevice()->BindBuffer(m_ReadBuffer.Get(), _Data, _Size);
+    }
 
 	void StructedBuffer::BindSRV(eShaderStage _Stage, UINT _Slot)
 	{

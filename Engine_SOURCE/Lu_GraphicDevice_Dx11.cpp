@@ -501,6 +501,11 @@ namespace Lu::graphics
 		m_Context->OMSetBlendState(_pBlendState, nullptr, 0xffffffff);
 	}
 
+	void GraphicDevice_Dx11::CopyResource(ID3D11Resource* _pDstResource, ID3D11Resource* _pSrcResource)
+	{
+		m_Context->CopyResource(_pDstResource, _pSrcResource);
+	}
+
 	void GraphicDevice_Dx11::DrawIndexed(UINT _IndexCount, UINT _StartIndexLocation, INT _BaseVertexLocation)
 	{
 		m_Context->DrawIndexed(_IndexCount, _StartIndexLocation, _BaseVertexLocation);

@@ -24,10 +24,9 @@ namespace Lu
 	{
 		SetName(L"BigSlimeScript");
 
-		GetInfo().HP = 300;
-		GetInfo().MaxHP = 300;
-		GetInfo().DetectRange = 200.f;
-		GetInfo().MoveSpeed = 150.f;
+		GetInfo().HP = 100;
+		GetInfo().MaxHP = 100;
+		GetInfo().MoveSpeed = 100.f;
 	}
 
 	BigSlimeScript::~BigSlimeScript()

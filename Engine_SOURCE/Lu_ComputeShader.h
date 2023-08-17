@@ -12,7 +12,7 @@ namespace Lu::graphics
 		virtual ~ComputeShader();
 
 	protected:
-		Microsoft::WRL::ComPtr<ID3DBlob> m_CSBlob;
+		Microsoft::WRL::ComPtr<ID3DBlob>			m_CSBlob;
 		Microsoft::WRL::ComPtr<ID3D11ComputeShader> m_CS;
 
 		UINT m_ThreadGroupCountX;
@@ -22,6 +22,8 @@ namespace Lu::graphics
 		UINT m_GroupX;
 		UINT m_GroupY;
 		UINT m_GroupZ;
+
+		tMtrlConst	m_Const;
 
 	public:
 		bool Create(const std::wstring& _Name, const std::string& _MethodName);

@@ -66,6 +66,7 @@ namespace Lu
 
 	void Mesh::RenderInstanced(UINT _StartIndexLocation)
 	{
+		BindBuffer();
 		GetDevice()->DrawIndexedInstanced(m_IndexCount, _StartIndexLocation, 0, 0, 0);
 	}
 

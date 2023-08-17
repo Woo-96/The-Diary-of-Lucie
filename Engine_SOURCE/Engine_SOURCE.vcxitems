@@ -40,6 +40,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_PaintShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Renderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Resources.h" />
@@ -74,6 +75,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_MeshRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_PaintShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Renderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Resources.cpp" />

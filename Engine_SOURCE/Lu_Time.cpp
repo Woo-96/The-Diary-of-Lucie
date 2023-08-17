@@ -1,11 +1,13 @@
 #include "Lu_Time.h"
 #include "Lu_Application.h"
+#include "Lu_Renderer.h"
 
 extern Lu::Application application;
 
 namespace Lu
 {
 	double Time::m_DeltaTime = 0.0l;
+	double Time::m_AccTime = 0.0l;
 	double Time::m_Second = 0.0f;
 	LARGE_INTEGER Time::m_CpuFrequency = {};
 	LARGE_INTEGER Time::m_PrevFrequency = {};
@@ -27,8 +29,22 @@ namespace Lu
 		double differnceFrequency = (double)(m_CurFrequency.QuadPart - m_PrevFrequency.QuadPart);
 
 		m_DeltaTime = (differnceFrequency / m_CpuFrequency.QuadPart);
-		
+		m_AccTime += m_DeltaTime;
 		m_PrevFrequency.QuadPart = m_CurFrequency.QuadPart;
+
+		// 글로벌 상수 버퍼 바인딩
+		renderer::GlobalCB GbCB = {};
+		GbCB.g_DT = (float)m_DeltaTime;
+		GbCB.g_AccTime = (float)m_AccTime;
+
+		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Global];
+		cb->SetData(&GbCB);
+		cb->Bind(eShaderStage::VS);
+		cb->Bind(eShaderStage::HS);
+		cb->Bind(eShaderStage::DS);
+		cb->Bind(eShaderStage::GS);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::CS);
 	}
 
 	void Time::Render()

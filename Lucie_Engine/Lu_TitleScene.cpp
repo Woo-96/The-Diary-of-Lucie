@@ -4,6 +4,7 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
+#include "Lu_ParticleSystem.h"
 
 namespace Lu
 {
@@ -73,7 +74,10 @@ namespace Lu
 
 		// UI
 		{
+			GameObject* pParticle = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), Vector3(500, 500.f, 500.f), eLayerType::Default);
+			pParticle->SetName(L"ParticleTest");
 
+			ParticleSystem* pParticleSystem = pParticle->AddComponent<ParticleSystem>();
 		}
 	}
 

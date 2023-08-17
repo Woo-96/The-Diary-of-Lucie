@@ -109,6 +109,9 @@
     <Filter Include="06. Resource\03. Shader\ComputeShader\ParticleShader">
       <UniqueIdentifier>{9d3ecec3-4a3f-45c7-8ec5-c1fc47319c30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. GameObject\Component\07. ParticleSystem">
+      <UniqueIdentifier>{2d2e3781-3ffe-489a-9d2c-88b98f299fc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.h">
       <Filter>06. Resource\03. Shader\ComputeShader\ParticleShader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleSystem.h">
+      <Filter>05. GameObject\Component\07. ParticleSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp">
@@ -319,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleShader.cpp">
       <Filter>06. Resource\03. Shader\ComputeShader\ParticleShader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleSystem.cpp">
+      <Filter>05. GameObject\Component\07. ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -61,5 +61,6 @@ namespace Lu
 		cb->Bind(eShaderStage::DS);
 		cb->Bind(eShaderStage::GS);
 		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::CS);
 	}
 }

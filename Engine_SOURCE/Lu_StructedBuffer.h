@@ -11,6 +11,9 @@ namespace Lu::graphics
 		virtual ~StructedBuffer();
 
 	private:
+		Microsoft::WRL::ComPtr<ID3D11Buffer> m_ReadBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> m_WriteBuffer;
+
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>	m_SRV;
 		Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>	m_UAV;
 		eViewType	m_Type;
@@ -33,8 +36,10 @@ namespace Lu::graphics
 		}
 
 	public:
-		bool Create(UINT _Size, UINT _Stride, eViewType _Type, void* _Data);
+		bool Create(UINT _Size, UINT _Stride, eViewType _Type, void* _Data, bool _bCPUAccess = false);
+		bool CreateRWBuffer();
 		void SetData(void* _Data, UINT _Stride);
+		void GetData(void* _Data, UINT _Size);
 		void BindSRV(eShaderStage _Stage, UINT _Slot);
 		void BindUAV(UINT _Slot);
 

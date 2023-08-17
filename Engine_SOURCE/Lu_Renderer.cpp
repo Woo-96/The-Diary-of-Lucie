@@ -344,9 +344,9 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Animator] = new ConstantBuffer(eCBType::Animator);
 		constantBuffer[(UINT)eCBType::Animator]->Create(sizeof(AnimatorCB));
 	
-		//ParticleCB
-		//constantBuffer[(UINT)eCBType::Particle] = new ConstantBuffer(eCBType::Particle);
-		//constantBuffer[(UINT)eCBType::Particle]->Create(sizeof(ParticleCB));
+		//GlobalCB
+		constantBuffer[(UINT)eCBType::Global] = new ConstantBuffer(eCBType::Global);
+		constantBuffer[(UINT)eCBType::Global]->Create(sizeof(GlobalCB));
 
 
 		// =====================
@@ -385,6 +385,10 @@ namespace renderer
 		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
 		paintShader->Create(L"PaintCS.hlsl", "main");
 		Lu::Resources::Insert(L"PaintShader", paintShader);
+
+		std::shared_ptr<ParticleShader> psSystemShader = std::make_shared<ParticleShader>();
+		psSystemShader->Create(L"ParticleCS.hlsl", "main");
+		Lu::Resources::Insert(L"ParticleSystemShader", psSystemShader);
 
 		std::shared_ptr<Shader> paritcleShader = std::make_shared<Shader>();
 		paritcleShader->Create(eShaderStage::VS, L"ParticleVS.hlsl", "main");
@@ -467,6 +471,10 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(particleShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
+
+		std::shared_ptr<Texture> particleTexture
+			= Resources::Load<Texture>(L"ParticleTex", L"..\\Resources\\Texture\\Particle\\Title\\Particles7.png");
+		material->SetTexture(particleTexture);
 		Resources::Insert(L"ParticleMaterial", material);
 
 #pragma region	Title Scene Resources
@@ -782,7 +790,7 @@ namespace renderer
 			lightsAttributes.push_back(attribute);
 		}
 
-		lightsBuffer->SetData(lightsAttributes.data(), (UINT)lightsAttributes.size());
+		//lightsBuffer->SetData(lightsAttributes.data(), (UINT)lightsAttributes.size());
 		lightsBuffer->BindSRV(eShaderStage::VS, 13);
 		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}

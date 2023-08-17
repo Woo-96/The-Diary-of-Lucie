@@ -44,13 +44,11 @@ namespace renderer
 		UINT	Padding[2];
 	};
 
-	//CBUFFER(ParticleCB, CBSLOT_PARTICLE)
-	//{
-	//	UINT elementCount;
-	//	float elpasedTime;
-	//	int padd;
-	//	int padd2;
-	//};
+	CBUFFER(GlobalCB, CBSLOT_GLOBAL)
+	{
+		float  g_DT;
+		float  g_AccTime;
+	};
 
 	extern Lu::graphics::ConstantBuffer*					constantBuffer[(UINT)eCBType::End];
 

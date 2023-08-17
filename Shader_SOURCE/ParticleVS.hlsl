@@ -1,30 +1,23 @@
 #include "globals.hlsli"
 
-
-struct VSIn
+struct VS_IN
 {
-    float3 LocalPos : POSITION;
-    uint Instance : SV_InstanceID;
+    float3 vPos : POSITION;
+    uint iInstID : SV_InstanceID;
 };
 
-struct VSOut
+struct VS_OUT
 {
-    float4 LocalPos : SV_Position;
-    uint Instance : SV_InstanceID;
+    float3 vPos : POSITION;
+    uint iInstID : SV_InstanceID;
 };
 
-VSOut main(VSIn In)
+VS_OUT main(VS_IN _in)
 {
-    VSOut Out = (VSOut) 0.0f;
-    Out.LocalPos = float4(In.LocalPos, 1.0f);
-    Out.Instance = In.Instance;
-    //float3 worldPos = (In.pos.xyz) + WorldMatrix._41_42_43 + particles[In.Instance].position.xyz;
+    VS_OUT output = (VS_OUT) 0.f;
+     
+    output.vPos = _in.vPos;
+    output.iInstID = _in.iInstID;
     
-    //float4 worldPos = mul(float4(In.pos, 1.0f), WorldMatrix);
-    //worldPos.xyz += particles[In.Instance].position.xyz;
-    
-    //float4 viewPos = mul(worldPos, ViewMatrix);
-    //Out.pos = mul(viewPos, ProjectionMatrix);
-    
-    return Out;
+    return output;
 }

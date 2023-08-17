@@ -1,17 +1,25 @@
 #include "globals.hlsli"
+StructuredBuffer<tParticle> ParticleBuffer : register(t20);
+StructuredBuffer<tParticleModule> ParticleModuleData : register(t21);
 
-struct GSOut
+struct GS_OUT
 {
-    float4 Pos : SV_Position;
-    float2 UV : TEXCOORD;
+    float4 vPosition : SV_Position;
+    float2 vUV : TEXCOORD;
+    uint iInstID : SV_InstanceID;
 };
 
-float4 main(GSOut In) : SV_TARGET
+float4 main(GS_OUT _in) : SV_Target
 {
-    float4 Out = (float4) 0.0f;
+    float4 vOutColor = (float4) 0.f;
     
-    Out = float4(1.0f, 0.0f, 1.0f, 1.0f);
-    
-    return Out;
+    vOutColor = (float4) albedoTexture.Sample(anisotropicSampler, _in.vUV);
+    vOutColor.rgb *= ParticleBuffer[_in.iInstID].vColor.rgb;
 
+    if (0.f == vOutColor.a)
+    {
+        discard;
+    }
+    
+    return vOutColor;
 }
