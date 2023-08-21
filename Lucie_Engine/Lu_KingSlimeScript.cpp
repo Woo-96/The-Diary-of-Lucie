@@ -19,6 +19,8 @@ namespace Lu
 		: m_CurState(nullptr)
 		, m_PrevState(KingSlimeStateScript::eState::End)
 		, m_Target(nullptr)
+		, m_HPFrame(nullptr)
+		, m_HPBar(nullptr)
 		, m_Time(13.f)
 		, m_bAttack(false)
 	{
@@ -44,6 +46,26 @@ namespace Lu
 	{
 		MonsterScript::Initialize();
 
+		// 보스 HP
+		{
+			m_HPFrame = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(759.f, 48.f, 100.f), eLayerType::UI);
+			m_HPFrame->SetName(L"KingSlime_HP_Frame");
+
+			MeshRenderer* pMeshRender = m_HPFrame->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossHPFrame_Mtrl"));
+		}
+
+		{
+			m_HPBar = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(720.f, 30.f, 100.f), eLayerType::UI);
+			m_HPBar->SetName(L"KingSlime_HP");
+
+			MeshRenderer* pMeshRender = m_HPBar->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHP_Mtrl"));
+		}
+
+		// 상태
 		AddState(new KingSlimeIdleState);
 		AddState(new KingSlimeTraceState);
 		AddState(new KingSlimeAttackState);

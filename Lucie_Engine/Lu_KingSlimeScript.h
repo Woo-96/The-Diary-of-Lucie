@@ -6,6 +6,7 @@
 namespace Lu
 {
 	class PlayerScript;
+	class GameObject;
 	class KingSlimeScript : public MonsterScript
 	{
 	public:
@@ -18,6 +19,8 @@ namespace Lu
 		KingSlimeStateScript::eState	m_PrevState;
 
 		PlayerScript*					m_Target;
+		GameObject*						m_HPFrame;
+		GameObject*						m_HPBar;
 
 		float							m_Time;
 		bool							m_bAttack;
@@ -32,6 +35,16 @@ namespace Lu
 		PlayerScript* GetTarget()	const
 		{
 			return m_Target;
+		}
+
+		GameObject* GetHPFrame()	const
+		{
+			return m_HPFrame;
+		}
+
+		GameObject* GetHPBar()	const
+		{
+			return m_HPBar;
 		}
 
 	public:

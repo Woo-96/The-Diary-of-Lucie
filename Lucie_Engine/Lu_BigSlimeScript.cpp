@@ -19,6 +19,8 @@ namespace Lu
 		: m_CurState(nullptr)
 		, m_PrevState(BigSlimeStateScript::eState::End)
 		, m_Target(nullptr)
+		, m_HPFrame(nullptr)
+		, m_HPBar(nullptr)
 		, m_Time(13.f)
 		, m_bAttack(false)
 	{

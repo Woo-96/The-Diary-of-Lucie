@@ -95,25 +95,29 @@ namespace Lu
 			= Resources::Load<Texture>(L"SlimeSprite", L"..\\Resources\\Texture\\Monster\\MidBoss\\Slime.png");
 
 		// Idle
-		GetAnimator()->Create(L"Slime_Idle_Left", pAtlas, Vector2(0.f, 432.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
-		GetAnimator()->Create(L"Slime_Idle_Right", pAtlas, Vector2(0.f, 480.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
-		GetAnimator()->Create(L"Slime_Idle_Up", pAtlas, Vector2(0.f, 528.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
-		GetAnimator()->Create(L"Slime_Idle_Down", pAtlas, Vector2(0.f, 384.f), Vector2(48.f, 48.f), 2, Vector2(48.f, 48.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Slime_Idle_Left", pAtlas, Vector2(0.f, 360.f), Vector2(360.f, 360.f), 2, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Idle_Right", pAtlas, Vector2(0.f, 720.f), Vector2(360.f, 360.f), 2, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Idle_Up", pAtlas, Vector2(0.f, 1080.f), Vector2(360.f, 360.f), 2, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Idle_Down", pAtlas, Vector2(0.f, 0.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
 
 		// Move
-		GetAnimator()->Create(L"Slime_Move_Left", pAtlas, Vector2(0.f, 48.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Slime_Move_Right", pAtlas, Vector2(0.f, 96.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Slime_Move_Up", pAtlas, Vector2(0.f, 144.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Slime_Move_Down", pAtlas, Vector2(0.f, 0.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Move_Left", pAtlas, Vector2(0.f, 1800.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Move_Right", pAtlas, Vector2(0.f, 2160.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Move_Up", pAtlas, Vector2(0.f, 2520.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Move_Down", pAtlas, Vector2(0.f, 1440.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 
-		// Attack
-		GetAnimator()->Create(L"Slime_Attack_Left", pAtlas, Vector2(0.f, 240.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Slime_Attack_Right", pAtlas, Vector2(0.f, 288.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Slime_Attack_Up", pAtlas, Vector2(0.f, 336.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Slime_Attack_Down", pAtlas, Vector2(0.f, 192.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		// Jump
+		GetAnimator()->Create(L"Slime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->CompleteEvent(L"Slime_Jump_Left") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"Slime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->CompleteEvent(L"Slime_Jump_Right") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"Slime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->CompleteEvent(L"Slime_Jump_Up") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"Slime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->CompleteEvent(L"Slime_Jump_Down") = std::bind(&SlimeScript::CompleteAction, this);
 
 		// Dead
-		GetAnimator()->Create(L"Slime_Dead", pAtlas, Vector2(0.f, 576.f), Vector2(48.f, 48.f), 1, Vector2(48.f, 48.f), Vector2::Zero, 1.f);
+		GetAnimator()->Create(L"Slime_Dead", pAtlas, Vector2(0.f, 7200.f), Vector2(360.f, 360.f), 1, Vector2(360.f, 360.f), Vector2::Zero, 1.f);
 		GetAnimator()->CompleteEvent(L"Slime_Dead") = std::bind(&SlimeScript::CompleteAction, this);
 	}
 
@@ -201,16 +205,16 @@ namespace Lu
 			switch (eCurDir)
 			{
 			case Lu::MonsterScript::eAnimDir::Left:
-				GetAnimator()->PlayAnimation(L"Slime_Attack_Left", true);
+				GetAnimator()->PlayAnimation(L"Slime_Jump_Left", true);
 				break;
 			case Lu::MonsterScript::eAnimDir::Right:
-				GetAnimator()->PlayAnimation(L"Slime_Attack_Right", true);
+				GetAnimator()->PlayAnimation(L"Slime_Jump_Right", true);
 				break;
 			case Lu::MonsterScript::eAnimDir::Up:
-				GetAnimator()->PlayAnimation(L"Slime_Attack_Up", true);
+				GetAnimator()->PlayAnimation(L"Slime_Jump_Up", true);
 				break;
 			case Lu::MonsterScript::eAnimDir::Down:
-				GetAnimator()->PlayAnimation(L"Slime_Attack_Down", true);
+				GetAnimator()->PlayAnimation(L"Slime_Jump_Down", true);
 				break;
 			default:
 				break;

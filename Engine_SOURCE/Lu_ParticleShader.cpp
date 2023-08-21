@@ -28,8 +28,8 @@ namespace Lu::graphics
 	{
 		m_ParticleBuffer->BindUAV(0);
 		m_RWBuffer->BindUAV(1);
-		m_ModuleData->BindSRV(eShaderStage::CS, 20);
-		m_NoiseTex->BindShaderResource(eShaderStage::CS, 21);
+		m_ModuleData->BindSRV(eShaderStage::CS, 21);
+		m_NoiseTex->BindShaderResource(eShaderStage::CS, 22);
 
 		m_GroupX = m_ParticleBuffer->GetStride() / m_ThreadGroupCountX + 1;
 		m_GroupY = 1;

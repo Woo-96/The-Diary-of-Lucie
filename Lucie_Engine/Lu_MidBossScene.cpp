@@ -40,24 +40,6 @@ namespace Lu
 
 		// UI : 크기 원본 1.5배
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(759.f, 48.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"MidBoss_HP_Frame");
-
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossHPFrame_Mtrl"));
-		}
-
-		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(720.f, 30.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"MidBoss_HP");
-
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHP_Mtrl"));
-		}
-
-		{
 			m_BossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
 			m_BossName->SetName(L"MidBoss_Name");
 

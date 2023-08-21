@@ -1,8 +1,8 @@
 #include "globals.hlsli"
 RWStructuredBuffer<tParticle> ParticleBuffer : register(u0);
 RWStructuredBuffer<int4> ParticleSpawnCount : register(u1);
-StructuredBuffer<tParticleModule> ParticleModuleData : register(t20);
-Texture2D NoiseTexture : register(t21);
+StructuredBuffer<tParticleModule> ParticleModuleData : register(t21);
+Texture2D NoiseTexture : register(t22);
 
 
 #define ObjectPos           g_vec4_0
