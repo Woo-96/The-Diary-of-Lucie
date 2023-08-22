@@ -12,7 +12,9 @@ namespace Lu
 		{
 			Idle,
 			Patrol,
+			Trace,
 			Attack,
+			JumpAttack,
 			Dead,
 			End
 		};
@@ -23,9 +25,9 @@ namespace Lu
 
 	private:
 		eState				m_StateType;
-		SlimeScript* m_SlimeScript;
-		Transform* m_Transform;
-		PlayerScript* m_Target;
+		SlimeScript*		m_SlimeScript;
+		Transform*			m_Transform;
+		PlayerScript*		m_Target;
 		Vector3				m_ActionDir;
 		float				m_Time;
 

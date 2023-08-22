@@ -2,6 +2,7 @@
 #include "Lu_Entity.h"
 #include "Lu_Component.h"
 #include "Lu_Script.h"
+#include "Lu_Animator.h"
 
 namespace Lu
 {

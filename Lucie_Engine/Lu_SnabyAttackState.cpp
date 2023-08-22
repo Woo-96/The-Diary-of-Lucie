@@ -10,7 +10,6 @@
 namespace Lu
 {
 	SnabyAttackState::SnabyAttackState()
-		: m_ChangeDist(300.f)
 	{
 		SetName(L"SnabyAttackStateScript");
 		SetStateType(eState::Attack);
@@ -23,23 +22,21 @@ namespace Lu
 
 	void SnabyAttackState::Update()
 	{
+		// 거리가 멀어지면 어택 -> 아이들
+		if (CalDirToPlayer().Length() > GetSnabyScript()->GetInfo().DetectRange)
+		{
+			GetSnabyScript()->ChangeState(eState::Idle);
+		}
+
+		// 시간에 따라 어택 -> 아이들
+		ChangeStateAfterTime(3.f, eState::Idle);
+
 		// 어택
 		Vector3 vPos = GetTransform()->GetPosition();
 		float distanceToMove = GetSnabyScript()->GetInfo().MoveSpeed * (float)Time::DeltaTime();
 		Vector3 moveVector = GetDir() * distanceToMove;
 		vPos += moveVector;
 		GetTransform()->SetPosition(vPos);
-
-		
-		// 거리가 멀어지면 어택 -> 아이들
-		if (CalDirToPlayer().Length() > m_ChangeDist)
-		{
-			GetSnabyScript()->ChangeState(eState::Idle);
-		}
-
-
-		// 시간에 따라 어택 -> 아이들
-		ChangeStateAfterTime(3.f, eState::Idle);
 	}
 
 	void SnabyAttackState::Enter()

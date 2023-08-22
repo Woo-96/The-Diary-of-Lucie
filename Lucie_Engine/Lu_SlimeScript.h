@@ -9,9 +9,6 @@ namespace Lu
 	class SlimeScript : public MonsterScript
 	{
 	public:
-
-
-	public:
 		SlimeScript();
 		virtual ~SlimeScript();
 

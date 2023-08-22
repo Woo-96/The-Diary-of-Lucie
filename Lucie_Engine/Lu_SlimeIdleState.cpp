@@ -23,10 +23,10 @@ namespace Lu
 		ChangeStateAfterTime(2.f, eState::Patrol);
 
 
-		// 아이들 -> 어택
+		// 아이들 -> 트레이스
 		if (CalDirToPlayer().Length() < GetSlimeScript()->GetInfo().DetectRange)
 		{
-			GetSlimeScript()->ChangeState(eState::Attack);
+			GetSlimeScript()->ChangeState(eState::Trace);
 		}
 	}
 

@@ -12,6 +12,7 @@ namespace Lu
             int     HP;
             int     MaxHP;
             float   DetectRange;
+            float   AttackRange;
             float   MoveSpeed;
         };
 

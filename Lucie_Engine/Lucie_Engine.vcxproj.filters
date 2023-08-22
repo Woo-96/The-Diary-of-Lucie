@@ -206,6 +206,12 @@
     <ClCompile Include="Lu_SlimeDeadState.cpp">
       <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Dead</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_SlimeTraceState.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Trace</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SlimeJumpAttackState.cpp">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -418,6 +424,12 @@
     </ClInclude>
     <ClInclude Include="Lu_SlimeDeadState.h">
       <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeTraceState.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Trace</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SlimeJumpAttackState.h">
+      <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -648,6 +660,12 @@
     </Filter>
     <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Dead">
       <UniqueIdentifier>{22fe5110-f5ec-425c-8b33-d4a002b4fffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_Trace">
+      <UniqueIdentifier>{b7a6cb74-0c06-41da-8528-0fc31545a93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack">
+      <UniqueIdentifier>{a787cfb9-179f-48af-b1d8-1d23125521c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -9,9 +9,6 @@ namespace Lu
 		SnabyAttackState();
 		virtual ~SnabyAttackState();
 
-	private:
-		float m_ChangeDist;
-
 	public:
 		virtual void Update() override;
 

@@ -3,14 +3,11 @@
 
 namespace Lu
 {
-	class SlimeAttackState : public SlimeStateScript
+	class SlimeTraceState : public SlimeStateScript
 	{
 	public:
-		SlimeAttackState();
-		virtual ~SlimeAttackState();
-
-	private:
-		Vector3 m_AttackDir;
+		SlimeTraceState();
+		virtual ~SlimeTraceState();
 
 	public:
 		virtual void Update() override;

@@ -28,13 +28,13 @@ namespace Lu
 
 
 		// 패트롤 -> 아이들
-		ChangeStateAfterTime(1.f, eState::Idle);
+		ChangeStateAfterTime(2.f, eState::Idle);
 
 
-		// 패트롤 -> 어택
+		// 패트롤 -> 트레이스
 		if (CalDirToPlayer().Length() < GetSlimeScript()->GetInfo().DetectRange)
 		{
-			GetSlimeScript()->ChangeState(eState::Attack);
+			GetSlimeScript()->ChangeState(eState::Trace);
 		}
 	}
 

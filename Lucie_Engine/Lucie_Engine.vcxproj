@@ -208,9 +208,11 @@
     <ClInclude Include="Lu_SlimeAttackState.h" />
     <ClInclude Include="Lu_SlimeDeadState.h" />
     <ClInclude Include="Lu_SlimeIdleState.h" />
+    <ClInclude Include="Lu_SlimeJumpAttackState.h" />
     <ClInclude Include="Lu_SlimePatrolState.h" />
     <ClInclude Include="Lu_SlimeScript.h" />
     <ClInclude Include="Lu_SlimeStateScript.h" />
+    <ClInclude Include="Lu_SlimeTraceState.h" />
     <ClInclude Include="Lu_SnabyAttackState.h" />
     <ClInclude Include="Lu_SnabyDeadState.h" />
     <ClInclude Include="Lu_SnabyIdleState.h" />
@@ -280,9 +282,11 @@
     <ClCompile Include="Lu_SlimeAttackState.cpp" />
     <ClCompile Include="Lu_SlimeDeadState.cpp" />
     <ClCompile Include="Lu_SlimeIdleState.cpp" />
+    <ClCompile Include="Lu_SlimeJumpAttackState.cpp" />
     <ClCompile Include="Lu_SlimePatrolState.cpp" />
     <ClCompile Include="Lu_SlimeScript.cpp" />
     <ClCompile Include="Lu_SlimeStateScript.cpp" />
+    <ClCompile Include="Lu_SlimeTraceState.cpp" />
     <ClCompile Include="Lu_SnabyAttackState.cpp" />
     <ClCompile Include="Lu_SnabyDeadState.cpp" />
     <ClCompile Include="Lu_SnabyIdleState.cpp" />

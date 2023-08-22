@@ -6,7 +6,9 @@
 
 #include "Lu_SlimeIdleState.h"
 #include "Lu_SlimePatrolState.h"
+#include "Lu_SlimeTraceState.h"
 #include "Lu_SlimeAttackState.h"
+#include "Lu_SlimeJumpAttackState.h"
 #include "Lu_SlimeDeadState.h"
 
 namespace Lu
@@ -20,8 +22,9 @@ namespace Lu
 
 		GetInfo().HP = 100;
 		GetInfo().MaxHP = 100;
-		GetInfo().DetectRange = 200.f;
-		GetInfo().MoveSpeed = 100.f;
+		GetInfo().DetectRange = 250.f;
+		GetInfo().AttackRange = 150.f;
+		GetInfo().MoveSpeed = 50.f;
 	}
 
 	SlimeScript::~SlimeScript()
@@ -41,7 +44,9 @@ namespace Lu
 
 		AddState(new SlimeIdleState);
 		AddState(new SlimePatrolState);
+		AddState(new SlimeTraceState);
 		AddState(new SlimeAttackState);
+		AddState(new SlimeJumpAttackState);
 		AddState(new SlimeDeadState);
 
 		m_CurState = GetStateScript(SlimeStateScript::eState::Idle);
@@ -106,6 +111,7 @@ namespace Lu
 		GetAnimator()->Create(L"Slime_Move_Up", pAtlas, Vector2(0.f, 2520.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->Create(L"Slime_Move_Down", pAtlas, Vector2(0.f, 1440.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 
+
 		// Jump
 		GetAnimator()->Create(L"Slime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Left") = std::bind(&SlimeScript::CompleteAction, this);
@@ -115,6 +121,18 @@ namespace Lu
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Up") = std::bind(&SlimeScript::CompleteAction, this);
 		GetAnimator()->Create(L"Slime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Down") = std::bind(&SlimeScript::CompleteAction, this);
+
+
+		// Attack
+		GetAnimator()->Create(L"Slime_Attack_Left", pAtlas, Vector2(0.f, 6120.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Left") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"Slime_Attack_Right", pAtlas, Vector2(0.f, 6480.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Right") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"Slime_Attack_Up", pAtlas, Vector2(0.f, 6840.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Up") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->Create(L"Slime_Attack_Down", pAtlas, Vector2(0.f, 4320.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Down") = std::bind(&SlimeScript::CompleteAction, this);
+
 
 		// Dead
 		GetAnimator()->Create(L"Slime_Dead", pAtlas, Vector2(0.f, 7200.f), Vector2(360.f, 360.f), 1, Vector2(360.f, 360.f), Vector2::Zero, 1.f);
@@ -180,6 +198,7 @@ namespace Lu
 		}
 		break;
 		case SlimeStateScript::eState::Patrol:
+		case SlimeStateScript::eState::Trace:
 		{
 			switch (eCurDir)
 			{
@@ -201,6 +220,27 @@ namespace Lu
 		}
 		break;
 		case SlimeStateScript::eState::Attack:
+		{
+			switch (eCurDir)
+			{
+			case Lu::MonsterScript::eAnimDir::Left:
+				GetAnimator()->PlayAnimation(L"Slime_Attack_Left", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Right:
+				GetAnimator()->PlayAnimation(L"Slime_Attack_Right", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Up:
+				GetAnimator()->PlayAnimation(L"Slime_Attack_Up", true);
+				break;
+			case Lu::MonsterScript::eAnimDir::Down:
+				GetAnimator()->PlayAnimation(L"Slime_Attack_Down", true);
+				break;
+			default:
+				break;
+			}
+		}
+		break;
+		case SlimeStateScript::eState::JumpAttack:
 		{
 			switch (eCurDir)
 			{

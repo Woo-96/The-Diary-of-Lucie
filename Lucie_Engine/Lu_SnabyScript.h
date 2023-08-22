@@ -9,9 +9,6 @@ namespace Lu
 	class SnabyScript : public MonsterScript
 	{
 	public:
-
-
-	public:
 		SnabyScript();
 		virtual ~SnabyScript();
 
