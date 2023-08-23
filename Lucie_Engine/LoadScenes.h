@@ -29,15 +29,15 @@ namespace Lu
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<LobbyScene>(L"LobbyScene");
 
-		SceneManager::CreateScene<WeaponChoiceScene>(L"WeaponChoiceScene");
-		SceneManager::CreateScene<DiceScene>(L"DiceScene");
-		SceneManager::CreateScene<StoreScene>(L"StoreScene");
+		//SceneManager::CreateScene<WeaponChoiceScene>(L"WeaponChoiceScene");
+		//SceneManager::CreateScene<DiceScene>(L"DiceScene");
+		//SceneManager::CreateScene<StoreScene>(L"StoreScene");
 		SceneManager::CreateScene<Nomal1Scene>(L"Nomal1Scene");
 		SceneManager::CreateScene<Nomal2Scene>(L"Nomal2Scene");
 		SceneManager::CreateScene<MidBossScene>(L"MidBossScene");
-		SceneManager::CreateScene<NextFloorScene>(L"NextFloorScene");
-		SceneManager::CreateScene<BossWayScene>(L"BossWayScene");
-		SceneManager::CreateScene<BossScene>(L"BossScene");
+		//SceneManager::CreateScene<NextFloorScene>(L"NextFloorScene");
+		//SceneManager::CreateScene<BossWayScene>(L"BossWayScene");
+		//SceneManager::CreateScene<BossScene>(L"BossScene");
 
 		SceneManager::CreateScene<GameOverScene>(L"GameOverScene");
 

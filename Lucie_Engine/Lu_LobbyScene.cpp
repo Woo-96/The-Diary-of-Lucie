@@ -88,7 +88,8 @@ namespace Lu
 		// 오브젝트로 입장해야함
 		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
-			SceneManager::LoadScene(L"WeaponChoiceScene");
+			//SceneManager::LoadScene(L"WeaponChoiceScene");
+			SceneManager::LoadScene(L"Nomal1Scene");
 		}
 	}
 

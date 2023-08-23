@@ -19,18 +19,20 @@ namespace Lu
 	{
 		// 플레이어 추적
 		Vector3 vPos = GetTransform()->GetPosition();
+		float Zpos = vPos.z;
 		float fSpeed = GetBigSlimeScript()->GetInfo().MoveSpeed;
 		Vector3 vMoveDir = Vector3(CalDirToPlayer().x, CalDirToPlayer().y, 1.f);
 		vMoveDir.Normalize();
 		Vector3 vMove = vMoveDir * fSpeed * (float)Time::DeltaTime();
 		vPos += vMove;
+		vPos.z = Zpos;
 		GetTransform()->SetPosition(vPos);
 
 		// 애니메이션 업데이트
 		DetermineAnimDir(vMoveDir);
 
 		// 트레이스 -> 어택
-		ChangeStateAfterTime(10.f, eState::Attack);
+		ChangeStateAfterTime(5.f, eState::Attack);
 	}
 
 	void BigSlimeTraceState::Enter()

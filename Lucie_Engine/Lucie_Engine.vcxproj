@@ -184,6 +184,7 @@
     <ClInclude Include="Lu_IdleState.h" />
     <ClInclude Include="Lu_ImmovableScript.h" />
     <ClInclude Include="Lu_Inventory.h" />
+    <ClInclude Include="Lu_JumpProjectile.h" />
     <ClInclude Include="Lu_KingSlimeAttackState.h" />
     <ClInclude Include="Lu_KingSlimeDeadState.h" />
     <ClInclude Include="Lu_KingSlimeIdleState.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="Lu_IdleState.cpp" />
     <ClCompile Include="Lu_ImmovableScript.cpp" />
     <ClCompile Include="Lu_Inventory.cpp" />
+    <ClCompile Include="Lu_JumpProjectile.cpp" />
     <ClCompile Include="Lu_KingSlimeAttackState.cpp" />
     <ClCompile Include="Lu_KingSlimeDeadState.cpp" />
     <ClCompile Include="Lu_KingSlimeIdleState.cpp" />

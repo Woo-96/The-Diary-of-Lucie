@@ -32,10 +32,6 @@ namespace Lu
 
 	void BigSlimeDeadState::Exit()
 	{
-		object::Destroy(GetBigSlimeScript()->GetHPFrame());
-		object::Destroy(GetBigSlimeScript()->GetHPBar());
-		object::Destroy(GetBigSlimeScript()->GetOwner());
-
 		Vector3 vCurPos = GetTransform()->GetPosition();
 		int Xposition = -1;	// 데칼코마니로 스폰하기 위한 변수
 
@@ -61,5 +57,9 @@ namespace Lu
 			SlimeScript* pSlimeScript = pObject->AddComponent<SlimeScript>();
 			pSlimeScript->SetTarget(GetTarget());
 		}
+
+		object::Destroy(GetBigSlimeScript()->GetHPFrame());
+		object::Destroy(GetBigSlimeScript()->GetHPBar());
+		object::Destroy(GetBigSlimeScript()->GetOwner());
 	}
 }

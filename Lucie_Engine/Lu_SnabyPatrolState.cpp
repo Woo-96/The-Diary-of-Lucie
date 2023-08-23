@@ -20,10 +20,10 @@ namespace Lu
 	{
 		// ÆÐÆ®·Ñ
 		Vector3 vPos = GetTransform()->GetPosition();
+		float Zpos = vPos.z;
 		float fSpeed = GetSnabyScript()->GetInfo().MoveSpeed;
-		float distanceToMove = fSpeed * (float)Time::DeltaTime();
-		Vector3 moveVector = GetDir() * distanceToMove;
-		vPos += moveVector;
+		vPos += GetDir() * fSpeed * (float)Time::DeltaTime();
+		vPos.z = Zpos;
 		GetTransform()->SetPosition(vPos);
 
 

@@ -26,10 +26,20 @@ namespace Lu
 	
 	void Layer::Update()
 	{
-		for (GameObject* gameObj : m_GameObjects)
+		//for (GameObject* gameObj : m_GameObjects)
+		//{
+		//	if (gameObj->GetState()
+		//		!= GameObject::eState::Active)
+		//		continue;
+
+		//	gameObj->Update();
+		//}
+
+		for (int i = 0; i < m_GameObjects.size(); ++i)
 		{
-			if (gameObj->GetState()
-				!= GameObject::eState::Active)
+			GameObject* gameObj = m_GameObjects[i];
+
+			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
 			gameObj->Update();
@@ -38,10 +48,20 @@ namespace Lu
 	
 	void Layer::LateUpdate()
 	{
-		for (GameObject* gameObj : m_GameObjects)
+		//for (GameObject* gameObj : m_GameObjects)
+		//{
+		//	if (gameObj->GetState()
+		//		!= GameObject::eState::Active)
+		//		continue;
+
+		//	gameObj->LateUpdate();
+		//}
+
+		for (int i = 0; i < m_GameObjects.size(); ++i)
 		{
-			if (gameObj->GetState()
-				!= GameObject::eState::Active)
+			GameObject* gameObj = m_GameObjects[i];
+
+			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
 			gameObj->LateUpdate();
@@ -50,10 +70,20 @@ namespace Lu
 	
 	void Layer::Render()
 	{
-		for (GameObject* gameObj : m_GameObjects)
+		//for (GameObject* gameObj : m_GameObjects)
+		//{
+		//	if (gameObj->GetState()
+		//		!= GameObject::eState::Active)
+		//		continue;
+
+		//	gameObj->Render();
+		//}
+
+		for (int i = 0; i < m_GameObjects.size(); ++i)
 		{
-			if (gameObj->GetState()
-				!= GameObject::eState::Active)
+			GameObject* gameObj = m_GameObjects[i];
+
+			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();
@@ -64,10 +94,11 @@ namespace Lu
 	{
 		// dead 오브젝트 모아두기
 		std::set<GameObject*> deleteGameObj = {};
-		for (GameObject* gameObj : m_GameObjects)
+		for (int i = 0; i < m_GameObjects.size(); ++i)
 		{
-			if (gameObj->GetState()
-				== GameObject::eState::Dead)
+			GameObject* gameObj = m_GameObjects[i];
+
+			if (gameObj->GetState() == GameObject::eState::Dead)
 				deleteGameObj.insert(gameObj);
 		}
 

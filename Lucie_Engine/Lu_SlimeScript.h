@@ -14,10 +14,10 @@ namespace Lu
 
 	private:
 		std::map<SlimeStateScript::eState, SlimeStateScript*> m_State;
-		SlimeStateScript* m_CurState;
+		SlimeStateScript*			m_CurState;
 		SlimeStateScript::eState	m_PrevState;
 
-		PlayerScript* m_Target;
+		PlayerScript*				m_Target;
 
 	public:
 		void SetTarget(PlayerScript* _Target)

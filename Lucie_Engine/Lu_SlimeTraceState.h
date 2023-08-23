@@ -9,6 +9,11 @@ namespace Lu
 		SlimeTraceState();
 		virtual ~SlimeTraceState();
 
+	private:
+		bool	m_bAttackType;		// 2가지 공격을 번갈아 사용하기 위한 변수
+		bool	m_bAttack;			 
+		float	m_AttackCoolTime;	
+
 	public:
 		virtual void Update() override;
 

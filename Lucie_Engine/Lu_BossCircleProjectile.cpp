@@ -57,8 +57,10 @@ namespace Lu
 		else if (GetTime() >= 3.5f)
 		{
 			Vector3 vPos = GetTransform()->GetPosition();
+			float Zpos = vPos.z;
 			Vector3 moveVector = -GetDir() * GetSpeed() * (float)Time::DeltaTime();
 			vPos += moveVector;
+			vPos.z = Zpos;
 			GetTransform()->SetPosition(vPos);
 		}
 
@@ -71,8 +73,9 @@ namespace Lu
 		else if (GetTime() >= 2.5f)
 		{
 			Vector3 vPos = GetTransform()->GetPosition();
-			Vector3 moveVector = GetDir() * GetSpeed() * (float)Time::DeltaTime();
-			vPos += moveVector;
+			float Zpos = vPos.z;
+			vPos += GetDir() * GetSpeed() * (float)Time::DeltaTime();
+			vPos.z = Zpos;
 			GetTransform()->SetPosition(vPos);
 		}
 	}

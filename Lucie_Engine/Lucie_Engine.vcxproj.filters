@@ -212,6 +212,9 @@
     <ClCompile Include="Lu_SlimeJumpAttackState.cpp">
       <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_JumpProjectile.cpp">
+      <Filter>Contents\Script\Monster\MonsterProjectile\BigSlimeJump</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -430,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="Lu_SlimeJumpAttackState.h">
       <Filter>Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_JumpProjectile.h">
+      <Filter>Contents\Script\Monster\MonsterProjectile\BigSlimeJump</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -666,6 +672,9 @@
     </Filter>
     <Filter Include="Contents\Script\Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack">
       <UniqueIdentifier>{a787cfb9-179f-48af-b1d8-1d23125521c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Monster\MonsterProjectile\BigSlimeJump">
+      <UniqueIdentifier>{538460ea-98cf-4702-a61a-591085898a9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

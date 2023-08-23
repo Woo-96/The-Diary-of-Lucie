@@ -5,6 +5,9 @@
 namespace Lu
 {
 	SlimeTraceState::SlimeTraceState()
+		: m_bAttackType(true)
+		, m_bAttack(false)
+		, m_AttackCoolTime(0.f)
 	{
 		SetName(L"SlimeTraceStateScript");
 		SetStateType(eState::Trace);
@@ -15,11 +18,14 @@ namespace Lu
 
 	void SlimeTraceState::Update()
 	{
-		// 추격
+		Vector3 vDir = Vector3(CalDirToPlayer().x, CalDirToPlayer().y, 1.f);
+		vDir.Normalize();
+		SetDir(vDir);
+		DetermineAnimDir(vDir);
 		Vector3 vPos = GetTransform()->GetPosition();
-		float distanceToMove = GetSlimeScript()->GetInfo().MoveSpeed * (float)Time::DeltaTime();
-		Vector3 moveVector = GetDir() * distanceToMove;
-		vPos += moveVector;
+		float Zpos = vPos.z;
+		vPos += GetDir() * GetSlimeScript()->GetInfo().MoveSpeed * (float)Time::DeltaTime();
+		vPos.z = Zpos;
 		GetTransform()->SetPosition(vPos);
 
 		// 추격 범위를 벗어남
@@ -31,23 +37,38 @@ namespace Lu
 		// 공격 범위에 들어옴
 		if (CalDirToPlayer().Length() < GetSlimeScript()->GetInfo().AttackRange)
 		{
-			int iAttackRand = std::rand() % 2;
-			if(0 == iAttackRand)
-				GetSlimeScript()->ChangeState(eState::Attack);
+			// 쿨타임 체크
+			if (m_bAttack)
+			{
+				m_AttackCoolTime += (float)Time::DeltaTime();
+
+				if (m_AttackCoolTime >= 3.f)
+				{
+					m_bAttack = false;
+					m_AttackCoolTime = 0.f;
+				}
+			}
 			else
-				GetSlimeScript()->ChangeState(eState::JumpAttack);
+			{
+				m_bAttack = true;
+
+				if (m_bAttackType)
+				{
+					GetSlimeScript()->ChangeState(eState::Attack);
+					m_bAttackType = false;
+				}
+				else
+				{
+					GetSlimeScript()->ChangeState(eState::JumpAttack);
+					m_bAttackType = true;
+				}
+			}
 		}
 	}
 
 	void SlimeTraceState::Enter()
 	{
-		// 방향 결정
-		Vector3 vDir = Vector3(CalDirToPlayer().x, CalDirToPlayer().y, 1.f);
-		vDir.Normalize();
-		SetDir(vDir);
 
-		// 애니메이션 방향 결정
-		DetermineAnimDir(vDir);
 	}
 
 	void SlimeTraceState::Exit()

@@ -34,12 +34,14 @@ namespace Lu
 
 			Vector3 vThisPos = pThisTransform->GetPosition();
 			Vector3 vOtherPos = pOtherTransform->GetPosition();
+			float Zpos = vOtherPos.z;
 
 			Vector3 vCollisionDir = vOtherPos - vThisPos;
 			vCollisionDir.Normalize();
 
 			float pushDistance = 0.0001f; // 밀어낼 양
 			Vector3 pushedPosition = vOtherPos + vCollisionDir * pushDistance;
+			pushedPosition.z = Zpos;
 			pOtherTransform->SetPosition(pushedPosition);
 		}
 	}
@@ -66,12 +68,14 @@ namespace Lu
 
 			Vector3 vThisPos = pThisTransform->GetPosition();
 			Vector3 vOtherPos = pOtherTransform->GetPosition();
+			float Zpos = vOtherPos.z;
 
 			Vector3 vCollisionDir = vOtherPos - vThisPos;
 			vCollisionDir.Normalize();
 
 			float pushDistance = 0.0001f; // 밀어낼 양
 			Vector3 pushedPosition = vOtherPos + vCollisionDir * pushDistance;
+			pushedPosition.z = Zpos;
 			pOtherTransform->SetPosition(pushedPosition);
 		}
 	}

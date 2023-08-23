@@ -13,9 +13,6 @@ namespace Lu
 		Vector3 m_AttackDir;
 
 	public:
-		virtual void Update() override;
-
-	public:
 		virtual void Enter() override;
 		virtual void Exit() override;
 	};

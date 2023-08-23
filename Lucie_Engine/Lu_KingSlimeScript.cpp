@@ -21,7 +21,7 @@ namespace Lu
 		, m_Target(nullptr)
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
-		, m_Time(13.f)
+		, m_Time(8.f)
 		, m_bAttack(false)
 	{
 		SetName(L"KingSlimeScript");
@@ -177,7 +177,7 @@ namespace Lu
 	{
 		if (!m_bAttack)
 		{
-			// 최초 스폰 13초 후 Circle 첫 공격
+			// 최초 스폰 n초 후 Circle 첫 공격
 			m_Time -= (float)Time::DeltaTime();
 			if (m_Time <= 0.f)
 			{

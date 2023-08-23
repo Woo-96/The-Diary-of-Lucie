@@ -22,8 +22,8 @@ namespace Lu
 
 		GetInfo().HP = 100;
 		GetInfo().MaxHP = 100;
-		GetInfo().DetectRange = 250.f;
-		GetInfo().AttackRange = 150.f;
+		GetInfo().DetectRange = 300.f;
+		GetInfo().AttackRange = 200.f;
 		GetInfo().MoveSpeed = 50.f;
 	}
 
@@ -113,24 +113,24 @@ namespace Lu
 
 
 		// Jump
-		GetAnimator()->Create(L"Slime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Left") = std::bind(&SlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"Slime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Right") = std::bind(&SlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"Slime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Up") = std::bind(&SlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"Slime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Slime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Down") = std::bind(&SlimeScript::CompleteAction, this);
 
 
 		// Attack
-		GetAnimator()->Create(L"Slime_Attack_Left", pAtlas, Vector2(0.f, 6120.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Attack_Left", pAtlas, Vector2(0.f, 6120.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
 		GetAnimator()->CompleteEvent(L"Slime_Attack_Left") = std::bind(&SlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"Slime_Attack_Right", pAtlas, Vector2(0.f, 6480.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Attack_Right", pAtlas, Vector2(0.f, 6480.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
 		GetAnimator()->CompleteEvent(L"Slime_Attack_Right") = std::bind(&SlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"Slime_Attack_Up", pAtlas, Vector2(0.f, 6840.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Attack_Up", pAtlas, Vector2(0.f, 6840.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
 		GetAnimator()->CompleteEvent(L"Slime_Attack_Up") = std::bind(&SlimeScript::CompleteAction, this);
-		GetAnimator()->Create(L"Slime_Attack_Down", pAtlas, Vector2(0.f, 4320.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Slime_Attack_Down", pAtlas, Vector2(0.f, 4320.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
 		GetAnimator()->CompleteEvent(L"Slime_Attack_Down") = std::bind(&SlimeScript::CompleteAction, this);
 
 

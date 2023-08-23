@@ -33,9 +33,9 @@ namespace Lu
 
 		// ╬Нец
 		Vector3 vPos = GetTransform()->GetPosition();
-		float distanceToMove = GetSnabyScript()->GetInfo().MoveSpeed * (float)Time::DeltaTime();
-		Vector3 moveVector = GetDir() * distanceToMove;
-		vPos += moveVector;
+		float Zpos = vPos.z;
+		vPos += GetDir() * GetSnabyScript()->GetInfo().MoveSpeed * (float)Time::DeltaTime();
+		vPos.z = Zpos;
 		GetTransform()->SetPosition(vPos);
 	}
 

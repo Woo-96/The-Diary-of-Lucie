@@ -32,12 +32,9 @@ namespace Lu
 	void AttackState::Update()
 	{
 		Vector3 vPos = GetTransform()->GetPosition();
-
-		float distanceToMove = GetSpeed() * (float)Time::DeltaTime();
-		Vector3 moveVector = GetDir() * distanceToMove;
-
-		vPos += moveVector;
-
+		float Zpos = vPos.z;
+		vPos += GetDir() * GetSpeed() * (float)Time::DeltaTime();
+		vPos.z = Zpos;
 		GetTransform()->SetPosition(vPos);
 	}
 

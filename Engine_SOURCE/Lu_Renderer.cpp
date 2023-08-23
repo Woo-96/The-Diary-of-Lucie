@@ -434,6 +434,13 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SlimeAnimation_Mtrl", material);
 
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SlimeJumpAnimation_Mtrl", material);
+
+
+		// 스프라이트 Mrtl
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
 
 		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Mouse_Tex", L"..\\Resources\\Texture\\UI\\Mouse.png");
