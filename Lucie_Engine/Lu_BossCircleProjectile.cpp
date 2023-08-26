@@ -19,42 +19,15 @@ namespace Lu
 
 	}
 
-	//void BossCircleProjectile::Update()
-	//{
-	//	// 소환 후 오른쪽 포물선 형태로 이동 (각도를 어떻게 설정하지?)
-	//	Vector3 vPos = GetTransform()->GetPosition();
-
-
-
-	//	GetTransform()->SetPosition(vPos);
-
-
-	//	// 2.5초후 다시 시작 위치로 되돌아감
-	//	SetTime(GetTime() + (float)Time::DeltaTime());
-
-	//	if (GetTime() >= 2.5f)
-	//	{
-
-
-
-
-	//		// 5초후 소멸 (같은 속도로 퍼져나갔다가 되돌아오니까 2.5초 이동 후 2.5초 되돌아오면 시작 지점이겠지?)
-	//		if (GetTime() >= 5.f)
-	//		{
-	//			object::Destroy(GetOwner());
-	//		}
-	//	}
-	//}
-
 	void BossCircleProjectile::Update()
 	{
 		SetTime(GetTime() + (float)Time::DeltaTime());
-		if (GetTime() >= 5.f)
+		if (GetTime() >= 2.2f)
 		{
 			object::Destroy(GetOwner());
 		}
 
-		else if (GetTime() >= 3.5f)
+		else if (GetTime() >= 1.3f)
 		{
 			Vector3 vPos = GetTransform()->GetPosition();
 			float Zpos = vPos.z;
@@ -64,13 +37,13 @@ namespace Lu
 			GetTransform()->SetPosition(vPos);
 		}
 
-		else if (GetTime() >= 3.f)
+		else if (GetTime() >= 1.f)
 		{
 			Vector3 vPos = GetTransform()->GetPosition();
 			GetTransform()->SetPosition(vPos);
 		}
 
-		else if (GetTime() >= 2.5f)
+		else
 		{
 			Vector3 vPos = GetTransform()->GetPosition();
 			float Zpos = vPos.z;
@@ -79,8 +52,6 @@ namespace Lu
 			GetTransform()->SetPosition(vPos);
 		}
 	}
-
-
 
 	void BossCircleProjectile::OnCollisionEnter(Collider2D* other)
 	{

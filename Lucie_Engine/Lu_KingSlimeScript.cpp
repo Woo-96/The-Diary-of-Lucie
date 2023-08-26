@@ -208,7 +208,7 @@ namespace Lu
 
 					MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
 					pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-					pMeshRender->SetMaterial(Resources::Find<Material>(L"MonsterProjectile_BossCircle_Mtrl"));
+					pMeshRender->SetMaterial(Resources::Find<Material>(L"MonsterProjectile_SlimeCircle_Mtrl"));
 
 					Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
 					pCollider->SetType(eColliderType::Rect);

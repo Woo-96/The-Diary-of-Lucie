@@ -34,10 +34,6 @@ namespace Lu
 
 	void KingSlimeDeadState::Exit()
 	{
-		object::Destroy(GetKingSlimeScript()->GetHPFrame());
-		object::Destroy(GetKingSlimeScript()->GetHPBar());
-		object::Destroy(GetKingSlimeScript()->GetOwner());
-
 		Vector3 vCurPos = GetTransform()->GetPosition();
 		int Xposition = -1;	// 데칼코마니로 스폰하기 위한 변수
 
@@ -94,5 +90,9 @@ namespace Lu
 				pBigSlimeScript->SetHPBar(pObject);
 			}
 		}
+
+		object::Destroy(GetKingSlimeScript()->GetHPFrame());
+		object::Destroy(GetKingSlimeScript()->GetHPBar());
+		object::Destroy(GetKingSlimeScript()->GetOwner());
 	}
 }

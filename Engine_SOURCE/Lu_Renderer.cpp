@@ -768,7 +768,7 @@ namespace renderer
 		material->SetShader(pShader);
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MonsterProjectile_BossCircle_Mtrl", material);
+		Resources::Insert(L"MonsterProjectile_SlimeCircle_Mtrl", material);
 
 		texture = Resources::Load<Texture>(L"BigSlimeJump_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\BigSlimeJump.png");
 		material = std::make_shared<Material>();

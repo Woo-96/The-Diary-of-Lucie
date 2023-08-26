@@ -26,7 +26,7 @@ namespace Lu
 	{
 		Vector3 vBossPos = GetTransform()->GetPosition();
 		vBossPos.y -= 150.f;
-		vBossPos.z = 600.f;
+		vBossPos.z = 550.f;
 
 		const int numProjectiles = 8;
 		const float angleIncrement = 360.0f / numProjectiles; // 8방향으로 퍼지도록 각도 간격 계산
@@ -44,7 +44,7 @@ namespace Lu
 			BubbleProjectile* pProjectileScript = pProjectile->AddComponent<BubbleProjectile>();
 			pProjectileScript->SetMonsterScript((MonsterScript*)this);
 			pProjectileScript->SetTransform(pProjectile->GetComponent<Transform>());
-			pProjectileScript->SetSpeed(200.f);
+			pProjectileScript->SetSpeed(250.f);
 
 			float angle = i * angleIncrement; // 투사체의 방향을 결정하는 각도 계산
 			float angleInRadians = DegreeToRadian(angle); // 각도를 라디안으로 변환
