@@ -6,6 +6,7 @@ namespace Lu
 {
 	class MouseScript;
 	class Camera;
+	class AudioSource;
 	class Scene : public Entity
 	{
 	public:
@@ -16,6 +17,19 @@ namespace Lu
 		std::vector<Layer>	m_Layers;
 		Camera*				m_MainCam;
 		MouseScript*		m_Mouse;
+		AudioSource*		m_BGM;
+		bool				m_bContinuousPlay;
+
+	public:
+		void SetBGM(AudioSource* _BGM)
+		{
+			m_BGM = _BGM;
+		}
+
+		void SetContinuousPlay(bool _bContinue)
+		{
+			m_bContinuousPlay = _bContinue;
+		}
 
 	public:
 		Layer& GetLayer(eLayerType type)
@@ -26,6 +40,11 @@ namespace Lu
 		MouseScript* GetMouse()	const
 		{
 			return m_Mouse;
+		}
+
+		AudioSource* GetBGM()	const
+		{
+			return m_BGM;
 		}
 
 	public:

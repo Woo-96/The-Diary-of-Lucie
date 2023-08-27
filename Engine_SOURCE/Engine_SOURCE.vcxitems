@@ -16,9 +16,14 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Animator.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_AudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_AudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_AudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Collider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ComputeShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Fmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_FontWrapper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Input.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Light2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Object.h" />
@@ -57,6 +62,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Animator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_AudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_AudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_AudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Collider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp" />
@@ -64,6 +72,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Fmod.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_FontWrapper.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_GraphicDevice_Dx11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Input.cpp" />

@@ -3,11 +3,15 @@
 
 namespace Lu
 {
+	class GameObject;
 	class AttackState : public StateScript
 	{
 	public:
 		AttackState();
 		virtual ~AttackState();
+
+	private:
+		GameObject* m_AttackSFX;
 
 	public:
 		virtual void Initialize() override;

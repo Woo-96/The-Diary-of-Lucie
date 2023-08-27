@@ -4,6 +4,8 @@
 #include "Lu_Renderer.h"
 #include "Lu_SceneManager.h"
 #include "Lu_CollisionManager.h"
+#include "Lu_Fmod.h"
+#include "Lu_FontWrapper.h"
 
 namespace Lu
 {
@@ -33,6 +35,8 @@ namespace Lu
 	{
 		Time::Initiailize();
 		Input::Initialize();
+		Fmod::Initialize();
+		FontWrapper::Initialize();
 
 		renderer::Initialize();
 		SceneManager::Initialize();

@@ -70,7 +70,6 @@ namespace Lu
 		BigSlimeStateScript* GetStateScript(BigSlimeStateScript::eState _State);
 		void AddState(BigSlimeStateScript* _State);
 		void CompleteAction();
-		void CircleAttack();
 
 	protected:
 		virtual void CreateAnimation() override;

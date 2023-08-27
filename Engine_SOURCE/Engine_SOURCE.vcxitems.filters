@@ -112,6 +112,30 @@
     <Filter Include="05. GameObject\Component\07. ParticleSystem">
       <UniqueIdentifier>{2d2e3781-3ffe-489a-9d2c-88b98f299fc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. Resource\06. Sound">
+      <UniqueIdentifier>{b1efef3a-de70-4cc7-9786-d5a74bd81613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\07. Font">
+      <UniqueIdentifier>{a0aa30a8-4a5f-4fd7-9ea0-1db3f7f9d80f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\06. Sound\AudioClip">
+      <UniqueIdentifier>{db34b126-aef8-4d5e-b8c3-8e26925fe53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\06. Sound\Fmod">
+      <UniqueIdentifier>{f347a7ba-c068-4f2b-9d41-1f16339ebb8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Resource\07. Font\FontWrapper">
+      <UniqueIdentifier>{fea9cfc1-90bb-4a7f-9d40-8fc7a2049835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\08. Sound">
+      <UniqueIdentifier>{4162cb34-cb2b-4c44-8f33-49cd0b96be2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\08. Sound\AudioSource">
+      <UniqueIdentifier>{76e49b49-78cd-4fdb-961f-4f09d220850c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. GameObject\Component\08. Sound\AudioListener">
+      <UniqueIdentifier>{5779adb0-81ac-485b-8380-668f016dd887}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -228,6 +252,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_ParticleSystem.h">
       <Filter>05. GameObject\Component\07. ParticleSystem</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_FontWrapper.h">
+      <Filter>06. Resource\07. Font\FontWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_AudioSource.h">
+      <Filter>05. GameObject\Component\08. Sound\AudioSource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_Fmod.h">
+      <Filter>06. Resource\06. Sound\Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_AudioListener.h">
+      <Filter>05. GameObject\Component\08. Sound\AudioListener</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lu_AudioClip.h">
+      <Filter>06. Resource\06. Sound\AudioClip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Entity.cpp">
@@ -328,6 +367,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_ParticleSystem.cpp">
       <Filter>05. GameObject\Component\07. ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_FontWrapper.cpp">
+      <Filter>06. Resource\07. Font\FontWrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_AudioSource.cpp">
+      <Filter>05. GameObject\Component\08. Sound\AudioSource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_Fmod.cpp">
+      <Filter>06. Resource\06. Sound\Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_AudioListener.cpp">
+      <Filter>05. GameObject\Component\08. Sound\AudioListener</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Lu_AudioClip.cpp">
+      <Filter>06. Resource\06. Sound\AudioClip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

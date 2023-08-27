@@ -8,6 +8,8 @@
 #include "Lu_Object.h"
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
+#include "Lu_AudioSource.h"
+#include "Lu_AudioListener.h"
 
 #include "Lu_Input.h"
 
@@ -36,6 +38,11 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossBG_Mtrl"));
+		
+			pObject->AddComponent<AudioListener>();
+			AudioSource* BGM = pObject->AddComponent<AudioSource>();
+			BGM->SetClip(Resources::Load<AudioClip>(L"MidBossBGM", L"..\\Resources\\Sound\\BGM\\MidBossBGM.ogg"));
+			SetBGM(BGM);
 		}
 
 		// UI : 크기 원본 1.5배
@@ -142,6 +149,6 @@ namespace Lu
 
 	void MidBossScene::OnExit()
 	{
-
+		StageScene::OnExit();
 	}
 }

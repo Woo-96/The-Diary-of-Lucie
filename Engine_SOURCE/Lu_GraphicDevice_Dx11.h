@@ -34,6 +34,11 @@ namespace Lu::graphics
 			return m_Device.Get();
 		}
 
+		ID3D11DeviceContext* GetID3D11DeviceContext()
+		{
+			return m_Context.Get();
+		}
+
 		D3D11_VIEWPORT GetViewPort()
 		{
 			return m_ViewPort;

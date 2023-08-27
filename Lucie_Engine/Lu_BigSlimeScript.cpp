@@ -61,7 +61,6 @@ namespace Lu
 			return;
 
 		m_CurState->Update();
-		CircleAttack();
 		AnimationUpdate();
 
 		m_PrevState = m_CurState->GetStateType();
@@ -151,64 +150,6 @@ namespace Lu
 	void BigSlimeScript::CompleteAction()
 	{
 		ChangeState(BigSlimeStateScript::eState::Trace);
-	}
-
-	void BigSlimeScript::CircleAttack()
-	{
-		if (!m_bAttack)
-		{
-			// 최초 스폰 n초 후 Circle 첫 공격
-			m_Time -= (float)Time::DeltaTime();
-			if (m_Time <= 0.f)
-			{
-				m_bAttack = true;
-				m_Time = 0.f;
-			}
-		}
-		else
-		{
-			// 첫 공격 이후 3초마다 Circle 발사
-			m_Time += (float)Time::DeltaTime();
-			if (m_Time >= 3.f)
-			{
-				m_Time = 0.f;
-
-				Vector3 vBossPos = GetOwner()->GetComponent<Transform>()->GetPosition();
-				vBossPos.y -= 150.f;
-				vBossPos.z = 600.f;
-
-				const int numProjectiles = 8;
-				const float angleIncrement = 360.0f / numProjectiles; // 8방향으로 퍼지도록 각도 간격 계산
-
-				// 써클 투사체 생성
-				for (int i = 0; i < numProjectiles; ++i)
-				{
-					GameObject* pProjectile = object::Instantiate<GameObject>(vBossPos, Vector3(80.f, 80.f, 100.f), eLayerType::MonsterProjectile);
-					pProjectile->SetName(L"CircleProjectile");
-
-					MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
-					pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-					pMeshRender->SetMaterial(Resources::Find<Material>(L"MonsterProjectile_SlimeCircle_Mtrl"));
-
-					Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
-					pCollider->SetType(eColliderType::Rect);
-					pCollider->SetSize(Vector2(0.6f, 0.6f));
-
-					CircleProjectile* pProjectileScript = pProjectile->AddComponent<CircleProjectile>();
-					pProjectileScript->SetMonsterScript((MonsterScript*)this);
-					pProjectileScript->SetTransform(pProjectile->GetComponent<Transform>());
-					pProjectileScript->SetSpeed(300.f);
-
-					float angle = i * angleIncrement; // 투사체의 방향을 결정하는 각도 계산
-					float angleInRadians = DegreeToRadian(angle); // 각도를 라디안으로 변환
-					// 삼각함수를 이용하여 방향 벡터 계산
-					float cosAngle = cos(angleInRadians);
-					float sinAngle = sin(angleInRadians);
-					Vector3 forwardDirection(cosAngle, sinAngle, 0.f); // 투사체가 전진할 방향 벡터 계산
-					pProjectileScript->SetDir(forwardDirection);
-				}
-			}
-		}
 	}
 
 	void BigSlimeScript::AnimationUpdate()

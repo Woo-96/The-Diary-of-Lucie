@@ -3,6 +3,7 @@
 #include "Lu_Transform.h"
 #include "Lu_Time.h"
 #include "Lu_Object.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -15,15 +16,18 @@ namespace Lu
 		, m_Time(0.f)
 	{
 		SetName(L"ProjectileScript");
+
+		m_SFX = new GameObject;
+		m_SFX->AddComponent<AudioSource>();
 	}
 
 	ProjectileScript::~ProjectileScript()
 	{
-	}
-
-	void ProjectileScript::Initialize()
-	{
-
+		if (nullptr != m_SFX)
+		{
+			delete m_SFX;
+			m_SFX = nullptr;
+		}
 	}
 
 	void ProjectileScript::Update()

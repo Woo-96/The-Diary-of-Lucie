@@ -12,6 +12,8 @@ namespace Lu::enums
 		Animator,
 		Light,
 		Particle,
+		AudioListener,
+		AudioSource,
 		Script,
 		End,
 	};
@@ -39,6 +41,7 @@ namespace Lu::enums
 		Mesh,
 		Animation,
 		ComputeShader,
+		AudioClip,
 		End,
 	};
 

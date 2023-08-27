@@ -61,7 +61,7 @@ namespace Lu
 
 	void StageScene::OnExit()
 	{
-
+		Scene::OnExit();
 	}
 
 	void StageScene::CreateHUD()

@@ -10,7 +10,6 @@ namespace Lu
         virtual ~BowProjectile();
 
     public:
-        virtual void Initialize() override;
         virtual void Update() override;
 
     public:

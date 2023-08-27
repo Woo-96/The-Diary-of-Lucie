@@ -9,6 +9,9 @@
 #include "Lu_CameraScript.h"
 #include "Lu_ImmovableScript.h"
 #include "Lu_CollisionManager.h"
+#include "Lu_AudioListener.h"
+#include "Lu_AudioClip.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -34,6 +37,11 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"LobbyBG_Mtrl"));
+		
+			pObject->AddComponent<AudioListener>();
+			AudioSource* BGM = pObject->AddComponent<AudioSource>();
+			BGM->SetClip(Resources::Load<AudioClip>(L"LobbyBGM", L"..\\Resources\\Sound\\BGM\\LobbyBGM.ogg"));
+			SetBGM(BGM);
 		}
 
 		// Player : 크기 원본 2배
@@ -58,8 +66,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(2.f, -29.f));
 			pCollider->SetSize(Vector2(0.1f, 0.1f));
 
-
-			Animator* pAnimator = pPlayer->AddComponent<Animator>();
+			pPlayer->AddComponent<Animator>();
 			pPlayer->AddComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
@@ -115,6 +122,6 @@ namespace Lu
 
 	void LobbyScene::OnExit()
 	{
-
+		Scene::OnExit();
 	}
 }

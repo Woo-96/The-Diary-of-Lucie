@@ -187,9 +187,9 @@ namespace Lu
 		}
 		else
 		{
-			// 첫 공격 이후 3초마다 Circle 발사
+			// 첫 공격 이후 n초마다 Circle 발사
 			m_Time += (float)Time::DeltaTime();
-			if (m_Time >= 3.f)
+			if (m_Time >= 1.5f)
 			{
 				m_Time = 0.f;
 

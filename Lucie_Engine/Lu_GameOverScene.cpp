@@ -3,6 +3,9 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
+#include "Lu_AudioSource.h"
+#include "Lu_AudioListener.h"
+
 #include "Lu_Input.h"
 
 namespace Lu
@@ -29,6 +32,11 @@ namespace Lu
 			MeshRenderer* pMeshRender = pGameOver->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"GameOver_Mtrl"));
+
+			pGameOver->AddComponent<AudioListener>();
+			AudioSource* BGM = pGameOver->AddComponent<AudioSource>();
+			BGM->SetClip(Resources::Load<AudioClip>(L"GameOverBGM", L"..\\Resources\\Sound\\BGM\\GameOverBGM.ogg"));
+			SetBGM(BGM);
 		}
 	}
 
@@ -71,6 +79,6 @@ namespace Lu
 
 	void GameOverScene::OnExit()
 	{
-
+		Scene::OnExit();
 	}
 }

@@ -6,6 +6,8 @@
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_SlimeScript.h"
+#include "Lu_AudioListener.h"
+#include "Lu_AudioSource.h"
 
 #include "Lu_Input.h"
 
@@ -32,6 +34,12 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Nomal2BG_Mtrl"));
+		
+			pObject->AddComponent<AudioListener>();
+			AudioSource* BGM = pObject->AddComponent<AudioSource>();
+			BGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
+			SetBGM(BGM);
+			SetContinuousPlay(true);
 		}
 
 		// Player : 크기 원본 2배
@@ -56,8 +64,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(2.f, -29.f));
 			pCollider->SetSize(Vector2(0.1f, 0.1f));
 
-
-			Animator* pAnimator = pPlayer->AddComponent<Animator>();
+			pPlayer->AddComponent<Animator>();
 			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
@@ -78,7 +85,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(0.f, -60.f));
 			pCollider->SetSize(Vector2(0.4f, 0.3f));
 
-			pAnimator = pMonster->AddComponent<Animator>();
+			pMonster->AddComponent<Animator>();
 			SlimeScript* pSlimeScript = pMonster->AddComponent<SlimeScript>();
 			pSlimeScript->SetTarget(pPlayerScript);
 
@@ -95,7 +102,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(0.f, -60.f));
 			pCollider->SetSize(Vector2(0.4f, 0.3f));
 
-			pAnimator = pMonster->AddComponent<Animator>();
+			pMonster->AddComponent<Animator>();
 			pSlimeScript = pMonster->AddComponent<SlimeScript>();
 			pSlimeScript->SetTarget(pPlayerScript);
 		}
@@ -134,6 +141,7 @@ namespace Lu
 
 	void Nomal2Scene::OnExit()
 	{
-
+		SetContinuousPlay(false);
+		StageScene::OnExit();
 	}
 }

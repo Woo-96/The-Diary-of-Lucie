@@ -11,9 +11,9 @@ struct GS_OUT
 
 float4 main(GS_OUT _in) : SV_Target
 {
-    float4 vOutColor = (float4) 0.f;
+    float4 vOutColor = float4(1.0f, 0.f, 1.0f, 1.0f);
     
-    vOutColor = (float4) albedoTexture.Sample(anisotropicSampler, _in.vUV);
+    vOutColor = albedoTexture.Sample(anisotropicSampler, _in.vUV);
     vOutColor.rgb *= ParticleBuffer[_in.iInstID].vColor.rgb;
 
     if (0.f == vOutColor.a)

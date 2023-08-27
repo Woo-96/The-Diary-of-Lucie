@@ -5,6 +5,8 @@
 #include "Editor_Window.h"
 #include "..\Engine_SOURCE\Lu_Application.h"
 #include "..\Engine_SOURCE\Lu_Renderer.h"
+#include "..\Engine_SOURCE\Lu_Fmod.h"
+#include "..\Engine_SOURCE\Lu_FontWrapper.h"
 #include "LoadScenes.h"
 #include "guiEditor.h"
 
@@ -85,6 +87,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     renderer::Release();
     Lu::SceneManager::Release();
+    Lu::Fmod::Release();
+    Lu::FontWrapper::Release();
     gui::Editor::Release();
 
     return (int) msg.wParam;

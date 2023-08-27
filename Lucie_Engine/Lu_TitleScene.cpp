@@ -5,6 +5,8 @@
 #include "Lu_Object.h"
 #include "Lu_Input.h"
 #include "Lu_ParticleSystem.h"
+#include "Lu_AudioListener.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -30,6 +32,11 @@ namespace Lu
 			MeshRenderer* pMeshRender = pTitleBG->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"TitleBG_Mtrl"));
+		
+			pTitleBG->AddComponent<AudioListener>();
+			AudioSource* BGM = pTitleBG->AddComponent<AudioSource>();
+			BGM->SetClip(Resources::Load<AudioClip>(L"ForestBGM", L"..\\Resources\\Sound\\BGM\\ForestBGM.ogg"));
+			SetBGM(BGM);
 		}
 
 		// ·ç½Ã
@@ -116,6 +123,6 @@ namespace Lu
 
 	void TitleScene::OnExit()
 	{
-
+		Scene::OnExit();
 	}
 }

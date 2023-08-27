@@ -9,6 +9,8 @@
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_ImmovableScript.h"
+#include "Lu_AudioListener.h"
+#include "Lu_AudioSource.h"
 
 #include "Lu_Input.h"
 
@@ -35,6 +37,11 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Nomal1BG_Mtrl"));
+		
+			pObject->AddComponent<AudioListener>();
+			AudioSource* BGM = pObject->AddComponent<AudioSource>();
+			BGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
+			SetBGM(BGM);
 		}
 
 		// Player : 크기 원본 2배
@@ -59,8 +66,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(2.f, -29.f));
 			pCollider->SetSize(Vector2(0.1f, 0.1f));
 
-
-			Animator* pAnimator = pPlayer->AddComponent<Animator>();
+			pPlayer->AddComponent<Animator>();
 			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
@@ -81,7 +87,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(3.f, -7.f));
 			pCollider->SetSize(Vector2(0.3f, 0.8f));
 
-			pAnimator = pMonster->AddComponent<Animator>();
+			pMonster->AddComponent<Animator>();
 			SnabyScript* pSnabyScript = pMonster->AddComponent<SnabyScript>();
 			pSnabyScript->SetTarget(pPlayerScript);
 
@@ -98,7 +104,7 @@ namespace Lu
 			pCollider->SetCenter(Vector2(3.f, -7.f));
 			pCollider->SetSize(Vector2(0.3f, 0.8f));
 
-			pAnimator = pMonster->AddComponent<Animator>();
+			pMonster->AddComponent<Animator>();
 			pSnabyScript = pMonster->AddComponent<SnabyScript>();
 			pSnabyScript->SetTarget(pPlayerScript);
 		}
@@ -126,6 +132,7 @@ namespace Lu
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);
 	}
 
@@ -158,10 +165,11 @@ namespace Lu
 	void Nomal1Scene::OnEnter()
 	{
 		StageScene::OnEnter();
+		SetContinuousPlay(true);
 	}
 
 	void Nomal1Scene::OnExit()
 	{
-
+		StageScene::OnExit();
 	}
 }

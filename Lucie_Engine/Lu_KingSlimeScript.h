@@ -25,6 +25,7 @@ namespace Lu
 		float							m_Time;
 		bool							m_bAttack;
 
+
 	public:
 		void SetTarget(PlayerScript* _Target)
 		{

@@ -4,6 +4,7 @@
 
 namespace Lu
 {
+    class GameObject;
     class Transform;
     class ProjectileScript : public Script
     {
@@ -18,6 +19,7 @@ namespace Lu
         float				        m_AttackSpeed;
         Vector3				        m_AttackDir;
         float                       m_Time;
+        GameObject*                 m_SFX;
 
     public:
         void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -45,8 +47,18 @@ namespace Lu
             m_AttackDir = _Dir;
         }
 
+        void SetSFX(GameObject* _Audio)
+        {
+            m_SFX = _Audio;
+        }
+
     public:
-        virtual void Initialize() override;
+        GameObject* GetSFX()   const
+        {
+            return m_SFX;
+        }
+
+    public:
         virtual void Update() override;
 
     public:

@@ -7,14 +7,16 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "..\Lucie_Engine\Lu_MouseScript.h"
-#include "Lu_Input.h"
 #include "Lu_Transform.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
 	Scene::Scene()
 		: m_MainCam(nullptr)
 		, m_Mouse(nullptr)
+		, m_BGM(nullptr)
+		, m_bContinuousPlay(false)
 	{
 		m_Layers.resize((int)Lu::enums::eLayerType::End);
 	}
@@ -104,10 +106,17 @@ namespace Lu
 	void Scene::OnEnter()
 	{
 		renderer::mainCamera = m_MainCam;
+
+		if (nullptr != m_BGM && false == m_bContinuousPlay)
+		{
+			m_BGM->Play();
+			m_BGM->SetVolume(0.3);
+		}
 	}
 
 	void Scene::OnExit()
 	{
-
+		if (nullptr != m_BGM && false == m_bContinuousPlay)
+			m_BGM->Stop();
 	}
 }

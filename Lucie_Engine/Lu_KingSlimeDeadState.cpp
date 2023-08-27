@@ -7,6 +7,7 @@
 #include "Lu_Collider2D.h"
 #include "Lu_Animator.h"
 #include "Lu_BigSlimeScript.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -14,11 +15,18 @@ namespace Lu
 	{
 		SetName(L"KingSlimeDeadStateScript");
 		SetStateType(eState::Dead);
+
+		m_SFX = new GameObject;
+		m_SFX->AddComponent<AudioSource>();
 	}
 
 	KingSlimeDeadState::~KingSlimeDeadState()
 	{
-
+		if (nullptr != m_SFX)
+		{
+			delete m_SFX;
+			m_SFX = nullptr;
+		}
 	}
 
 	void KingSlimeDeadState::Update()
@@ -30,6 +38,10 @@ namespace Lu
 	{
 		if (!(GetKingSlimeScript()->GetOwner()->DeleteComponent<Collider2D>()))
 			assert(nullptr);
+
+		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
+		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeDeadSFX.ogg"));
+		pAudio->Play();
 	}
 
 	void KingSlimeDeadState::Exit()
