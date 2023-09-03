@@ -12,7 +12,7 @@ namespace Lu
 		, m_CurNumber(-1)
 		, m_TexResolution(Vector2::Zero)
 	{
-
+		SetName(L"NumberScript");
 	}
 
 	NumberScript::~NumberScript()

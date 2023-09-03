@@ -16,7 +16,8 @@ namespace Lu
 	private:
 		std::vector<Layer>	m_Layers;
 		Camera*				m_MainCam;
-		MouseScript*		m_Mouse;
+		Camera*				m_UICam;
+		//MouseScript*		m_Mouse;
 		AudioSource*		m_BGM;
 		bool				m_bContinuousPlay;
 
@@ -37,10 +38,15 @@ namespace Lu
 			return m_Layers[(UINT)type];
 		}
 
-		MouseScript* GetMouse()	const
+		Camera* GetUICam()	const
 		{
-			return m_Mouse;
+			return m_UICam;
 		}
+
+		//MouseScript* GetMouse()	const
+		//{
+		//	return m_Mouse;
+		//}
 
 		AudioSource* GetBGM()	const
 		{
@@ -56,6 +62,9 @@ namespace Lu
 
 	public:
 		void AddGameObject(eLayerType _Type, GameObject* _GameObj);
+		void RemoveGameObject(eLayerType _Type, GameObject* _GameObj);
+		GameObject* FindGameObject(eLayerType _Type, GameObject* _GameObj);
+		GameObject* FindGameObject(eLayerType _Type, std::wstring _Name);
 
 	public:
 		virtual void OnEnter();

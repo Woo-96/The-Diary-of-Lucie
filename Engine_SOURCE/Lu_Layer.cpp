@@ -9,14 +9,25 @@ namespace Lu
 
 	Layer::~Layer()
 	{
-		for (GameObject* gameObj : m_GameObjects)
+		//for (GameObject* gameObj : m_GameObjects)
+		//{
+		//	if (gameObj == nullptr)
+		//		continue;
+
+		//	delete gameObj;
+		//	gameObj = nullptr;
+		//}
+
+		for (int i = 0; i < m_GameObjects.size(); ++i)
 		{
+			GameObject* gameObj = m_GameObjects[i];
 			if (gameObj == nullptr)
 				continue;
 
 			delete gameObj;
-			gameObj = nullptr;
+			m_GameObjects[i] = nullptr;
 		}
+
 	}
 	
 	void Layer::Initialize()
@@ -130,5 +141,17 @@ namespace Lu
 	void Layer::AddGameObject(GameObject* _GameObj)
 	{
 		m_GameObjects.push_back(_GameObj);
+	}
+
+	void Layer::RemoveGameObject(GameObject* _GameObj)
+	{
+		for (auto iter = m_GameObjects.begin(); iter != m_GameObjects.end(); ++iter)
+		{
+			if (*iter == _GameObj)
+			{
+				m_GameObjects.erase(iter);
+				break; // 객체를 찾고 나면 반복문 종료
+			}
+		}
 	}
 }

@@ -40,12 +40,6 @@
     <Filter Include="07. Scene\Layer">
       <UniqueIdentifier>{4158d93b-edb1-43dd-917a-ff156fd496af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="07. Scene\Manager">
-      <UniqueIdentifier>{76e67179-9842-4784-9d5f-132680103d84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. Scene\Manager\SceneMgr">
-      <UniqueIdentifier>{917def0c-b899-4528-ba8c-23ccc5d90ead}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05. GameObject\Component\03. Camera">
       <UniqueIdentifier>{dfb53166-2f64-4b7c-b035-7c723b3af490}</UniqueIdentifier>
     </Filter>
@@ -136,6 +130,9 @@
     <Filter Include="05. GameObject\Component\08. Sound\AudioListener">
       <UniqueIdentifier>{5779adb0-81ac-485b-8380-668f016dd887}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07. Scene\SceneMgr">
+      <UniqueIdentifier>{917def0c-b899-4528-ba8c-23ccc5d90ead}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -220,7 +217,7 @@
       <Filter>05. GameObject\Component\04. Collider</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_SceneManager.h">
-      <Filter>07. Scene\Manager\SceneMgr</Filter>
+      <Filter>07. Scene\SceneMgr</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.h">
       <Filter>05. GameObject\Component\04. Collider\CollisionMgr</Filter>
@@ -336,7 +333,7 @@
       <Filter>05. GameObject\Component\04. Collider</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_SceneManager.cpp">
-      <Filter>07. Scene\Manager\SceneMgr</Filter>
+      <Filter>07. Scene\SceneMgr</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Lu_CollisionManager.cpp">
       <Filter>05. GameObject\Component\04. Collider\CollisionMgr</Filter>

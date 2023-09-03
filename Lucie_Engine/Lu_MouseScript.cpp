@@ -2,6 +2,7 @@
 #include "Lu_Input.h"
 #include "Lu_GameObject.h"
 #include "Lu_Transform.h"
+#include "Lu_SceneManager.h"
 
 namespace Lu
 {
@@ -10,6 +11,7 @@ namespace Lu
 		, m_OffsetPos(Vector2(21.f, -23.f))
 	{
 		SetName(L"MouseScript");
+		m_Cam = SceneManager::GetActiveScene()->GetUICam();
 	}
 
 	MouseScript::~MouseScript()

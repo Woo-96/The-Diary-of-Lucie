@@ -48,6 +48,7 @@ namespace Lu
 		{
 			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(400.f, 50.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
 			pPlayer->SetName(L"Player");
+			SceneManager::DontDestroyOnLoad(pPlayer);
 
 			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

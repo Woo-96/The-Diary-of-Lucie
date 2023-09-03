@@ -6,6 +6,7 @@ namespace Lu
 {
 	ImmovableScript::ImmovableScript()
 	{
+		SetName(L"ImmovableScript");
 	}
 
 	ImmovableScript::~ImmovableScript()

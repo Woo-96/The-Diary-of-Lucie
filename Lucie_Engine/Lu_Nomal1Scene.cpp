@@ -46,28 +46,31 @@ namespace Lu
 
 		// Player : 크기 원본 2배
 		{
-			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(400.f, 50.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
-			pPlayer->SetName(L"Player");
+			//GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(400.f, 50.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
+			//pPlayer->SetName(L"Player");
 
-			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
+			//MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			//pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
 
-			// 피격 판정용 충돌체
-			Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
-			pCollider->SetName(L"ImmovableCollider");
-			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(2.f, 3.f));
-			pCollider->SetSize(Vector2(0.2f, 0.42f));
+			//// 피격 판정용 충돌체
+			//Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
+			//pCollider->SetName(L"ImmovableCollider");
+			//pCollider->SetType(eColliderType::Rect);
+			//pCollider->SetCenter(Vector2(2.f, 3.f));
+			//pCollider->SetSize(Vector2(0.2f, 0.42f));
 
-			pCollider = pPlayer->AddComponent<Collider2D>();
-			pCollider->SetName(L"HitCollider");
-			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(2.f, -29.f));
-			pCollider->SetSize(Vector2(0.1f, 0.1f));
+			//pCollider = pPlayer->AddComponent<Collider2D>();
+			//pCollider->SetName(L"HitCollider");
+			//pCollider->SetType(eColliderType::Rect);
+			//pCollider->SetCenter(Vector2(2.f, -29.f));
+			//pCollider->SetSize(Vector2(0.1f, 0.1f));
 
-			pPlayer->AddComponent<Animator>();
-			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
+			//pPlayer->AddComponent<Animator>();
+			//PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
+
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
@@ -78,11 +81,11 @@ namespace Lu
 			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(-200.f, 200.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
 			pMonster->SetName(L"Snaby");
 
-			pMeshRender = pMonster->AddComponent<MeshRenderer>();
+			MeshRenderer* pMeshRender = pMonster->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SnabyAnimation_Mtrl"));
 
-			pCollider = pMonster->AddComponent<Collider2D>();
+			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(3.f, -7.f));
 			pCollider->SetSize(Vector2(0.3f, 0.8f));

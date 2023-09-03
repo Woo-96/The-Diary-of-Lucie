@@ -15,12 +15,6 @@ namespace Lu
 		Vector2 m_OffsetPos;
 
 	public:
-		void SetCam(Camera* _Cam)
-		{
-			m_Cam = _Cam;
-		}
-
-	public:
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 	};

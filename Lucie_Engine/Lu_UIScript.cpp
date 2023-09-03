@@ -4,7 +4,7 @@ namespace Lu
 {
 	UIScript::UIScript()
 	{
-
+		SetName(L"UIScript");
 	}
 
 	UIScript::~UIScript()

@@ -14,8 +14,6 @@
 
 #include "Lu_GameOverScene.h"
 
-#include "Lu_PlayScene.h"
-
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\Lucie_Engine.lib")
 #else
@@ -42,8 +40,5 @@ namespace Lu
 		SceneManager::CreateScene<GameOverScene>(L"GameOverScene");
 
 		SceneManager::LoadScene(L"TitleScene");
-
-		// 수업 진도용
-		//SceneManager::CreateScene<PlayScene>(L"PlayScene");
 	}
 }

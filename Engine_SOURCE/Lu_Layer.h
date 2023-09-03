@@ -27,5 +27,6 @@ namespace Lu
 		
 	public:
 		void AddGameObject(GameObject* _GameObj);
+		void RemoveGameObject(GameObject* _GameObj);
 	};
 }

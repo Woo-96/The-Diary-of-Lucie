@@ -213,7 +213,6 @@
     <ClInclude Include="Lu_Nomal2Scene.h" />
     <ClInclude Include="Lu_NumberScript.h" />
     <ClInclude Include="Lu_PlayerScript.h" />
-    <ClInclude Include="Lu_PlayScene.h" />
     <ClInclude Include="Lu_ProjectileScript.h" />
     <ClInclude Include="Lu_QuickItem.h" />
     <ClInclude Include="Lu_SlimeAttackState.h" />
@@ -288,7 +287,6 @@
     <ClCompile Include="Lu_Nomal2Scene.cpp" />
     <ClCompile Include="Lu_NumberScript.cpp" />
     <ClCompile Include="Lu_PlayerScript.cpp" />
-    <ClCompile Include="Lu_PlayScene.cpp" />
     <ClCompile Include="Lu_ProjectileScript.cpp" />
     <ClCompile Include="Lu_QuickItem.cpp" />
     <ClCompile Include="Lu_SlimeAttackState.cpp" />

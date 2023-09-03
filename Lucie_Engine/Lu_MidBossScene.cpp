@@ -57,28 +57,31 @@ namespace Lu
 
 		// Player & KingSlime
 		{
-			GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(600.f, -150.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
-			pPlayer->SetName(L"Player");
+			//GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(600.f, -150.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
+			//pPlayer->SetName(L"Player");
 
-			MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
+			//MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
+			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			//pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
 
-			// 피격 판정용 충돌체
-			Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
-			pCollider->SetName(L"ImmovableCollider");
-			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(2.f, 3.f));
-			pCollider->SetSize(Vector2(0.2f, 0.42f));
+			//// 피격 판정용 충돌체
+			//Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
+			//pCollider->SetName(L"ImmovableCollider");
+			//pCollider->SetType(eColliderType::Rect);
+			//pCollider->SetCenter(Vector2(2.f, 3.f));
+			//pCollider->SetSize(Vector2(0.2f, 0.42f));
 
-			pCollider = pPlayer->AddComponent<Collider2D>();
-			pCollider->SetName(L"HitCollider");
-			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(2.f, -29.f));
-			pCollider->SetSize(Vector2(0.1f, 0.1f));
+			//pCollider = pPlayer->AddComponent<Collider2D>();
+			//pCollider->SetName(L"HitCollider");
+			//pCollider->SetType(eColliderType::Rect);
+			//pCollider->SetCenter(Vector2(2.f, -29.f));
+			//pCollider->SetSize(Vector2(0.1f, 0.1f));
 
-			Animator* pAnimator = pPlayer->AddComponent<Animator>();
-			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
+			//Animator* pAnimator = pPlayer->AddComponent<Animator>();
+			//PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
+
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 			pMainCamScript->SetWorldResolution(Vector2(2208.f, 1920.f));
@@ -89,16 +92,16 @@ namespace Lu
 			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 200.f, 500.f), Vector3(720.f, 720.f, 100.f), eLayerType::Monster);
 			pObject->SetName(L"KingSlime");
 
-			pMeshRender = pObject->AddComponent<MeshRenderer>();
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
-			pCollider = pObject->AddComponent<Collider2D>();
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(0.f, -200.f));
 			pCollider->SetSize(Vector2(0.5f, 0.4f));
 
-			pAnimator = pObject->AddComponent<Animator>();
+			Animator* pAnimator = pObject->AddComponent<Animator>();
 			KingSlimeScript* pKingSlimeScript = pObject->AddComponent<KingSlimeScript>();
 			pKingSlimeScript->SetTarget(pPlayerScript);
 		}

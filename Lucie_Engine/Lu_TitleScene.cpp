@@ -1,12 +1,11 @@
 #include "Lu_TitleScene.h"
-#include "Lu_Renderer.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
-#include "Lu_ParticleSystem.h"
 #include "Lu_AudioListener.h"
 #include "Lu_AudioSource.h"
+#include "Lu_MouseScript.h"
 
 namespace Lu
 {
@@ -79,12 +78,17 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
 		}
 
-		// UI
+		// Mouse
 		{
-			//GameObject* pParticle = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 900.f), Vector3(500, 500.f, 500.f), eLayerType::Default);
-			//pParticle->SetName(L"ParticleTest");
+			GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
+			pMouse->SetName(L"Mouse");
+			SceneManager::DontDestroyOnLoad(pMouse);
 
-			//ParticleSystem* pParticleSystem = pParticle->AddComponent<ParticleSystem>();
+			MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
+
+			pMouse->AddComponent<MouseScript>();
 		}
 	}
 
@@ -119,6 +123,8 @@ namespace Lu
 	void TitleScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		SceneManager::DontUseOnLoad(eLayerType::Player);
 	}
 
 	void TitleScene::OnExit()

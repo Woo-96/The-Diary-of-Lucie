@@ -6,7 +6,7 @@
 #include "Lu_GameObject.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
-#include "..\Lucie_Engine\Lu_MouseScript.h"
+//#include "..\Lucie_Engine\Lu_MouseScript.h"
 #include "Lu_Transform.h"
 #include "Lu_AudioSource.h"
 
@@ -14,7 +14,8 @@ namespace Lu
 {
 	Scene::Scene()
 		: m_MainCam(nullptr)
-		, m_Mouse(nullptr)
+		, m_UICam(nullptr)
+		//, m_Mouse(nullptr)
 		, m_BGM(nullptr)
 		, m_bContinuousPlay(false)
 	{
@@ -48,21 +49,21 @@ namespace Lu
 			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), eLayerType::Default);
 			pObject->SetName(L"UICam");
 
-			Camera* pCam = pObject->AddComponent<Camera>();
-			pCam->DisableLayerMasks();
-			pCam->TurnLayerMask(eLayerType::UI, true);
-			pCam->TurnLayerMask(eLayerType::Mouse, true);
-			renderer::cameras.push_back(pCam);
+			m_UICam = pObject->AddComponent<Camera>();
+			m_UICam->DisableLayerMasks();
+			m_UICam->TurnLayerMask(eLayerType::UI, true);
+			m_UICam->TurnLayerMask(eLayerType::Mouse, true);
+			renderer::cameras.push_back(m_UICam);
 
-			GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
-			pMouse->SetName(L"Mouse");
+			//GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
+			//pMouse->SetName(L"Mouse");
 
-			m_Mouse = pMouse->AddComponent<MouseScript>();
-			m_Mouse->SetCam(pCam);
+			//MouseScript* pMouseScript = pMouse->AddComponent<MouseScript>();
+			//pMouseScript->SetCam(m_UICam);
 
-			MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
+			//MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
+			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			//pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
 		}
 	}
 
@@ -101,6 +102,41 @@ namespace Lu
 	void Scene::AddGameObject(eLayerType _Type, GameObject* _GameObj)
 	{
 		m_Layers[(int)_Type].AddGameObject(_GameObj);
+	}
+
+	void Scene::RemoveGameObject(eLayerType _Type, GameObject* _GameObj)
+	{
+		m_Layers[(int)_Type].RemoveGameObject(_GameObj);
+	}
+
+	GameObject* Scene::FindGameObject(eLayerType _Type, GameObject* _GameObj)
+	{
+		Layer& layer = m_Layers[(int)_Type];
+
+		for (GameObject* obj : layer.GetGameObjects())
+		{
+			if (obj == _GameObj)
+			{
+				return obj;
+			}
+		}
+
+		return nullptr;
+	}
+
+	GameObject* Scene::FindGameObject(eLayerType _Type, std::wstring _Name)
+	{
+		Layer& layer = m_Layers[(int)_Type];
+
+		for (GameObject* obj : layer.GetGameObjects())
+		{
+			if (obj->GetName() == _Name)
+			{
+				return obj;
+			}
+		}
+
+		return nullptr;
 	}
 
 	void Scene::OnEnter()
