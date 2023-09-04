@@ -6,8 +6,6 @@
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_SlimeScript.h"
-#include "Lu_AudioListener.h"
-#include "Lu_AudioSource.h"
 
 #include "Lu_Input.h"
 
@@ -34,39 +32,10 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Nomal2BG_Mtrl"));
-		
-			pObject->AddComponent<AudioListener>();
-			AudioSource* BGM = pObject->AddComponent<AudioSource>();
-			BGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
-			SetBGM(BGM);
-			SetContinuousPlay(true);
 		}
 
-		// Player : 크기 원본 2배
+		// Monster : 크기 원본 2배
 		{
-			//GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(0.f, 400.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
-			//pPlayer->SetName(L"Player");
-
-			//MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			//pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
-
-			//// 피격 판정용 충돌체
-			//Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
-			//pCollider->SetName(L"ImmovableCollider");
-			//pCollider->SetType(eColliderType::Rect);
-			//pCollider->SetCenter(Vector2(2.f, 3.f));
-			//pCollider->SetSize(Vector2(0.2f, 0.42f));
-
-			//pCollider = pPlayer->AddComponent<Collider2D>();
-			//pCollider->SetName(L"HitCollider");
-			//pCollider->SetType(eColliderType::Rect);
-			//pCollider->SetCenter(Vector2(2.f, -29.f));
-			//pCollider->SetSize(Vector2(0.1f, 0.1f));
-
-			//pPlayer->AddComponent<Animator>();
-			//PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
-
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
@@ -75,7 +44,6 @@ namespace Lu
 			pMainCamScript->SetTarget(pPlayer);
 
 
-			// Monster : 크기 원본 2배
 			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(-40.f, 100.f, 500.f), Vector3(180.f, 180.f, 100.f), eLayerType::Monster);
 			pMonster->SetName(L"Slime");
 
@@ -144,7 +112,6 @@ namespace Lu
 
 	void Nomal2Scene::OnExit()
 	{
-		SetContinuousPlay(false);
 		StageScene::OnExit();
 	}
 }

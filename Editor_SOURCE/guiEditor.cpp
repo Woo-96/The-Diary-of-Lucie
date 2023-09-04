@@ -6,6 +6,7 @@
 #include "..\\Engine_SOURCE\\Lu_Material.h"
 #include "..\\Engine_SOURCE\\Lu_Renderer.h"
 #include "..\\Engine_SOURCE\\Lu_Enums.h"
+#include "..\\Engine_SOURCE\\Lu_Input.h"
 
 namespace gui
 {
@@ -13,6 +14,7 @@ namespace gui
 	std::vector<Widget*> Editor::m_Widgets = {};
 	std::vector<EditorObject*> Editor::m_EditorObjects = {};
 	std::vector<DebugOjbect*> Editor::m_DebugOjbects = {};
+	bool Editor::m_bDebugRender = true;
 
 	void Editor::Initialize()
 	{
@@ -53,6 +55,14 @@ namespace gui
 		for (EditorObject* obj : m_EditorObjects)
 		{
 			obj->Update();
+		}
+
+		if (Lu::Input::GetKeyDown(Lu::eKeyCode::P))
+		{
+			if (m_bDebugRender)
+				m_bDebugRender = false;
+			else
+				m_bDebugRender = true;
 		}
 	}
 
@@ -103,6 +113,9 @@ namespace gui
 
 	void Editor::DebugRender(const Lu::graphics::DebugMesh& _Mesh)
 	{
+		if (!m_bDebugRender)
+			return;
+
 		DebugOjbect* debugObj = m_DebugOjbects[(UINT)_Mesh.Type];
 		Lu::Transform* tr = debugObj->GetComponent<Lu::Transform>();
 

@@ -9,9 +9,6 @@ namespace Lu
 		SnabyDeadState();
 		virtual ~SnabyDeadState();
 
-	private:
-		GameObject* m_SFX;
-
 	public:
 		virtual void Enter() override;
 		virtual void Exit() override;

@@ -11,7 +11,6 @@ namespace Lu
 
 	private:
 		Vector3 m_AttackDir;
-		GameObject* m_SFX;
 
 	public:
 		virtual void Enter() override;

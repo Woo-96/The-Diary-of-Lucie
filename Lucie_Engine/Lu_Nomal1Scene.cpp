@@ -3,14 +3,11 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_Animator.h"
-#include "Lu_CollisionManager.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_SnabyScript.h"
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_ImmovableScript.h"
-#include "Lu_AudioListener.h"
-#include "Lu_AudioSource.h"
 
 #include "Lu_Input.h"
 
@@ -37,38 +34,10 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Nomal1BG_Mtrl"));
-		
-			pObject->AddComponent<AudioListener>();
-			AudioSource* BGM = pObject->AddComponent<AudioSource>();
-			BGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
-			SetBGM(BGM);
 		}
 
-		// Player : 크기 원본 2배
+		// Monster : 크기 원본 2배
 		{
-			//GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(400.f, 50.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
-			//pPlayer->SetName(L"Player");
-
-			//MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			//pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
-
-			//// 피격 판정용 충돌체
-			//Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
-			//pCollider->SetName(L"ImmovableCollider");
-			//pCollider->SetType(eColliderType::Rect);
-			//pCollider->SetCenter(Vector2(2.f, 3.f));
-			//pCollider->SetSize(Vector2(0.2f, 0.42f));
-
-			//pCollider = pPlayer->AddComponent<Collider2D>();
-			//pCollider->SetName(L"HitCollider");
-			//pCollider->SetType(eColliderType::Rect);
-			//pCollider->SetCenter(Vector2(2.f, -29.f));
-			//pCollider->SetSize(Vector2(0.1f, 0.1f));
-
-			//pPlayer->AddComponent<Animator>();
-			//PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
-
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
@@ -77,7 +46,6 @@ namespace Lu
 			pMainCamScript->SetTarget(pPlayer);
 
 
-			// Monster : 크기 원본 2배
 			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(-200.f, 200.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
 			pMonster->SetName(L"Snaby");
 
@@ -131,12 +99,6 @@ namespace Lu
 
 			pObj->AddComponent<ImmovableScript>();
 		}
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);
-		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Immovable, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);
 	}
 
 	void Nomal1Scene::Update()
@@ -168,7 +130,6 @@ namespace Lu
 	void Nomal1Scene::OnEnter()
 	{
 		StageScene::OnEnter();
-		SetContinuousPlay(true);
 	}
 
 	void Nomal1Scene::OnExit()

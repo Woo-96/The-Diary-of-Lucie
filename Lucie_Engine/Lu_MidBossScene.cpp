@@ -9,7 +9,7 @@
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_AudioSource.h"
-#include "Lu_AudioListener.h"
+#include "Lu_SoundManager.h"
 
 #include "Lu_Input.h"
 
@@ -38,11 +38,6 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossBG_Mtrl"));
-		
-			pObject->AddComponent<AudioListener>();
-			AudioSource* BGM = pObject->AddComponent<AudioSource>();
-			BGM->SetClip(Resources::Load<AudioClip>(L"MidBossBGM", L"..\\Resources\\Sound\\BGM\\MidBossBGM.ogg"));
-			SetBGM(BGM);
 		}
 
 		// UI : 크기 원본 1.5배
@@ -55,31 +50,8 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
 		}
 
-		// Player & KingSlime
+		// KingSlime
 		{
-			//GameObject* pPlayer = object::Instantiate<GameObject>(Vector3(600.f, -150.f, 500.f), Vector3(200.f, 200.f, 100.f), eLayerType::Player);
-			//pPlayer->SetName(L"Player");
-
-			//MeshRenderer* pMeshRender = pPlayer->AddComponent<MeshRenderer>();
-			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			//pMeshRender->SetMaterial(Resources::Find<Material>(L"PlayerAnimation_Mtrl"));
-
-			//// 피격 판정용 충돌체
-			//Collider2D* pCollider = pPlayer->AddComponent<Collider2D>();
-			//pCollider->SetName(L"ImmovableCollider");
-			//pCollider->SetType(eColliderType::Rect);
-			//pCollider->SetCenter(Vector2(2.f, 3.f));
-			//pCollider->SetSize(Vector2(0.2f, 0.42f));
-
-			//pCollider = pPlayer->AddComponent<Collider2D>();
-			//pCollider->SetName(L"HitCollider");
-			//pCollider->SetType(eColliderType::Rect);
-			//pCollider->SetCenter(Vector2(2.f, -29.f));
-			//pCollider->SetSize(Vector2(0.1f, 0.1f));
-
-			//Animator* pAnimator = pPlayer->AddComponent<Animator>();
-			//PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
-
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
@@ -148,10 +120,18 @@ namespace Lu
 	void MidBossScene::OnEnter()
 	{
 		StageScene::OnEnter();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->SetClip(Resources::Load<AudioClip>(L"MidBossBGM", L"..\\Resources\\Sound\\BGM\\MidBossBGM.ogg"));
+		pBGM->Play();
+		pBGM->SetVolume(0.3f);
 	}
 
 	void MidBossScene::OnExit()
 	{
 		StageScene::OnExit();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->Stop();
 	}
 }

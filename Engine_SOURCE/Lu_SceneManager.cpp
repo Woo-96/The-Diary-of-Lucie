@@ -129,4 +129,20 @@ namespace Lu
 
 		return nullptr;
 	}
+
+	GameObject* SceneManager::FindSoundMgr()
+	{
+		for (auto& object : m_DontDestroyObjects)
+		{
+			std::wstring name = object->GetName();
+
+			if (L"SoundManager" == name)
+			{
+				return object;
+				break;
+			}
+		}
+
+		return nullptr;
+	}
 }

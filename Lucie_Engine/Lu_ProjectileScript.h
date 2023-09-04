@@ -19,7 +19,6 @@ namespace Lu
         float				        m_AttackSpeed;
         Vector3				        m_AttackDir;
         float                       m_Time;
-        GameObject*                 m_SFX;
 
     public:
         void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -45,17 +44,6 @@ namespace Lu
         void SetDir(Vector3 _Dir)
         {
             m_AttackDir = _Dir;
-        }
-
-        void SetSFX(GameObject* _Audio)
-        {
-            m_SFX = _Audio;
-        }
-
-    public:
-        GameObject* GetSFX()   const
-        {
-            return m_SFX;
         }
 
     public:

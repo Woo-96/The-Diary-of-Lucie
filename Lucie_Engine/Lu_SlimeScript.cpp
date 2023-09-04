@@ -3,6 +3,9 @@
 #include "Lu_Animator.h"
 #include "Lu_Resources.h"
 #include "Lu_PlayerScript.h"
+#include "Lu_AudioSource.h"
+#include "Lu_SoundManager.h"
+#include "Lu_SceneManager.h"
 
 #include "Lu_SlimeIdleState.h"
 #include "Lu_SlimePatrolState.h"
@@ -114,28 +117,36 @@ namespace Lu
 
 		// Jump
 		GetAnimator()->Create(L"Slime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Slime_Jump_Left") = std::bind(&SlimeScript::JumpSFX, this);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Left") = std::bind(&SlimeScript::CompleteAction, this);
+
 		GetAnimator()->Create(L"Slime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Slime_Jump_Right") = std::bind(&SlimeScript::JumpSFX, this);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Right") = std::bind(&SlimeScript::CompleteAction, this);
+
 		GetAnimator()->Create(L"Slime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Slime_Jump_Up") = std::bind(&SlimeScript::JumpSFX, this);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Up") = std::bind(&SlimeScript::CompleteAction, this);
+
 		GetAnimator()->Create(L"Slime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Slime_Jump_Down") = std::bind(&SlimeScript::JumpSFX, this);
 		GetAnimator()->CompleteEvent(L"Slime_Jump_Down") = std::bind(&SlimeScript::CompleteAction, this);
 
 
 		// Attack
 		GetAnimator()->Create(L"Slime_Attack_Left", pAtlas, Vector2(0.f, 6120.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
-		GetAnimator()->CompleteEvent(L"Slime_Attack_Left") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Left") = std::bind(&SlimeScript::AttackSFX, this);
 		GetAnimator()->Create(L"Slime_Attack_Right", pAtlas, Vector2(0.f, 6480.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
-		GetAnimator()->CompleteEvent(L"Slime_Attack_Right") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Right") = std::bind(&SlimeScript::AttackSFX, this);
 		GetAnimator()->Create(L"Slime_Attack_Up", pAtlas, Vector2(0.f, 6840.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
-		GetAnimator()->CompleteEvent(L"Slime_Attack_Up") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Up") = std::bind(&SlimeScript::AttackSFX, this);
 		GetAnimator()->Create(L"Slime_Attack_Down", pAtlas, Vector2(0.f, 4320.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.5f);
-		GetAnimator()->CompleteEvent(L"Slime_Attack_Down") = std::bind(&SlimeScript::CompleteAction, this);
+		GetAnimator()->CompleteEvent(L"Slime_Attack_Down") = std::bind(&SlimeScript::AttackSFX, this);
 
 
 		// Dead
 		GetAnimator()->Create(L"Slime_Dead", pAtlas, Vector2(0.f, 7200.f), Vector2(360.f, 360.f), 1, Vector2(360.f, 360.f), Vector2::Zero, 1.f);
+		GetAnimator()->StartEvent(L"Slime_Dead") = std::bind(&SlimeScript::DeadSFX, this);
 		GetAnimator()->CompleteEvent(L"Slime_Dead") = std::bind(&SlimeScript::CompleteAction, this);
 	}
 
@@ -163,6 +174,29 @@ namespace Lu
 	void SlimeScript::CompleteAction()
 	{
 		ChangeState(SlimeStateScript::eState::Idle);
+	}
+
+	void SlimeScript::AttackSFX()
+	{	
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SlimeAttackSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeAttackSFX.ogg"));
+		pSFX->Play();
+
+		ChangeState(SlimeStateScript::eState::Idle);
+	}
+
+	void SlimeScript::JumpSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SlimeJumpSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeJumpSFX.ogg"));
+		pSFX->Play();
+	}
+
+	void SlimeScript::DeadSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SlimeDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeDeadSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void SlimeScript::AnimationUpdate()

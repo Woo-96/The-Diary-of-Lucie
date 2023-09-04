@@ -44,6 +44,8 @@ namespace Lu
 		SnabyStateScript* GetStateScript(SnabyStateScript::eState _State);
 		void AddState(SnabyStateScript* _State);
 		void CompleteAction();
+		void AttackSFX();
+		void DeadSFX();
 
 	protected:
 		virtual void CreateAnimation() override;

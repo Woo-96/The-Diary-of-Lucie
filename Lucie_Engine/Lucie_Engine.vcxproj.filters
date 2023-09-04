@@ -212,6 +212,15 @@
     <ClCompile Include="Lu_JumpProjectile.cpp">
       <Filter>Contents\Script\03. Monster\MonsterProjectile\BigSlimeJump</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_PortalScript.cpp">
+      <Filter>Contents\Script\04. Object\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_DiaryScript.cpp">
+      <Filter>Contents\Script\04. Object\Portal\Diary</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SoundManager.cpp">
+      <Filter>Contents\Script\01. Manager\SoundMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -430,6 +439,15 @@
     </ClInclude>
     <ClInclude Include="Lu_JumpProjectile.h">
       <Filter>Contents\Script\03. Monster\MonsterProjectile\BigSlimeJump</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_PortalScript.h">
+      <Filter>Contents\Script\04. Object\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_DiaryScript.h">
+      <Filter>Contents\Script\04. Object\Portal\Diary</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SoundManager.h">
+      <Filter>Contents\Script\01. Manager\SoundMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -676,11 +694,23 @@
     <Filter Include="Contents\Script\03. Monster\Boss\Ent">
       <UniqueIdentifier>{400690c1-48c3-43fe-aa82-c3a2e0b99730}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\01. Manager\UIMgr">
-      <UniqueIdentifier>{9cf1cc76-fd1e-4f90-86a9-26681c500122}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\01. Manager\SoundMgr">
       <UniqueIdentifier>{022acc63-ac29-4901-8a84-cd610e1ee8d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Portal">
+      <UniqueIdentifier>{3895f3e4-87e2-461d-894e-3bbfdd2e6f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Portal\MapPortal">
+      <UniqueIdentifier>{68ab1155-708d-4169-81ee-68be67eb8586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Portal\Diary">
+      <UniqueIdentifier>{cb98da6d-fb99-4147-aa85-ac52e1838ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Portal\MagicCircle">
+      <UniqueIdentifier>{60dd83c2-8f79-4b50-91fd-da5c32488521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\01. Manager\UIMgr">
+      <UniqueIdentifier>{9cf1cc76-fd1e-4f90-86a9-26681c500122}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

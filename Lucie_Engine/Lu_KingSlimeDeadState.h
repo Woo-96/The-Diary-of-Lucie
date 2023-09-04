@@ -9,9 +9,6 @@ namespace Lu
 		KingSlimeDeadState();
 		virtual ~KingSlimeDeadState();
 
-	private:
-		GameObject* m_SFX;
-
 	public:
 		virtual void Update() override;
 

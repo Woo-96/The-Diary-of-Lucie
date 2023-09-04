@@ -2,6 +2,8 @@
 #include "Lu_AudioSource.h"
 #include "Lu_Resources.h"
 #include "Lu_GameObject.h"
+#include "Lu_SceneManager.h"
+#include "Lu_SoundManager.h"
 
 namespace Lu
 {
@@ -23,9 +25,9 @@ namespace Lu
 
 	void BowProjectile::OnCollisionEnter(Collider2D* other)
 	{
-		AudioSource* pAudio = GetSFX()->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"BowSFX", L"..\\Resources\\Sound\\SFX\\Player\\BowSFX.ogg"));
-		pAudio->Play();
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"BowSFX", L"..\\Resources\\Sound\\SFX\\Player\\BowSFX.ogg"));
+		pSFX->Play();
 		ProjectileScript::OnCollisionEnter(other);
 	}
 

@@ -3,7 +3,6 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_BubbleProjectile.h"
-#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -11,25 +10,16 @@ namespace Lu
 	{
 		SetName(L"KingSlimeAttackStateScript");
 		SetStateType(eState::Attack);
-
-		m_SFX = new GameObject;
-		m_SFX->AddComponent<AudioSource>();
 	}
 
 	KingSlimeAttackState::~KingSlimeAttackState()
 	{
-		if (nullptr != m_SFX)
-		{
-			delete m_SFX;
-			m_SFX = nullptr;
-		}
+
 	}
 
 	void KingSlimeAttackState::Enter()
 	{
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeJumpSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeJumpSFX.ogg"));
-		pAudio->Play();
+
 	}
 
 	void KingSlimeAttackState::Exit()
@@ -64,9 +54,5 @@ namespace Lu
 			Vector3 forwardDirection(cosAngle, sinAngle, 0.f); // 투사체가 전진할 방향 벡터 계산
 			pProjectileScript->SetDir(forwardDirection);
 		}
-
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeBubbleSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeBubbleSFX.ogg"));
-		pAudio->Play();
 	}
 }

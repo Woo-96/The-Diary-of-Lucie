@@ -2,6 +2,8 @@
 #include "Lu_Object.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
+#include "Lu_SoundManager.h"
+#include "Lu_AudioSource.h"
 
 #include "Lu_Input.h"
 
@@ -60,10 +62,18 @@ namespace Lu
 	void BossWayScene::OnEnter()
 	{
 		StageScene::OnEnter();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->SetClip(Resources::Load<AudioClip>(L"BossWayBGM", L"..\\Resources\\Sound\\BGM\\BossWayBGM.ogg"));
+		pBGM->Play();
+		pBGM->SetVolume(0.3f);
 	}
 
 	void BossWayScene::OnExit()
 	{
+		Scene::OnExit();
 
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->Stop();
 	}
 }

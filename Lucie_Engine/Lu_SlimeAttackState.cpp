@@ -6,7 +6,6 @@
 #include "Lu_Resources.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_Time.h"
-#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -15,18 +14,11 @@ namespace Lu
 	{
 		SetName(L"SlimeAttackStateScript");
 		SetStateType(eState::Attack);
-
-		m_SFX = new GameObject;
-		m_SFX->AddComponent<AudioSource>();
 	}
 
 	SlimeAttackState::~SlimeAttackState()
 	{
-		if (nullptr != m_SFX)
-		{
-			delete m_SFX;
-			m_SFX = nullptr;
-		}
+
 	}
 
 	void SlimeAttackState::Enter()
@@ -100,11 +92,5 @@ namespace Lu
 				pProjectileScript->SetDir(dir);
 			}
 		}
-
-
-		// SFX
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeAttackSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeAttackSFX.ogg"));
-		pAudio->Play();
 	}
 }

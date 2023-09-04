@@ -70,6 +70,11 @@ namespace Lu
 			m_bAction = _Action;
 		}
 
+		void SetDir(eDir _Dir)
+		{
+			m_Dir = _Dir;
+		}
+
 	public:
 		eDir GetDir()	const
 		{
@@ -108,6 +113,7 @@ namespace Lu
 		void AnimationUpdate();
 		eDir CalDirToMouse();
 		void CompleteAction();
+		void AttackSFX();
 
 	public:
 		void ChangeState(StateScript::eState _NextState);

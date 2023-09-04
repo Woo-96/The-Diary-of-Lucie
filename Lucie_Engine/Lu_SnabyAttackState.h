@@ -9,9 +9,6 @@ namespace Lu
 		SnabyAttackState();
 		virtual ~SnabyAttackState();
 
-	private:
-		GameObject* m_SFX;
-
 	public:
 		virtual void Update() override;
 

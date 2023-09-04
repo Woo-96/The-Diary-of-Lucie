@@ -44,6 +44,9 @@ namespace Lu
 		SlimeStateScript* GetStateScript(SlimeStateScript::eState _State);
 		void AddState(SlimeStateScript* _State);
 		void CompleteAction();
+		void AttackSFX();
+		void JumpSFX();
+		void DeadSFX();
 
 	protected:
 		virtual void CreateAnimation() override;

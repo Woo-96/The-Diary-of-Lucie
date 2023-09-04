@@ -6,18 +6,13 @@
 #include "Lu_GameObject.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
-//#include "..\Lucie_Engine\Lu_MouseScript.h"
 #include "Lu_Transform.h"
-#include "Lu_AudioSource.h"
 
 namespace Lu
 {
 	Scene::Scene()
 		: m_MainCam(nullptr)
 		, m_UICam(nullptr)
-		//, m_Mouse(nullptr)
-		, m_BGM(nullptr)
-		, m_bContinuousPlay(false)
 	{
 		m_Layers.resize((int)Lu::enums::eLayerType::End);
 	}
@@ -44,7 +39,7 @@ namespace Lu
 			renderer::mainCamera = m_MainCam;
 		}
 
-		//UI Camera & Mouse Obj
+		//UI Camera
 		{
 			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), eLayerType::Default);
 			pObject->SetName(L"UICam");
@@ -54,16 +49,6 @@ namespace Lu
 			m_UICam->TurnLayerMask(eLayerType::UI, true);
 			m_UICam->TurnLayerMask(eLayerType::Mouse, true);
 			renderer::cameras.push_back(m_UICam);
-
-			//GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
-			//pMouse->SetName(L"Mouse");
-
-			//MouseScript* pMouseScript = pMouse->AddComponent<MouseScript>();
-			//pMouseScript->SetCam(m_UICam);
-
-			//MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
-			//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			//pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
 		}
 	}
 
@@ -142,17 +127,10 @@ namespace Lu
 	void Scene::OnEnter()
 	{
 		renderer::mainCamera = m_MainCam;
-
-		if (nullptr != m_BGM && false == m_bContinuousPlay)
-		{
-			m_BGM->Play();
-			m_BGM->SetVolume(0.3);
-		}
 	}
 
 	void Scene::OnExit()
 	{
-		if (nullptr != m_BGM && false == m_bContinuousPlay)
-			m_BGM->Stop();
+
 	}
 }

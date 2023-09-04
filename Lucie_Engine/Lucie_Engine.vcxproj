@@ -177,6 +177,7 @@
     <ClInclude Include="Lu_AttackState.h" />
     <ClInclude Include="Lu_BigSlimeIdleState.h" />
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
+    <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
     <ClInclude Include="Lu_BossScene.h" />
     <ClInclude Include="Lu_BossWayScene.h" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Lu_Nomal2Scene.h" />
     <ClInclude Include="Lu_NumberScript.h" />
     <ClInclude Include="Lu_PlayerScript.h" />
+    <ClInclude Include="Lu_PortalScript.h" />
     <ClInclude Include="Lu_ProjectileScript.h" />
     <ClInclude Include="Lu_QuickItem.h" />
     <ClInclude Include="Lu_SlimeAttackState.h" />
@@ -228,6 +230,7 @@
     <ClInclude Include="Lu_SnabyIdleState.h" />
     <ClInclude Include="Lu_SnabyPatrolState.h" />
     <ClInclude Include="Lu_SnabyStateScript.h" />
+    <ClInclude Include="Lu_SoundManager.h" />
     <ClInclude Include="Lu_StageScene.h" />
     <ClInclude Include="Lu_StateScript.h" />
     <ClInclude Include="Lu_StoreScene.h" />
@@ -251,6 +254,7 @@
     <ClCompile Include="Lu_AttackState.cpp" />
     <ClCompile Include="Lu_BigSlimeIdleState.cpp" />
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
+    <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />
     <ClCompile Include="Lu_BossScene.cpp" />
     <ClCompile Include="Lu_BossWayScene.cpp" />
@@ -287,6 +291,7 @@
     <ClCompile Include="Lu_Nomal2Scene.cpp" />
     <ClCompile Include="Lu_NumberScript.cpp" />
     <ClCompile Include="Lu_PlayerScript.cpp" />
+    <ClCompile Include="Lu_PortalScript.cpp" />
     <ClCompile Include="Lu_ProjectileScript.cpp" />
     <ClCompile Include="Lu_QuickItem.cpp" />
     <ClCompile Include="Lu_SlimeAttackState.cpp" />
@@ -302,6 +307,7 @@
     <ClCompile Include="Lu_SnabyIdleState.cpp" />
     <ClCompile Include="Lu_SnabyPatrolState.cpp" />
     <ClCompile Include="Lu_SnabyStateScript.cpp" />
+    <ClCompile Include="Lu_SoundManager.cpp" />
     <ClCompile Include="Lu_StageScene.cpp" />
     <ClCompile Include="Lu_StateScript.cpp" />
     <ClCompile Include="Lu_StoreScene.cpp" />

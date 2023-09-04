@@ -4,7 +4,6 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_CircleProjectile.h"
 #include "Lu_Resources.h"
-#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -12,25 +11,16 @@ namespace Lu
 	{
 		SetName(L"SlimeJumpAttackStateScript");
 		SetStateType(eState::JumpAttack);
-
-		m_SFX = new GameObject;
-		m_SFX->AddComponent<AudioSource>();
 	}
 
 	SlimeJumpAttackState::~SlimeJumpAttackState()
 	{
-		if (nullptr != m_SFX)
-		{
-			delete m_SFX;
-			m_SFX = nullptr;
-		}
+
 	}
 
 	void SlimeJumpAttackState::Enter()
 	{
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeJumpSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeJumpSFX.ogg"));
-		pAudio->Play();
+
 	}
 
 	void SlimeJumpAttackState::Exit()

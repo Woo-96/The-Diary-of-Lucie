@@ -7,6 +7,9 @@
 #include "Lu_Time.h"
 #include "Lu_Object.h"
 #include "Lu_CircleProjectile.h"
+#include "Lu_AudioSource.h"
+#include "Lu_SoundManager.h"
+#include "Lu_SceneManager.h"
 
 #include "Lu_BigSlimeIdleState.h"
 #include "Lu_BigSlimeTraceState.h"
@@ -21,8 +24,6 @@ namespace Lu
 		, m_Target(nullptr)
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
-		, m_Time(3.f)
-		, m_bAttack(false)
 	{
 		SetName(L"BigSlimeScript");
 
@@ -113,16 +114,24 @@ namespace Lu
 
 		// Jump
 		GetAnimator()->Create(L"BigSlime_Jump_Left", pAtlas, Vector2(0.f, 3240.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
-		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Left") = std::bind(&BigSlimeScript::CompleteAction, this);
+		GetAnimator()->StartEvent(L"BigSlime_Jump_Left") = std::bind(&BigSlimeScript::JumpSFX, this);
+		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Left") = std::bind(&BigSlimeScript::AttackSFX, this);
+
 		GetAnimator()->Create(L"BigSlime_Jump_Right", pAtlas, Vector2(0.f, 3600.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
-		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Right") = std::bind(&BigSlimeScript::CompleteAction, this);
+		GetAnimator()->StartEvent(L"BigSlime_Jump_Right") = std::bind(&BigSlimeScript::JumpSFX, this);
+		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Right") = std::bind(&BigSlimeScript::AttackSFX, this);
+
 		GetAnimator()->Create(L"BigSlime_Jump_Up", pAtlas, Vector2(0.f, 3960.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
-		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Up") = std::bind(&BigSlimeScript::CompleteAction, this);
+		GetAnimator()->StartEvent(L"BigSlime_Jump_Up") = std::bind(&BigSlimeScript::JumpSFX, this);
+		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Up") = std::bind(&BigSlimeScript::AttackSFX, this);
+
 		GetAnimator()->Create(L"BigSlime_Jump_Down", pAtlas, Vector2(0.f, 2880.f), Vector2(360.f, 360.f), 3, Vector2(360.f, 360.f), Vector2::Zero, 0.2f);
-		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Down") = std::bind(&BigSlimeScript::CompleteAction, this);
+		GetAnimator()->StartEvent(L"BigSlime_Jump_Down") = std::bind(&BigSlimeScript::JumpSFX, this);
+		GetAnimator()->CompleteEvent(L"BigSlime_Jump_Down") = std::bind(&BigSlimeScript::AttackSFX, this);
 
 		// Dead
 		GetAnimator()->Create(L"BigSlime_Dead", pAtlas, Vector2(0.f, 7200.f), Vector2(360.f, 360.f), 1, Vector2(360.f, 360.f), Vector2::Zero, 1.f);
+		GetAnimator()->StartEvent(L"BigSlime_Dead") = std::bind(&BigSlimeScript::DeadSFX, this);
 		GetAnimator()->CompleteEvent(L"BigSlime_Dead") = std::bind(&BigSlimeScript::CompleteAction, this);
 	}
 
@@ -150,6 +159,29 @@ namespace Lu
 	void BigSlimeScript::CompleteAction()
 	{
 		ChangeState(BigSlimeStateScript::eState::Trace);
+	}
+
+	void BigSlimeScript::JumpSFX()
+	{	
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SlimeJumpSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeJumpSFX.ogg"));
+		pSFX->Play();
+	}
+
+	void BigSlimeScript::AttackSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SlimeBubbleSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeBubbleSFX.ogg"));
+		pSFX->Play();
+
+		ChangeState(BigSlimeStateScript::eState::Trace);
+	}
+
+	void BigSlimeScript::DeadSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SlimeDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeDeadSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void BigSlimeScript::AnimationUpdate()

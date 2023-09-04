@@ -8,12 +8,10 @@
 #include "Lu_WandProjectile.h"
 #include "Lu_Input.h"
 #include "Lu_Renderer.h"
-#include "Lu_AudioSource.h"
 
 namespace Lu
 {
 	AttackState::AttackState()
-		: m_AttackSFX(nullptr)
 	{
 		SetName(L"AttackStateScript");
 		SetStateType(eState::Attack);
@@ -21,11 +19,7 @@ namespace Lu
 
 	AttackState::~AttackState()
 	{
-		if (nullptr != m_AttackSFX)
-		{
-			delete m_AttackSFX;
-			m_AttackSFX = nullptr;
-		}
+
 	}
 
 	void AttackState::Initialize()
@@ -33,10 +27,6 @@ namespace Lu
 		StateScript::Initialize();
 
 		SetSpeed(50.f);
-
-		m_AttackSFX = new GameObject;
-		AudioSource* pAudio = m_AttackSFX->AddComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"AttackSFX", L"..\\Resources\\Sound\\SFX\\Player\\AttackSFX.ogg"));
 	}
 
 	void AttackState::Update()
@@ -54,8 +44,6 @@ namespace Lu
 		CalDirToMouse();
 
 		CreateProjectile();
-
-		m_AttackSFX->GetComponent<AudioSource>()->Play();
 	}
 
 	void AttackState::Exit()

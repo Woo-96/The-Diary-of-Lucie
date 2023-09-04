@@ -32,7 +32,7 @@ namespace Lu
 		DetermineAnimDir(vMoveDir);
 
 		// 트레이스 -> 어택
-		ChangeStateAfterTime(5.f, eState::Attack);
+		ChangeStateAfterTime(3.f, eState::Attack);
 	}
 
 	void BigSlimeTraceState::Enter()

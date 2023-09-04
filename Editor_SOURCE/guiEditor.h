@@ -15,6 +15,8 @@ namespace gui
 		static std::vector<EditorObject*>	m_EditorObjects;
 		static std::vector<DebugOjbect*>	m_DebugOjbects;
 
+		static bool							m_bDebugRender;
+
 	public:
 		static void Initialize();
 		static void Run();

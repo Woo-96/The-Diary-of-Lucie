@@ -6,6 +6,8 @@
 #include "Lu_AudioListener.h"
 #include "Lu_AudioSource.h"
 #include "Lu_MouseScript.h"
+#include "Lu_SoundManager.h"
+#include "Lu_CollisionManager.h"
 
 namespace Lu
 {
@@ -31,11 +33,31 @@ namespace Lu
 			MeshRenderer* pMeshRender = pTitleBG->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"TitleBG_Mtrl"));
-		
-			pTitleBG->AddComponent<AudioListener>();
-			AudioSource* BGM = pTitleBG->AddComponent<AudioSource>();
-			BGM->SetClip(Resources::Load<AudioClip>(L"ForestBGM", L"..\\Resources\\Sound\\BGM\\ForestBGM.ogg"));
-			SetBGM(BGM);
+		}
+
+		// 사운드 매니저
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(0.f, 0.f, 0.f), eLayerType::Default);
+			pObject->SetName(L"SoundManager");
+			SceneManager::DontDestroyOnLoad(pObject);
+
+			SoundManager* pSoundMgr = pObject->AddComponent<SoundManager>();
+			pSoundMgr->SetListener(pObject->AddComponent<AudioListener>());
+			pSoundMgr->SetBGM(pObject->AddComponent<AudioSource>());
+			pSoundMgr->SetSFX(pObject->AddComponent<AudioSource>());
+		}
+
+		// Mouse
+		{
+			GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
+			pMouse->SetName(L"Mouse");
+			SceneManager::DontDestroyOnLoad(pMouse);
+
+			MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
+
+			pMouse->AddComponent<MouseScript>();
 		}
 
 		// 루시
@@ -78,18 +100,12 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
 		}
 
-		// Mouse
-		{
-			GameObject* pMouse = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(48.f, 48.f, 100.f), eLayerType::Mouse);
-			pMouse->SetName(L"Mouse");
-			SceneManager::DontDestroyOnLoad(pMouse);
-
-			MeshRenderer* pMeshRender = pMouse->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"Mouse_Mtrl"));
-
-			pMouse->AddComponent<MouseScript>();
-		}
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);
+		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Immovable, true);
 	}
 
 	void TitleScene::Update()
@@ -124,11 +140,19 @@ namespace Lu
 	{
 		Scene::OnEnter();
 
+		AudioSource * pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->SetClip(Resources::Load<AudioClip>(L"ForestBGM", L"..\\Resources\\Sound\\BGM\\ForestBGM.ogg"));
+		pBGM->Play();
+		pBGM->SetVolume(0.3f);
+
 		SceneManager::DontUseOnLoad(eLayerType::Player);
 	}
 
 	void TitleScene::OnExit()
 	{
 		Scene::OnExit();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->Stop();
 	}
 }

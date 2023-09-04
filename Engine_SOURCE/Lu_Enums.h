@@ -23,6 +23,7 @@ namespace Lu::enums
 		Default,
 		BackGround,
 		Immovable,
+		Portal,
 		Monster,
 		Player,
 		MonsterProjectile,

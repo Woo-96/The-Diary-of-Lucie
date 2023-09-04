@@ -7,6 +7,9 @@
 #include "Lu_Camera.h"
 #include "Lu_Time.h"
 #include "Lu_MeshRenderer.h"
+#include "Lu_SceneManager.h"
+#include "Lu_AudioSource.h"
+#include "Lu_SoundManager.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -117,54 +120,54 @@ namespace Lu
 		if (StateScript::eState::Dead == m_CurState->GetStateType())
 			return;
 
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			return;
-
-		// Hit & Dead
-		if (!m_bInvincible)
+		if ((int)eLayerType::MonsterProjectile == _Other->GetOwner()->GetLayerIndex())
 		{
-			m_PlayerInfo.HP -= m_Damage;
+			// Hit & Dead
+			if (!m_bInvincible)
+			{
+				m_PlayerInfo.HP -= m_Damage;
 
-			if (m_PlayerInfo.HP <= 0)
-			{
-				m_PlayerInfo.HP = 0;
-				m_bInvincible = false;
-				m_bHitEffect = false;
-				m_InvincibleTime = 0.f;
-				ChangeState(StateScript::eState::Dead);
-			}
-			else
-			{
-				m_bInvincible = true;
-				m_bHitEffect = true;
-				m_InvincibleTime = 1.f;		// 乔拜 公利
+				if (m_PlayerInfo.HP <= 0)
+				{
+					m_PlayerInfo.HP = 0;
+					m_bInvincible = false;
+					m_bHitEffect = false;
+					m_InvincibleTime = 0.f;
+					ChangeState(StateScript::eState::Dead);
+				}
+				else
+				{
+					m_bInvincible = true;
+					m_bHitEffect = true;
+					m_InvincibleTime = 1.f;		// 乔拜 公利
+				}
 			}
 		}
 	}
 
 	void PlayerScript::OnCollisionStay(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			return;
-
-		// Hit & Dead
-		if (!m_bInvincible)
+		if ((int)eLayerType::MonsterProjectile == _Other->GetOwner()->GetLayerIndex())
 		{
-			m_PlayerInfo.HP -= 1;
+			// Hit & Dead
+			if (!m_bInvincible)
+			{
+				m_PlayerInfo.HP -= 1;
 
-			if (m_PlayerInfo.HP <= 0)
-			{
-				m_PlayerInfo.HP = 0;
-				m_bInvincible = false;
-				m_bHitEffect = false;
-				m_InvincibleTime = 0.f;
-				ChangeState(StateScript::eState::Dead);
-			}
-			else
-			{
-				m_bInvincible = true;
-				m_bHitEffect = true;
-				m_InvincibleTime = 1.f;
+				if (m_PlayerInfo.HP <= 0)
+				{
+					m_PlayerInfo.HP = 0;
+					m_bInvincible = false;
+					m_bHitEffect = false;
+					m_InvincibleTime = 0.f;
+					ChangeState(StateScript::eState::Dead);
+				}
+				else
+				{
+					m_bInvincible = true;
+					m_bHitEffect = true;
+					m_InvincibleTime = 1.f;
+				}
 			}
 		}
 	}
@@ -230,38 +233,68 @@ namespace Lu
 
 		// Attack - Bow
 		m_Animator->Create(L"Player_Bow_Left", pAtlas, Vector2(300.f, 1500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_Left") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_Left") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_Right", pAtlas, Vector2(0.f, 1600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_Right") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_Right") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_Up", pAtlas, Vector2(0.f, 1700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_Up") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_Up") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_Down", pAtlas, Vector2(300.f, 1400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_Down") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_Down") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_LeftUp", pAtlas, Vector2(300.f, 1600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_LeftUp") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_RightUp", pAtlas, Vector2(300.f, 1700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_RightUp") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_LeftDown", pAtlas, Vector2(0.f, 1400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_LeftDown") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Bow_RightDown", pAtlas, Vector2(0.f, 1500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_Bow_RightDown") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Bow_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 		// Attack - Wand
 		m_Animator->Create(L"Player_Wand_Left", pAtlas, Vector2(0.f, 5600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_Left") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Left") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_Right", pAtlas, Vector2(0.f, 5700.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_Right") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Right") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_Up", pAtlas, Vector2(0.f, 5900.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_Up") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Up") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_Down", pAtlas, Vector2(0.f, 5400.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_Down") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Down") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_LeftUp", pAtlas, Vector2(0.f, 5800.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_LeftUp") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_RightUp", pAtlas, Vector2(0.f, 6000.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_RightUp") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_LeftDown", pAtlas, Vector2(0.f, 5300.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_LeftDown") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+
 		m_Animator->Create(L"Player_Wand_RightDown", pAtlas, Vector2(0.f, 5500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->StartEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 		// Dead
@@ -664,6 +697,13 @@ namespace Lu
 	void PlayerScript::CompleteAction()
 	{
 		ChangeState(StateScript::eState::Idle);
+	}
+
+	void PlayerScript::AttackSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"AttackSFX", L"..\\Resources\\Sound\\SFX\\Player\\AttackSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void PlayerScript::ChangeState(StateScript::eState _NextState)

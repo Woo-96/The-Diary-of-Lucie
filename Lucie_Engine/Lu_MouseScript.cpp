@@ -21,7 +21,7 @@ namespace Lu
 
 	void MouseScript::Update()
 	{
-
+		
 	}
 
 	void MouseScript::LateUpdate()

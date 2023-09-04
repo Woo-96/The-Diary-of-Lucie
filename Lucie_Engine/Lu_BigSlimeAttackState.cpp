@@ -5,7 +5,6 @@
 #include "Lu_BubbleProjectile.h"
 #include "Lu_JumpProjectile.h"
 #include "Lu_BigSlimeScript.h"
-#include "Lu_AudioSource.h"
 #include "Lu_CircleProjectile.h"
 
 namespace Lu
@@ -14,18 +13,11 @@ namespace Lu
 	{
 		SetName(L"BigSlimeAttackStateScript");
 		SetStateType(eState::Attack);
-
-		m_SFX = new GameObject;
-		m_SFX->AddComponent<AudioSource>();
 	}
 
 	BigSlimeAttackState::~BigSlimeAttackState()
 	{
-		if (nullptr != m_SFX)
-		{
-			delete m_SFX;
-			m_SFX = nullptr;
-		}
+
 	}
 
 	void BigSlimeAttackState::Enter()
@@ -53,11 +45,6 @@ namespace Lu
 		pAnimator->PlayAnimation(L"BigSlime_JumpProjectile", false);
 
 		pProjectile->AddComponent<JumpProjectile>();
-
-		// SFX
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeJumpSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeJumpSFX.ogg"));
-		pAudio->Play();
 	}
 
 	void BigSlimeAttackState::Exit()
@@ -96,10 +83,5 @@ namespace Lu
 			Vector3 forwardDirection(cosAngle, sinAngle, 0.f); // 투사체가 전진할 방향 벡터 계산
 			pProjectileScript->SetDir(forwardDirection);
 		}
-
-
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SlimeBubbleSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Slime\\SlimeBubbleSFX.ogg"));
-		pAudio->Play();
 	}
 }

@@ -439,6 +439,20 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SlimeJumpAnimation_Mtrl", material);
 
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"DiaryAnimation_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MagicCircleAnimation_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MagicCircle2Animation_Mtrl", material);
 
 		// 스프라이트 Mrtl
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");

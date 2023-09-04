@@ -3,6 +3,9 @@
 #include "Lu_Animator.h"
 #include "Lu_Resources.h"
 #include "Lu_PlayerScript.h"
+#include "Lu_AudioSource.h"
+#include "Lu_SoundManager.h"
+#include "Lu_SceneManager.h"
 
 #include "Lu_SnabyIdleState.h"
 #include "Lu_SnabyPatrolState.h"
@@ -108,12 +111,20 @@ namespace Lu
 
 		// Attack
 		GetAnimator()->Create(L"Snaby_Attack_Left", pAtlas, Vector2(0.f, 240.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Snaby_Attack_Left") = std::bind(&SnabyScript::AttackSFX, this);
+
 		GetAnimator()->Create(L"Snaby_Attack_Right", pAtlas, Vector2(0.f, 288.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Snaby_Attack_Right") = std::bind(&SnabyScript::AttackSFX, this);
+
 		GetAnimator()->Create(L"Snaby_Attack_Up", pAtlas, Vector2(0.f, 336.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Snaby_Attack_Up") = std::bind(&SnabyScript::AttackSFX, this);
+
 		GetAnimator()->Create(L"Snaby_Attack_Down", pAtlas, Vector2(0.f, 192.f), Vector2(48.f, 48.f), 3, Vector2(48.f, 48.f), Vector2::Zero, 0.3f);
+		GetAnimator()->StartEvent(L"Snaby_Attack_Down") = std::bind(&SnabyScript::AttackSFX, this);
 
 		// Dead
 		GetAnimator()->Create(L"Snaby_Dead", pAtlas, Vector2(0.f, 576.f), Vector2(48.f, 48.f), 1, Vector2(48.f, 48.f), Vector2::Zero, 1.f);
+		GetAnimator()->StartEvent(L"Snaby_Dead") = std::bind(&SnabyScript::DeadSFX, this);
 		GetAnimator()->CompleteEvent(L"Snaby_Dead") = std::bind(&SnabyScript::CompleteAction, this);
 	}
 
@@ -141,6 +152,20 @@ namespace Lu
 	void SnabyScript::CompleteAction()
 	{
 		ChangeState(SnabyStateScript::eState::Idle);
+	}
+
+	void SnabyScript::AttackSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SnabyAttackSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Snaby\\SnabyAttackSFX.ogg"));
+		pSFX->Play();
+	}
+
+	void SnabyScript::DeadSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SnabyDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Snaby\\SnabyDeadSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void SnabyScript::AnimationUpdate()

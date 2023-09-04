@@ -22,9 +22,6 @@ namespace Lu
 		GameObject*						m_HPFrame;
 		GameObject*						m_HPBar;
 
-		float							m_Time;
-		bool							m_bAttack;
-
 	public:
 		void SetTarget(PlayerScript* _Target)
 		{
@@ -70,6 +67,9 @@ namespace Lu
 		BigSlimeStateScript* GetStateScript(BigSlimeStateScript::eState _State);
 		void AddState(BigSlimeStateScript* _State);
 		void CompleteAction();
+		void JumpSFX();
+		void AttackSFX();
+		void DeadSFX();
 
 	protected:
 		virtual void CreateAnimation() override;

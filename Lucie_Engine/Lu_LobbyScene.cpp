@@ -3,15 +3,14 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
-#include "Lu_Input.h"
 #include "Lu_Animator.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_CameraScript.h"
 #include "Lu_ImmovableScript.h"
-#include "Lu_CollisionManager.h"
-#include "Lu_AudioListener.h"
 #include "Lu_AudioClip.h"
 #include "Lu_AudioSource.h"
+#include "Lu_DiaryScript.h"
+#include "Lu_SoundManager.h"
 
 namespace Lu
 {
@@ -37,11 +36,6 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"LobbyBG_Mtrl"));
-		
-			pObject->AddComponent<AudioListener>();
-			AudioSource* BGM = pObject->AddComponent<AudioSource>();
-			BGM->SetClip(Resources::Load<AudioClip>(L"LobbyBGM", L"..\\Resources\\Sound\\BGM\\LobbyBGM.ogg"));
-			SetBGM(BGM);
 		}
 
 		// Player : 크기 원본 2배
@@ -75,30 +69,82 @@ namespace Lu
 			pMainCamScript->SetTarget(pPlayer);
 		}
 
-		// 책상
+		// 벽
 		{
 			GameObject* pObj = object::Instantiate<GameObject>(Vector3(3.f, -80.f, 500.f), Vector3(220.f, 120.f, 100.f), eLayerType::Immovable);
 			pObj->SetName(L"Desk");
 
 			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
+			pObj->AddComponent<ImmovableScript>();
+		}
+		{
+			GameObject* pObj = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 500.f), Vector3(1000.f, 300.f, 100.f), eLayerType::Immovable);
+			pObj->SetName(L"Wall_Top");
 
+			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
 			pObj->AddComponent<ImmovableScript>();
 		}
 
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
+		{
+			GameObject* pObj = object::Instantiate<GameObject>(Vector3(400.f, 150.f, 500.f), Vector3(150.f, 70.f, 100.f), eLayerType::Immovable);
+			pObj->SetName(L"Closet");
+
+			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pObj->AddComponent<ImmovableScript>();
+		}
+
+		{
+			GameObject* pObj = object::Instantiate<GameObject>(Vector3(-492.f, -115.f, 500.f), Vector3(20.f, 630.f, 100.f), eLayerType::Immovable);
+			pObj->SetName(L"Wall_Left");
+
+			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pObj->AddComponent<ImmovableScript>();
+		}
+
+		{
+			GameObject* pObj = object::Instantiate<GameObject>(Vector3(492.f, -115.f, 500.f), Vector3(20.f, 630.f, 100.f), eLayerType::Immovable);
+			pObj->SetName(L"Wall_Right");
+
+			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pObj->AddComponent<ImmovableScript>();
+		}
+
+		{
+			GameObject* pObj = object::Instantiate<GameObject>(Vector3(0.f, -435.f, 500.f), Vector3(1000.f, 20.f, 100.f), eLayerType::Immovable);
+			pObj->SetName(L"Wall_Bottom");
+
+			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pObj->AddComponent<ImmovableScript>();
+		}
+
+		// 다이어리(포탈)
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -110.f, 500.f), Vector3(96.f, 72.f, 100.f), eLayerType::Portal);
+			pObject->SetName(L"Diary");
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"DiaryAnimation_Mtrl"));
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+			pCollider->SetCenter(Vector2(0.f, -15.f));
+			pCollider->SetSize(Vector2(0.35f, 0.57f));
+
+			pObject->AddComponent<Animator>();
+			pObject->AddComponent<DiaryScript>();
+		}
 	}
 
 	void LobbyScene::Update()
 	{
 		Scene::Update();
-
-		// 오브젝트로 입장해야함
-		if (Input::GetKeyUp(eKeyCode::ENTER))
-		{
-			//SceneManager::LoadScene(L"WeaponChoiceScene");
-			SceneManager::LoadScene(L"Nomal1Scene");
-		}
 	}
 
 	void LobbyScene::LateUpdate()
@@ -119,10 +165,18 @@ namespace Lu
 	void LobbyScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->SetClip(Resources::Load<AudioClip>(L"LobbyBGM", L"..\\Resources\\Sound\\BGM\\LobbyBGM.ogg"));
+		pBGM->Play();
+		pBGM->SetVolume(0.3f);
 	}
 
 	void LobbyScene::OnExit()
 	{
 		Scene::OnExit();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->Stop();
 	}
 }

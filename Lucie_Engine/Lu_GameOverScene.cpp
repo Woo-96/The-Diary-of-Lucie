@@ -4,7 +4,7 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_AudioSource.h"
-#include "Lu_AudioListener.h"
+#include "Lu_SoundManager.h"
 
 #include "Lu_Input.h"
 
@@ -32,11 +32,6 @@ namespace Lu
 			MeshRenderer* pMeshRender = pGameOver->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"GameOver_Mtrl"));
-
-			pGameOver->AddComponent<AudioListener>();
-			AudioSource* BGM = pGameOver->AddComponent<AudioSource>();
-			BGM->SetClip(Resources::Load<AudioClip>(L"GameOverBGM", L"..\\Resources\\Sound\\BGM\\GameOverBGM.ogg"));
-			SetBGM(BGM);
 		}
 	}
 
@@ -47,7 +42,7 @@ namespace Lu
 		// 다시하기 : 
 		if (Input::GetKeyUp(eKeyCode::ENTER))
 		{
-			SceneManager::LoadScene(L"PlayScene");
+			SceneManager::LoadScene(L"LobbyScene");
 		}
 
 		// 방으로 돌아가기
@@ -75,10 +70,21 @@ namespace Lu
 	void GameOverScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->SetClip(Resources::Load<AudioClip>(L"GameOverBGM", L"..\\Resources\\Sound\\BGM\\GameOverBGM.ogg"));
+		pBGM->Play();
+		pBGM->SetVolume(0.3f);
+
+		SceneManager::DontUseOnLoad(eLayerType::Player);
 	}
 
 	void GameOverScene::OnExit()
 	{
 		Scene::OnExit();
+
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		if(nullptr != pBGM->GetClip())
+			pBGM->Stop();
 	}
 }

@@ -9,9 +9,6 @@ namespace Lu
 		KingSlimeAttackState();
 		virtual ~KingSlimeAttackState();
 
-	private:
-		GameObject* m_SFX;
-
 	public:
 		virtual void Enter() override;
 		virtual void Exit() override;

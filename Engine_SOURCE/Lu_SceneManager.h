@@ -38,6 +38,7 @@ namespace Lu
 		static void DontUseOnLoad(eLayerType _LayerType);
 
 		static GameObject* FindPlayer();
+		static GameObject* FindSoundMgr();
 
 	public:
 		template <typename T>

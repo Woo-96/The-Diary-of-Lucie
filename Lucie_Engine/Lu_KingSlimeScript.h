@@ -61,6 +61,9 @@ namespace Lu
 		KingSlimeStateScript* GetStateScript(KingSlimeStateScript::eState _State);
 		void AddState(KingSlimeStateScript* _State);
 		void CompleteAction();
+		void JumpSFX();
+		void AttackSFX();
+		void DeadSFX();
 		void CircleAttack();
 
 	protected:

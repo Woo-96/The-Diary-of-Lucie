@@ -6,7 +6,6 @@
 #include "Lu_Resources.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_Time.h"
-#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -14,18 +13,11 @@ namespace Lu
 	{
 		SetName(L"SnabyAttackStateScript");
 		SetStateType(eState::Attack);
-
-		m_SFX = new GameObject;
-		m_SFX->AddComponent<AudioSource>();
 	}
 
 	SnabyAttackState::~SnabyAttackState()
 	{
-		if (nullptr != m_SFX)
-		{
-			delete m_SFX;
-			m_SFX = nullptr;
-		}
+
 	}
 
 	void SnabyAttackState::Update()
@@ -59,10 +51,6 @@ namespace Lu
 
 		// 투사체 발사
 		CreateProjectile(vDir);
-
-		AudioSource* pAudio = m_SFX->GetComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"SnabyAttackSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Snaby\\SnabyAttackSFX.ogg"));
-		pAudio->Play();
 	}
 
 	void SnabyAttackState::Exit()
