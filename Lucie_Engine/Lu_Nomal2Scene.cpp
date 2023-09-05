@@ -40,7 +40,7 @@ namespace Lu
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
-			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
+			pMainCamScript->SetWorldResolution(Vector2(1008.f * 1.5f - 200.f, 1056.f * 1.5f - 300.f));
 			pMainCamScript->SetTarget(pPlayer);
 
 
