@@ -11,12 +11,12 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_PortalScript.h"
+#include "Lu_LabelScript.h"
 
 namespace Lu
 {
 	MidBossScene::MidBossScene()
-		: m_BossName(nullptr)
-		, m_Time(0.f)
+		: m_bBossAlive(true)
 	{
 		SetName(L"MidBossSceneScript");
 	}
@@ -37,16 +37,6 @@ namespace Lu
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossBG_Mtrl"));
-		}
-
-		// UI : 크기 원본 1.5배
-		{
-			m_BossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
-			m_BossName->SetName(L"MidBoss_Name");
-
-			MeshRenderer* pMeshRender = m_BossName->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
 		}
 
 		// KingSlime
@@ -94,18 +84,6 @@ namespace Lu
 	void MidBossScene::Update()
 	{
 		StageScene::Update();
-
-		// 임시, 이름이 서서히 나타났다가 서서히 사라져야하는 것으로 알고있음..
-		if (nullptr != m_BossName)
-		{
-			m_Time += (float)Time::DeltaTime();
-			if (3.f <= m_Time)
-			{
-				m_Time = 0.f;
-				object::Destroy(m_BossName);
-				m_BossName = nullptr;
-			}
-		}
 	}
 
 	void MidBossScene::LateUpdate()
@@ -127,14 +105,29 @@ namespace Lu
 	{
 		StageScene::OnEnter();
 
-		// 임시임. 구조 바꿔야함
-		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->Stop();
+		if (m_bBossAlive)
+		{
+			AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+			pBGM->Stop();
 
-		//AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->SetClip(Resources::Find<AudioClip>(L"MidBossBGM"));
-		pBGM->Play();
-		pBGM->SetVolume(0.3f);
+			pBGM->SetClip(Resources::Find<AudioClip>(L"MidBossBGM"));
+			pBGM->Play();
+			pBGM->SetVolume(0.3f);
+
+			// 보스 이름 UI : 원본 크기 1.5배
+			{
+				GameObject* pBossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+				pBossName->SetName(L"MidBoss_Name");
+
+				MeshRenderer* pMeshRender = pBossName->AddComponent<MeshRenderer>();
+				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
+
+				LabelScript* pLabel = pBossName->AddComponent<LabelScript>();
+				pLabel->SetMeshRender(pMeshRender);
+				pLabel->SetDuration(3.f);
+			}
+		}
 	}
 
 	void MidBossScene::OnExit()

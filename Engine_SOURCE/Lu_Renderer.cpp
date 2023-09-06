@@ -69,6 +69,16 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = Lu::Resources::Find<Shader>(L"BossHPBarShader");
+		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = Lu::Resources::Find<Shader>(L"NumberShader");
+		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 		shader = Lu::Resources::Find<Shader>(L"SpriteAnimationShader");
 		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
@@ -383,6 +393,11 @@ namespace renderer
 		numberShader->Create(eShaderStage::PS, L"NumberPS.hlsl", "main");
 		Lu::Resources::Insert(L"NumberShader", numberShader);
 
+		std::shared_ptr<Shader> bossHPBarShader = std::make_shared<Shader>();
+		bossHPBarShader->Create(eShaderStage::VS, L"BossHPBarVS.hlsl", "main");
+		bossHPBarShader->Create(eShaderStage::PS, L"BossHPBarPS.hlsl", "main");
+		Lu::Resources::Insert(L"BossHPBarShader", bossHPBarShader);
+
 		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
 		paintShader->Create(L"PaintCS.hlsl", "main");
 		Lu::Resources::Insert(L"PaintShader", paintShader);
@@ -595,12 +610,6 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"MidBossBG_Mtrl", pMaterial);
 
-		pTexture = Resources::Load<Texture>(L"BossHP_Tex", L"..\\Resources\\Texture\\UI\\Boss\\BossHP.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"BossHP_Mtrl", pMaterial);
-
 		pTexture = Resources::Load<Texture>(L"MidBossFrame_Tex", L"..\\Resources\\Texture\\UI\\Boss\\boss_mid_Frame.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -791,6 +800,32 @@ namespace renderer
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BigSlimeJump_Mtrl", material);
+
+
+
+		// ∫∏Ω∫ HP Ω¶¿Ã¥ı
+		pShader = Resources::Find<Shader>(L"BossHPBarShader");
+		pTexture = Resources::Load<Texture>(L"BossHP_Tex", L"..\\Resources\\Texture\\UI\\Boss\\BossHP.png");
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"KingSlime_BossHP_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"BigSlime1_BossHP_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"BigSlime2_BossHP_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"Ent_BossHP_Mtrl", pMaterial);
 	}
 	
 	void LoadSound()

@@ -46,7 +46,7 @@ namespace Lu
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHP_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Ent_BossHP_Mtrl"));
 		}
 
 		{

@@ -42,6 +42,11 @@ namespace Lu::graphics
 			return m_Mode;
 		}
 
+		std::shared_ptr<Texture> GetTexture()
+		{
+			return m_Texture;
+		}
+
 		void GetScalarParam(SCALAR_PARAM _param, void* _pData);
 
 	public:

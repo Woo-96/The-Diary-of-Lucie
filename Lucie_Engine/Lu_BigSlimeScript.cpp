@@ -10,6 +10,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_SceneManager.h"
+#include "Lu_BossHPScript.h"
 
 #include "Lu_BigSlimeIdleState.h"
 #include "Lu_BigSlimeTraceState.h"
@@ -79,6 +80,7 @@ namespace Lu
 				return;
 
 			GetInfo().HP -= 50;
+			m_HPBar->GetComponent<BossHPScript>()->SetCurHP(GetInfo().HP);
 
 			if (GetInfo().HP <= 0.f)
 			{

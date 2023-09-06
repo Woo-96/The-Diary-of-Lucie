@@ -7,7 +7,7 @@
 #include "Lu_Collider2D.h"
 #include "Lu_Animator.h"
 #include "Lu_BigSlimeScript.h"
-
+#include "Lu_BossHPScript.h"
 
 namespace Lu
 {
@@ -61,17 +61,24 @@ namespace Lu
 			pBigSlimeScript->SetTarget(GetTarget());
 
 			// 오른쪽 슬라임 HP
-			Vector3 vHPPos = Vector3(0.f, 350.f, 100.f);
+			Vector3 vHPPos;
+			std::wstring pHPBar;
 
 			// 왼쪽 슬라임 HP
-			if (2 == i)
+			if (1 == i)
+			{
+				vHPPos = Vector3(0.f, 350.f, 100.f);
+				pHPBar = L"BigSlime1_BossHP_Mtrl";
+			}
+			else
 			{
 				vHPPos = Vector3(0.f, 300.f, 100.f);
+				pHPBar = L"BigSlime2_BossHP_Mtrl";
 			}
 
 			{
 				GameObject* pObject = object::Instantiate<GameObject>(vHPPos, Vector3(759.f, 48.f, 100.f), eLayerType::UI);
-				pObject->SetName(L"BigSlime_HP_Frame");
+				pObject->SetName(L"BigSlime_HPFrame");
 
 				MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -82,13 +89,19 @@ namespace Lu
 
 			{
 				GameObject* pObject = object::Instantiate<GameObject>(vHPPos, Vector3(720.f, 30.f, 100.f), eLayerType::UI);
-				pObject->SetName(L"BigSlime_HP");
+				pObject->SetName(L"BigSlime_HPBar");
 
 				MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHP_Mtrl"));
+				pMeshRender->SetMaterial(Resources::Find<Material>(pHPBar));
 
 				pBigSlimeScript->SetHPBar(pObject);
+
+				BossHPScript* pHPScript = pObject->AddComponent<BossHPScript>();
+				pHPScript->SetMeshRender(pMeshRender);
+				pHPScript->SetTransform(pObject->GetComponent<Transform>());
+				pHPScript->SetMaxHP(pBigSlimeScript->GetInfo().MaxHP);
+				pHPScript->SetCurHP(pBigSlimeScript->GetInfo().HP);
 			}
 		}
 

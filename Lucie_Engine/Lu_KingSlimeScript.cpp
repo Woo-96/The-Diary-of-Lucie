@@ -10,6 +10,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_SceneManager.h"
+#include "Lu_BossHPScript.h"
 
 #include "Lu_KingSlimeIdleState.h"
 #include "Lu_KingSlimeTraceState.h"
@@ -52,7 +53,7 @@ namespace Lu
 		// 보스 HP
 		{
 			m_HPFrame = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(759.f, 48.f, 100.f), eLayerType::UI);
-			m_HPFrame->SetName(L"KingSlime_HP_Frame");
+			m_HPFrame->SetName(L"KingSlime_HPFrame");
 
 			MeshRenderer* pMeshRender = m_HPFrame->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -61,11 +62,17 @@ namespace Lu
 
 		{
 			m_HPBar = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(720.f, 30.f, 100.f), eLayerType::UI);
-			m_HPBar->SetName(L"KingSlime_HP");
+			m_HPBar->SetName(L"KingSlime_HPBar");
 
 			MeshRenderer* pMeshRender = m_HPBar->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHP_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"KingSlime_BossHP_Mtrl"));
+		
+			BossHPScript* pHPScript = m_HPBar->AddComponent<BossHPScript>();
+			pHPScript->SetMeshRender(pMeshRender);
+			pHPScript->SetTransform(m_HPBar->GetComponent<Transform>());
+			pHPScript->SetMaxHP(GetInfo().MaxHP);
+			pHPScript->SetCurHP(GetInfo().HP);
 		}
 
 		// 상태
@@ -102,6 +109,7 @@ namespace Lu
 				return;
 
 			GetInfo().HP -= 50;
+			m_HPBar->GetComponent<BossHPScript>()->SetCurHP(GetInfo().HP);
 
 			if (GetInfo().HP <= 0.f)
 			{

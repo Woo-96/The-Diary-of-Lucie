@@ -177,6 +177,7 @@
     <ClInclude Include="Lu_AttackState.h" />
     <ClInclude Include="Lu_BigSlimeIdleState.h" />
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
+    <ClInclude Include="Lu_BossHPScript.h" />
     <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
     <ClInclude Include="Lu_BossScene.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Lu_KingSlimeScript.h" />
     <ClInclude Include="Lu_KingSlimeStateScript.h" />
     <ClInclude Include="Lu_KingSlimeTraceState.h" />
+    <ClInclude Include="Lu_LabelScript.h" />
     <ClInclude Include="Lu_Layout.h" />
     <ClInclude Include="Lu_LobbyScene.h" />
     <ClInclude Include="Lu_MidBossScene.h" />
@@ -236,6 +238,7 @@
     <ClInclude Include="Lu_StoreScene.h" />
     <ClInclude Include="Lu_TitleScene.h" />
     <ClInclude Include="Lu_TP.h" />
+    <ClInclude Include="Lu_UIManager.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
     <ClInclude Include="Lu_WeaponChoiceScene.h" />
@@ -254,6 +257,7 @@
     <ClCompile Include="Lu_AttackState.cpp" />
     <ClCompile Include="Lu_BigSlimeIdleState.cpp" />
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
+    <ClCompile Include="Lu_BossHPScript.cpp" />
     <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />
     <ClCompile Include="Lu_BossScene.cpp" />
@@ -279,6 +283,7 @@
     <ClCompile Include="Lu_KingSlimeScript.cpp" />
     <ClCompile Include="Lu_KingSlimeStateScript.cpp" />
     <ClCompile Include="Lu_KingSlimeTraceState.cpp" />
+    <ClCompile Include="Lu_LabelScript.cpp" />
     <ClCompile Include="Lu_Layout.cpp" />
     <ClCompile Include="Lu_LobbyScene.cpp" />
     <ClCompile Include="Lu_MidBossScene.cpp" />
@@ -313,6 +318,7 @@
     <ClCompile Include="Lu_StoreScene.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
     <ClCompile Include="Lu_TP.cpp" />
+    <ClCompile Include="Lu_UIManager.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />
     <ClCompile Include="Lu_WeaponChoiceScene.cpp" />

@@ -34,12 +34,12 @@ namespace Lu::graphics
         void SetNoiseTexture(std::shared_ptr<Texture> _tex)
         {
             m_NoiseTex = _tex;
-            m_Const.arrV2[0] = Vector2((float)m_NoiseTex->GetWidth(), (float)m_NoiseTex->GetHeight());
+            m_Const.arrV2[0] = Lu::math::Vector2((float)m_NoiseTex->GetWidth(), (float)m_NoiseTex->GetHeight());
         }
 
-        void SetParticleObjectPos(Vector3 _vPos)
+        void SetParticleObjectPos(Lu::math::Vector3 _vPos)
         {
-            m_Const.arrV4[0] = Vector4(_vPos.x, _vPos.y, _vPos.z, 0.f);
+            m_Const.arrV4[0] = Lu::math::Vector4(_vPos.x, _vPos.y, _vPos.z, 0.f);
         }
 
 		virtual void Binds() override;

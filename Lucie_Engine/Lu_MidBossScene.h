@@ -3,7 +3,6 @@
 
 namespace Lu
 {
-	class GameObject;
 	class MidBossScene : public StageScene
 	{
 	public:
@@ -11,8 +10,13 @@ namespace Lu
 		virtual ~MidBossScene();
 
 	private:
-		GameObject* m_BossName;
-		float		m_Time;
+		bool	m_bBossAlive;
+
+	public:
+		void BossDead()
+		{
+			m_bBossAlive = false;
+		}
 
 	public:
 		virtual void Initialize() override;
