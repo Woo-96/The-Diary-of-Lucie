@@ -64,7 +64,7 @@ namespace Lu
 		StageScene::OnEnter();
 
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->SetClip(Resources::Load<AudioClip>(L"BossWayBGM", L"..\\Resources\\Sound\\BGM\\BossWayBGM.ogg"));
+		pBGM->SetClip(Resources::Find<AudioClip>(L"BossWayBGM"));
 		pBGM->Play();
 		pBGM->SetVolume(0.3f);
 	}

@@ -1,10 +1,10 @@
 #pragma once
-#include "Lu_PortalScript.h"
+#include "..\\Engine_SOURCE\\Lu_Script.h"
 
 namespace Lu
 {
 	class Animator;
-	class DiaryScript : public PortalScript
+	class DiaryScript : public Script
 	{
 	public:
 		DiaryScript();
@@ -15,7 +15,6 @@ namespace Lu
 
 	public:
 		virtual void Initialize() override;
-		virtual void Update() override {};
 
 	public:
 		virtual void OnCollisionStay(Collider2D* _Other);
@@ -23,5 +22,6 @@ namespace Lu
 	private:
 		void CreateDiaryAnimation();
 		void GameStart();
+		void DiarySFX();
 	};
 }

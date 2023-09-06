@@ -5,8 +5,9 @@
 #include "Lu_PlayerScript.h"
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
-
-#include "Lu_Input.h"
+#include "Lu_CameraScript.h"
+#include "Lu_Renderer.h"
+#include "Lu_PortalScript.h"
 
 namespace Lu
 {
@@ -60,17 +61,36 @@ namespace Lu
 			pAnimator2->Create(L"MagicCircle", pAtlas, Vector2(0.f, 0.f), Vector2(192.f, 192.f), 2, Vector2(192.f, 192.f), Vector2::Zero, 0.4f);
 			pAnimator2->PlayAnimation(L"MagicCircle", true);
 		}
+
+		// Æ÷Å»
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(790.f, -160.f, 500.f), Vector3(20.f, 180.f, 100.f), eLayerType::Portal);
+			pObject->SetName(L"Portal");
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+
+			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
+			pPortal->SetCurSceneName(L"WeaponChoiceScene");
+			pPortal->SetNextSceneName(L"Nomal1Scene");
+			pPortal->Initialize();
+		}
+
+		// º®
+		{
+
+		}
+
+
+		GameObject* pPlayer = SceneManager::FindPlayer();
+		CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+		pMainCamScript->SetWorldResolution(Vector2(2016.f - 400.f, 1344.f - 200.f));
+		pMainCamScript->SetTarget(pPlayer);
 	}
 
 	void WeaponChoiceScene::Update()
 	{
 		StageScene::Update();
-
-		// ÀÓ½Ã
-		if (Input::GetKeyUp(eKeyCode::ENTER))
-		{
-			SceneManager::LoadScene(L"Nomal1Scene");
-		}
 	}
 
 	void WeaponChoiceScene::LateUpdate()
@@ -91,15 +111,6 @@ namespace Lu
 	void WeaponChoiceScene::OnEnter()
 	{
 		StageScene::OnEnter();
-
-		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
-		pBGM->Play();
-		pBGM->SetVolume(0.3f);
-
-		GameObject* pPlayer = SceneManager::FindPlayer();
-		pPlayer->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, 500.f));
-		pPlayer->GetComponent<PlayerScript>()->SetDir(eDir::Down);
 	}
 
 	void WeaponChoiceScene::OnExit()

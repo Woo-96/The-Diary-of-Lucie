@@ -64,6 +64,6 @@ namespace Lu
 
 	void StoreScene::OnExit()
 	{
-
+		StageScene::OnExit();
 	}
 }

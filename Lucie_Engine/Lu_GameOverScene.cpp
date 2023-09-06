@@ -72,7 +72,7 @@ namespace Lu
 		Scene::OnEnter();
 
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->SetClip(Resources::Load<AudioClip>(L"GameOverBGM", L"..\\Resources\\Sound\\BGM\\GameOverBGM.ogg"));
+		pBGM->SetClip(Resources::Find<AudioClip>(L"GameOverBGM"));
 		pBGM->Play();
 		pBGM->SetVolume(0.3f);
 

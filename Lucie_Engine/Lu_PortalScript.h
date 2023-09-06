@@ -1,5 +1,6 @@
 #pragma once
 #include "..\\Engine_SOURCE\\Lu_Script.h"
+#include "Lu_ScriptEnums.h"
 
 namespace Lu
 {
@@ -9,15 +10,26 @@ namespace Lu
         PortalScript();
         virtual ~PortalScript();
 
-	public:
-		virtual void Initialize() override {};
-		virtual void Update() override {};
-		virtual void LateUpdate() override {};
-		virtual void Render() override {};
+	private:
+		std::wstring	m_CurSceneName;
+		std::wstring	m_NextSceneName;
+		Vector2			m_SpawnPos;
 
 	public:
-		virtual void OnCollisionEnter(Collider2D* other) {};
-		virtual void OnCollisionStay(Collider2D* other) {};
-		virtual void OnCollisionExit(Collider2D* other) {};
+		void SetCurSceneName(std::wstring _CurSceneName)
+		{
+			m_CurSceneName = _CurSceneName;
+		}
+
+		void SetNextSceneName(std::wstring _NextSceneName)
+		{
+			m_NextSceneName = _NextSceneName;
+		}
+
+	public:
+		virtual void Initialize() override;
+
+	public:
+		virtual void OnCollisionStay(Collider2D* _Other);
     };
 }

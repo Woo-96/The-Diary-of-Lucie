@@ -4,12 +4,11 @@
 #include "Lu_Resources.h"
 #include "Lu_Animator.h"
 #include "Lu_PlayerScript.h"
-#include "Lu_SnabyScript.h"
+#include "Lu_SlimeScript.h"
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_ImmovableScript.h"
-
-#include "Lu_Input.h"
+#include "Lu_PortalScript.h"
 
 namespace Lu
 {
@@ -42,43 +41,44 @@ namespace Lu
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
-			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
+			pMainCamScript->SetWorldResolution(Vector2(2016.f - 400.f, 1536.f - 100.f));
 			pMainCamScript->SetTarget(pPlayer);
 
 
-			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(-200.f, 200.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
-			pMonster->SetName(L"Snaby");
+			GameObject* pMonster = object::Instantiate<GameObject>(Vector3(300.f, 200.f, 500.f), Vector3(180.f, 180.f, 100.f), eLayerType::Monster);
+			pMonster->SetName(L"Slime");
 
 			MeshRenderer* pMeshRender = pMonster->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"SnabyAnimation_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
 			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(3.f, -7.f));
-			pCollider->SetSize(Vector2(0.3f, 0.8f));
+			pCollider->SetCenter(Vector2(0.f, -60.f));
+			pCollider->SetSize(Vector2(0.4f, 0.3f));
 
 			pMonster->AddComponent<Animator>();
-			SnabyScript* pSnabyScript = pMonster->AddComponent<SnabyScript>();
-			pSnabyScript->SetTarget(pPlayerScript);
+			SlimeScript* pSlimeScript = pMonster->AddComponent<SlimeScript>();
+			pSlimeScript->SetTarget(pPlayerScript);
 
-	
-			pMonster = object::Instantiate<GameObject>(Vector3(250.f, -250.f, 500.f), Vector3(96.f, 96.f, 100.f), eLayerType::Monster);
-			pMonster->SetName(L"Snaby2");
+
+			pMonster = object::Instantiate<GameObject>(Vector3(0.f, -200.f, 500.f), Vector3(180.f, 180.f, 100.f), eLayerType::Monster);
+			pMonster->SetName(L"Slime2");
 
 			pMeshRender = pMonster->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"SnabyAnimation_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
 			pCollider = pMonster->AddComponent<Collider2D>();
 			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetCenter(Vector2(3.f, -7.f));
-			pCollider->SetSize(Vector2(0.3f, 0.8f));
+			pCollider->SetCenter(Vector2(0.f, -60.f));
+			pCollider->SetSize(Vector2(0.4f, 0.3f));
 
 			pMonster->AddComponent<Animator>();
-			pSnabyScript = pMonster->AddComponent<SnabyScript>();
-			pSnabyScript->SetTarget(pPlayerScript);
+			pSlimeScript = pMonster->AddComponent<SlimeScript>();
+			pSlimeScript->SetTarget(pPlayerScript);
 		}
+
 
 		// ¸Ê °¡¿îµ¥ ³ª¹«
 		{
@@ -99,17 +99,38 @@ namespace Lu
 
 			pObj->AddComponent<ImmovableScript>();
 		}
+
+		// Æ÷Å»
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(-780.f, -30.f, 500.f), Vector3(20.f, 250.f, 100.f), eLayerType::Portal);
+			pObject->SetName(L"Portal1");
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+
+			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
+			pPortal->SetCurSceneName(L"Nomal1Scene");
+			pPortal->SetNextSceneName(L"WeaponChoiceScene");
+			pPortal->Initialize();
+		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 700.f, 500.f), Vector3(280.f, 20.f, 100.f), eLayerType::Portal);
+			pObject->SetName(L"Portal2");
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+
+			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
+			pPortal->SetCurSceneName(L"Nomal1Scene");
+			pPortal->SetNextSceneName(L"Nomal2Scene");
+			pPortal->Initialize();
+		}
 	}
 
 	void Nomal1Scene::Update()
 	{
 		StageScene::Update();
-
-		// ÀÓ½Ã
-		if (Input::GetKeyUp(eKeyCode::ENTER))
-		{
-			SceneManager::LoadScene(L"Nomal2Scene");
-		}
 	}
 
 	void Nomal1Scene::LateUpdate()

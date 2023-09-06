@@ -27,11 +27,12 @@ namespace Lu
 
 	void AudioSource::LateUpdate()
 	{
-		//Transform* tr = GetOwner()->GetComponent<Transform>();
-		//Vector3 pos = tr->GetPosition();
-		//Vector3 foward = tr->Foward();
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector3 pos = tr->GetPosition();
+		Vector3 foward = tr->Foward();
 
-		//m_AudioClip->Set3DAttributes(pos, foward);
+		if(m_AudioClip)
+			m_AudioClip->Set3DAttributes(pos, foward);
 	}
 
 	void AudioSource::Render()

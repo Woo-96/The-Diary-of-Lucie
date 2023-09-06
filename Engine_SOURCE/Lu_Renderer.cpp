@@ -5,6 +5,7 @@
 #include "Lu_StructedBuffer.h"
 #include "Lu_PaintShader.h"
 #include "Lu_ParticleShader.h"
+#include "Lu_AudioClip.h"
 
 namespace renderer
 {
@@ -769,7 +770,7 @@ namespace renderer
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MonsterProjectile_Circle_Mtrl", material);
-	
+
 		texture = Resources::Load<Texture>(L"MonsterProjectile_Bubble_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\Bubble.png");
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
@@ -790,7 +791,17 @@ namespace renderer
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BigSlimeJump_Mtrl", material);
-}
+	}
+	
+	void LoadSound()
+	{
+		Resources::Load<AudioClip>(L"ForestBGM", L"..\\Resources\\Sound\\BGM\\ForestBGM.ogg");
+		Resources::Load<AudioClip>(L"LobbyBGM", L"..\\Resources\\Sound\\BGM\\LobbyBGM.ogg");
+		Resources::Load<AudioClip>(L"MidBossBGM", L"..\\Resources\\Sound\\BGM\\MidBossBGM.ogg");
+		Resources::Load<AudioClip>(L"BossWayBGM", L"..\\Resources\\Sound\\BGM\\BossWayBGM.ogg");
+		Resources::Load<AudioClip>(L"BossBGM", L"..\\Resources\\Sound\\BGM\\BossBGM.ogg");
+		Resources::Load<AudioClip>(L"GameOverBGM", L"..\\Resources\\Sound\\BGM\\GameOverBGM.ogg");
+	}
 
 	void Initialize()
 	{
@@ -800,6 +811,7 @@ namespace renderer
 		SetupState();
 		LoadTexture();
 		LoadMaterial();
+		LoadSound();
 	}
 
 	void BindLights()

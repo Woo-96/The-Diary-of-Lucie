@@ -700,9 +700,6 @@
     <Filter Include="Contents\Script\04. Object\Portal">
       <UniqueIdentifier>{3895f3e4-87e2-461d-894e-3bbfdd2e6f94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\04. Object\Portal\MapPortal">
-      <UniqueIdentifier>{68ab1155-708d-4169-81ee-68be67eb8586}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\04. Object\Portal\Diary">
       <UniqueIdentifier>{cb98da6d-fb99-4147-aa85-ac52e1838ead}</UniqueIdentifier>
     </Filter>

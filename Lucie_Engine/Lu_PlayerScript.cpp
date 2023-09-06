@@ -29,6 +29,7 @@ namespace Lu
 		, m_bAction(false)
 		, m_bInvincible(false)
 		, m_bHitEffect(false)
+		, m_bDontAnimChange(false)
 		, m_InvincibleTime(0.f)
 		, m_Damage(1)
 		, m_Animator(nullptr)
@@ -300,6 +301,14 @@ namespace Lu
 		// Dead
 		m_Animator->Create(L"Player_Dead", pAtlas, Vector2(400.f, 2300.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 2.f, false);
 		m_Animator->CompleteEvent(L"Player_Dead") = std::bind(&PlayerScript::CompleteAction, this);
+
+
+		// LookAround
+		m_Animator->Create(L"Player_MagicCircleMove", pAtlas, Vector2(0.f, 4100.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->CompleteEvent(L"Player_MagicCircleMove") = std::bind(&PlayerScript::MagicCircleMove, this);
+
+		m_Animator->Create(L"Player_LookAround", pAtlas, Vector2(0.f, 3700.f), Vector2(100.f, 100.f), 5, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->CompleteEvent(L"Player_LookAround") = std::bind(&PlayerScript::LookAround, this);
 	}
 
 	StateScript* PlayerScript::GetStateScript(StateScript::eState _State)
@@ -462,33 +471,36 @@ namespace Lu
 		{
 		case StateScript::eState::Idle:
 		{
-			switch (m_Dir)
+			if (!m_bDontAnimChange)
 			{
-			case eDir::Left:
-				m_Animator->PlayAnimation(L"Player_Idle_Left", true);
-				break;
-			case eDir::Right:
-				m_Animator->PlayAnimation(L"Player_Idle_Right", true);
-				break;
-			case eDir::Up:
-				m_Animator->PlayAnimation(L"Player_Idle_Up", true);
-				break;
-			case eDir::Down:
-				m_Animator->PlayAnimation(L"Player_Idle_Down", true);
-				break;
-			case eDir::LeftUp:
-				m_Animator->PlayAnimation(L"Player_Idle_LeftUp", true);
-				break;
-			case eDir::RightUp:
-				m_Animator->PlayAnimation(L"Player_Idle_RightUp", true);
-				break;
-			case eDir::LeftDown:
-				m_Animator->PlayAnimation(L"Player_Idle_LeftDown", true);
-				break;
-			case eDir::RightDown:
-				m_Animator->PlayAnimation(L"Player_Idle_RightDown", true);
-				break;
-			}
+				switch (m_Dir)
+				{
+				case eDir::Left:
+					m_Animator->PlayAnimation(L"Player_Idle_Left", true);
+					break;
+				case eDir::Right:
+					m_Animator->PlayAnimation(L"Player_Idle_Right", true);
+					break;
+				case eDir::Up:
+					m_Animator->PlayAnimation(L"Player_Idle_Up", true);
+					break;
+				case eDir::Down:
+					m_Animator->PlayAnimation(L"Player_Idle_Down", true);
+					break;
+				case eDir::LeftUp:
+					m_Animator->PlayAnimation(L"Player_Idle_LeftUp", true);
+					break;
+				case eDir::RightUp:
+					m_Animator->PlayAnimation(L"Player_Idle_RightUp", true);
+					break;
+				case eDir::LeftDown:
+					m_Animator->PlayAnimation(L"Player_Idle_LeftDown", true);
+					break;
+				case eDir::RightDown:
+					m_Animator->PlayAnimation(L"Player_Idle_RightDown", true);
+					break;
+				}
+			}		
 		}
 			break;
 		case StateScript::eState::Move:
@@ -706,6 +718,18 @@ namespace Lu
 		pSFX->Play();
 	}
 
+	void PlayerScript::MagicCircleMove()
+	{
+		m_Animator->PlayAnimation(L"Player_LookAround", true);
+	}
+
+	void PlayerScript::LookAround()
+	{
+		m_Animator->PlayAnimation(L"Player_Idle_Down", true);
+		m_bAction = false;
+		m_bDontAnimChange = false;
+	}
+
 	void PlayerScript::ChangeState(StateScript::eState _NextState)
 	{
 		StateScript* pNextState = GetStateScript(_NextState);
@@ -717,5 +741,20 @@ namespace Lu
 		m_PrevState = m_CurState->GetStateType();
 		m_CurState = pNextState;
 		m_CurState->Enter();
+	}
+
+	void PlayerScript::MagicPortalMove()
+	{
+		m_bDontAnimChange = true;
+		m_bAction = true;
+		m_Dir = eDir::Down;
+		m_Animator->PlayAnimation(L"Player_MagicCircleMove", true);
+	}
+
+	void PlayerScript::IdleStateEvent()
+	{
+		m_bDontAnimChange = true;
+		m_Dir = eDir::Down;
+		m_Animator->PlayAnimation(L"Player_LookAround", true);
 	}
 }

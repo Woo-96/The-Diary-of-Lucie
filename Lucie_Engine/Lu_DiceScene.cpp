@@ -64,6 +64,6 @@ namespace Lu
 
 	void DiceScene::OnExit()
 	{
-
+		StageScene::OnExit();
 	}
 }

@@ -59,6 +59,7 @@ namespace Lu
 		bool				m_bAction;
 		bool				m_bInvincible;
 		bool				m_bHitEffect;
+		bool				m_bDontAnimChange;
 		float				m_InvincibleTime;
 		int					m_Damage;
 
@@ -114,9 +115,13 @@ namespace Lu
 		eDir CalDirToMouse();
 		void CompleteAction();
 		void AttackSFX();
+		void MagicCircleMove();
+		void LookAround();
 
 	public:
 		void ChangeState(StateScript::eState _NextState);
+		void MagicPortalMove();
+		void IdleStateEvent();
 	};
 }
 

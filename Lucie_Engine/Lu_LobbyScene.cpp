@@ -167,7 +167,7 @@ namespace Lu
 		Scene::OnEnter();
 
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->SetClip(Resources::Load<AudioClip>(L"LobbyBGM", L"..\\Resources\\Sound\\BGM\\LobbyBGM.ogg"));
+		pBGM->SetClip(Resources::Find<AudioClip>(L"LobbyBGM"));
 		pBGM->Play();
 		pBGM->SetVolume(0.3f);
 	}
@@ -178,5 +178,10 @@ namespace Lu
 
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->Stop();
+
+		// 로비로 다시 못가니까 여기서 켜줌
+		pBGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
+		pBGM->Play();
+		pBGM->SetVolume(0.3f);
 	}
 }

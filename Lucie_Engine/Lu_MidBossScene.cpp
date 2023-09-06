@@ -10,8 +10,7 @@
 #include "Lu_Renderer.h"
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
-
-#include "Lu_Input.h"
+#include "Lu_PortalScript.h"
 
 namespace Lu
 {
@@ -56,7 +55,7 @@ namespace Lu
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
-			pMainCamScript->SetWorldResolution(Vector2(2208.f, 1920.f));
+			pMainCamScript->SetWorldResolution(Vector2(2208.f - 400.f, 1920.f - 200.f));
 			pMainCamScript->SetTarget(pPlayer);
 
 
@@ -77,17 +76,24 @@ namespace Lu
 			KingSlimeScript* pKingSlimeScript = pObject->AddComponent<KingSlimeScript>();
 			pKingSlimeScript->SetTarget(pPlayerScript);
 		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(870.f, -110.f, 500.f), Vector3(20.f, 180.f, 100.f), eLayerType::Portal);
+			pObject->SetName(L"Portal");
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+
+			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
+			pPortal->SetCurSceneName(L"MidBossScene");
+			pPortal->SetNextSceneName(L"Nomal2Scene");
+			pPortal->Initialize();
+		}
 	}
 
 	void MidBossScene::Update()
 	{
 		StageScene::Update();
-
-		// 임시
-		if (Input::GetKeyUp(eKeyCode::ENTER))
-		{
-			SceneManager::LoadScene(L"NextFloorScene");
-		}
 
 		// 임시, 이름이 서서히 나타났다가 서서히 사라져야하는 것으로 알고있음..
 		if (nullptr != m_BossName)
@@ -121,8 +127,12 @@ namespace Lu
 	{
 		StageScene::OnEnter();
 
+		// 임시임. 구조 바꿔야함
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->SetClip(Resources::Load<AudioClip>(L"MidBossBGM", L"..\\Resources\\Sound\\BGM\\MidBossBGM.ogg"));
+		pBGM->Stop();
+
+		//AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->SetClip(Resources::Find<AudioClip>(L"MidBossBGM"));
 		pBGM->Play();
 		pBGM->SetVolume(0.3f);
 	}

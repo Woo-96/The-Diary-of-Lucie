@@ -2,8 +2,6 @@
 #include "Lu_Object.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
-#include "Lu_AudioSource.h"
-#include "Lu_SoundManager.h"
 
 #include "Lu_Input.h"
 
@@ -68,8 +66,5 @@ namespace Lu
 	void NextFloorScene::OnExit()
 	{
 		StageScene::OnExit();
-
-		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-		pBGM->Stop();
 	}
 }
