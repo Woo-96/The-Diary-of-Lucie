@@ -99,7 +99,6 @@ namespace Lu
 
 				BossHPScript* pHPScript = pObject->AddComponent<BossHPScript>();
 				pHPScript->SetMeshRender(pMeshRender);
-				pHPScript->SetTransform(pObject->GetComponent<Transform>());
 				pHPScript->SetMaxHP(pBigSlimeScript->GetInfo().MaxHP);
 				pHPScript->SetCurHP(pBigSlimeScript->GetInfo().HP);
 			}

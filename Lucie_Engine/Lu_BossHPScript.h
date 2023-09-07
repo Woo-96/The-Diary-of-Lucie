@@ -3,7 +3,6 @@
 
 namespace Lu
 {
-	class Transform;
 	class MeshRenderer;
 	class BossHPScript : public UIScript
 	{
@@ -12,17 +11,11 @@ namespace Lu
 		virtual ~BossHPScript();
 
 	private:
-		Transform*		m_Transform;
 		MeshRenderer*	m_MeshRender;
-		int				m_MaxHP;
-		int				m_CurHP;
+		float			m_MaxHP;
+		float			m_CurHP;
 
 	public:
-		void SetTransform(Transform* _Transform)
-		{
-			m_Transform = _Transform;
-		}
-
 		void SetMeshRender(MeshRenderer* _MeshRender)
 		{
 			m_MeshRender = _MeshRender;

@@ -70,7 +70,6 @@ namespace Lu
 		
 			BossHPScript* pHPScript = m_HPBar->AddComponent<BossHPScript>();
 			pHPScript->SetMeshRender(pMeshRender);
-			pHPScript->SetTransform(m_HPBar->GetComponent<Transform>());
 			pHPScript->SetMaxHP(GetInfo().MaxHP);
 			pHPScript->SetCurHP(GetInfo().HP);
 		}
