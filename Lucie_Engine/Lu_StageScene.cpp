@@ -5,7 +5,7 @@
 #include "Lu_Object.h"
 #include "Lu_Input.h"
 #include "Lu_Layout.h"
-#include "Lu_HP.h"
+#include "Lu_HeartScript.h"
 #include "Lu_MP.h"
 #include "Lu_EXP.h"
 #include "Lu_TP.h"
@@ -13,6 +13,7 @@
 #include "Lu_WeaponSlot.h"
 #include "Lu_Inventory.h"
 #include "Lu_NumberScript.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -83,13 +84,16 @@ namespace Lu
 
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(-100.f, -280.f, 100.f), Vector3(72.f, 33.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"UI_HPIcon");
+			pObject->SetName(L"UI_HeartMgr");
+			SceneManager::DontDestroyOnLoad(pObject);
+			HeartScript* pHPScript = pObject->AddComponent<HeartScript>();
 
-			pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"HP_Icon_Mtrl"));
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+			pPlayerScript->SetHPScript(pHPScript);
 
-			pObject->AddComponent<HP>();
+			pHPScript->SetMaxHP(pPlayerScript->GetPlayerInfo().MaxHP);
+			pHPScript->SetHeart(pPlayerScript->GetPlayerInfo().CurHP);
 		}
 
 		{

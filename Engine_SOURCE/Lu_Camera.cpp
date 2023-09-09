@@ -160,13 +160,15 @@ namespace Lu
 	{
 		for (GameObject* obj : _GameObjs)
 		{
-			MeshRenderer* mr
-				= obj->GetComponent<MeshRenderer>();
+			MeshRenderer* mr = obj->GetComponent<MeshRenderer>();
 			if (mr == nullptr)
 				continue;
 
 			std::shared_ptr<Material> mt = mr->GetMaterial();
+			if (mt == nullptr)
+				continue;
 			eRenderingMode mode = mt->GetRenderingMode();
+
 			switch (mode)
 			{
 			case Lu::graphics::eRenderingMode::Opaque:
@@ -252,5 +254,20 @@ namespace Lu
 		Vector3 vMousePos = Vector3(_MousePos.x, _MousePos.y, 0.f);
 
 		return View.Unproject(vMousePos, mProj, mView, mWolrd);
+	}
+
+	Vector2 Camera::WorldToScreen(Vector3 _WorldPos)
+	{
+		Matrix mWorld = Matrix::Identity;
+		D3D11_VIEWPORT DeviceViewport = graphics::GetDevice()->GetViewPort();
+		Viewport View(DeviceViewport.TopLeftX, DeviceViewport.TopLeftY, DeviceViewport.Width, DeviceViewport.Height, DeviceViewport.MinDepth, DeviceViewport.MaxDepth);
+
+		Matrix mProj = GetProjectionMatrix();
+		Matrix mView = GetViewMatrix();
+
+		// 월드 좌표를 스크린 좌표로 변환
+		Vector3 vScreenPos = View.Project(_WorldPos, mProj, mView, mWorld);
+
+		return Vector2(vScreenPos.x, vScreenPos.y);
 	}
 }

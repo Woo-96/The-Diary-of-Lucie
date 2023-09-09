@@ -98,9 +98,11 @@ namespace Lu
 				pBigSlimeScript->SetHPBar(pObject);
 
 				BossHPScript* pHPScript = pObject->AddComponent<BossHPScript>();
+				pHPScript->SetTransform(pObject->GetComponent<Transform>());
 				pHPScript->SetMeshRender(pMeshRender);
 				pHPScript->SetMaxHP(pBigSlimeScript->GetInfo().MaxHP);
 				pHPScript->SetCurHP(pBigSlimeScript->GetInfo().HP);
+				pHPScript->SetBossName(L"∫ÚΩΩ∂Û¿”");
 			}
 		}
 

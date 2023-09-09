@@ -23,9 +23,6 @@
     <ClCompile Include="Lu_UIScript.cpp">
       <Filter>Contents\Script\05. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_HP.cpp">
-      <Filter>Contents\Script\05. UI\HUD\HP</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_EXP.cpp">
       <Filter>Contents\Script\05. UI\HUD\EXP</Filter>
     </ClCompile>
@@ -230,6 +227,9 @@
     <ClCompile Include="Lu_BossHPScript.cpp">
       <Filter>Contents\Script\05. UI\HUD\HP\BossHP</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_HeartScript.cpp">
+      <Filter>Contents\Script\05. UI\HUD\HP\PlayerHP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -256,9 +256,6 @@
     </ClInclude>
     <ClInclude Include="Lu_UIScript.h">
       <Filter>Contents\Script\05. UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_HP.h">
-      <Filter>Contents\Script\05. UI\HUD\HP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_EXP.h">
       <Filter>Contents\Script\05. UI\HUD\EXP</Filter>
@@ -466,6 +463,9 @@
     </ClInclude>
     <ClInclude Include="Lu_BossHPScript.h">
       <Filter>Contents\Script\05. UI\HUD\HP\BossHP</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_HeartScript.h">
+      <Filter>Contents\Script\05. UI\HUD\HP\PlayerHP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -732,6 +732,9 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\HP\BossHP">
       <UniqueIdentifier>{76bfc60c-3f55-4d2a-9841-34a5e9c481e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\HUD\HP\PlayerHP">
+      <UniqueIdentifier>{f3423f01-9f03-4229-9836-8cc19d99b64b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

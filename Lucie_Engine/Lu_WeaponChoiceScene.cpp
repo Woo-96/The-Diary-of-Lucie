@@ -22,7 +22,8 @@ namespace Lu
 
 	void WeaponChoiceScene::Initialize()
 	{
-		StageScene::Initialize();
+		//StageScene::Initialize();
+		Scene::Initialize();
 
 		// Back : 크기 원본 2배
 		{

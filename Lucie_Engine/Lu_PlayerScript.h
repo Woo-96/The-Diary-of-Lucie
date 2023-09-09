@@ -6,6 +6,7 @@
 namespace Lu
 {
 	class Animator;
+	class HeartScript;
 	class PlayerScript : public Script
 	{
 	public:
@@ -30,10 +31,12 @@ namespace Lu
 
 		struct tPlayerInfo
 		{
-			int HP;
+			int CurHP;
+			int MaxHP;
 
 			tPlayerInfo()
-				: HP(2)
+				: CurHP(7)
+				, MaxHP(7)
 			{
 
 			}
@@ -65,6 +68,9 @@ namespace Lu
 
 		Animator*			m_Animator;
 
+		// UI
+		HeartScript*		m_HPScript;
+
 	public:
 		void SetAction(bool _Action)
 		{
@@ -74,6 +80,11 @@ namespace Lu
 		void SetDir(eDir _Dir)
 		{
 			m_Dir = _Dir;
+		}
+
+		void SetHPScript(HeartScript* _Script)
+		{
+			m_HPScript = _Script;
 		}
 
 	public:

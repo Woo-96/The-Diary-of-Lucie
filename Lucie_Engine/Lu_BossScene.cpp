@@ -18,7 +18,7 @@ namespace Lu
 
 	void BossScene::Initialize()
 	{
-		StageScene::Initialize();
+		Scene::Initialize();
 
 		// Back크기 원본 2배
 		{

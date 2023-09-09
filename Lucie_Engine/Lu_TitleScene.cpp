@@ -146,6 +146,7 @@ namespace Lu
 		pBGM->SetVolume(0.3f);
 
 		SceneManager::DontUseOnLoad(eLayerType::Player);
+		SceneManager::DontUseOnLoad(eLayerType::UI);
 	}
 
 	void TitleScene::OnExit()

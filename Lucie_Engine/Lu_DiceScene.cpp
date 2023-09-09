@@ -18,7 +18,7 @@ namespace Lu
 
 	void DiceScene::Initialize()
 	{
-		StageScene::Initialize();
+		Scene::Initialize();
 
 		// Back : 크기 원본 2배
 		{

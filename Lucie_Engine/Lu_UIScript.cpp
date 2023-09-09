@@ -11,9 +11,4 @@ namespace Lu
 	{
 
 	}
-
-	void UIScript::Update()
-	{
-
-	}
 }

@@ -69,9 +69,11 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"KingSlime_BossHP_Mtrl"));
 		
 			BossHPScript* pHPScript = m_HPBar->AddComponent<BossHPScript>();
+			pHPScript->SetTransform(m_HPBar->GetComponent<Transform>());
 			pHPScript->SetMeshRender(pMeshRender);
 			pHPScript->SetMaxHP(GetInfo().MaxHP);
 			pHPScript->SetCurHP(GetInfo().HP);
+			pHPScript->SetBossName(L"킹슬라임");
 		}
 
 		// 상태

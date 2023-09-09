@@ -682,13 +682,6 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
 
-		pTexture = Resources::Load<Texture>(L"HP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\HP_Icon.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"HP_Icon_Mtrl", pMaterial);
-
 		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -738,6 +731,20 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"LvNumber_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"HP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\HP_Icon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"EmptyHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"FullHeart_Icon_Mtrl", pMaterial);
+
+
 #pragma endregion
 #pragma region Inventory Resources
 		pShader = Resources::Find<Shader>(L"SpriteShader");

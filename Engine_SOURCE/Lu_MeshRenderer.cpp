@@ -19,6 +19,9 @@ namespace Lu
 
 	void MeshRenderer::Render()
 	{
+		if (m_Mesh == nullptr || m_Material == nullptr)
+			return;
+
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		tr->BindConstantBuffer();
 

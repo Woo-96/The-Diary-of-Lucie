@@ -109,5 +109,6 @@ namespace Lu
 		void DisableDepthStencilState();
 
 		Vector3 ScreenToWorld(Vector2 _MousePos);
+		Vector2 WorldToScreen(Vector3 _WorldPos);
 	};
 }

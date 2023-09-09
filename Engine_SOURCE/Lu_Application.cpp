@@ -64,6 +64,7 @@ namespace Lu
 
 		renderer::Render();
 		//graphicDevice->Draw();
+		//SceneManager::Render();		// 반드시 폰트용으로 사용할 것!!!
 	}
 
 	void Application::Destroy()

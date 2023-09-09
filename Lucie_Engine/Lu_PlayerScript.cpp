@@ -10,6 +10,7 @@
 #include "Lu_SceneManager.h"
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
+#include "Lu_HeartScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -33,6 +34,7 @@ namespace Lu
 		, m_InvincibleTime(0.f)
 		, m_Damage(1)
 		, m_Animator(nullptr)
+		, m_HPScript(nullptr)
 	{
 		SetName(L"PlayerScript");
 	}
@@ -126,11 +128,12 @@ namespace Lu
 			// Hit & Dead
 			if (!m_bInvincible)
 			{
-				m_PlayerInfo.HP -= m_Damage;
+				m_PlayerInfo.CurHP -= m_Damage;
+				m_HPScript->SetHeart(m_PlayerInfo.CurHP);
 
-				if (m_PlayerInfo.HP <= 0)
+				if (m_PlayerInfo.CurHP <= 0)
 				{
-					m_PlayerInfo.HP = 0;
+					m_PlayerInfo.CurHP = 0;
 					m_bInvincible = false;
 					m_bHitEffect = false;
 					m_InvincibleTime = 0.f;
@@ -153,11 +156,12 @@ namespace Lu
 			// Hit & Dead
 			if (!m_bInvincible)
 			{
-				m_PlayerInfo.HP -= 1;
+				m_PlayerInfo.CurHP -= m_Damage;
+				m_HPScript->SetHeart(m_PlayerInfo.CurHP);
 
-				if (m_PlayerInfo.HP <= 0)
+				if (m_PlayerInfo.CurHP <= 0)
 				{
-					m_PlayerInfo.HP = 0;
+					m_PlayerInfo.CurHP = 0;
 					m_bInvincible = false;
 					m_bHitEffect = false;
 					m_InvincibleTime = 0.f;

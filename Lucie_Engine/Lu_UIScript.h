@@ -10,7 +10,10 @@ namespace Lu
 		virtual ~UIScript();
 
 	public:
-		virtual void Update() override;
+		virtual void Initialize() override {}
+		virtual void Update() override {}
+		virtual void LateUpdate() override {}
+		virtual void Render() override {}
 	};
 }
 
