@@ -738,11 +738,66 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"EmptyHeart_Icon_Mtrl", pMaterial);
 
+		/*pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"0EmptyHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"1EmptyHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"2EmptyHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"3EmptyHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"4EmptyHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"5FullHeart_Icon_Mtrl", pMaterial);*/
+
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"FullHeart_Icon_Mtrl", pMaterial);
+
+		/*pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"6FullHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"7FullHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"8FullHeart_Icon_Mtrl", pMaterial);
+
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"9FullHeart_Icon_Mtrl", pMaterial);*/
 
 
 #pragma endregion

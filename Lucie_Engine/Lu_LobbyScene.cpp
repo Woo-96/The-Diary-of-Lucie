@@ -166,12 +166,12 @@ namespace Lu
 	{
 		Scene::OnEnter();
 
-		SceneManager::DontUseOnLoad(eLayerType::UI);
-
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->SetClip(Resources::Find<AudioClip>(L"LobbyBGM"));
 		pBGM->Play();
 		pBGM->SetVolume(0.3f);
+
+		SceneManager::DontUseOnLoad(eLayerType::UI);
 	}
 
 	void LobbyScene::OnExit()

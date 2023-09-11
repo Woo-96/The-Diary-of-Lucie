@@ -63,12 +63,12 @@ namespace Lu
 	{
 		StageScene::OnEnter();
 
-		SceneManager::DontUseOnLoad(eLayerType::UI);
-
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->SetClip(Resources::Find<AudioClip>(L"BossWayBGM"));
 		pBGM->Play();
 		pBGM->SetVolume(0.3f);
+
+		SceneManager::DontUseOnLoad(eLayerType::UI);
 	}
 
 	void BossWayScene::OnExit()

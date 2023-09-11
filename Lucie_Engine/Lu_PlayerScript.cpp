@@ -347,6 +347,28 @@ namespace Lu
 				m_Damage = 1;
 		}
 
+		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_1))
+		{
+			m_HPScript->SetMaxHP(--m_PlayerInfo.MaxHP);
+			m_HPScript->SetHeart(m_PlayerInfo.CurHP);
+		}
+
+		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
+		{
+			m_HPScript->SetHeart(--m_PlayerInfo.CurHP);
+		}
+
+		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_1))
+		{
+			m_HPScript->SetMaxHP(++m_PlayerInfo.MaxHP);
+			m_HPScript->SetHeart(m_PlayerInfo.CurHP);
+		}
+
+		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
+		{
+			m_HPScript->SetHeart(++m_PlayerInfo.CurHP);
+		}
+
 		StateScript::eState eCurState = m_CurState->GetStateType();
 
 		if (m_bAction || StateScript::eState::Dead == eCurState)
@@ -760,5 +782,11 @@ namespace Lu
 		m_bDontAnimChange = true;
 		m_Dir = eDir::Down;
 		m_Animator->PlayAnimation(L"Player_LookAround", true);
+	}
+
+	void PlayerScript::InfoUpdate()
+	{
+		m_HPScript->SetMaxHP(m_PlayerInfo.MaxHP);
+		m_HPScript->SetHeart(m_PlayerInfo.CurHP);
 	}
 }

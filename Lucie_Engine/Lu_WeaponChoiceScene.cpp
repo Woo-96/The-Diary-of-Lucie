@@ -22,8 +22,8 @@ namespace Lu
 
 	void WeaponChoiceScene::Initialize()
 	{
-		//StageScene::Initialize();
-		Scene::Initialize();
+		StageScene::Initialize();
+		CreateHUD();
 
 		// Back : 크기 원본 2배
 		{
@@ -76,12 +76,6 @@ namespace Lu
 			pPortal->SetNextSceneName(L"Nomal1Scene");
 			pPortal->Initialize();
 		}
-
-		// 벽
-		{
-
-		}
-
 
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();

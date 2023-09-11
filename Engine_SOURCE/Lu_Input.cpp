@@ -12,9 +12,13 @@ namespace Lu
 		'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
 
+		'1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+
 		VK_UP, VK_DOWN, VK_LEFT ,VK_RIGHT, VK_SPACE,
 		VK_LBUTTON, VK_RBUTTON,
-		VK_CONTROL, VK_MENU, VK_RETURN, VK_SHIFT
+		VK_CONTROL, VK_MENU, VK_RETURN, VK_SHIFT,
+
+		VK_OEM_4, VK_OEM_6,
 	};
 
 	std::vector<Input::Key> Input::m_Keys;

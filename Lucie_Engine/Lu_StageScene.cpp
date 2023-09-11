@@ -31,7 +31,7 @@ namespace Lu
 	{
 		Scene::Initialize();
 
-		CreateHUD();
+		//CreateHUD();
 		//CreateInventory();
 	}
 
@@ -58,6 +58,10 @@ namespace Lu
 	void StageScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		GameObject* pPlayer = SceneManager::FindPlayer();
+		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+		pPlayerScript->InfoUpdate();
 	}
 
 	void StageScene::OnExit()
@@ -74,6 +78,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 150.f), Vector3(345.f, 135.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_Layout");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -91,7 +96,6 @@ namespace Lu
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 			pPlayerScript->SetHPScript(pHPScript);
-
 			pHPScript->SetMaxHP(pPlayerScript->GetPlayerInfo().MaxHP);
 			pHPScript->SetHeart(pPlayerScript->GetPlayerInfo().CurHP);
 		}
@@ -99,6 +103,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(85.f, -280.f, 100.f), Vector3(72.f, 33.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_MPIcon");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -110,6 +115,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(15.f, -315.f, 100.f), Vector3(190.5f, 10.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_EXP");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -121,6 +127,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(-7.f, -336.5f, 100.f), Vector3(249.f, 21.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_TP");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -132,6 +139,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(640.f, -330.f, 100.f), Vector3(105.f, 102.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_WeaponSlot");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -143,6 +151,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(66.f, 66.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_QuickItem");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -154,6 +163,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(685.f, 355.f, 100.f), Vector3(21.f, 28.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Gold_G");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -164,6 +174,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(662.f, 354.f, 100.f), Vector3(21.f, 30.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Gold_Num");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -185,6 +196,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(-113.f, -313.f, 100.f), Vector3(48.f, 28.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Level");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -212,6 +224,7 @@ namespace Lu
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(516.f, -80.f, 0.f), Vector3(360.f, 444.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Inventory_Layout");
+			SceneManager::DontDestroyOnLoad(pObject);
 
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));

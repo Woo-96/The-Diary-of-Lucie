@@ -21,7 +21,7 @@ namespace Lu
 
 	void Nomal2Scene::Initialize()
 	{
-		Scene::Initialize();
+		StageScene::Initialize();
 
 		// Back : 크기 원본 2배
 		{

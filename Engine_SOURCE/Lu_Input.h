@@ -12,9 +12,13 @@ namespace Lu
 		A, S, D, F, G, H, J, K, L,
 		Z, X, C, V, B, N, M,
 
+		_1, _2, _3, _4, _5, _6, _7, _8, _9, _0,
+
 		UP, DOWN, LEFT, RIGHT, SPACE,
 		LBUTTON, RBUTTON,
 		CTRL, ALT, ENTER, SHIFT,
+
+		LEFT_BRACKET, RIGHT_BRACKET,
 		END,
 	};
 

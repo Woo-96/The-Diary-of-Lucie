@@ -31,12 +31,16 @@ namespace Lu
 
 		struct tPlayerInfo
 		{
-			int CurHP;
 			int MaxHP;
+			int CurHP;
+			int MaxMP;
+			int CurMP;
 
 			tPlayerInfo()
-				: CurHP(7)
-				, MaxHP(7)
+				: MaxHP(6)
+				, CurHP(6)
+				, MaxMP(3)
+				, CurMP(3)
 			{
 
 			}
@@ -68,7 +72,6 @@ namespace Lu
 
 		Animator*			m_Animator;
 
-		// UI
 		HeartScript*		m_HPScript;
 
 	public:
@@ -82,9 +85,9 @@ namespace Lu
 			m_Dir = _Dir;
 		}
 
-		void SetHPScript(HeartScript* _Script)
+		void SetHPScript(HeartScript* _HPScript)
 		{
-			m_HPScript = _Script;
+			m_HPScript = _HPScript;
 		}
 
 	public:
@@ -133,6 +136,7 @@ namespace Lu
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
+		void InfoUpdate();
 	};
 }
 

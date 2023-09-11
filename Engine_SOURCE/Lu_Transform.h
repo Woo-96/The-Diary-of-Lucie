@@ -35,7 +35,7 @@ namespace Lu
 
 		void SetScale(Vector3 scale) 
 		{ 
-			m_Scale = scale; 
+			m_Scale = scale;
 		}
 
 		void SetPosition(float x, float y, float z)

@@ -20,7 +20,7 @@ namespace Lu
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
-	private:
+	protected:
 		void CreateHUD();
 		void CreateInventory();
 	};
