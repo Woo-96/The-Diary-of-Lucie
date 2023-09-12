@@ -11,6 +11,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_HeartScript.h"
+#include "Lu_ManaScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -35,6 +36,7 @@ namespace Lu
 		, m_Damage(1)
 		, m_Animator(nullptr)
 		, m_HPScript(nullptr)
+		, m_MPScript(nullptr)
 	{
 		SetName(L"PlayerScript");
 	}
@@ -367,6 +369,26 @@ namespace Lu
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
 		{
 			m_HPScript->SetHeart(++m_PlayerInfo.CurHP);
+		}
+
+		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_3))
+		{
+			m_MPScript->SetMaxMP(--m_PlayerInfo.MaxMP);
+		}
+
+		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_4))
+		{
+			m_MPScript->SetMana(--m_PlayerInfo.CurMP);
+		}
+
+		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_3))
+		{
+			m_MPScript->SetMaxMP(++m_PlayerInfo.MaxMP);
+		}
+
+		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_4))
+		{
+			m_MPScript->SetMana(++m_PlayerInfo.CurMP);
 		}
 
 		StateScript::eState eCurState = m_CurState->GetStateType();
@@ -782,11 +804,5 @@ namespace Lu
 		m_bDontAnimChange = true;
 		m_Dir = eDir::Down;
 		m_Animator->PlayAnimation(L"Player_LookAround", true);
-	}
-
-	void PlayerScript::InfoUpdate()
-	{
-		m_HPScript->SetMaxHP(m_PlayerInfo.MaxHP);
-		m_HPScript->SetHeart(m_PlayerInfo.CurHP);
 	}
 }

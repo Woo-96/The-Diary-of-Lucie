@@ -1,5 +1,7 @@
 #pragma once
 #include "Lu_UIScript.h"
+#include "Lu_Material.h"
+
 #define MaxHeart	5
 
 namespace Lu
@@ -44,6 +46,6 @@ namespace Lu
 	private:
 		void ChangeHeartColor(int _Index, eHeartColor _Color);
 		void ChangeHeartSize(int _Index, eHeartSize _Size);
-		void HeartRender(int _Index, bool _Render);
+		//void HeartRender(int _Index, bool _Render);
 	};
 }

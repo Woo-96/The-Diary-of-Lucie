@@ -682,13 +682,6 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
 
-		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MP_Icon_Mtrl", pMaterial);
-
 		pTexture = Resources::Load<Texture>(L"quickItem_Tex", L"..\\Resources\\Texture\\UI\\HUD\\quickItem.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -799,6 +792,18 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"9FullHeart_Icon_Mtrl", pMaterial);*/
 
+		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"EmptyMana_Icon_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"FullMana_Icon_Mtrl", pMaterial);
 
 #pragma endregion
 #pragma region Inventory Resources

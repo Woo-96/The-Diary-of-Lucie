@@ -14,10 +14,7 @@
     <ClCompile Include="Lu_StageScene.cpp">
       <Filter>Contents\Scene\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_Layout.cpp">
-      <Filter>Contents\Script\05. UI\HUD\Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Lu_MP.cpp">
+    <ClCompile Include="Lu_ManaScript.cpp">
       <Filter>Contents\Script\05. UI\HUD\MP</Filter>
     </ClCompile>
     <ClCompile Include="Lu_UIScript.cpp">
@@ -218,9 +215,6 @@
     <ClCompile Include="Lu_SoundManager.cpp">
       <Filter>Contents\Script\01. Manager\SoundMgr</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_UIManager.cpp">
-      <Filter>Contents\Script\01. Manager\UIMgr</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_LabelScript.cpp">
       <Filter>Contents\Script\05. UI\Label</Filter>
     </ClCompile>
@@ -248,10 +242,7 @@
     <ClInclude Include="Lu_StageScene.h">
       <Filter>Contents\Scene\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_Layout.h">
-      <Filter>Contents\Script\05. UI\HUD\Layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_MP.h">
+    <ClInclude Include="Lu_ManaScript.h">
       <Filter>Contents\Script\05. UI\HUD\MP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_UIScript.h">
@@ -455,9 +446,6 @@
     <ClInclude Include="Lu_SoundManager.h">
       <Filter>Contents\Script\01. Manager\SoundMgr</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_UIManager.h">
-      <Filter>Contents\Script\01. Manager\UIMgr</Filter>
-    </ClInclude>
     <ClInclude Include="Lu_LabelScript.h">
       <Filter>Contents\Script\05. UI\Label</Filter>
     </ClInclude>
@@ -570,9 +558,6 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD">
       <UniqueIdentifier>{aaa4d6e8-98e9-48b1-8b8e-f3cafdf07df1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\Layout">
-      <UniqueIdentifier>{35b6e371-ad3c-4739-a03e-1ab82fc79440}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\EXP">
       <UniqueIdentifier>{1fca2025-d9e6-4d41-b569-3686bc8dd298}</UniqueIdentifier>
@@ -723,9 +708,6 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Portal\MagicCircle">
       <UniqueIdentifier>{60dd83c2-8f79-4b50-91fd-da5c32488521}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\01. Manager\UIMgr">
-      <UniqueIdentifier>{9cf1cc76-fd1e-4f90-86a9-26681c500122}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\05. UI\Label">
       <UniqueIdentifier>{51e6a6cb-8bcd-4cbe-8c49-2a65174b129d}</UniqueIdentifier>

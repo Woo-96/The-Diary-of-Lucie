@@ -204,13 +204,12 @@
     <ClInclude Include="Lu_KingSlimeStateScript.h" />
     <ClInclude Include="Lu_KingSlimeTraceState.h" />
     <ClInclude Include="Lu_LabelScript.h" />
-    <ClInclude Include="Lu_Layout.h" />
     <ClInclude Include="Lu_LobbyScene.h" />
     <ClInclude Include="Lu_MidBossScene.h" />
     <ClInclude Include="Lu_MonsterProjectileScript.h" />
     <ClInclude Include="Lu_MouseScript.h" />
     <ClInclude Include="Lu_MoveState.h" />
-    <ClInclude Include="Lu_MP.h" />
+    <ClInclude Include="Lu_ManaScript.h" />
     <ClInclude Include="Lu_NextFloorScene.h" />
     <ClInclude Include="Lu_Nomal1Scene.h" />
     <ClInclude Include="Lu_Nomal2Scene.h" />
@@ -238,7 +237,6 @@
     <ClInclude Include="Lu_StoreScene.h" />
     <ClInclude Include="Lu_TitleScene.h" />
     <ClInclude Include="Lu_TP.h" />
-    <ClInclude Include="Lu_UIManager.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
     <ClInclude Include="Lu_WeaponChoiceScene.h" />
@@ -284,13 +282,12 @@
     <ClCompile Include="Lu_KingSlimeStateScript.cpp" />
     <ClCompile Include="Lu_KingSlimeTraceState.cpp" />
     <ClCompile Include="Lu_LabelScript.cpp" />
-    <ClCompile Include="Lu_Layout.cpp" />
     <ClCompile Include="Lu_LobbyScene.cpp" />
     <ClCompile Include="Lu_MidBossScene.cpp" />
     <ClCompile Include="Lu_MonsterProjectileScript.cpp" />
     <ClCompile Include="Lu_MouseScript.cpp" />
     <ClCompile Include="Lu_MoveState.cpp" />
-    <ClCompile Include="Lu_MP.cpp" />
+    <ClCompile Include="Lu_ManaScript.cpp" />
     <ClCompile Include="Lu_NextFloorScene.cpp" />
     <ClCompile Include="Lu_Nomal1Scene.cpp" />
     <ClCompile Include="Lu_Nomal2Scene.cpp" />
@@ -318,7 +315,6 @@
     <ClCompile Include="Lu_StoreScene.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
     <ClCompile Include="Lu_TP.cpp" />
-    <ClCompile Include="Lu_UIManager.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />
     <ClCompile Include="Lu_WeaponChoiceScene.cpp" />

@@ -4,9 +4,8 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
-#include "Lu_Layout.h"
 #include "Lu_HeartScript.h"
-#include "Lu_MP.h"
+#include "Lu_ManaScript.h"
 #include "Lu_EXP.h"
 #include "Lu_TP.h"
 #include "Lu_QuickItem.h"
@@ -59,9 +58,9 @@ namespace Lu
 	{
 		Scene::OnEnter();
 
-		GameObject* pPlayer = SceneManager::FindPlayer();
-		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-		pPlayerScript->InfoUpdate();
+		//GameObject* pPlayer = SceneManager::FindPlayer();
+		//PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+		//pPlayerScript->InfoUpdate();
 	}
 
 	void StageScene::OnExit()
@@ -73,43 +72,37 @@ namespace Lu
 	{
 		GameObject* pObject;
 		MeshRenderer* pMeshRender;
+		GameObject* pPlayer = SceneManager::FindPlayer();
+		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
 		// 크기 원본 1.5배
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 150.f), Vector3(345.f, 135.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_Layout");
 			SceneManager::DontDestroyOnLoad(pObject);
-
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Layout_Mtrl"));
-
-			pObject->AddComponent<Layout>();
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(-100.f, -280.f, 100.f), Vector3(72.f, 33.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_HeartMgr");
 			SceneManager::DontDestroyOnLoad(pObject);
 			HeartScript* pHPScript = pObject->AddComponent<HeartScript>();
-
-			GameObject* pPlayer = SceneManager::FindPlayer();
-			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 			pPlayerScript->SetHPScript(pHPScript);
 			pHPScript->SetMaxHP(pPlayerScript->GetPlayerInfo().MaxHP);
 			pHPScript->SetHeart(pPlayerScript->GetPlayerInfo().CurHP);
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(85.f, -280.f, 100.f), Vector3(72.f, 33.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"UI_MPIcon");
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), eLayerType::UI);
+			pObject->SetName(L"UI_ManaMgr");
 			SceneManager::DontDestroyOnLoad(pObject);
-
-			pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"MP_Icon_Mtrl"));
-
-			pObject->AddComponent<MP>();
+			ManaScript* pMPScript = pObject->AddComponent<ManaScript>();
+			pPlayerScript->SetMPScript(pMPScript);
+			pMPScript->SetMaxMP(pPlayerScript->GetPlayerInfo().MaxMP);
+			pMPScript->SetMana(pPlayerScript->GetPlayerInfo().CurMP);
 		}
 
 		{
@@ -164,7 +157,6 @@ namespace Lu
 			pObject = object::Instantiate<GameObject>(Vector3(685.f, 355.f, 100.f), Vector3(21.f, 28.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"Gold_G");
 			SceneManager::DontDestroyOnLoad(pObject);
-
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Gold_A_Mtrl"));

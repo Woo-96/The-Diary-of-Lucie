@@ -7,6 +7,7 @@ namespace Lu
 {
 	class Animator;
 	class HeartScript;
+	class ManaScript;
 	class PlayerScript : public Script
 	{
 	public:
@@ -73,6 +74,7 @@ namespace Lu
 		Animator*			m_Animator;
 
 		HeartScript*		m_HPScript;
+		ManaScript*			m_MPScript;
 
 	public:
 		void SetAction(bool _Action)
@@ -88,6 +90,11 @@ namespace Lu
 		void SetHPScript(HeartScript* _HPScript)
 		{
 			m_HPScript = _HPScript;
+		}
+
+		void SetMPScript(ManaScript* _MPScript)
+		{
+			m_MPScript = _MPScript;
 		}
 
 	public:
@@ -136,7 +143,6 @@ namespace Lu
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
-		void InfoUpdate();
 	};
 }
 
