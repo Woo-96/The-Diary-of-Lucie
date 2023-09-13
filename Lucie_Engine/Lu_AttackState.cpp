@@ -40,6 +40,7 @@ namespace Lu
 
 	void AttackState::Enter()
 	{
+		GetPlayerScript()->UseStamina(10.f);
 		GetPlayerScript()->SetAction(true);
 		CalDirToMouse();
 

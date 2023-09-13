@@ -4,6 +4,7 @@
 #include "Lu_Resources.h"
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -26,6 +27,8 @@ namespace Lu
 
 	void SnabyDeadState::Exit()
 	{
+		GetTarget()->IncreaseEXP(30);
+
 		object::Destroy(GetSnabyScript()->GetOwner());
 	}
 }

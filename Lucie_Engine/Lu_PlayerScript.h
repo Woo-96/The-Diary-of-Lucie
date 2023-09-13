@@ -6,8 +6,7 @@
 namespace Lu
 {
 	class Animator;
-	class HeartScript;
-	class ManaScript;
+	class UIScript;
 	class PlayerScript : public Script
 	{
 	public:
@@ -30,18 +29,46 @@ namespace Lu
 			End
 		};
 
+		enum class eUI
+		{
+			HP,
+			MP,
+			EXP,
+			Level,
+			TP,
+			Gold,
+			QuickItem,
+			WeaponSlot_A,
+			WeaponSlot_B,
+			End,
+		};
+
 		struct tPlayerInfo
 		{
 			int MaxHP;
 			int CurHP;
 			int MaxMP;
 			int CurMP;
+			int MaxEXP;
+			int CurEXP;
+			int MaxLevel;
+			int CurLevel;
+			float MaxTP;
+			float CurTP;
+			float TPRecoveryRate;
 
 			tPlayerInfo()
 				: MaxHP(6)
 				, CurHP(6)
 				, MaxMP(3)
 				, CurMP(3)
+				, MaxEXP(100)
+				, CurEXP(0)
+				, MaxLevel(9)
+				, CurLevel(1)
+				, MaxTP(100.f)
+				, CurTP(100.f)
+				, TPRecoveryRate(5.f)
 			{
 
 			}
@@ -73,8 +100,7 @@ namespace Lu
 
 		Animator*			m_Animator;
 
-		HeartScript*		m_HPScript;
-		ManaScript*			m_MPScript;
+		UIScript*			m_arrUI[(int)eUI::End];
 
 	public:
 		void SetAction(bool _Action)
@@ -87,14 +113,9 @@ namespace Lu
 			m_Dir = _Dir;
 		}
 
-		void SetHPScript(HeartScript* _HPScript)
+		void SetUI(eUI _UIType, UIScript* _UI)
 		{
-			m_HPScript = _HPScript;
-		}
-
-		void SetMPScript(ManaScript* _MPScript)
-		{
-			m_MPScript = _MPScript;
+			m_arrUI[(int)_UIType] = _UI;
 		}
 
 	public:
@@ -138,11 +159,14 @@ namespace Lu
 		void AttackSFX();
 		void MagicCircleMove();
 		void LookAround();
+		void StaminaRecovery();
 
 	public:
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
+		void UseStamina(float _Value);
+		void IncreaseEXP(int _Value);
 	};
 }
 

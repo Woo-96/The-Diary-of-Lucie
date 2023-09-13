@@ -5,17 +5,17 @@ namespace Lu
 {
 	class Transform;
 	class MeshRenderer;
-	class BossHPScript : public UIScript
+	class ProgressBarScript : public UIScript
 	{
 	public:
-		BossHPScript();
-		virtual ~BossHPScript();
+		ProgressBarScript();
+		virtual ~ProgressBarScript();
 
 	private:
 		Transform*		m_Transform;
 		MeshRenderer*	m_MeshRender;
-		float			m_MaxHP;
-		float			m_CurHP;
+		float			m_MaxValue;
+		float			m_CurValue;
 		std::wstring	m_BossName;
 
 	public:
@@ -29,9 +29,9 @@ namespace Lu
 			m_MeshRender = _MeshRender;
 		}
 
-		void SetMaxHP(int _MaxHP)
+		void SetMaxValue(int _MaxValue)
 		{
-			m_MaxHP = (float)_MaxHP;
+			m_MaxValue = (float)_MaxValue;
 		}
 
 		void SetBossName(std::wstring _BossName)
@@ -40,9 +40,11 @@ namespace Lu
 		}
 
 	public:
-		void SetCurHP(int _HP);
+		void SetCurValue(int _Value);
+		void SetCurValue(float _Value);
 
 	public:
-		virtual void Render() override;
+		virtual void Update() override {}
+	//	virtual void Render() override;
 	};
 }

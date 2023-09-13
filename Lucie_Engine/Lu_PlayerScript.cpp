@@ -12,6 +12,8 @@
 #include "Lu_SoundManager.h"
 #include "Lu_HeartScript.h"
 #include "Lu_ManaScript.h"
+#include "Lu_ProgressBarScript.h"
+#include "Lu_NumberScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -35,8 +37,7 @@ namespace Lu
 		, m_InvincibleTime(0.f)
 		, m_Damage(1)
 		, m_Animator(nullptr)
-		, m_HPScript(nullptr)
-		, m_MPScript(nullptr)
+		, m_arrUI{}
 	{
 		SetName(L"PlayerScript");
 	}
@@ -74,6 +75,7 @@ namespace Lu
 		if (GetOwner()->IsDead())
 			return;
 
+		// 무적 상태 블링크
 		if (m_bInvincible)
 		{
 			m_InvincibleTime -= (float)Time::DeltaTime();
@@ -113,10 +115,22 @@ namespace Lu
 			}
 		}
 
+		// 키 입력을 통해 상태 및 방향 업데이트
 		StateUpdate();
+
+		// 현재 상태 Update
  		m_CurState->Update();
+
+		// 현재 상태에 따른 애니메이션 업데이트
 		AnimationUpdate();
 
+		// 스테미너 자동 회복 기능
+		if (m_PlayerInfo.CurTP < m_PlayerInfo.MaxTP)
+		{
+			StaminaRecovery();
+		}
+
+		// 이전 상태 저장
 		m_PrevState = m_CurState->GetStateType();
 	}
 
@@ -131,7 +145,9 @@ namespace Lu
 			if (!m_bInvincible)
 			{
 				m_PlayerInfo.CurHP -= m_Damage;
-				m_HPScript->SetHeart(m_PlayerInfo.CurHP);
+				HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+				if(pHPScript)
+					pHPScript->SetHeart(m_PlayerInfo.CurHP);
 
 				if (m_PlayerInfo.CurHP <= 0)
 				{
@@ -159,7 +175,9 @@ namespace Lu
 			if (!m_bInvincible)
 			{
 				m_PlayerInfo.CurHP -= m_Damage;
-				m_HPScript->SetHeart(m_PlayerInfo.CurHP);
+				HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+				if (pHPScript)
+					pHPScript->SetHeart(m_PlayerInfo.CurHP);
 
 				if (m_PlayerInfo.CurHP <= 0)
 				{
@@ -351,44 +369,76 @@ namespace Lu
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_1))
 		{
-			m_HPScript->SetMaxHP(--m_PlayerInfo.MaxHP);
-			m_HPScript->SetHeart(m_PlayerInfo.CurHP);
+			HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+			if (pHPScript)
+			{
+				pHPScript->SetMaxHP(--m_PlayerInfo.MaxHP);
+				pHPScript->SetHeart(m_PlayerInfo.CurHP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
 		{
-			m_HPScript->SetHeart(--m_PlayerInfo.CurHP);
+			HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+			if (pHPScript)
+			{
+				pHPScript->SetHeart(--m_PlayerInfo.CurHP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_1))
 		{
-			m_HPScript->SetMaxHP(++m_PlayerInfo.MaxHP);
-			m_HPScript->SetHeart(m_PlayerInfo.CurHP);
+			HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+			if (pHPScript)
+			{
+				pHPScript->SetMaxHP(++m_PlayerInfo.MaxHP);
+				pHPScript->SetHeart(m_PlayerInfo.CurHP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
 		{
-			m_HPScript->SetHeart(++m_PlayerInfo.CurHP);
+			HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+			if (pHPScript)
+			{
+				pHPScript->SetHeart(++m_PlayerInfo.CurHP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_3))
 		{
-			m_MPScript->SetMaxMP(--m_PlayerInfo.MaxMP);
+			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+			if (pMPScript)
+			{
+				pMPScript->SetMaxMP(--m_PlayerInfo.MaxMP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_4))
 		{
-			m_MPScript->SetMana(--m_PlayerInfo.CurMP);
+			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+			if (pMPScript)
+			{
+				pMPScript->SetMana(--m_PlayerInfo.CurMP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_3))
 		{
-			m_MPScript->SetMaxMP(++m_PlayerInfo.MaxMP);
+			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+			if (pMPScript)
+			{
+				pMPScript->SetMaxMP(++m_PlayerInfo.MaxMP);
+			}
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_4))
 		{
-			m_MPScript->SetMana(++m_PlayerInfo.CurMP);
+			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+			if (pMPScript)
+			{
+				pMPScript->SetMana(++m_PlayerInfo.CurMP);
+			}
 		}
 
 		StateScript::eState eCurState = m_CurState->GetStateType();
@@ -415,7 +465,7 @@ namespace Lu
 		}
 
 		// 대쉬
-		if (Input::GetKeyDown(eKeyCode::SPACE))
+		if (Input::GetKeyDown(eKeyCode::SPACE) && m_PlayerInfo.CurTP > 20.f)
 		{
 			m_PrevDir = m_Dir;
 			m_Dir = CalDirToMouse();
@@ -425,7 +475,7 @@ namespace Lu
 		}
 
 		// 공격
-		if (Input::GetKeyUp(eKeyCode::LBUTTON))
+		if (Input::GetKeyUp(eKeyCode::LBUTTON) && m_PlayerInfo.CurTP > 10.f)
 		{
 			m_PrevDir = m_Dir;
 			m_Dir = CalDirToMouse();
@@ -778,6 +828,29 @@ namespace Lu
 		m_bDontAnimChange = false;
 	}
 
+	void PlayerScript::StaminaRecovery()
+	{
+		StateScript::eState eCurState = m_CurState->GetStateType();
+
+		if (m_PrevState == StateScript::eState::Attack
+			|| m_PrevState == StateScript::eState::Dash
+			|| eCurState == StateScript::eState::Attack
+			|| eCurState == StateScript::eState::Dash)
+			return;
+
+		float RecoveryValue = m_PlayerInfo.TPRecoveryRate * Time::DeltaTime();
+		m_PlayerInfo.CurTP += RecoveryValue;
+
+		if (m_PlayerInfo.CurTP > m_PlayerInfo.MaxTP)
+			m_PlayerInfo.CurTP = m_PlayerInfo.MaxTP;
+
+		ProgressBarScript* pTPScript = (ProgressBarScript*)m_arrUI[(int)eUI::TP];
+		if (pTPScript)
+		{
+			pTPScript->SetCurValue(m_PlayerInfo.CurTP);
+		}
+	}
+
 	void PlayerScript::ChangeState(StateScript::eState _NextState)
 	{
 		StateScript* pNextState = GetStateScript(_NextState);
@@ -804,5 +877,37 @@ namespace Lu
 		m_bDontAnimChange = true;
 		m_Dir = eDir::Down;
 		m_Animator->PlayAnimation(L"Player_LookAround", true);
+	}
+
+	void PlayerScript::UseStamina(float _Value)
+	{
+		m_PlayerInfo.CurTP -= _Value;
+		ProgressBarScript* pTPScript = (ProgressBarScript*)m_arrUI[(int)eUI::TP];
+		if (pTPScript)
+		{
+			pTPScript->SetCurValue(m_PlayerInfo.CurTP);
+		}
+	}
+
+	void PlayerScript::IncreaseEXP(int _Value)
+	{
+		m_PlayerInfo.CurEXP += _Value;
+
+		if (m_PlayerInfo.CurEXP > 100)
+		{
+			NumberScript* pNumScript = (NumberScript*)m_arrUI[(int)eUI::Level];
+			if (pNumScript)
+			{
+				pNumScript->SetCurNumber(++m_PlayerInfo.CurLevel);
+			}
+
+			m_PlayerInfo.CurEXP -= 100;
+		}
+
+		ProgressBarScript* pEXPScript = (ProgressBarScript*)m_arrUI[(int)eUI::EXP];
+		if (pEXPScript)
+		{
+			pEXPScript->SetCurValue(m_PlayerInfo.CurEXP);
+		}
 	}
 }

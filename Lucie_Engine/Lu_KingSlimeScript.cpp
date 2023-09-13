@@ -10,7 +10,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_SceneManager.h"
-#include "Lu_BossHPScript.h"
+#include "Lu_ProgressBarScript.h"
 
 #include "Lu_KingSlimeIdleState.h"
 #include "Lu_KingSlimeTraceState.h"
@@ -68,12 +68,12 @@ namespace Lu
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"KingSlime_BossHP_Mtrl"));
 		
-			BossHPScript* pHPScript = m_HPBar->AddComponent<BossHPScript>();
-			pHPScript->SetTransform(m_HPBar->GetComponent<Transform>());
-			pHPScript->SetMeshRender(pMeshRender);
-			pHPScript->SetMaxHP(GetInfo().MaxHP);
-			pHPScript->SetCurHP(GetInfo().HP);
-			pHPScript->SetBossName(L"킹슬라임");
+			ProgressBarScript* pHPBarScript = m_HPBar->AddComponent<ProgressBarScript>();
+			pHPBarScript->SetTransform(m_HPBar->GetComponent<Transform>());
+			pHPBarScript->SetMeshRender(pMeshRender);
+			pHPBarScript->SetMaxValue(GetInfo().MaxHP);
+			pHPBarScript->SetCurValue(GetInfo().HP);
+			pHPBarScript->SetBossName(L"킹슬라임");
 		}
 
 		// 상태
@@ -110,7 +110,7 @@ namespace Lu
 				return;
 
 			GetInfo().HP -= 50;
-			m_HPBar->GetComponent<BossHPScript>()->SetCurHP(GetInfo().HP);
+			m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 
 			if (GetInfo().HP <= 0.f)
 			{

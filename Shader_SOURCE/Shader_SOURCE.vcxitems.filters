@@ -54,10 +54,10 @@
     <FxCompile Include="$(MSBuildThisFileDirectory)ParticleGS.hlsl">
       <Filter>GS</Filter>
     </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)BossHPBarVS.hlsl">
+    <FxCompile Include="$(MSBuildThisFileDirectory)ProgressBarVS.hlsl">
       <Filter>VS</Filter>
     </FxCompile>
-    <FxCompile Include="$(MSBuildThisFileDirectory)BossHPBarPS.hlsl">
+    <FxCompile Include="$(MSBuildThisFileDirectory)ProgressBarPS.hlsl">
       <Filter>PS</Filter>
     </FxCompile>
   </ItemGroup>

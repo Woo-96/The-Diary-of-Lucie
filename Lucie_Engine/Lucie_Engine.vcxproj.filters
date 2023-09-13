@@ -218,11 +218,11 @@
     <ClCompile Include="Lu_LabelScript.cpp">
       <Filter>Contents\Script\05. UI\Label</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_BossHPScript.cpp">
-      <Filter>Contents\Script\05. UI\HUD\HP\BossHP</Filter>
+    <ClCompile Include="Lu_ProgressBarScript.cpp">
+      <Filter>Contents\Script\05. UI\ProgressBar</Filter>
     </ClCompile>
     <ClCompile Include="Lu_HeartScript.cpp">
-      <Filter>Contents\Script\05. UI\HUD\HP\PlayerHP</Filter>
+      <Filter>Contents\Script\05. UI\HUD\HP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,11 +449,11 @@
     <ClInclude Include="Lu_LabelScript.h">
       <Filter>Contents\Script\05. UI\Label</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_BossHPScript.h">
-      <Filter>Contents\Script\05. UI\HUD\HP\BossHP</Filter>
+    <ClInclude Include="Lu_ProgressBarScript.h">
+      <Filter>Contents\Script\05. UI\ProgressBar</Filter>
     </ClInclude>
     <ClInclude Include="Lu_HeartScript.h">
-      <Filter>Contents\Script\05. UI\HUD\HP\PlayerHP</Filter>
+      <Filter>Contents\Script\05. UI\HUD\HP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -564,9 +564,6 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\MP">
       <UniqueIdentifier>{62f76408-a400-4213-9802-003ae86e3ce7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\HP">
-      <UniqueIdentifier>{9bba9cce-feaf-474c-983f-c2e6027d5311}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\TP">
       <UniqueIdentifier>{862b8851-a6a4-406a-96e8-9973b0c4fed2}</UniqueIdentifier>
@@ -712,10 +709,10 @@
     <Filter Include="Contents\Script\05. UI\Label">
       <UniqueIdentifier>{51e6a6cb-8bcd-4cbe-8c49-2a65174b129d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\HP\BossHP">
+    <Filter Include="Contents\Script\05. UI\ProgressBar">
       <UniqueIdentifier>{76bfc60c-3f55-4d2a-9841-34a5e9c481e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\HP\PlayerHP">
+    <Filter Include="Contents\Script\05. UI\HUD\HP">
       <UniqueIdentifier>{f3423f01-9f03-4229-9836-8cc19d99b64b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

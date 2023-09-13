@@ -33,6 +33,7 @@ namespace Lu
 
 	void DashState::Enter()
 	{
+		GetPlayerScript()->UseStamina(20.f);
 		GetPlayerScript()->SetAction(true);
 		CalDirToMouse();
 	}

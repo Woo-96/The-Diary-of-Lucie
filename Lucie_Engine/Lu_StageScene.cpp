@@ -4,15 +4,15 @@
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
 #include "Lu_Input.h"
+#include "Lu_PlayerScript.h"
+#include "Lu_NumberScript.h"
 #include "Lu_HeartScript.h"
 #include "Lu_ManaScript.h"
-#include "Lu_EXP.h"
-#include "Lu_TP.h"
+#include "Lu_ProgressBarScript.h"
+
 #include "Lu_QuickItem.h"
 #include "Lu_WeaponSlot.h"
 #include "Lu_Inventory.h"
-#include "Lu_NumberScript.h"
-#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -90,7 +90,7 @@ namespace Lu
 			pObject->SetName(L"UI_HeartMgr");
 			SceneManager::DontDestroyOnLoad(pObject);
 			HeartScript* pHPScript = pObject->AddComponent<HeartScript>();
-			pPlayerScript->SetHPScript(pHPScript);
+			pPlayerScript->SetUI(PlayerScript::eUI::HP, (UIScript*)pHPScript);
 			pHPScript->SetMaxHP(pPlayerScript->GetPlayerInfo().MaxHP);
 			pHPScript->SetHeart(pPlayerScript->GetPlayerInfo().CurHP);
 		}
@@ -100,7 +100,7 @@ namespace Lu
 			pObject->SetName(L"UI_ManaMgr");
 			SceneManager::DontDestroyOnLoad(pObject);
 			ManaScript* pMPScript = pObject->AddComponent<ManaScript>();
-			pPlayerScript->SetMPScript(pMPScript);
+			pPlayerScript->SetUI(PlayerScript::eUI::MP, (UIScript*)pMPScript);
 			pMPScript->SetMaxMP(pPlayerScript->GetPlayerInfo().MaxMP);
 			pMPScript->SetMana(pPlayerScript->GetPlayerInfo().CurMP);
 		}
@@ -109,24 +109,28 @@ namespace Lu
 			pObject = object::Instantiate<GameObject>(Vector3(15.f, -315.f, 100.f), Vector3(190.5f, 10.5f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_EXP");
 			SceneManager::DontDestroyOnLoad(pObject);
-
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"EXP_Meter_Mtrl"));
-
-			pObject->AddComponent<EXP>();
+			ProgressBarScript* pProgressBarScript = pObject->AddComponent<ProgressBarScript>();
+			pProgressBarScript->SetMeshRender(pMeshRender);
+			pProgressBarScript->SetMaxValue(pPlayerScript->GetPlayerInfo().MaxEXP);
+			pProgressBarScript->SetCurValue(pPlayerScript->GetPlayerInfo().CurEXP);
+			pPlayerScript->SetUI(PlayerScript::eUI::EXP, (UIScript*)pProgressBarScript);
 		}
 
 		{
 			pObject = object::Instantiate<GameObject>(Vector3(-7.f, -336.5f, 100.f), Vector3(249.f, 21.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_TP");
 			SceneManager::DontDestroyOnLoad(pObject);
-
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"TP_Meter_Mtrl"));
-
-			pObject->AddComponent<TP>();
+			ProgressBarScript* pProgressBarScript = pObject->AddComponent<ProgressBarScript>();
+			pProgressBarScript->SetMeshRender(pMeshRender);
+			pProgressBarScript->SetMaxValue(pPlayerScript->GetPlayerInfo().MaxTP);
+			pProgressBarScript->SetCurValue(pPlayerScript->GetPlayerInfo().CurTP);
+			pPlayerScript->SetUI(PlayerScript::eUI::TP, (UIScript*)pProgressBarScript);
 		}
 
 		{
@@ -183,6 +187,8 @@ namespace Lu
 			}
 			pNum->SetNumbersLT(arrLT, 10);
 			pNum->SetCurNumber(0);
+
+			pPlayerScript->SetUI(PlayerScript::eUI::Gold, (UIScript*)pNum);
 		}
 
 		{
@@ -205,6 +211,8 @@ namespace Lu
 			}
 			pNum->SetNumbersLT(arrLT, 10);
 			pNum->SetCurNumber(1);
+
+			pPlayerScript->SetUI(PlayerScript::eUI::Level, (UIScript*)pNum);
 		}
 	}
 	void StageScene::CreateInventory()

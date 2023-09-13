@@ -2,6 +2,7 @@
 #include "Lu_Object.h"
 #include "Lu_SlimeScript.h"
 #include "Lu_Resources.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -24,6 +25,8 @@ namespace Lu
 
 	void SlimeDeadState::Exit()
 	{
+		GetTarget()->IncreaseEXP(30);
+
 		object::Destroy(GetSlimeScript()->GetOwner());
 	}
 }

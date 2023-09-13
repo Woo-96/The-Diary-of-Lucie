@@ -7,7 +7,7 @@
 #include "Lu_Collider2D.h"
 #include "Lu_Animator.h"
 #include "Lu_BigSlimeScript.h"
-#include "Lu_BossHPScript.h"
+#include "Lu_ProgressBarScript.h"
 
 namespace Lu
 {
@@ -97,12 +97,12 @@ namespace Lu
 
 				pBigSlimeScript->SetHPBar(pObject);
 
-				BossHPScript* pHPScript = pObject->AddComponent<BossHPScript>();
-				pHPScript->SetTransform(pObject->GetComponent<Transform>());
-				pHPScript->SetMeshRender(pMeshRender);
-				pHPScript->SetMaxHP(pBigSlimeScript->GetInfo().MaxHP);
-				pHPScript->SetCurHP(pBigSlimeScript->GetInfo().HP);
-				pHPScript->SetBossName(L"∫ÚΩΩ∂Û¿”");
+				ProgressBarScript* pHPBarScript = pObject->AddComponent<ProgressBarScript>();
+				pHPBarScript->SetTransform(pObject->GetComponent<Transform>());
+				pHPBarScript->SetMeshRender(pMeshRender);
+				pHPBarScript->SetMaxValue(pBigSlimeScript->GetInfo().MaxHP);
+				pHPBarScript->SetCurValue(pBigSlimeScript->GetInfo().HP);
+				pHPBarScript->SetBossName(L"∫ÚΩΩ∂Û¿”");
 			}
 		}
 

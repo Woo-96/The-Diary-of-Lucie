@@ -69,7 +69,7 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
-		shader = Lu::Resources::Find<Shader>(L"BossHPBarShader");
+		shader = Lu::Resources::Find<Shader>(L"ProgressBarShader");
 		Lu::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
@@ -393,10 +393,10 @@ namespace renderer
 		numberShader->Create(eShaderStage::PS, L"NumberPS.hlsl", "main");
 		Lu::Resources::Insert(L"NumberShader", numberShader);
 
-		std::shared_ptr<Shader> bossHPBarShader = std::make_shared<Shader>();
-		bossHPBarShader->Create(eShaderStage::VS, L"BossHPBarVS.hlsl", "main");
-		bossHPBarShader->Create(eShaderStage::PS, L"BossHPBarPS.hlsl", "main");
-		Lu::Resources::Insert(L"BossHPBarShader", bossHPBarShader);
+		std::shared_ptr<Shader> progressBarShader = std::make_shared<Shader>();
+		progressBarShader->Create(eShaderStage::VS, L"ProgressBarVS.hlsl", "main");
+		progressBarShader->Create(eShaderStage::PS, L"ProgressBarPS.hlsl", "main");
+		Lu::Resources::Insert(L"ProgressBarShader", progressBarShader);
 
 		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
 		paintShader->Create(L"PaintCS.hlsl", "main");
@@ -427,39 +427,54 @@ namespace renderer
 
 	void LoadMaterial()
 	{
-		// 애니메이션 Mtrl
-		std::shared_ptr<Shader> animationShader
-			= Resources::Find<Shader>(L"SpriteAnimationShader");
+#pragma region DebugRender Shader
+		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
+
 		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material->SetShader(debugShader);
+		Resources::Insert(L"DebugMaterial", material);
+
+#pragma endregion
+#pragma region Animation Shader
+		std::shared_ptr<Shader> animationShader = Resources::Find<Shader>(L"SpriteAnimationShader");
+
+		// Default
+		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimaionMaterial", material);
 
+		// Player
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"PlayerAnimation_Mtrl", material);
 
+		// Monster - Snaby
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SnabyAnimation_Mtrl", material);
 
+		// Monster - Slime
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SlimeAnimation_Mtrl", material);
 
+		// Monster - SlimeJumpFX
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SlimeJumpAnimation_Mtrl", material);
 
+		// Object - Diary
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"DiaryAnimation_Mtrl", material);
 
+		// Object - MagicCircle
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
@@ -470,61 +485,36 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MagicCircle2Animation_Mtrl", material);
 
-		// 스프라이트 Mrtl
-		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
+#pragma endregion
+#pragma region Particle Shader
+		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
 
+		std::shared_ptr<Texture> particleTexture = Resources::Load<Texture>(L"ParticleTex", L"..\\Resources\\Texture\\Particle\\Title\\Particles7.png");
+		material = std::make_shared<Material>();
+		material->SetShader(particleShader);
+		material->SetTexture(particleTexture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"ParticleMaterial", material);
+#pragma endregion
+#pragma region	Sprite Shader
+		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
+
+		// Object - Mouse
 		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Mouse_Tex", L"..\\Resources\\Texture\\UI\\Mouse.png");
 		material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
+		material->SetShader(pShader);
 		material->SetTexture(texture);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Mouse_Mtrl", material);
 
-		texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\Link.png");
-		material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
-		material->SetTexture(texture);
-		Resources::Insert(L"SpriteMaterial", material);
-
-
-		texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
-		//texture = Resources::Find<Texture>(L"PaintTexuture");
-		material = std::make_shared<Material>();
-		material->SetShader(spriteShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"SpriteMaterial02", material);
-
-
-		std::shared_ptr<Shader> debugShader
-			= Resources::Find<Shader>(L"DebugShader");
-
-		material = std::make_shared<Material>();
-		material->SetShader(debugShader);
-		Resources::Insert(L"DebugMaterial", material);
-
-		std::shared_ptr<Shader> particleShader
-			= Resources::Find<Shader>(L"ParticleShader");
-		material = std::make_shared<Material>();
-		material->SetShader(particleShader);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-
-		std::shared_ptr<Texture> particleTexture
-			= Resources::Load<Texture>(L"ParticleTex", L"..\\Resources\\Texture\\Particle\\Title\\Particles7.png");
-		material->SetTexture(particleTexture);
-		Resources::Insert(L"ParticleMaterial", material);
-
-#pragma region	Title Scene Resources
-		std::shared_ptr<Shader> pShader = Resources::Find<Shader>(L"SpriteShader");
-
-		// 타이틀 백그라운드
+		// TitleScene BG
 		std::shared_ptr<Texture> pTexture = Resources::Load<Texture>(L"TitleBG_Tex", L"..\\Resources\\Texture\\Map\\Title\\TtitleBG.png");
 		std::shared_ptr<Material> pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"TitleBG_Mtrl", pMaterial);
 
-		// 루시
+		// Title BG (Lucie)
 		pTexture = Resources::Load<Texture>(L"Lucie_Tex", L"..\\Resources\\Texture\\Map\\Title\\Lucie.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -532,7 +522,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Lucie_Mtrl", pMaterial);
 
-		// 마리 
+		// Title BG (Mary)
 		pTexture = Resources::Load<Texture>(L"Mary_Tex", L"..\\Resources\\Texture\\Map\\Title\\Mary.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -540,7 +530,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Mary_Mtrl", pMaterial);
 
-		// 아이오네
+		// Title BG (Ione)
 		pTexture = Resources::Load<Texture>(L"Ione_Tex", L"..\\Resources\\Texture\\Map\\Title\\Ione.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -548,68 +538,64 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Ione_Mtrl", pMaterial);
 
-		// 타이틀 문구
+		// Title Tex
 		pTexture = Resources::Load<Texture>(L"Title_Tex", L"..\\Resources\\Texture\\Map\\Title\\Title.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Title_Mtrl", pMaterial);
-#pragma endregion
-#pragma region Lobby Scene Resources
-		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
+		// LobbyScene BG
 		pTexture = Resources::Load<Texture>(L"Room_Tex", L"..\\Resources\\Texture\\Map\\Lobby\\Room.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"LobbyBG_Mtrl", pMaterial);
-#pragma endregion
-#pragma region Stage Scene Resources
-		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
-		// WeaponChoiceScene
+		// WeaponChoiceScene BG
 		pTexture = Resources::Load<Texture>(L"WeaponChoice_Tex", L"..\\Resources\\Texture\\Map\\Stage\\WeaponChoice.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"WeaponChoiceBG_Mtrl", pMaterial);
 
-		// DiceScene
+		// DiceScene BG
 		pTexture = Resources::Load<Texture>(L"Dice_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Dice.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"DiceBG_Mtrl", pMaterial);
 
-		// StoreScene
+		// StoreScene BG
 		pTexture = Resources::Load<Texture>(L"Store_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Store.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"StoreBG_Mtrl", pMaterial);
 
-		// Nomal1Scene
+		// Nomal1Scene BG
 		pTexture = Resources::Load<Texture>(L"Nomal1_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Nomal_1.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"Nomal1BG_Mtrl", pMaterial);
 
-		// Nomal2Scene
+		// Nomal2Scene BG
 		pTexture = Resources::Load<Texture>(L"Nomal2_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Nomal_2.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"Nomal2BG_Mtrl", pMaterial);
 
-		// MidBossScene
+		// MidBossScene BG
 		pTexture = Resources::Load<Texture>(L"MidBoss_Tex", L"..\\Resources\\Texture\\Map\\Stage\\MidBoss.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"MidBossBG_Mtrl", pMaterial);
 
+		// Mid Boss Frame
 		pTexture = Resources::Load<Texture>(L"MidBossFrame_Tex", L"..\\Resources\\Texture\\UI\\Boss\\boss_mid_Frame.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -617,6 +603,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MidBossHPFrame_Mtrl", pMaterial);
 
+		// Mid Boss Name
 		pTexture = Resources::Load<Texture>(L"MidBossName_Tex", L"..\\Resources\\Texture\\UI\\Boss\\Boss_kingSlime.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -624,20 +611,21 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MidBossName_Mtrl", pMaterial);
 
-		// BossWayScene
+		// BossWayScene BG
 		pTexture = Resources::Load<Texture>(L"BossWay_Tex", L"..\\Resources\\Texture\\Map\\Stage\\BossWay.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"BossWayBG_Mtrl", pMaterial);
 
-		// BossScene
+		// BossScene BG
 		pTexture = Resources::Load<Texture>(L"Boss_Tex", L"..\\Resources\\Texture\\Map\\Stage\\Boss.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"BossBG_Mtrl", pMaterial);
 
+		// Boss Frame
 		pTexture = Resources::Load<Texture>(L"BossFrame_Tex", L"..\\Resources\\Texture\\UI\\Boss\\boss_Frame.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -645,6 +633,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BossHPFrame_Mtrl", pMaterial);
 
+		// Boss Name
 		pTexture = Resources::Load<Texture>(L"BossName_Tex", L"..\\Resources\\Texture\\UI\\Boss\\Boss_Iggdrasil.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -652,17 +641,70 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"BossName_Mtrl", pMaterial);
 
-#pragma endregion
-#pragma region GameOver Scene Resources
+		// GameOverScene BG
 		pTexture = Resources::Load<Texture>(L"GameOver_Tex", L"..\\Resources\\Texture\\Map\\GameOver\\Game_Over.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"GameOver_Mtrl", pMaterial);
-#pragma endregion
-#pragma region HUD Resources
-		//pShader = Resources::Find<Shader>(L"SpriteShader");
 
+		// Projectile - Bow
+		texture = Resources::Load<Texture>(L"BowProjectile_Tex", L"..\\Resources\\Texture\\Player\\BowProjectile.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BowProjectile_Mtrl", material);
+
+		// Projectile - Wand
+		texture = Resources::Load<Texture>(L"WandProjectile_Tex", L"..\\Resources\\Texture\\Player\\WandProjectile.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"WandProjectile_Mtrl", material);
+
+		// Projectile - Circle
+		texture = Resources::Load<Texture>(L"MonsterProjectile_Circle_Tex", L"..\\Resources\\Texture\\Monster\\MonsterProjectile_Circle.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterProjectile_Circle_Mtrl", material);
+
+		// Projectile - Bubble
+		texture = Resources::Load<Texture>(L"MonsterProjectile_Bubble_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\Bubble.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterProjectile_Bubble_Mtrl", material);
+
+		// Projectile - BossCircle
+		texture = Resources::Load<Texture>(L"MonsterProjectile_BossCircle_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\SlimeCircle.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterProjectile_SlimeCircle_Mtrl", material);
+
+		// Projectile - Jump
+		texture = Resources::Load<Texture>(L"BigSlimeJump_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\BigSlimeJump.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"BigSlimeJump_Mtrl", material);
+
+		// Item - GreenJelly
+		texture = Resources::Load<Texture>(L"GreenJelly_Tex", L"..\\Resources\\Texture\\Item\\GreenJelly.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"GreenJelly_Mtrl", material);
+
+		// UI - Layout
 		pTexture = Resources::Load<Texture>(L"Layout_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Layout.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -670,18 +712,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Layout_Mtrl", pMaterial);
 
-		pTexture = Resources::Load<Texture>(L"TP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\TP_Meter.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"TP_Meter_Mtrl", pMaterial);
-
-		pTexture = Resources::Load<Texture>(L"EXP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\EXP_Meter.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
-
+		// UI - QuickItem
 		pTexture = Resources::Load<Texture>(L"quickItem_Tex", L"..\\Resources\\Texture\\UI\\HUD\\quickItem.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -689,6 +720,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"quickItem_Mtrl", pMaterial);
 
+		// UI - WeaponSlot_A
 		pTexture = Resources::Load<Texture>(L"weaponSlotA_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotA.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -696,6 +728,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"weaponSlotA_Mtrl", pMaterial);
 
+		// UI - WeaponSlot_B
 		pTexture = Resources::Load<Texture>(L"weaponSlotB_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotB.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -703,6 +736,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"weaponSlotB_Mtrl", pMaterial);
 
+		// UI - Gold_A
 		pTexture = Resources::Load<Texture>(L"Gold_A_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_A.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -710,7 +744,18 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Gold_A_Mtrl", pMaterial);
 
+		// UI - Inventory BG
+		pTexture = Resources::Load<Texture>(L"InvenBG_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\InvenBG.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"InvenBG_Mtrl", pMaterial);
+
+#pragma endregion
+#pragma region Number Shader
+		// LT, Slice를 정하는 Shader
 		pShader = Resources::Find<Shader>(L"NumberShader");
+
 		pTexture = Resources::Load<Texture>(L"Gold_B_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_B.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
@@ -804,76 +849,11 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"FullMana_Icon_Mtrl", pMaterial);
-
 #pragma endregion
-#pragma region Inventory Resources
-		pShader = Resources::Find<Shader>(L"SpriteShader");
+#pragma region ProgressBar Shader
+		pShader = Resources::Find<Shader>(L"ProgressBarShader");
 
-		pTexture = Resources::Load<Texture>(L"InvenBG_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\InvenBG.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"InvenBG_Mtrl", pMaterial);
-
-		pShader = Resources::Find<Shader>(L"ButtonShader");
-		pTexture = Resources::Load<Texture>(L"EquipBtn", L"..\\Resources\\Texture\\UI\\Inventory\\.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"EquipBtn_Mtrl", pMaterial);
-#pragma endregion
-
-		pShader = Resources::Find<Shader>(L"SpriteShader");
-
-		texture = Resources::Load<Texture>(L"BowProjectile_Tex", L"..\\Resources\\Texture\\Player\\BowProjectile.png");
-		material = std::make_shared<Material>();
-		material->SetShader(pShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"BowProjectile_Mtrl", material);
-
-		texture = Resources::Load<Texture>(L"WandProjectile_Tex", L"..\\Resources\\Texture\\Player\\WandProjectile.png");
-		material = std::make_shared<Material>();
-		material->SetShader(pShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"WandProjectile_Mtrl", material);
-
-		texture = Resources::Load<Texture>(L"MonsterProjectile_Circle_Tex", L"..\\Resources\\Texture\\Monster\\MonsterProjectile_Circle.png");
-		material = std::make_shared<Material>();
-		material->SetShader(pShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MonsterProjectile_Circle_Mtrl", material);
-
-		texture = Resources::Load<Texture>(L"MonsterProjectile_Bubble_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\Bubble.png");
-		material = std::make_shared<Material>();
-		material->SetShader(pShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MonsterProjectile_Bubble_Mtrl", material);
-
-		texture = Resources::Load<Texture>(L"MonsterProjectile_BossCircle_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\SlimeCircle.png");
-		material = std::make_shared<Material>();
-		material->SetShader(pShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"MonsterProjectile_SlimeCircle_Mtrl", material);
-
-		texture = Resources::Load<Texture>(L"BigSlimeJump_Tex", L"..\\Resources\\Texture\\Monster\\MidBoss\\BigSlimeJump.png");
-		material = std::make_shared<Material>();
-		material->SetShader(pShader);
-		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"BigSlimeJump_Mtrl", material);
-
-
-
-		// 보스 HP 쉐이더
-		pShader = Resources::Find<Shader>(L"BossHPBarShader");
 		pTexture = Resources::Load<Texture>(L"BossHP_Tex", L"..\\Resources\\Texture\\UI\\Boss\\BossHP.png");
-
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
@@ -893,6 +873,30 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"Ent_BossHP_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"TP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\TP_Meter.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"TP_Meter_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"EXP_Meter_Tex", L"..\\Resources\\Texture\\UI\\HUD\\EXP_Meter.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
+#pragma endregion
+#pragma region Button Shader
+		pShader = Resources::Find<Shader>(L"ButtonShader");
+
+		pTexture = Resources::Load<Texture>(L"EquipBtn", L"..\\Resources\\Texture\\UI\\Inventory\\.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"EquipBtn_Mtrl", pMaterial);
+
+#pragma endregion
 	}
 	
 	void LoadSound()

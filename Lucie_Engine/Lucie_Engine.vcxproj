@@ -177,7 +177,7 @@
     <ClInclude Include="Lu_AttackState.h" />
     <ClInclude Include="Lu_BigSlimeIdleState.h" />
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
-    <ClInclude Include="Lu_BossHPScript.h" />
+    <ClInclude Include="Lu_ProgressBarScript.h" />
     <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
     <ClInclude Include="Lu_BossScene.h" />
@@ -255,7 +255,7 @@
     <ClCompile Include="Lu_AttackState.cpp" />
     <ClCompile Include="Lu_BigSlimeIdleState.cpp" />
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
-    <ClCompile Include="Lu_BossHPScript.cpp" />
+    <ClCompile Include="Lu_ProgressBarScript.cpp" />
     <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />
     <ClCompile Include="Lu_BossScene.cpp" />
