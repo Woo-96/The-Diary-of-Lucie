@@ -20,17 +20,11 @@
     <ClCompile Include="Lu_UIScript.cpp">
       <Filter>Contents\Script\05. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_EXP.cpp">
-      <Filter>Contents\Script\05. UI\HUD\EXP</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_WeaponSlot.cpp">
       <Filter>Contents\Script\05. UI\HUD\WeaponSlot</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_QuickItem.cpp">
+    <ClCompile Include="Lu_QuickItemScript.cpp">
       <Filter>Contents\Script\05. UI\HUD\QuickItem</Filter>
-    </ClCompile>
-    <ClCompile Include="Lu_TP.cpp">
-      <Filter>Contents\Script\05. UI\HUD\TP</Filter>
     </ClCompile>
     <ClCompile Include="Lu_GameOverScene.cpp">
       <Filter>Contents\Scene\GameOver</Filter>
@@ -224,6 +218,12 @@
     <ClCompile Include="Lu_HeartScript.cpp">
       <Filter>Contents\Script\05. UI\HUD\HP</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_ItemScript.cpp">
+      <Filter>Contents\Script\04. Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_JellyScript.cpp">
+      <Filter>Contents\Script\04. Object\Item\Jelly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -248,17 +248,11 @@
     <ClInclude Include="Lu_UIScript.h">
       <Filter>Contents\Script\05. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_EXP.h">
-      <Filter>Contents\Script\05. UI\HUD\EXP</Filter>
-    </ClInclude>
     <ClInclude Include="Lu_WeaponSlot.h">
       <Filter>Contents\Script\05. UI\HUD\WeaponSlot</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_QuickItem.h">
+    <ClInclude Include="Lu_QuickItemScript.h">
       <Filter>Contents\Script\05. UI\HUD\QuickItem</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_TP.h">
-      <Filter>Contents\Script\05. UI\HUD\TP</Filter>
     </ClInclude>
     <ClInclude Include="Lu_GameOverScene.h">
       <Filter>Contents\Scene\GameOver</Filter>
@@ -455,6 +449,12 @@
     <ClInclude Include="Lu_HeartScript.h">
       <Filter>Contents\Script\05. UI\HUD\HP</Filter>
     </ClInclude>
+    <ClInclude Include="Lu_ItemScript.h">
+      <Filter>Contents\Script\04. Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_JellyScript.h">
+      <Filter>Contents\Script\04. Object\Item\Jelly</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -559,14 +559,8 @@
     <Filter Include="Contents\Script\05. UI\HUD">
       <UniqueIdentifier>{aaa4d6e8-98e9-48b1-8b8e-f3cafdf07df1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\EXP">
-      <UniqueIdentifier>{1fca2025-d9e6-4d41-b569-3686bc8dd298}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\MP">
       <UniqueIdentifier>{62f76408-a400-4213-9802-003ae86e3ce7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\TP">
-      <UniqueIdentifier>{862b8851-a6a4-406a-96e8-9973b0c4fed2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\QuickItem">
       <UniqueIdentifier>{ec661e94-c2fb-40dc-bab9-90e0476b7681}</UniqueIdentifier>
@@ -714,6 +708,12 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\HP">
       <UniqueIdentifier>{f3423f01-9f03-4229-9836-8cc19d99b64b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Item">
+      <UniqueIdentifier>{4d4df43f-8328-4bef-aeb0-35535f5ee66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Item\Jelly">
+      <UniqueIdentifier>{ee02b41a-a63b-4a42-8093-d8defc2df058}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

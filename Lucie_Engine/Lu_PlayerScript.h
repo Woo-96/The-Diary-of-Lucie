@@ -68,7 +68,7 @@ namespace Lu
 				, CurLevel(1)
 				, MaxTP(100.f)
 				, CurTP(100.f)
-				, TPRecoveryRate(5.f)
+				, TPRecoveryRate(10.f)
 			{
 
 			}
@@ -139,6 +139,11 @@ namespace Lu
 			return m_PlayerInfo;
 		}
 
+		UIScript* GetUI(eUI _UIType)	const
+		{
+			return m_arrUI[(int)_UIType];
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -165,6 +170,7 @@ namespace Lu
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
+		void InflictDamage(int _Damage);
 		void UseStamina(float _Value);
 		void IncreaseEXP(int _Value);
 	};

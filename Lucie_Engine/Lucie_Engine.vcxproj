@@ -177,6 +177,8 @@
     <ClInclude Include="Lu_AttackState.h" />
     <ClInclude Include="Lu_BigSlimeIdleState.h" />
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
+    <ClInclude Include="Lu_ItemScript.h" />
+    <ClInclude Include="Lu_JellyScript.h" />
     <ClInclude Include="Lu_ProgressBarScript.h" />
     <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
@@ -189,7 +191,6 @@
     <ClInclude Include="Lu_DashState.h" />
     <ClInclude Include="Lu_DeadState.h" />
     <ClInclude Include="Lu_DiceScene.h" />
-    <ClInclude Include="Lu_EXP.h" />
     <ClInclude Include="Lu_GameOverScene.h" />
     <ClInclude Include="Lu_Gold.h" />
     <ClInclude Include="Lu_HeartScript.h" />
@@ -217,7 +218,7 @@
     <ClInclude Include="Lu_PlayerScript.h" />
     <ClInclude Include="Lu_PortalScript.h" />
     <ClInclude Include="Lu_ProjectileScript.h" />
-    <ClInclude Include="Lu_QuickItem.h" />
+    <ClInclude Include="Lu_QuickItemScript.h" />
     <ClInclude Include="Lu_SlimeAttackState.h" />
     <ClInclude Include="Lu_SlimeDeadState.h" />
     <ClInclude Include="Lu_SlimeIdleState.h" />
@@ -236,7 +237,6 @@
     <ClInclude Include="Lu_StateScript.h" />
     <ClInclude Include="Lu_StoreScene.h" />
     <ClInclude Include="Lu_TitleScene.h" />
-    <ClInclude Include="Lu_TP.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
     <ClInclude Include="Lu_WeaponChoiceScene.h" />
@@ -255,6 +255,8 @@
     <ClCompile Include="Lu_AttackState.cpp" />
     <ClCompile Include="Lu_BigSlimeIdleState.cpp" />
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
+    <ClCompile Include="Lu_ItemScript.cpp" />
+    <ClCompile Include="Lu_JellyScript.cpp" />
     <ClCompile Include="Lu_ProgressBarScript.cpp" />
     <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />
@@ -267,7 +269,6 @@
     <ClCompile Include="Lu_DashState.cpp" />
     <ClCompile Include="Lu_DeadState.cpp" />
     <ClCompile Include="Lu_DiceScene.cpp" />
-    <ClCompile Include="Lu_EXP.cpp" />
     <ClCompile Include="Lu_GameOverScene.cpp" />
     <ClCompile Include="Lu_Gold.cpp" />
     <ClCompile Include="Lu_HeartScript.cpp" />
@@ -295,7 +296,7 @@
     <ClCompile Include="Lu_PlayerScript.cpp" />
     <ClCompile Include="Lu_PortalScript.cpp" />
     <ClCompile Include="Lu_ProjectileScript.cpp" />
-    <ClCompile Include="Lu_QuickItem.cpp" />
+    <ClCompile Include="Lu_QuickItemScript.cpp" />
     <ClCompile Include="Lu_SlimeAttackState.cpp" />
     <ClCompile Include="Lu_SlimeDeadState.cpp" />
     <ClCompile Include="Lu_SlimeIdleState.cpp" />
@@ -314,7 +315,6 @@
     <ClCompile Include="Lu_StateScript.cpp" />
     <ClCompile Include="Lu_StoreScene.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
-    <ClCompile Include="Lu_TP.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />
     <ClCompile Include="Lu_WeaponChoiceScene.cpp" />

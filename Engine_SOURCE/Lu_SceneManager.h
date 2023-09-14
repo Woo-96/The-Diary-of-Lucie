@@ -34,6 +34,8 @@ namespace Lu
 			m_DontDestroyObjects.push_back(_GameObject);
 		}
 
+		static void RemoveFromDontDestroyOnLoad(GameObject* _GameObject);
+
 		static void DontUseOnLoad(std::wstring _Name);
 		static void DontUseOnLoad(eLayerType _LayerType);
 

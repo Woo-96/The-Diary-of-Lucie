@@ -78,6 +78,16 @@ namespace Lu
 	}
 
 
+	void SceneManager::RemoveFromDontDestroyOnLoad(GameObject* _GameObject)
+	{
+		auto iter = std::find(m_DontDestroyObjects.begin(), m_DontDestroyObjects.end(), _GameObject);
+
+		if (iter != m_DontDestroyObjects.end())
+		{
+			m_DontDestroyObjects.erase(iter);
+		}
+	}
+
 	void SceneManager::DontUseOnLoad(std::wstring objectName)
 	{
 		// m_DontDestroyObjects를 반복문으로 돌며 동일한 이름의 객체를 찾는다

@@ -100,6 +100,7 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
 		}
 
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);

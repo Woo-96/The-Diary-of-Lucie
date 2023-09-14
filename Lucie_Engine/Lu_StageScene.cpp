@@ -10,7 +10,7 @@
 #include "Lu_ManaScript.h"
 #include "Lu_ProgressBarScript.h"
 
-#include "Lu_QuickItem.h"
+#include "Lu_QuickItemScript.h"
 #include "Lu_WeaponSlot.h"
 #include "Lu_Inventory.h"
 
@@ -154,7 +154,7 @@ namespace Lu
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"quickItem_Mtrl"));
 
-			pObject->AddComponent<QuickItem>();
+			pPlayerScript->SetUI(PlayerScript::eUI::QuickItem, (UIScript*)pObject->AddComponent<QuickItemScript>());
 		}
 
 		{

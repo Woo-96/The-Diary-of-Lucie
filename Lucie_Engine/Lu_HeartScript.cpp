@@ -137,10 +137,16 @@ namespace Lu
 			return;
 
 		int iMaxIndex = m_MaxCount + 4;
-
 		int iFullHeartCount = _CurHP / 2;
 		int iHalfHeartCount = _CurHP % 2;
 		int iEmptyHeartCount = m_MaxCount - (iFullHeartCount + iHalfHeartCount);
+
+		int iMaxHP = m_MaxCount * 2;
+		if (iHalfHeartCount != 0)
+			--iMaxHP;
+		
+		if (iMaxHP < _CurHP)
+			return;
 
 		for (int i = MaxHeart; i < MaxHeart * 2; ++i)
 		{

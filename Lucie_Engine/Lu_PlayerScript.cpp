@@ -14,6 +14,7 @@
 #include "Lu_ManaScript.h"
 #include "Lu_ProgressBarScript.h"
 #include "Lu_NumberScript.h"
+#include "Lu_QuickItemScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -144,10 +145,7 @@ namespace Lu
 			// Hit & Dead
 			if (!m_bInvincible)
 			{
-				m_PlayerInfo.CurHP -= m_Damage;
-				HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
-				if(pHPScript)
-					pHPScript->SetHeart(m_PlayerInfo.CurHP);
+				InflictDamage(m_Damage);
 
 				if (m_PlayerInfo.CurHP <= 0)
 				{
@@ -174,10 +172,7 @@ namespace Lu
 			// Hit & Dead
 			if (!m_bInvincible)
 			{
-				m_PlayerInfo.CurHP -= m_Damage;
-				HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
-				if (pHPScript)
-					pHPScript->SetHeart(m_PlayerInfo.CurHP);
+				InflictDamage(m_Damage);
 
 				if (m_PlayerInfo.CurHP <= 0)
 				{
@@ -480,6 +475,14 @@ namespace Lu
 			m_PrevDir = m_Dir;
 			m_Dir = CalDirToMouse();
 			ChangeState(StateScript::eState::Attack);
+		}
+
+		// Äü½½·Ô ¾ÆÀÌÅÛ »ç¿ë
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			QuickItemScript* pQuickSlot = (QuickItemScript*)m_arrUI[(int)eUI::QuickItem];
+			if (pQuickSlot)
+				pQuickSlot->UseQuickSlotItem();
 		}
 
 		if (!m_bAction)
@@ -877,6 +880,14 @@ namespace Lu
 		m_bDontAnimChange = true;
 		m_Dir = eDir::Down;
 		m_Animator->PlayAnimation(L"Player_LookAround", true);
+	}
+
+	void PlayerScript::InflictDamage(int _Damage)
+	{
+		m_PlayerInfo.CurHP -= _Damage;
+		HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+		if (pHPScript)
+			pHPScript->SetHeart(m_PlayerInfo.CurHP);
 	}
 
 	void PlayerScript::UseStamina(float _Value)
