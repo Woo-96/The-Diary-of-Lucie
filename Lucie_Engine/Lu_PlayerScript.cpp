@@ -921,4 +921,14 @@ namespace Lu
 			pEXPScript->SetCurValue(m_PlayerInfo.CurEXP);
 		}
 	}
+
+	void PlayerScript::GetCoin(int _Value)
+	{
+		m_PlayerInfo.CurGold += _Value;
+		NumberScript* pNumScript = (NumberScript*)m_arrUI[(int)eUI::Gold];
+		if (pNumScript)
+		{
+			pNumScript->SetCurNumber(m_PlayerInfo.CurGold);
+		}
+	}
 }

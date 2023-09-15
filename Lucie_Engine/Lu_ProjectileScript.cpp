@@ -26,7 +26,7 @@ namespace Lu
 	{
 		m_Time += (float)Time::DeltaTime();
 
-		if (m_Time >= 1.5f)
+		if (m_Time >= 0.5f)
 		{
 			object::Destroy(GetOwner());
 		}

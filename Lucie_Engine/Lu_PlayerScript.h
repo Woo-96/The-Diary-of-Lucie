@@ -56,6 +56,8 @@ namespace Lu
 			float MaxTP;
 			float CurTP;
 			float TPRecoveryRate;
+			int MaxGold;
+			int CurGold;
 
 			tPlayerInfo()
 				: MaxHP(6)
@@ -69,6 +71,8 @@ namespace Lu
 				, MaxTP(100.f)
 				, CurTP(100.f)
 				, TPRecoveryRate(10.f)
+				, MaxGold(9)
+				, CurGold(0)
 			{
 
 			}
@@ -170,9 +174,13 @@ namespace Lu
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
+
+	// UI 상호 작용 관련 함수
+	public:
 		void InflictDamage(int _Damage);
 		void UseStamina(float _Value);
 		void IncreaseEXP(int _Value);
+		void GetCoin(int _Value);
 	};
 }
 

@@ -32,8 +32,8 @@
     <ClCompile Include="Lu_Inventory.cpp">
       <Filter>Contents\Script\05. UI\Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_Gold.cpp">
-      <Filter>Contents\Script\05. UI\HUD\Gold</Filter>
+    <ClCompile Include="Lu_CoinScript.cpp">
+      <Filter>Contents\Script\04. Object\Item\Coin</Filter>
     </ClCompile>
     <ClCompile Include="Lu_ButtonScript.cpp">
       <Filter>Contents\Script\05. UI\Button</Filter>
@@ -260,8 +260,8 @@
     <ClInclude Include="Lu_Inventory.h">
       <Filter>Contents\Script\05. UI\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_Gold.h">
-      <Filter>Contents\Script\05. UI\HUD\Gold</Filter>
+    <ClInclude Include="Lu_CoinScript.h">
+      <Filter>Contents\Script\04. Object\Item\Coin</Filter>
     </ClInclude>
     <ClInclude Include="Lu_ButtonScript.h">
       <Filter>Contents\Script\05. UI\Button</Filter>
@@ -568,9 +568,6 @@
     <Filter Include="Contents\Script\05. UI\HUD\WeaponSlot">
       <UniqueIdentifier>{0c2c25ba-e8a1-42c6-96e0-b4e29e8417c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\Gold">
-      <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\05. UI\Inventory">
       <UniqueIdentifier>{b6719425-543e-4b01-9712-5571d134f905}</UniqueIdentifier>
     </Filter>
@@ -714,6 +711,9 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Item\Jelly">
       <UniqueIdentifier>{ee02b41a-a63b-4a42-8093-d8defc2df058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Item\Coin">
+      <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -41,7 +41,6 @@ namespace Lu
 	void SlimePatrolState::Enter()
 	{
 		// 애니메이션 방향 결정
-		int rand = std::rand();
 		int iMoveAngle = std::rand() % 360;
 		DetermineAnimDir((float)iMoveAngle);
 

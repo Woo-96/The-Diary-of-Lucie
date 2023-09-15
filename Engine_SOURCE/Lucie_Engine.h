@@ -20,3 +20,5 @@
 #include "Lu_Enums.h"
 #include "Lu_Math.h"
 
+#include <cstdlib> // For std::rand() and std::srand
+#include <ctime>   // For std::time

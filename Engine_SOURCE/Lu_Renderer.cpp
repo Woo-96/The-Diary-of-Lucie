@@ -485,6 +485,13 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"MagicCircle2Animation_Mtrl", material);
 
+		// Object - Coin
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"CoinAnimation_Mtrl", material);
+
+
 #pragma endregion
 #pragma region Particle Shader
 		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");

@@ -14,6 +14,6 @@ namespace Lu
 		virtual void Exit() override;
 
 	private:
-		void CreateGreenJelly();
+		void DropItem();
 	};
 }

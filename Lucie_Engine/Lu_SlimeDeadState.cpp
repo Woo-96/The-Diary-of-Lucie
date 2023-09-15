@@ -31,13 +31,13 @@ namespace Lu
 		GetTarget()->IncreaseEXP(30);
 
 		// Á©¸® ¾ÆÀÌÅÛ µå·Ó
-		CreateGreenJelly();
+		DropItem();
 
 		// °´Ã¼ ¼Ò¸ê
 		object::Destroy(GetSlimeScript()->GetOwner());
 	}
 
-	void SlimeDeadState::CreateGreenJelly()
+	void SlimeDeadState::DropItem()
 	{
 		Vector3 vSpawnPos = GetTransform()->GetPosition();
 		vSpawnPos.y -= 60.f;

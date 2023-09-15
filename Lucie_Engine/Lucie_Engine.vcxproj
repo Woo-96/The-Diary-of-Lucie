@@ -192,7 +192,7 @@
     <ClInclude Include="Lu_DeadState.h" />
     <ClInclude Include="Lu_DiceScene.h" />
     <ClInclude Include="Lu_GameOverScene.h" />
-    <ClInclude Include="Lu_Gold.h" />
+    <ClInclude Include="Lu_CoinScript.h" />
     <ClInclude Include="Lu_HeartScript.h" />
     <ClInclude Include="Lu_IdleState.h" />
     <ClInclude Include="Lu_ImmovableScript.h" />
@@ -270,7 +270,7 @@
     <ClCompile Include="Lu_DeadState.cpp" />
     <ClCompile Include="Lu_DiceScene.cpp" />
     <ClCompile Include="Lu_GameOverScene.cpp" />
-    <ClCompile Include="Lu_Gold.cpp" />
+    <ClCompile Include="Lu_CoinScript.cpp" />
     <ClCompile Include="Lu_HeartScript.cpp" />
     <ClCompile Include="Lu_IdleState.cpp" />
     <ClCompile Include="Lu_ImmovableScript.cpp" />

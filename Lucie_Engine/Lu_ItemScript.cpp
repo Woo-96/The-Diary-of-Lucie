@@ -27,6 +27,14 @@ namespace Lu
 			return;
 
 		m_ItemState = _State;
+
+		// 초기 설정이거나, Coin 아이템(아이콘으로 변경 불가)일 경우 예외처리
+		if (m_ItemState == eItemState::None
+			|| m_ItemType == eItemType::Coin)
+		{
+			return;
+		}
+
 		Scene* pCurScene = SceneManager::GetActiveScene();
 		pCurScene->RemoveGameObject((eLayerType)GetOwner()->GetLayerIndex(), GetOwner());
 

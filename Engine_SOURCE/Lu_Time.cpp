@@ -20,6 +20,10 @@ namespace Lu
 
 		// 프로그램이 처음 시작할때 진동수
 		QueryPerformanceCounter(&m_PrevFrequency);
+
+		// 난수 생성기 초기화
+		std::srand(static_cast<unsigned int>(std::time(nullptr)));
+		int rand = std::rand(); // 처음꺼는 버리기
 	}
 
 	void Time::Update()

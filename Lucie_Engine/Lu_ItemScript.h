@@ -13,6 +13,7 @@ namespace Lu
 			Bow,
 			Wand,
 			Jelly,
+			Coin,
 			End,
 		};
 

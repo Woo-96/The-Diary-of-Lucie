@@ -149,11 +149,9 @@ namespace Lu
 			pObject = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(66.f, 66.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_QuickItem");
 			SceneManager::DontDestroyOnLoad(pObject);
-
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"quickItem_Mtrl"));
-
 			pPlayerScript->SetUI(PlayerScript::eUI::QuickItem, (UIScript*)pObject->AddComponent<QuickItemScript>());
 		}
 
