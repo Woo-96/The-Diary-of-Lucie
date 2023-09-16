@@ -3,6 +3,9 @@
 #include "Lu_Object.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_QuickItemScript.h"
+#include "Lu_SoundManager.h"
+#include "Lu_AudioSource.h"
+#include "Lu_Resources.h"
 
 namespace Lu
 {
@@ -34,6 +37,10 @@ namespace Lu
 			{
 				QuickItemScript* pQuickItem = (QuickItemScript*)pPlayerScript->GetUI(PlayerScript::eUI::QuickItem);
 				pQuickItem->SetQuickSlotItem(this);
+
+				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+				pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));
+				pSFX->Play();
 			}
 		}
 	}
@@ -48,6 +55,10 @@ namespace Lu
 
 		if (iCurHP + 2 > iMaxHP)
 			return false;
+
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"DrinkSFX", L"..\\Resources\\Sound\\SFX\\Player\\DrinkSFX.ogg"));
+		pSFX->Play();
 
 		pPlayerScript->InflictDamage(-2);
 		SceneManager::RemoveFromDontDestroyOnLoad(GetOwner());

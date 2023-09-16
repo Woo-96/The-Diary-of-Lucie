@@ -15,6 +15,7 @@
 #include "Lu_ProgressBarScript.h"
 #include "Lu_NumberScript.h"
 #include "Lu_QuickItemScript.h"
+#include "Lu_WeaponSlotScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -450,13 +451,19 @@ namespace Lu
 				m_MoveType = eMoveType::Walk;
 		}
 
-		// 공격 모드 (임시)
+		// 무기 교체
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
-			if (eWeaponType::Wand == m_CurWeapon)
-				m_CurWeapon = eWeaponType::Bow;
-			else
-				m_CurWeapon = eWeaponType::Wand;
+			WeaponSlotScript* pWeaponSlot = (WeaponSlotScript*)m_arrUI[(int)eUI::WeaponSlot];
+			if (pWeaponSlot)
+			{
+				pWeaponSlot->ChangeSlot();
+			}
+
+			//if (eWeaponType::Wand == m_CurWeapon)
+			//	m_CurWeapon = eWeaponType::Bow;
+			//else
+			//	m_CurWeapon = eWeaponType::Wand;
 		}
 
 		// 대쉬

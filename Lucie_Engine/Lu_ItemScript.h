@@ -9,11 +9,9 @@ namespace Lu
 	public:
 		enum class eItemType
 		{
-			Sword,
-			Bow,
-			Wand,
 			Jelly,
 			Coin,
+			Weapon,
 			End,
 		};
 

@@ -241,7 +241,8 @@
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
     <ClInclude Include="Lu_WeaponChoiceScene.h" />
-    <ClInclude Include="Lu_WeaponSlot.h" />
+    <ClInclude Include="Lu_WeaponScript.h" />
+    <ClInclude Include="Lu_WeaponSlotScript.h" />
     <ClInclude Include="Lu_SnabyScript.h" />
     <ClInclude Include="Lu_ScriptEnums.h" />
     <ClInclude Include="Lu_MonsterScript.h" />
@@ -320,7 +321,8 @@
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />
     <ClCompile Include="Lu_WeaponChoiceScene.cpp" />
-    <ClCompile Include="Lu_WeaponSlot.cpp" />
+    <ClCompile Include="Lu_WeaponScript.cpp" />
+    <ClCompile Include="Lu_WeaponSlotScript.cpp" />
     <ClCompile Include="Lu_SnabyScript.cpp" />
     <ClCompile Include="Lu_MonsterScript.cpp" />
   </ItemGroup>

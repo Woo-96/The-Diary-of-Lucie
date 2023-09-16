@@ -52,11 +52,7 @@ namespace Lu
 
 				switch (m_ItemType)
 				{
-				case Lu::ItemScript::eItemType::Sword:
-					break;
-				case Lu::ItemScript::eItemType::Bow:
-					break;
-				case Lu::ItemScript::eItemType::Wand:
+				case Lu::ItemScript::eItemType::Weapon:
 					break;
 				case Lu::ItemScript::eItemType::Jelly:
 				{

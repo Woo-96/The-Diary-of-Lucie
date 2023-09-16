@@ -497,7 +497,6 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"StatueAnimation_Mtrl", material);
 
-
 #pragma endregion
 #pragma region Particle Shader
 		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
@@ -717,6 +716,30 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"GreenJelly_Mtrl", material);
 
+		// Item - Sword
+		texture = Resources::Load<Texture>(L"Sword_Tex", L"..\\Resources\\Texture\\Item\\Sword.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Sword_Mtrl", material);
+
+		// Item - Bow
+		texture = Resources::Load<Texture>(L"Bow_Tex", L"..\\Resources\\Texture\\Item\\Bow.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Bow_Mtrl", material);
+
+		// Item - Wand
+		texture = Resources::Load<Texture>(L"Wand_Tex", L"..\\Resources\\Texture\\Item\\Wand.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Wand_Mtrl", material);
+
 		// UI - Layout
 		pTexture = Resources::Load<Texture>(L"Layout_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Layout.png");
 		pMaterial = std::make_shared<Material>();
@@ -731,7 +754,7 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"quickItem_Mtrl", pMaterial);
+		Resources::Insert(L"QuickItem_Mtrl", pMaterial);
 
 		// UI - WeaponSlot_A
 		pTexture = Resources::Load<Texture>(L"weaponSlotA_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotA.png");
@@ -739,15 +762,15 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"weaponSlotA_Mtrl", pMaterial);
+		Resources::Insert(L"WeaponSlot_Mtrl", pMaterial);
 
-		// UI - WeaponSlot_B
-		pTexture = Resources::Load<Texture>(L"weaponSlotB_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotB.png");
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"weaponSlotB_Mtrl", pMaterial);
+		//// UI - WeaponSlot_B
+		//pTexture = Resources::Load<Texture>(L"weaponSlotB_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotB.png");
+		//pMaterial = std::make_shared<Material>();
+		//pMaterial->SetShader(pShader);
+		//pMaterial->SetTexture(pTexture);
+		//pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		//Resources::Insert(L"weaponSlotB_Mtrl", pMaterial);
 
 		// UI - Gold_A
 		pTexture = Resources::Load<Texture>(L"Gold_A_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_A.png");

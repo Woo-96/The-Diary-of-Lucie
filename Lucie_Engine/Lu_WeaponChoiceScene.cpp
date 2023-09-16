@@ -12,6 +12,7 @@
 namespace Lu
 {
 	WeaponChoiceScene::WeaponChoiceScene()
+		: m_arrWeapon{}
 	{
 		SetName(L"WeaponChoiceSceneScript");
 	}
@@ -76,6 +77,55 @@ namespace Lu
 			pPortal->Initialize();
 		}
 
+		// Weapon
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(-200.f, 150.f, 500.f), Vector3(48.f, 48.f, 100.f), eLayerType::Item);
+			pObject->SetName(L"Wand");
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Wand_Mtrl"));
+
+			pObject->AddComponent<Collider2D>();
+
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand]->SetTransform(pObject->GetComponent<Transform>());
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand]->SetItemState(ItemScript::eItemState::Drop);
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand]->SetWeaponType(WeaponScript::eWeaponType::Wand);
+		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 150.f, 500.f), Vector3(48.f, 48.f, 100.f), eLayerType::Item);
+			pObject->SetName(L"Bow");
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Bow_Mtrl"));
+
+			pObject->AddComponent<Collider2D>();
+
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow]->SetTransform(pObject->GetComponent<Transform>());
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow]->SetItemState(ItemScript::eItemState::Drop);
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow]->SetWeaponType(WeaponScript::eWeaponType::Bow);
+		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(200.f, 150.f, 500.f), Vector3(48.f, 48.f, 100.f), eLayerType::Item);
+			pObject->SetName(L"Sword");
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Sword_Mtrl"));
+
+			pObject->AddComponent<Collider2D>();
+
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword]->SetTransform(pObject->GetComponent<Transform>());
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword]->SetItemState(ItemScript::eItemState::Drop);
+			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword]->SetWeaponType(WeaponScript::eWeaponType::Sword);
+		}
+
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 		pMainCamScript->SetWorldResolution(Vector2(2016.f - 400.f, 1344.f - 200.f));
@@ -110,5 +160,19 @@ namespace Lu
 	void WeaponChoiceScene::OnExit()
 	{
 		StageScene::OnExit();
+	}
+
+	void WeaponChoiceScene::PlayerWeaponGet(WeaponScript::eWeaponType _Type)
+	{
+		for (int i = 0; i < (int)WeaponScript::eWeaponType::None; ++i)
+		{
+			if (i == (int)_Type)
+				continue;
+
+			if (m_arrWeapon[i])
+			{
+				object::Destroy(m_arrWeapon[i]->GetOwner());
+			}
+		}
 	}
 }

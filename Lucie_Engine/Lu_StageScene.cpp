@@ -11,7 +11,7 @@
 #include "Lu_ProgressBarScript.h"
 
 #include "Lu_QuickItemScript.h"
-#include "Lu_WeaponSlot.h"
+#include "Lu_WeaponSlotScript.h"
 #include "Lu_Inventory.h"
 
 namespace Lu
@@ -137,12 +137,10 @@ namespace Lu
 			pObject = object::Instantiate<GameObject>(Vector3(640.f, -330.f, 100.f), Vector3(105.f, 102.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_WeaponSlot");
 			SceneManager::DontDestroyOnLoad(pObject);
-
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"weaponSlotA_Mtrl"));
-
-			pObject->AddComponent<WeaponSlot>();
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"WeaponSlot_Mtrl"));
+			pPlayerScript->SetUI(PlayerScript::eUI::WeaponSlot, (UIScript*)pObject->AddComponent<WeaponSlotScript>());
 		}
 
 		{
@@ -151,7 +149,7 @@ namespace Lu
 			SceneManager::DontDestroyOnLoad(pObject);
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"quickItem_Mtrl"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"QuickItem_Mtrl"));
 			pPlayerScript->SetUI(PlayerScript::eUI::QuickItem, (UIScript*)pObject->AddComponent<QuickItemScript>());
 		}
 

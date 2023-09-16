@@ -20,7 +20,7 @@
     <ClCompile Include="Lu_UIScript.cpp">
       <Filter>Contents\Script\05. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_WeaponSlot.cpp">
+    <ClCompile Include="Lu_WeaponSlotScript.cpp">
       <Filter>Contents\Script\05. UI\HUD\WeaponSlot</Filter>
     </ClCompile>
     <ClCompile Include="Lu_QuickItemScript.cpp">
@@ -227,6 +227,9 @@
     <ClCompile Include="Lu_StatueScript.cpp">
       <Filter>Contents\Script\04. Object\Statue</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_WeaponScript.cpp">
+      <Filter>Contents\Script\04. Object\Item\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -251,7 +254,7 @@
     <ClInclude Include="Lu_UIScript.h">
       <Filter>Contents\Script\05. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_WeaponSlot.h">
+    <ClInclude Include="Lu_WeaponSlotScript.h">
       <Filter>Contents\Script\05. UI\HUD\WeaponSlot</Filter>
     </ClInclude>
     <ClInclude Include="Lu_QuickItemScript.h">
@@ -460,6 +463,9 @@
     </ClInclude>
     <ClInclude Include="Lu_StatueScript.h">
       <Filter>Contents\Script\04. Object\Statue</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_WeaponScript.h">
+      <Filter>Contents\Script\04. Object\Item\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -723,6 +729,9 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Statue">
       <UniqueIdentifier>{863917aa-cfd3-410c-b5fa-7b1cf0b1aed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Item\Weapon">
+      <UniqueIdentifier>{01d6f78a-3b26-4ff7-9f8b-671e51d7ef56}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

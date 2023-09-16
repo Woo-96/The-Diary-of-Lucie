@@ -7,6 +7,7 @@
 namespace Lu
 {
 	QuickItemScript::QuickItemScript()
+		: m_CurItem{}
 	{
 		SetName(L"QuickItemScript");
 	}

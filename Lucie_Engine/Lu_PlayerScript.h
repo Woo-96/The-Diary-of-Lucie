@@ -38,8 +38,7 @@ namespace Lu
 			TP,
 			Gold,
 			QuickItem,
-			WeaponSlot_A,
-			WeaponSlot_B,
+			WeaponSlot,
 			End,
 		};
 
