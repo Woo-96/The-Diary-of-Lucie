@@ -37,7 +37,7 @@ namespace Lu
 
 		// 매직서클
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), Vector3(384.f, 384.f, 100.f), eLayerType::BackGround);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), Vector3(288.f, 288.f, 100.f), eLayerType::BackGround);
 			pObject->SetName(L"MagicCircle");
 
 			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
@@ -51,7 +51,7 @@ namespace Lu
 			pAnimator->Create(L"MagicCircle", pAtlas, Vector2(0.f, 0.f), Vector2(192.f, 192.f), 2, Vector2(192.f, 192.f));
 			pAnimator->PlayAnimation(L"MagicCircle", false);
 	
-			GameObject* pObject2 = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), Vector3(434.f, 434.f, 100.f), eLayerType::BackGround);
+			GameObject* pObject2 = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), Vector3(384.f, 384.f, 100.f), eLayerType::BackGround);
 			pObject2->SetName(L"MagicCircle2");
 
 			MeshRenderer* pMeshRender2 = pObject2->AddComponent<MeshRenderer>();
@@ -65,11 +65,10 @@ namespace Lu
 
 		// 포탈
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(790.f, -160.f, 500.f), Vector3(20.f, 180.f, 100.f), eLayerType::Portal);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 550.f, 500.f), Vector3(200.f, 20.f, 100.f), eLayerType::Portal);
 			pObject->SetName(L"Portal");
 
-			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
+			pObject->AddComponent<Collider2D>();
 
 			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
 			pPortal->SetCurSceneName(L"WeaponChoiceScene");

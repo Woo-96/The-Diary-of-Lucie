@@ -102,11 +102,10 @@ namespace Lu
 
 		// Æ÷Å»
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(-780.f, -30.f, 500.f), Vector3(20.f, 250.f, 100.f), eLayerType::Portal);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -700.f, 500.f), Vector3(280.f, 20.f, 100.f), eLayerType::Portal);
 			pObject->SetName(L"Portal1");
 
-			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
+			pObject->AddComponent<Collider2D>();
 
 			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
 			pPortal->SetCurSceneName(L"Nomal1Scene");
@@ -115,15 +114,14 @@ namespace Lu
 		}
 
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 700.f, 500.f), Vector3(280.f, 20.f, 100.f), eLayerType::Portal);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(-780.f, -30.f, 500.f), Vector3(20.f, 250.f, 100.f), eLayerType::Portal);
 			pObject->SetName(L"Portal2");
 
-			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
+			pObject->AddComponent<Collider2D>();
 
 			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
 			pPortal->SetCurSceneName(L"Nomal1Scene");
-			pPortal->SetNextSceneName(L"Nomal2Scene");
+			pPortal->SetNextSceneName(L"DiceScene");
 			pPortal->Initialize();
 		}
 	}

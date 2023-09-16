@@ -28,7 +28,7 @@ namespace Lu
 	void SlimeDeadState::Exit()
 	{
 		// 경험치 생성
-		GetTarget()->IncreaseEXP(30);
+		GetTarget()->GetEXP(30);
 
 		// 젤리 아이템 드롭
 		DropItem();

@@ -17,8 +17,8 @@ namespace Lu
 		virtual void Render() override {};
 
 	public:
-		virtual void OnCollisionEnter(Collider2D* other) {};
-		virtual void OnCollisionStay(Collider2D* other) {};
-		virtual void OnCollisionExit(Collider2D* other) {};
+		virtual void OnCollisionEnter(Collider2D* _Other) {};
+		virtual void OnCollisionStay(Collider2D* _Other) {};
+		virtual void OnCollisionExit(Collider2D* _Other) {};
 	};
 }

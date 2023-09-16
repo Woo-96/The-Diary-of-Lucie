@@ -54,10 +54,10 @@ namespace Lu
 			iGold = 1;
 			break;
 		case Lu::CoinScript::eCoinType::Silver:
-			iGold = 3;
+			iGold = 2;
 			break;
 		case Lu::CoinScript::eCoinType::Gold:
-			iGold = 5;
+			iGold = 3;
 			break;
 		}
 

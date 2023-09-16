@@ -24,6 +24,7 @@ namespace Lu::enums
 		BackGround,
 		Immovable,
 		Portal,
+		Statue,
 		Item,
 		Monster,
 		Player,

@@ -890,6 +890,26 @@ namespace Lu
 			pHPScript->SetHeart(m_PlayerInfo.CurHP);
 	}
 
+	void PlayerScript::UseMana(int _Value)
+	{
+		m_PlayerInfo.CurMP -= _Value;
+		ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+		if (pMPScript)
+			pMPScript->SetMana(m_PlayerInfo.CurMP);
+	}
+
+	void PlayerScript::GetMaxMana(int _Value)
+	{
+		m_PlayerInfo.MaxMP += _Value;
+
+		if (m_PlayerInfo.MaxMP > 5)
+			m_PlayerInfo.MaxMP = 5;
+
+		ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+		if (pMPScript)
+			pMPScript->SetMaxMP(m_PlayerInfo.MaxMP);
+	}
+
 	void PlayerScript::UseStamina(float _Value)
 	{
 		m_PlayerInfo.CurTP -= _Value;
@@ -900,7 +920,7 @@ namespace Lu
 		}
 	}
 
-	void PlayerScript::IncreaseEXP(int _Value)
+	void PlayerScript::GetEXP(int _Value)
 	{
 		m_PlayerInfo.CurEXP += _Value;
 

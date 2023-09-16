@@ -178,8 +178,10 @@ namespace Lu
 	// UI 상호 작용 관련 함수
 	public:
 		void InflictDamage(int _Damage);
+		void UseMana(int _Value);
+		void GetMaxMana(int _Value);
 		void UseStamina(float _Value);
-		void IncreaseEXP(int _Value);
+		void GetEXP(int _Value);
 		void GetCoin(int _Value);
 	};
 }

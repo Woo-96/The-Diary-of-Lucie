@@ -28,7 +28,7 @@ namespace Lu
 		SceneManager::CreateScene<LobbyScene>(L"LobbyScene");
 
 		SceneManager::CreateScene<WeaponChoiceScene>(L"WeaponChoiceScene");
-		//SceneManager::CreateScene<DiceScene>(L"DiceScene");
+		SceneManager::CreateScene<DiceScene>(L"DiceScene");
 		//SceneManager::CreateScene<StoreScene>(L"StoreScene");
 		SceneManager::CreateScene<Nomal1Scene>(L"Nomal1Scene");
 		SceneManager::CreateScene<Nomal2Scene>(L"Nomal2Scene");

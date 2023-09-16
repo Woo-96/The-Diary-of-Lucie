@@ -491,6 +491,12 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"CoinAnimation_Mtrl", material);
 
+		// Object - Statue
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"StatueAnimation_Mtrl", material);
+
 
 #pragma endregion
 #pragma region Particle Shader

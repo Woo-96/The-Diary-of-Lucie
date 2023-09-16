@@ -34,20 +34,28 @@ namespace Lu
 
 		if (L"WeaponChoiceScene" == m_CurSceneName)
 		{
-			// R -> L
 			if (L"Nomal1Scene" == m_NextSceneName)
 			{
-				m_SpawnPos = Vector2(-700.f, 0.f);
+				m_SpawnPos = Vector2(0.f, -600.f);
 			}
 		}
 		else if (L"Nomal1Scene" == m_CurSceneName)
 		{
 			if (L"WeaponChoiceScene" == m_NextSceneName)
 			{
-				m_SpawnPos = Vector2(730.f, -100.f);
+				m_SpawnPos = Vector2(0.f, 450.f);
 			}
-
-			// T -> B
+			else if (L"DiceScene" == m_NextSceneName)
+			{
+				m_SpawnPos = Vector2(800.f, -270.f);
+			}
+		}
+		else if (L"DiceScene" == m_CurSceneName)
+		{
+			if (L"Nomal1Scene" == m_NextSceneName)
+			{
+				m_SpawnPos = Vector2(-700.f, 0.f);
+			}
 			else if (L"Nomal2Scene" == m_NextSceneName)
 			{
 				m_SpawnPos = Vector2(0.f, -500.f);
@@ -55,26 +63,44 @@ namespace Lu
 		}
 		else if (L"Nomal2Scene" == m_CurSceneName)
 		{
-			// B -> T
-			if (L"Nomal1Scene" == m_NextSceneName)
+			if (L"DiceScene" == m_NextSceneName)
 			{
-				m_SpawnPos = Vector2(0.f, 600.f);
+				m_SpawnPos = Vector2(0.f, 550.f);
 			}
-
-			// L -> R
 			else if (L"MidBossScene" == m_NextSceneName)
 			{
 				m_SpawnPos = Vector2(800.f, -100.f);
 			}
+			//else if (L"StoreScene" == m_NextSceneName)
+			//{
+			//	m_SpawnPos = Vector2(0.f, -500.f);
+			//}
 		}
-
+		//else if (L"StoreScene" == m_CurSceneName)
+		//{
+		//	if (L"Nomal2Scene" == m_NextSceneName)
+		//	{
+		//		m_SpawnPos = Vector2(0.f, 550.f);
+		//	}
+		//	else if (L"MidBossScene" == m_NextSceneName)
+		//	{
+		//		m_SpawnPos = Vector2(-800.f, -100.f);
+		//	}
+		//}
 		else if (L"MidBossScene" == m_CurSceneName)
 		{
-			// R -> L
 			if (L"Nomal2Scene" == m_NextSceneName)
 			{
 				m_SpawnPos = Vector2(-700.f, -30.f);
 			}
+			//if (L"StoreScene" == m_NextSceneName)
+			//{
+			//	m_SpawnPos = Vector2(0.f, -600.f);
+			//}
+			//else if (L"NextFloorScene" == m_NextSceneName)
+			//{
+			//	m_SpawnPos = Vector2(0.f, 600.f);
+			//}
 		}
 	}
 

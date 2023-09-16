@@ -88,7 +88,7 @@ namespace Lu
 
 			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
 			pPortal->SetCurSceneName(L"Nomal2Scene");
-			pPortal->SetNextSceneName(L"Nomal1Scene");
+			pPortal->SetNextSceneName(L"DiceScene");
 			pPortal->Initialize();
 		}
 

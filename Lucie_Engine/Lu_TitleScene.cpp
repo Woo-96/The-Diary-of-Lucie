@@ -105,6 +105,7 @@ namespace Lu
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);
+		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Statue, true);
 		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::PlayerProjectile, eLayerType::Immovable, true);
 	}

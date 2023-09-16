@@ -30,7 +30,7 @@ namespace Lu
 	void SnabyDeadState::Exit()
 	{
 		// 경험치 생성
-		GetTarget()->IncreaseEXP(30);
+		GetTarget()->GetEXP(30);
 
 		// 코인 드롭
 		DropItem();

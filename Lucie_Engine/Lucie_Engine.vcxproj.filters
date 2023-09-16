@@ -224,6 +224,9 @@
     <ClCompile Include="Lu_JellyScript.cpp">
       <Filter>Contents\Script\04. Object\Item\Jelly</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_StatueScript.cpp">
+      <Filter>Contents\Script\04. Object\Statue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -454,6 +457,9 @@
     </ClInclude>
     <ClInclude Include="Lu_JellyScript.h">
       <Filter>Contents\Script\04. Object\Item\Jelly</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_StatueScript.h">
+      <Filter>Contents\Script\04. Object\Statue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -714,6 +720,9 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Item\Coin">
       <UniqueIdentifier>{df53b243-05ac-4e4a-be47-df3714a85625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Statue">
+      <UniqueIdentifier>{863917aa-cfd3-410c-b5fa-7b1cf0b1aed6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
