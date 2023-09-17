@@ -112,6 +112,7 @@ namespace Lu
 
 			pBGM->SetClip(Resources::Find<AudioClip>(L"MidBossBGM"));
 			pBGM->Play();
+			pBGM->SetLoop(true);
 			pBGM->SetVolume(0.3f);
 
 			// 보스 이름 UI : 원본 크기 1.5배

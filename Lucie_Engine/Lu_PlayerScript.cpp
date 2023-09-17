@@ -148,6 +148,10 @@ namespace Lu
 			{
 				InflictDamage(m_Damage);
 
+				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+				pSFX->SetClip(Resources::Load<AudioClip>(L"HitSFX", L"..\\Resources\\Sound\\SFX\\Player\\InflicDamageSFX.ogg"));
+				pSFX->Play();
+
 				if (m_PlayerInfo.CurHP <= 0)
 				{
 					m_PlayerInfo.CurHP = 0;
@@ -163,31 +167,13 @@ namespace Lu
 					m_InvincibleTime = 1.f;		// 피격 무적
 				}
 			}
-		}
-	}
-
-	void PlayerScript::OnCollisionStay(Collider2D* _Other)
-	{
-		if ((int)eLayerType::MonsterProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			// Hit & Dead
-			if (!m_bInvincible)
+			else
 			{
-				InflictDamage(m_Damage);
-
-				if (m_PlayerInfo.CurHP <= 0)
+				if (StateScript::eState::Dash == m_CurState->GetStateType())
 				{
-					m_PlayerInfo.CurHP = 0;
-					m_bInvincible = false;
-					m_bHitEffect = false;
-					m_InvincibleTime = 0.f;
-					ChangeState(StateScript::eState::Dead);
-				}
-				else
-				{
-					m_bInvincible = true;
-					m_bHitEffect = true;
-					m_InvincibleTime = 1.f;
+					AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+					pSFX->SetClip(Resources::Load<AudioClip>(L"AvoidSFX", L"..\\Resources\\Sound\\SFX\\Player\\AvoidSFX.ogg"));
+					pSFX->Play();
 				}
 			}
 		}
@@ -355,7 +341,9 @@ namespace Lu
 	void PlayerScript::StateUpdate()
 	{
 		// 치트
-		if (Input::GetKeyDown(eKeyCode::G))
+		if (Input::GetKeyDown(eKeyCode::G)
+			&& Input::GetKey(eKeyCode::LEFT_BRACKET)
+			&& Input::GetKey(eKeyCode::RIGHT_BRACKET))
 		{
 			if (1 == m_Damage)
 				m_Damage = 0;
@@ -459,18 +447,63 @@ namespace Lu
 			{
 				pWeaponSlot->ChangeSlot();
 			}
-
-			//if (eWeaponType::Wand == m_CurWeapon)
-			//	m_CurWeapon = eWeaponType::Bow;
-			//else
-			//	m_CurWeapon = eWeaponType::Wand;
 		}
 
 		// 대쉬
 		if (Input::GetKeyDown(eKeyCode::SPACE) && m_PlayerInfo.CurTP > 20.f)
 		{
 			m_PrevDir = m_Dir;
-			m_Dir = CalDirToMouse();
+			if (Input::GetKey(eKeyCode::A)
+				&& Input::GetKey(eKeyCode::D))
+			{
+				m_Dir = CalDirToMouse();
+			}
+			else if (Input::GetKey(eKeyCode::W)
+				&& Input::GetKey(eKeyCode::S))
+			{
+				m_Dir = CalDirToMouse();
+			}
+			else if (Input::GetKey(eKeyCode::A)
+				&& Input::GetKey(eKeyCode::W))
+			{
+				m_Dir = eDir::LeftUp;
+			}
+			else if (Input::GetKey(eKeyCode::A)
+				&& Input::GetKey(eKeyCode::S))
+			{
+				m_Dir = eDir::LeftDown;
+			}
+			else if (Input::GetKey(eKeyCode::D)
+				&& Input::GetKey(eKeyCode::S))
+			{
+				m_Dir = eDir::RightDown;
+			}
+			else if (Input::GetKey(eKeyCode::D)
+				&& Input::GetKey(eKeyCode::W))
+			{
+				m_Dir = eDir::RightUp;
+			}
+			else if (Input::GetKey(eKeyCode::A))
+			{
+				m_Dir = eDir::Left;
+			}
+			else if (Input::GetKey(eKeyCode::D))
+			{
+				m_Dir = eDir::Right;
+			}
+			else if (Input::GetKey(eKeyCode::S))
+			{
+				m_Dir = eDir::Down;
+			}
+			else if (Input::GetKey(eKeyCode::W))
+			{
+				m_Dir = eDir::Up;
+			}
+			else
+			{
+				m_Dir = CalDirToMouse();
+			}
+
 			m_bInvincible = true;
 			m_InvincibleTime = 0.6f;
 			ChangeState(StateScript::eState::Dash);
@@ -939,6 +972,10 @@ namespace Lu
 			if (pNumScript)
 			{
 				pNumScript->SetCurNumber(++m_PlayerInfo.CurLevel);
+
+				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+				pSFX->SetClip(Resources::Load<AudioClip>(L"LevelUpSFX", L"..\\Resources\\Sound\\SFX\\Player\\LevelUpSFX.ogg"));
+				pSFX->Play();
 			}
 
 			m_PlayerInfo.CurEXP -= 100;

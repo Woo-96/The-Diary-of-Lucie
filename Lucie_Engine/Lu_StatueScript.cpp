@@ -3,6 +3,8 @@
 #include "Lu_SceneManager.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_Resources.h"
+#include "Lu_SoundManager.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -129,6 +131,10 @@ namespace Lu
 					pPlayerScript->InflictDamage(2);
 				}
 			}
+
+			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+			pSFX->SetClip(Resources::Load<AudioClip>(L"RedStatueSFX", L"..\\Resources\\Sound\\SFX\\Player\\RedStatueSFX.ogg"));
+			pSFX->Play();
 		}
 		else
 		{
@@ -152,6 +158,10 @@ namespace Lu
 					pPlayerScript->UseMana(1);
 				}
 			}
+
+			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+			pSFX->SetClip(Resources::Load<AudioClip>(L"BlueStatueSFX", L"..\\Resources\\Sound\\SFX\\Player\\BlueStatueSFX.ogg"));
+			pSFX->Play();
 		}
 	}
 }

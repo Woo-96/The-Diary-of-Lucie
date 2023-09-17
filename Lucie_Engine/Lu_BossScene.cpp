@@ -86,6 +86,7 @@ namespace Lu
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->SetClip(Resources::Find<AudioClip>(L"BossBGM"));
 		pBGM->Play();
+		pBGM->SetLoop(true);
 		pBGM->SetVolume(0.3f);
 	}
 

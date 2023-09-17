@@ -150,7 +150,6 @@ namespace Lu
 
 	public:
 		virtual void OnCollisionEnter(Collider2D* _Other) override;
-		virtual void OnCollisionStay(Collider2D* _Other) override;
 		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:

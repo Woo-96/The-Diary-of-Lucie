@@ -57,7 +57,7 @@ namespace Lu
 			return false;
 
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-		pSFX->SetClip(Resources::Load<AudioClip>(L"DrinkSFX", L"..\\Resources\\Sound\\SFX\\Player\\DrinkSFX.ogg"));
+		pSFX->SetClip(Resources::Load<AudioClip>(L"RecoverySFX", L"..\\Resources\\Sound\\SFX\\Player\\RecoverySFX.ogg"));
 		pSFX->Play();
 
 		pPlayerScript->InflictDamage(-2);

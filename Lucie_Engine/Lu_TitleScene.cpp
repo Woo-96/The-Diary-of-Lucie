@@ -145,6 +145,7 @@ namespace Lu
 		AudioSource * pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->SetClip(Resources::Find<AudioClip>(L"ForestBGM"));
 		pBGM->Play();
+		pBGM->SetLoop(true);
 		pBGM->SetVolume(0.3f);
 
 		SceneManager::DontUseOnLoad(eLayerType::Player);

@@ -50,6 +50,11 @@ namespace Lu
 			m_ActionSpeed = _Speed;
 		}
 
+		void SetDir(Vector3 _Dir)
+		{
+			m_ActionDir = _Dir;
+		}
+
 	public:
 		Transform* GetTransform()	const
 		{
