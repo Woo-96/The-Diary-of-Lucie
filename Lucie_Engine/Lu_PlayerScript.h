@@ -16,14 +16,6 @@ namespace Lu
 			Run
 		};
 
-		enum class eWeaponType
-		{
-			None,
-			Sword,
-			Bow,
-			Wand,
-		};
-
 		enum class eSkillType
 		{
 			End
@@ -83,27 +75,27 @@ namespace Lu
 
 	private:
 		std::map<StateScript::eState, StateScript*> m_State;
-		StateScript*		m_CurState;
-		StateScript::eState	m_PrevState;
+		StateScript*			m_CurState;
+		StateScript::eState		m_PrevState;
 
-		eDir				m_Dir;
-		eDir				m_PrevDir;
+		eDir					m_Dir;
+		eDir					m_PrevDir;
 
-		eMoveType			m_MoveType;
-		eWeaponType			m_CurWeapon;
+		eMoveType				m_MoveType;
+		eWeaponType				m_CurWeapon;
 
-		tPlayerInfo			m_PlayerInfo;
+		tPlayerInfo				m_PlayerInfo;
 
-		bool				m_bAction;
-		bool				m_bInvincible;
-		bool				m_bHitEffect;
-		bool				m_bDontAnimChange;
-		float				m_InvincibleTime;
-		int					m_Damage;
+		bool					m_bAction;
+		bool					m_bInvincible;
+		bool					m_bHitEffect;
+		bool					m_bDontAnimChange;
+		float					m_InvincibleTime;
+		int						m_Damage;
 
-		Animator*			m_Animator;
+		Animator*				m_Animator;
 
-		UIScript*			m_arrUI[(int)eUI::End];
+		UIScript*				m_arrUI[(int)eUI::End];
 
 	public:
 		void SetAction(bool _Action)
@@ -119,6 +111,11 @@ namespace Lu
 		void SetUI(eUI _UIType, UIScript* _UI)
 		{
 			m_arrUI[(int)_UIType] = _UI;
+		}
+
+		void SetWeaponType(eWeaponType _Type)
+		{
+			m_CurWeapon = _Type;
 		}
 
 	public:

@@ -13,12 +13,12 @@ namespace Lu
         virtual ~ProjectileScript();
 
     private:
-        PlayerScript*               m_PlayerScript;
-        Transform*                  m_Transform;
-        PlayerScript::eWeaponType   m_ProjectileType;
-        float				        m_AttackSpeed;
-        Vector3				        m_AttackDir;
-        float                       m_Time;
+        PlayerScript*   m_PlayerScript;
+        Transform*      m_Transform;
+        eWeaponType     m_ProjectileType;
+        float			m_AttackSpeed;
+        Vector3			m_AttackDir;
+        float           m_Time;
 
     public:
         void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -31,7 +31,7 @@ namespace Lu
             m_Transform = _Transform;
         }
 
-        void SetType(PlayerScript::eWeaponType _Type)
+        void SetType(eWeaponType _Type)
         {
             m_ProjectileType = _Type;
         }

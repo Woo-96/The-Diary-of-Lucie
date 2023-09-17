@@ -10,7 +10,7 @@ namespace Lu
 	WandProjectile::WandProjectile()
 	{
 		SetName(L"WandProjectileScript");
-		SetType(Lu::PlayerScript::eWeaponType::Wand);
+		SetType(eWeaponType::Wand);
 	}
 
 	WandProjectile::~WandProjectile()

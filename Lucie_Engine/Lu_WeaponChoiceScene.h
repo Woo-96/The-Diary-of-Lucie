@@ -1,6 +1,7 @@
 #pragma once
 #include "Lu_StageScene.h"
 #include "Lu_WeaponScript.h"
+#include "Lu_ScriptEnums.h"
 
 namespace Lu
 {
@@ -11,7 +12,7 @@ namespace Lu
 		virtual ~WeaponChoiceScene();
 
 	private:
-		WeaponScript* m_arrWeapon[(int)WeaponScript::eWeaponType::None];
+		WeaponScript* m_arrWeapon[(int)eWeaponType::None];
 
 	public:
 		virtual void Initialize() override;
@@ -25,6 +26,6 @@ namespace Lu
 		virtual void OnExit() override;
 
 	public:
-		void PlayerWeaponGet(WeaponScript::eWeaponType _Type);
+		void PlayerWeaponGet(eWeaponType _Type);
 	};
 }

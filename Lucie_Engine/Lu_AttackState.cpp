@@ -56,7 +56,7 @@ namespace Lu
 	{
 		switch (GetPlayerScript()->GetWeaponType())
 		{
-		case Lu::PlayerScript::eWeaponType::Bow:
+		case eWeaponType::Bow:
 		{
 			Vector3 vDir = GetDir();
 			float angle = std::atan2(vDir.y, vDir.x);
@@ -78,7 +78,7 @@ namespace Lu
 			pBowProjectile->SetDir(GetDir());
 		}
 			break;
-		case Lu::PlayerScript::eWeaponType::Wand:
+		case eWeaponType::Wand:
 		{
 			GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(50.f, 50.f, 100.f), eLayerType::PlayerProjectile);
 			pProjectile->SetName(L"WandProjectile");

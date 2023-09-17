@@ -88,10 +88,10 @@ namespace Lu
 
 			pObject->AddComponent<Collider2D>();
 
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand] = pObject->AddComponent<WeaponScript>();
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand]->SetTransform(pObject->GetComponent<Transform>());
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand]->SetItemState(ItemScript::eItemState::Drop);
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Wand]->SetWeaponType(WeaponScript::eWeaponType::Wand);
+			m_arrWeapon[(int)eWeaponType::Wand] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)eWeaponType::Wand]->SetTransform(pObject->GetComponent<Transform>());
+			m_arrWeapon[(int)eWeaponType::Wand]->SetItemState(ItemScript::eItemState::Drop);
+			m_arrWeapon[(int)eWeaponType::Wand]->SetWeaponType(eWeaponType::Wand);
 		}
 
 		{
@@ -104,10 +104,10 @@ namespace Lu
 
 			pObject->AddComponent<Collider2D>();
 
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow] = pObject->AddComponent<WeaponScript>();
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow]->SetTransform(pObject->GetComponent<Transform>());
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow]->SetItemState(ItemScript::eItemState::Drop);
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Bow]->SetWeaponType(WeaponScript::eWeaponType::Bow);
+			m_arrWeapon[(int)eWeaponType::Bow] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)eWeaponType::Bow]->SetTransform(pObject->GetComponent<Transform>());
+			m_arrWeapon[(int)eWeaponType::Bow]->SetItemState(ItemScript::eItemState::Drop);
+			m_arrWeapon[(int)eWeaponType::Bow]->SetWeaponType(eWeaponType::Bow);
 		}
 
 		{
@@ -120,10 +120,10 @@ namespace Lu
 
 			pObject->AddComponent<Collider2D>();
 
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword] = pObject->AddComponent<WeaponScript>();
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword]->SetTransform(pObject->GetComponent<Transform>());
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword]->SetItemState(ItemScript::eItemState::Drop);
-			m_arrWeapon[(int)WeaponScript::eWeaponType::Sword]->SetWeaponType(WeaponScript::eWeaponType::Sword);
+			m_arrWeapon[(int)eWeaponType::Sword] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)eWeaponType::Sword]->SetTransform(pObject->GetComponent<Transform>());
+			m_arrWeapon[(int)eWeaponType::Sword]->SetItemState(ItemScript::eItemState::Drop);
+			m_arrWeapon[(int)eWeaponType::Sword]->SetWeaponType(eWeaponType::Sword);
 		}
 
 		GameObject* pPlayer = SceneManager::FindPlayer();
@@ -162,9 +162,9 @@ namespace Lu
 		StageScene::OnExit();
 	}
 
-	void WeaponChoiceScene::PlayerWeaponGet(WeaponScript::eWeaponType _Type)
+	void WeaponChoiceScene::PlayerWeaponGet(eWeaponType _Type)
 	{
-		for (int i = 0; i < (int)WeaponScript::eWeaponType::None; ++i)
+		for (int i = 0; i < (int)eWeaponType::None; ++i)
 		{
 			if (i == (int)_Type)
 				continue;

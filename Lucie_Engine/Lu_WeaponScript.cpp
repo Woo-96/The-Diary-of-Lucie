@@ -26,8 +26,12 @@ namespace Lu
 	{
 		ItemScript::Update();
 
-		int bPointSamplerUse = true;
-		GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_2, &bPointSamplerUse);
+		std::shared_ptr<Material> pMaterial = GetOwner()->GetComponent<MeshRenderer>()->GetMaterial();
+		if (pMaterial)
+		{
+			int bPointSamplerUse = true;
+			pMaterial->SetScalarParam(Lu::graphics::SCALAR_PARAM::INT_2, &bPointSamplerUse);
+		}
 	}
 
 	void WeaponScript::OnCollisionEnter(Collider2D* _Other)
@@ -55,7 +59,7 @@ namespace Lu
 			return false;
 
 		WeaponSlotScript* pSlot = (WeaponSlotScript*)pPlayerScript->GetUI(PlayerScript::eUI::WeaponSlot);
-		pSlot->SetWeaponSlotItem(this);
+		pSlot->EquipWeapon(this);
 
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));

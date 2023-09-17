@@ -14,4 +14,12 @@ namespace Lu
 		LeftDown,
 		RightDown
 	};
+
+	enum class eWeaponType
+	{
+		Wand,
+		Bow,
+		Sword,
+		None,
+	};
 }

@@ -1,19 +1,11 @@
 #pragma once
 #include "Lu_ItemScript.h"
+#include "Lu_ScriptEnums.h"
 
 namespace Lu
 {
     class WeaponScript : public ItemScript
     {
-    public:
-        enum class eWeaponType
-        {
-            Wand,
-            Bow,
-            Sword,
-            None,
-        };
-
     public:
         WeaponScript();
         virtual ~WeaponScript();
@@ -25,6 +17,12 @@ namespace Lu
         void SetWeaponType(eWeaponType _Type)
         {
             m_WeaponType = _Type;
+        }
+
+    public:
+        eWeaponType GetWeaponType() const
+        {
+            return m_WeaponType;
         }
 
     public:

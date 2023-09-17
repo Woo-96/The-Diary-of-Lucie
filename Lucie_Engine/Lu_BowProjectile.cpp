@@ -10,7 +10,7 @@ namespace Lu
 	BowProjectile::BowProjectile()
 	{
 		SetName(L"BowProjectileScript");
-		SetType(Lu::PlayerScript::eWeaponType::Bow);
+		SetType(eWeaponType::Bow);
 	}
 
 	BowProjectile::~BowProjectile()

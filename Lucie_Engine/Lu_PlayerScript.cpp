@@ -710,9 +710,38 @@ namespace Lu
 		{
 			switch (m_CurWeapon)
 			{
-			case Lu::PlayerScript::eWeaponType::Sword:
+			case eWeaponType::Wand:
+			{
+				switch (m_Dir)
+				{
+				case eDir::Left:
+					m_Animator->PlayAnimation(L"Player_Wand_Left", true);
+					break;
+				case eDir::Right:
+					m_Animator->PlayAnimation(L"Player_Wand_Right", true);
+					break;
+				case eDir::Up:
+					m_Animator->PlayAnimation(L"Player_Wand_Up", true);
+					break;
+				case eDir::Down:
+					m_Animator->PlayAnimation(L"Player_Wand_Down", true);
+					break;
+				case eDir::LeftUp:
+					m_Animator->PlayAnimation(L"Player_Wand_LeftUp", true);
+					break;
+				case eDir::RightUp:
+					m_Animator->PlayAnimation(L"Player_Wand_RightUp", true);
+					break;
+				case eDir::LeftDown:
+					m_Animator->PlayAnimation(L"Player_Wand_LeftDown", true);
+					break;
+				case eDir::RightDown:
+					m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
+					break;
+				}
+			}
 				break;
-			case Lu::PlayerScript::eWeaponType::Bow:
+			case eWeaponType::Bow:
 			{
 				switch (m_Dir)
 				{
@@ -743,36 +772,9 @@ namespace Lu
 				}
 			}
 				break;
-			case Lu::PlayerScript::eWeaponType::Wand:
-			{
-				switch (m_Dir)
-				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_Wand_Left", true);
-					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_Wand_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_Wand_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_Wand_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_Wand_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_Wand_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_Wand_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
-					break;
-				}
-			}
+			case eWeaponType::Sword:
+				break;
+			default:
 				break;
 			}
 		}
@@ -848,7 +850,7 @@ namespace Lu
 			|| eCurState == StateScript::eState::Dash)
 			return;
 
-		float RecoveryValue = m_PlayerInfo.TPRecoveryRate * Time::DeltaTime();
+		float RecoveryValue = m_PlayerInfo.TPRecoveryRate * (float)Time::DeltaTime();
 		m_PlayerInfo.CurTP += RecoveryValue;
 
 		if (m_PlayerInfo.CurTP > m_PlayerInfo.MaxTP)
