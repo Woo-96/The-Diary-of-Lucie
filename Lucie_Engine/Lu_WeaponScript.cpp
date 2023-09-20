@@ -4,6 +4,7 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_SceneManager.h"
 #include "Lu_WeaponChoiceScene.h"
+#include "Lu_InventoryScript.h"
 #include "Lu_WeaponSlotScript.h"
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
@@ -54,16 +55,26 @@ namespace Lu
 
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-
 		if (!pPlayerScript)
 			return false;
 
-		WeaponSlotScript* pSlot = (WeaponSlotScript*)pPlayerScript->GetUI(PlayerScript::eUI::WeaponSlot);
-		pSlot->EquipWeapon(this);
+		InventoryScript* pInven = (InventoryScript*)pPlayerScript->GetUI(PlayerScript::eUI::Inventory);
+		if (!pInven)
+			return false;
 
-		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-		pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));
-		pSFX->Play();
+		if (pInven->AddtoInventory(this))
+		{
+			WeaponSlotScript* pSlot = (WeaponSlotScript*)pPlayerScript->GetUI(PlayerScript::eUI::WeaponSlot);
+			if (pSlot)
+			{
+				if (pSlot->IsCurSlotEmpty())
+					pSlot->EquipWeapon(this);
+			}
+		
+			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+			pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));
+			pSFX->Play();
+		}
 
 		return true;
 	}

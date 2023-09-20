@@ -24,7 +24,7 @@ namespace Lu
 	void WeaponChoiceScene::Initialize()
 	{
 		StageScene::Initialize();
-		CreateHUD();
+		CreateUI();
 
 		// Back : 크기 원본 2배
 		{

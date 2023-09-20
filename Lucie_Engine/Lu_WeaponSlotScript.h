@@ -4,6 +4,7 @@
 
 namespace Lu
 {
+	class InventoryScript;
 	class ItemScript;
 	class WeaponSlotScript : public UIScript
 	{
@@ -20,10 +21,23 @@ namespace Lu
 		virtual ~WeaponSlotScript();
 
 	private:
+		InventoryScript*			m_Inventory;
 		eSlotType					m_CurType;
-		ItemScript*					m_arrItem[(int)eSlotType::End];
-		Vector3						m_arrItemPos[(int)eSlotType::End];
+		GameObject*					m_arrItem[(int)eSlotType::End];
 		std::shared_ptr<Material>	m_arrMaterial[(int)eSlotType::End];
+		eWeaponType					m_arrWeaponType[(int)eSlotType::End];
+
+	public:
+		void SetInventory(InventoryScript* _Inventory)
+		{
+			m_Inventory = _Inventory;
+		}
+
+	public:
+		bool IsCurSlotEmpty()
+		{
+			return m_arrMaterial[(int)m_CurType] == nullptr;
+		}
 
 	public:
 		virtual void Update() override;

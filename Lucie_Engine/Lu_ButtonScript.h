@@ -1,10 +1,12 @@
 #pragma once
 #include "Lu_UIScript.h"
+#include "Lu_Material.h"
 
 namespace Lu
 {
 	class ButtonScript : public UIScript
 	{
+	public:
 		enum class eButtonState
 		{
 			Normal,
@@ -19,50 +21,25 @@ namespace Lu
 		virtual ~ButtonScript();
 
 	private:
-		eButtonState m_ButtonState;
-
-		Vector2      m_arrLT[(int)eButtonState::End];
-		Vector2      m_SliceSize;
-		Vector2      m_TexResolution;
-
-		std::function<void()>   m_Callback[(int)eButtonState::End];
-		//std::shared_ptr<Sound>    m_StateSound[(int)eButtonState::End];
+		eButtonState m_CurBtnState;
+		eButtonState m_PrevBtnState;
 
 	public:
-		void SetButtonLT(Vector2 _arrLT[], int _Count);
-
-		void SetSliceSize(Vector2 _SliceSize)
+		eButtonState GetCurBtnState()	const
 		{
-			m_SliceSize = _SliceSize;
+			return m_CurBtnState;
 		}
 
-		void SetTexResolution(Vector2 _TexResolution)
+		eButtonState GetPrevBtnState()	const
 		{
-			m_TexResolution = _TexResolution;
-		}
-
-		// 버튼 비활성화 (안눌리는 버튼)
-		void EnableButton(bool Enable)
-		{
-			m_ButtonState = Enable ? eButtonState::Normal : eButtonState::Disable;
+			return m_PrevBtnState;
 		}
 
 	public:
 		virtual void Update() override;
 
-	public:
-		void Binds();
-
-	public:
-		virtual void CollisionMouseHoveredCallback(const Vector2& Pos);
-		virtual void CollisionMouseReleaseCallback();
-
-	public:
-		template <typename T>
-		void SetCallback(eButtonState State, T* Obj, void(T::* Func)())
-		{
-			m_Callback[(int)State] = std::bind(Func, Obj);
-		}
+	private:
+		bool MouseCollision();
 	};
 }
 

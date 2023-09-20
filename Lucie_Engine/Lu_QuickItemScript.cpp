@@ -3,13 +3,19 @@
 #include "Lu_Object.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
+#include "Lu_InventoryScript.h"
 
 namespace Lu
 {
 	QuickItemScript::QuickItemScript()
-		: m_CurItem{}
+		: m_Inventory(nullptr)
+		, m_CurItem(nullptr)
 	{
 		SetName(L"QuickItemScript");
+
+		m_CurIcon = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(48.f, 48.f, 100.f), eLayerType::UI);
+		m_CurIcon->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		SceneManager::DontDestroyOnLoad(m_CurIcon);
 	}
 
 	QuickItemScript::~QuickItemScript()
@@ -19,16 +25,10 @@ namespace Lu
 
 	void QuickItemScript::SetQuickSlotItem(ItemScript* _Item)
 	{
-		// 현재 퀵슬롯에 등록된 아이템이 없다면
 		if (!m_CurItem)
 		{
-			// 아이템을 퀵슬롯에 등록 후 아이콘으로 변경
 			m_CurItem = _Item;
-			m_CurItem->SetItemState(ItemScript::eItemState::Icon);
-
-			// 퀵슬롯 위치로 이동
-			Transform* pTransform = m_CurItem->GetOwner()->GetComponent<Transform>();
-			pTransform->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+			m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(m_CurItem->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
 		}
 		else
 		{
@@ -41,7 +41,10 @@ namespace Lu
 		if (m_CurItem)
 		{
 			if (m_CurItem->ItemEfficacy())
+			{
 				m_CurItem = nullptr;
+				m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+			}
 		}
 	}
 }

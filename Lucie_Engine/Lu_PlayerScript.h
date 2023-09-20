@@ -31,6 +31,7 @@ namespace Lu
 			Gold,
 			QuickItem,
 			WeaponSlot,
+			Inventory,
 			End,
 		};
 

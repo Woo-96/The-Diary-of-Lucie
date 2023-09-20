@@ -16,6 +16,7 @@
 #include "Lu_NumberScript.h"
 #include "Lu_QuickItemScript.h"
 #include "Lu_WeaponSlotScript.h"
+#include "Lu_InventoryScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -446,6 +447,16 @@ namespace Lu
 			if (pWeaponSlot)
 			{
 				pWeaponSlot->ChangeSlot();
+			}
+		}
+
+		// 인벤토리
+		if (Input::GetKeyDown(eKeyCode::I))
+		{
+			InventoryScript* pInven = (InventoryScript*)m_arrUI[(int)eUI::Inventory];
+			if (pInven)
+			{
+				pInven->InventoryOnOff();
 			}
 		}
 

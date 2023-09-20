@@ -53,7 +53,6 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
 			Collider2D* pCollider = pMonster->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(0.f, -60.f));
 			pCollider->SetSize(Vector2(0.4f, 0.3f));
 
@@ -70,7 +69,6 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
 			pCollider = pMonster->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
 			pCollider->SetCenter(Vector2(0.f, -60.f));
 			pCollider->SetSize(Vector2(0.4f, 0.3f));
 

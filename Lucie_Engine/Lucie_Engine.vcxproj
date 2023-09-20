@@ -177,6 +177,7 @@
     <ClInclude Include="Lu_AttackState.h" />
     <ClInclude Include="Lu_BigSlimeIdleState.h" />
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
+    <ClInclude Include="Lu_InventorySlotScript.h" />
     <ClInclude Include="Lu_ItemScript.h" />
     <ClInclude Include="Lu_JellyScript.h" />
     <ClInclude Include="Lu_ProgressBarScript.h" />
@@ -196,7 +197,7 @@
     <ClInclude Include="Lu_HeartScript.h" />
     <ClInclude Include="Lu_IdleState.h" />
     <ClInclude Include="Lu_ImmovableScript.h" />
-    <ClInclude Include="Lu_Inventory.h" />
+    <ClInclude Include="Lu_InventoryScript.h" />
     <ClInclude Include="Lu_JumpProjectile.h" />
     <ClInclude Include="Lu_KingSlimeAttackState.h" />
     <ClInclude Include="Lu_KingSlimeDeadState.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="Lu_AttackState.cpp" />
     <ClCompile Include="Lu_BigSlimeIdleState.cpp" />
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
+    <ClCompile Include="Lu_InventorySlotScript.cpp" />
     <ClCompile Include="Lu_ItemScript.cpp" />
     <ClCompile Include="Lu_JellyScript.cpp" />
     <ClCompile Include="Lu_ProgressBarScript.cpp" />
@@ -276,7 +278,7 @@
     <ClCompile Include="Lu_HeartScript.cpp" />
     <ClCompile Include="Lu_IdleState.cpp" />
     <ClCompile Include="Lu_ImmovableScript.cpp" />
-    <ClCompile Include="Lu_Inventory.cpp" />
+    <ClCompile Include="Lu_InventoryScript.cpp" />
     <ClCompile Include="Lu_JumpProjectile.cpp" />
     <ClCompile Include="Lu_KingSlimeAttackState.cpp" />
     <ClCompile Include="Lu_KingSlimeDeadState.cpp" />

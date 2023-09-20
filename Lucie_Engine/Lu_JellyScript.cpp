@@ -6,6 +6,7 @@
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
 #include "Lu_Resources.h"
+#include "Lu_InventoryScript.h"
 
 namespace Lu
 {
@@ -30,17 +31,23 @@ namespace Lu
 		GameObject* pPlayer = _Other->GetOwner();
 		if (pPlayer->GetLayerIndex() == (int)eLayerType::Player)
 		{
-			// 원래 인벤토리에 추가하고, 인벤토리에서 퀵슬롯이 비어있다면 등록해줘야함!
-			// 따로 퀵슬롯으로 등록할 수 있었는지는 기억이 안남ㅋ (소모하는 아이템이면 자동으로 퀵 슬롯 등록했나?)
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 			if (pPlayerScript)
 			{
-				QuickItemScript* pQuickItem = (QuickItemScript*)pPlayerScript->GetUI(PlayerScript::eUI::QuickItem);
-				pQuickItem->SetQuickSlotItem(this);
+				InventoryScript* pInven = (InventoryScript*)pPlayerScript->GetUI(PlayerScript::eUI::Inventory);
+				if (pInven->AddtoInventory(this))
+				{
+					QuickItemScript* pQuickItem = (QuickItemScript*)pPlayerScript->GetUI(PlayerScript::eUI::QuickItem);
+					if (pQuickItem)
+					{
+						if (pQuickItem->IsCurSlotEmpty())
+							pQuickItem->SetQuickSlotItem(this);
+					}
 
-				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-				pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));
-				pSFX->Play();
+					AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+					pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));
+					pSFX->Play();
+				}
 			}
 		}
 	}
@@ -61,6 +68,11 @@ namespace Lu
 		pSFX->Play();
 
 		pPlayerScript->InflictDamage(-2);
+
+		// 인벤토리에서 제거
+		InventoryScript* pInventory = (InventoryScript*)pPlayerScript->GetUI(PlayerScript::eUI::Inventory);
+		pInventory->UsetoInventory(GetItemSlotNumber());
+
 		SceneManager::RemoveFromDontDestroyOnLoad(GetOwner());
 		object::Destroy(GetOwner());
 

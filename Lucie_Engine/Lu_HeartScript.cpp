@@ -26,35 +26,23 @@ namespace Lu
 
 	void HeartScript::Initialize()
 	{
-		//std::wstring MaterialName;
-
 		for (int i = 0; i < MaxHeart * 2; ++i)
 		{
-			//m_arrHeartUV[i] = Vector2(24.f, 22.f) / Vector2(48.f, 22.f);
-
 			// 0 ~ 4번 : Empty 하트
 			if (i < MaxHeart)
 			{
 				m_arrHeartPos[i] = Vector2(-80.f - (i * 36) - (i * 5.f), -280.f);
 				m_arrHeart[i] = object::Instantiate<GameObject>(Vector3(m_arrHeartPos[i].x, m_arrHeartPos[i].y, 100.f), Vector3(36.f, 33.f, 100.f), eLayerType::UI);
-
-
-				//MaterialName = std::to_wstring(i);
-				//MaterialName += L"EmptyHeart_Icon_Mtrl";
-				//pMeshRender->SetMaterial(Resources::Find<Material>(MaterialName));
+				m_arrHeart[i]->SetName(L"Empty_Heart");
 			}
 
 			// 5 ~ 9번 : Full Heart
 			else
 			{
 				m_arrHeart[i] = object::Instantiate<GameObject>(Vector3(m_arrHeartPos[i - 5].x, m_arrHeartPos[i - 5].y, 100.f), Vector3(36.f, 33.f, 100.f), eLayerType::UI);
-
-				//MaterialName = std::to_wstring(i);
-				//MaterialName += L"FullHeart_Icon_Mtrl";
-				//pMeshRender->SetMaterial(Resources::Find<Material>(MaterialName));
+				m_arrHeart[i]->SetName(L"Full_Heart");
 			}
 
-			m_arrHeart[i]->SetName(L"Heart");
 			SceneManager::DontDestroyOnLoad(m_arrHeart[i]);
 			MeshRenderer* pMeshRender = m_arrHeart[i]->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -71,22 +59,6 @@ namespace Lu
 			m_arrMaterial[i]->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_0, &vLtUV);
 			m_arrMaterial[i]->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_1, &vSliceUV);
 		}
-
-		//for (int i = 0; i < MaxHeart * 2; ++i)
-		//{
-		//	// 0 ~ 4번 : Empty 하트
-		//	if (i < MaxHeart)
-		//	{
-		//		m_arrHeart[i]->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_1, &m_arrHeartUV[i]);
-		//	}
-		//	// 5 ~ 9번 : Full Heart
-		//	else
-		//	{
-		//		Vector2 vLtUV = Vector2(24.f, 0.f) / Vector2(48.f, 22.f);
-		//		m_arrHeart[i]->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_0, &vLtUV);
-		//		m_arrHeart[i]->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_1, &m_arrHeartUV[i]);
-		//	}
-		//}
 	}
 
 	void HeartScript::SetMaxHP(int _MaxHP)
@@ -110,7 +82,6 @@ namespace Lu
 		{
 			ChangeHeartSize(i, eHeartSize::Small);
 			ChangeHeartColor(i++, eHeartColor::Empty);
-			//HeartRender(i++, true);
 		}
 
 		for (; i < MaxHeart; ++i)
@@ -119,13 +90,11 @@ namespace Lu
 			if (i > m_MaxCount - 1)
 			{
 				m_arrHeart[i]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
-				//HeartRender(i, false);
 			}
 			else
 			{
 				ChangeHeartSize(i, eHeartSize::Big);
 				ChangeHeartColor(i, eHeartColor::Empty);
-				//HeartRender(i, true);
 			}
 		}
 	}
@@ -154,14 +123,12 @@ namespace Lu
 			if (i < MaxHeart + iEmptyHeartCount)
 			{
 				m_arrHeart[i]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
-				//HeartRender(i, false);
 			}
 
 			// MaxCount에 해당되지 않는 하트는 렌더링 안함
 			else if (i >= m_MaxCount + MaxHeart)
 			{
 				m_arrHeart[i]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
-				//HeartRender(i, false);
 			}
 
 			else
@@ -173,20 +140,17 @@ namespace Lu
 					{
 						ChangeHeartColor(i, eHeartColor::Full);
 						ChangeHeartSize(i, eHeartSize::Small);
-						//HeartRender(i, true);
 					}
 					else
 					{
 						ChangeHeartColor(i, eHeartColor::Full);
 						ChangeHeartSize(i, eHeartSize::Big);
-						//HeartRender(i, true);
 					}
 				}
 				else
 				{
 					ChangeHeartColor(i, eHeartColor::Full);
 					ChangeHeartSize(i, eHeartSize::Big);
-					//HeartRender(i, true);
 				}
 			}
 		}
@@ -208,16 +172,4 @@ namespace Lu
 			m_arrHeart[_Index]->GetComponent<Transform>()->SetScale(Vector3(36.f, 33.f, 100.f));
 		}
 	}
-
-	//void HeartScript::HeartRender(int _Index, bool _Render)
-	//{
-	//	if (_Render)
-	//	{
-	//		m_arrHeartUV[_Index] = Vector2(24.f, 22.f) / Vector2(48.f, 22.f);
-	//	}
-	//	else
-	//	{
-	//		m_arrHeartUV[_Index] = Vector2::Zero;
-	//	}
-	//}
 }

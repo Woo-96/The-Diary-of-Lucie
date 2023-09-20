@@ -32,7 +32,6 @@ namespace Lu
 		GameObject*					m_arrHeart[MaxHeart * 2];				// 하트 객체
 		std::shared_ptr<Material>	m_arrMaterial[(int)eHeartColor::End];	// 하트 재질
 		Vector2						m_arrHeartPos[MaxHeart];				// 하트 객체 위치
-		//Vector2						m_arrHeartUV[MaxHeart * 2];				// 하트 렌더링 여부 (Slice를 0으로 설정하면 렌더링 안함)
 		int							m_MaxCount;								// 현재 플레이어 최대 하트 객체 개수
 
 	public:
@@ -46,6 +45,5 @@ namespace Lu
 	private:
 		void ChangeHeartColor(int _Index, eHeartColor _Color);
 		void ChangeHeartSize(int _Index, eHeartSize _Size);
-		//void HeartRender(int _Index, bool _Render);
 	};
 }

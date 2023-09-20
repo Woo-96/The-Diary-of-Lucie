@@ -8,6 +8,7 @@ namespace Lu
 	GameObject::GameObject()
 		: m_State(eState::Active)
 		, m_LayerIdx(-1)
+		, m_bActive(true)
 	{
 		AddComponent<Transform>();
 	}
@@ -35,6 +36,9 @@ namespace Lu
 
 	void GameObject::Update()
 	{
+		if (!m_bActive)
+			return;
+
 		for (Component* comp : m_Components)
 		{
 			comp->Update();
@@ -48,6 +52,9 @@ namespace Lu
 
 	void GameObject::LateUpdate()
 	{
+		if (!m_bActive)
+			return;
+
 		for (Component* comp : m_Components)
 		{
 			comp->LateUpdate();
@@ -61,6 +68,9 @@ namespace Lu
 
 	void GameObject::Render()
 	{
+		if (!m_bActive)
+			return;
+
 		for (Component* comp : m_Components)
 		{
 			comp->Render();

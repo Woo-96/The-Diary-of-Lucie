@@ -29,7 +29,7 @@
     <ClCompile Include="Lu_GameOverScene.cpp">
       <Filter>Contents\Scene\GameOver</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_Inventory.cpp">
+    <ClCompile Include="Lu_InventoryScript.cpp">
       <Filter>Contents\Script\05. UI\Inventory</Filter>
     </ClCompile>
     <ClCompile Include="Lu_CoinScript.cpp">
@@ -230,6 +230,9 @@
     <ClCompile Include="Lu_WeaponScript.cpp">
       <Filter>Contents\Script\04. Object\Item\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_InventorySlotScript.cpp">
+      <Filter>Contents\Script\05. UI\Button\InventorySlot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -263,7 +266,7 @@
     <ClInclude Include="Lu_GameOverScene.h">
       <Filter>Contents\Scene\GameOver</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_Inventory.h">
+    <ClInclude Include="Lu_InventoryScript.h">
       <Filter>Contents\Script\05. UI\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Lu_CoinScript.h">
@@ -466,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="Lu_WeaponScript.h">
       <Filter>Contents\Script\04. Object\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_InventorySlotScript.h">
+      <Filter>Contents\Script\05. UI\Button\InventorySlot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -732,6 +738,9 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Item\Weapon">
       <UniqueIdentifier>{01d6f78a-3b26-4ff7-9f8b-671e51d7ef56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\Button\InventorySlot">
+      <UniqueIdentifier>{e96084a1-5d3a-487e-8ceb-14fabc427099}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

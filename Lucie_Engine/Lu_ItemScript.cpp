@@ -12,6 +12,7 @@ namespace Lu
 		, m_Time(0.f)
 		, m_MoveDir(1.f)
 		, m_MoveSpeed(30.f)
+		, m_ItemSlotNumber(-1)
 	{
 		SetName(L"ItemScript");
 	}

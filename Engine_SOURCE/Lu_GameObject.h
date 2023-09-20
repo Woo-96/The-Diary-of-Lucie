@@ -26,6 +26,7 @@ namespace Lu
 		std::vector<Script*>	m_Scripts;
 
 		int                     m_LayerIdx;
+		bool					m_bActive;
 
 	public:
 		void SetState(eState _State)
@@ -36,6 +37,11 @@ namespace Lu
 		void SetLayerIndex(int _Layer)
 		{
 			m_LayerIdx = _Layer;
+		}
+
+		void SetActive(bool _b)
+		{
+			m_bActive = _b;
 		}
 
 	public:

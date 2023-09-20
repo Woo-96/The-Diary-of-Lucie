@@ -756,21 +756,13 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"QuickItem_Mtrl", pMaterial);
 
-		// UI - WeaponSlot_A
+		// UI - WeaponSlot
 		pTexture = Resources::Load<Texture>(L"weaponSlotA_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotA.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WeaponSlot_Mtrl", pMaterial);
-
-		//// UI - WeaponSlot_B
-		//pTexture = Resources::Load<Texture>(L"weaponSlotB_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotB.png");
-		//pMaterial = std::make_shared<Material>();
-		//pMaterial->SetShader(pShader);
-		//pMaterial->SetTexture(pTexture);
-		//pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		//Resources::Insert(L"weaponSlotB_Mtrl", pMaterial);
 
 		// UI - Gold_A
 		pTexture = Resources::Load<Texture>(L"Gold_A_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Gold_A.png");
@@ -786,6 +778,47 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"InvenBG_Mtrl", pMaterial);
+
+		// UI - Inventory Slot Default
+		pTexture = Resources::Load<Texture>(L"Slot_Default_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\Slot_Default.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Slot_Default_Mtrl", pMaterial);
+
+		// UI - Inventory Slot Default Equipped
+		pTexture = Resources::Load<Texture>(L"Slot_Default_Equipped_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\Slot_Default_Equipped.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Slot_Default_Equipped_Mtrl", pMaterial);
+
+		// UI - Inventory Slot Hovered
+		pTexture = Resources::Load<Texture>(L"Slot_Hovered_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\Slot_Hovered.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Slot_Hovered_Mtrl", pMaterial);
+
+		// UI - Inventory Slot Hovered Equipped
+		pTexture = Resources::Load<Texture>(L"Slot_Hovered_Equipped_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\Slot_Hovered_Equipped.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Slot_Hovered_Equipped_Mtrl", pMaterial);
+
+		// UI - Inventory Slot Equipped Label
+		pTexture = Resources::Load<Texture>(L"Equipped_Label_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\Equipped_Label.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Equipped_Label_Mtrl", pMaterial);
+
 
 #pragma endregion
 #pragma region Number Shader
@@ -812,66 +845,11 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"EmptyHeart_Icon_Mtrl", pMaterial);
 
-		/*pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"0EmptyHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"1EmptyHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"2EmptyHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"3EmptyHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		Resources::Insert(L"4EmptyHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"5FullHeart_Icon_Mtrl", pMaterial);*/
-
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"FullHeart_Icon_Mtrl", pMaterial);
-
-		/*pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"6FullHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"7FullHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"8FullHeart_Icon_Mtrl", pMaterial);
-
-		pMaterial = std::make_shared<Material>();
-		pMaterial->SetShader(pShader);
-		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"9FullHeart_Icon_Mtrl", pMaterial);*/
 
 		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
 		pMaterial = std::make_shared<Material>();

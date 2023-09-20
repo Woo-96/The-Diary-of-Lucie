@@ -3,6 +3,8 @@
 
 namespace Lu
 {
+	class InventoryScript;
+	class GameObject;
 	class ItemScript;
 	class QuickItemScript : public UIScript
 	{
@@ -11,7 +13,21 @@ namespace Lu
 		virtual ~QuickItemScript();
 
 	private:
-		ItemScript* m_CurItem;
+		InventoryScript*	m_Inventory;
+		GameObject*			m_CurIcon;
+		ItemScript*			m_CurItem;
+
+	public:
+		void SetInventory(InventoryScript* _Inventory)
+		{
+			m_Inventory = _Inventory;
+		}
+
+	public:
+		bool IsCurSlotEmpty()
+		{
+			return m_CurItem == nullptr;
+		}
 
 	public:
 		void SetQuickSlotItem(ItemScript* _Item);

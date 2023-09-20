@@ -33,6 +33,7 @@ namespace Lu
 		float		m_Time;
 		float		m_MoveDir;
 		float		m_MoveSpeed;
+		int			m_ItemSlotNumber;
 
 	public:
 		void SetItemType(eItemType _Type)
@@ -52,6 +53,11 @@ namespace Lu
 
 		void SetItemState(eItemState _State);
 
+		void SetItemSlotNumber(int _Num)
+		{
+			m_ItemSlotNumber = _Num;
+		}
+
 	public:
 		eItemType GetItemType()	const
 		{
@@ -61,6 +67,11 @@ namespace Lu
 		eItemState GetItemState()	const
 		{
 			return m_ItemState;
+		}
+
+		int GetItemSlotNumber()	const
+		{
+			return m_ItemSlotNumber;
 		}
 
 	public:

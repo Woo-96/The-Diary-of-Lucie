@@ -21,7 +21,6 @@ namespace Lu
 		virtual void OnExit() override;
 
 	protected:
-		void CreateHUD();
-		void CreateInventory();
+		void CreateUI();
 	};
 }
