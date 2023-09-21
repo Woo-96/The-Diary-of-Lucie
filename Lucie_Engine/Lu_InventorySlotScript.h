@@ -25,6 +25,8 @@ namespace Lu
 		eSlotState			m_SlotState;
 		MeshRenderer*		m_MeshRender;
 		ItemScript*			m_Item;
+		int					m_SlotNumber;
+
 
 	public:
 		void SetInventory(InventoryScript* _Inventory)
@@ -43,7 +45,17 @@ namespace Lu
 
 		void SetInventoryOnOFF(bool _b);
 
+		void SetSlotNumber(int _Number)
+		{
+			m_SlotNumber = _Number;
+		}
+
 	public:
+		ItemScript* GetItem()	const
+		{
+			return m_Item;
+		}
+
 		bool IsSlotEmpty()
 		{
 			return m_Item == nullptr;
@@ -54,6 +66,9 @@ namespace Lu
 
 	private:
 		void MaterialUpdate();
+
+	protected:
+		virtual void ButtonClickEvent() override;
 	};
 }
 

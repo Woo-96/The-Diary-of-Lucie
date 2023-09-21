@@ -37,6 +37,7 @@ namespace Lu
 		, m_bInvincible(false)
 		, m_bHitEffect(false)
 		, m_bDontAnimChange(false)
+		, m_bCantHit(false)
 		, m_InvincibleTime(0.f)
 		, m_Damage(1)
 		, m_Animator(nullptr)
@@ -521,7 +522,9 @@ namespace Lu
 		}
 
 		// АјАн
-		if (Input::GetKeyUp(eKeyCode::LBUTTON) && m_PlayerInfo.CurTP > 10.f)
+		if (Input::GetKeyUp(eKeyCode::LBUTTON) 
+			&& m_PlayerInfo.CurTP > 10.f
+			&& !m_bCantHit)
 		{
 			m_PrevDir = m_Dir;
 			m_Dir = CalDirToMouse();

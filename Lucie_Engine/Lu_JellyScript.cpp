@@ -60,14 +60,14 @@ namespace Lu
 		int iMaxHP = pPlayerScript->GetPlayerInfo().MaxHP;
 		int iCurHP = pPlayerScript->GetPlayerInfo().CurHP;
 
-		if (iCurHP + 2 > iMaxHP)
+		if (iCurHP + 1 > iMaxHP)
 			return false;
 
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"RecoverySFX", L"..\\Resources\\Sound\\SFX\\Player\\RecoverySFX.ogg"));
 		pSFX->Play();
 
-		pPlayerScript->InflictDamage(-2);
+		pPlayerScript->InflictDamage(-1);
 
 		// 인벤토리에서 제거
 		InventoryScript* pInventory = (InventoryScript*)pPlayerScript->GetUI(PlayerScript::eUI::Inventory);

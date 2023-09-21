@@ -25,15 +25,11 @@ namespace Lu
 
 	void QuickItemScript::SetQuickSlotItem(ItemScript* _Item)
 	{
-		if (!m_CurItem)
-		{
-			m_CurItem = _Item;
+		m_CurItem = _Item;
+		if (m_CurItem)
 			m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(m_CurItem->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
-		}
 		else
-		{
-			// 이미 퀵 슬롯에 아이템이 있는데 바꾸고 싶은 경우..?
-		}
+			m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
 	}
 
 	void QuickItemScript::UseQuickSlotItem()
@@ -42,8 +38,17 @@ namespace Lu
 		{
 			if (m_CurItem->ItemEfficacy())
 			{
-				m_CurItem = nullptr;
-				m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+				// 소비 아이템이 인벤토리에 존재한다면, 퀵 슬롯에 등록
+				ItemScript* pItem = m_Inventory->FindQuickItem();
+				if (pItem)
+				{
+					SetQuickSlotItem(pItem);
+				}
+				else
+				{
+					m_CurItem = nullptr;
+					m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+				}
 			}
 		}
 	}

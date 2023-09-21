@@ -53,6 +53,7 @@ namespace Lu
 			pCurScene->PlayerWeaponGet(m_WeaponType);
 		}
 
+		// 인벤토리에 아이템 추가
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 		if (!pPlayerScript)
@@ -64,6 +65,7 @@ namespace Lu
 
 		if (pInven->AddtoInventory(this))
 		{
+			// 웨폰 퀵 슬롯에 아이템 추가
 			WeaponSlotScript* pSlot = (WeaponSlotScript*)pPlayerScript->GetUI(PlayerScript::eUI::WeaponSlot);
 			if (pSlot)
 			{
@@ -71,6 +73,7 @@ namespace Lu
 					pSlot->EquipWeapon(this);
 			}
 		
+			// 아이템 획득 효과음
 			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 			pSFX->SetClip(Resources::Load<AudioClip>(L"GetItemSFX", L"..\\Resources\\Sound\\SFX\\Player\\GetItemSFX.ogg"));
 			pSFX->Play();

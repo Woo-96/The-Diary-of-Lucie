@@ -23,9 +23,8 @@ namespace Lu
 	private:
 		InventoryScript*			m_Inventory;
 		eSlotType					m_CurType;
-		GameObject*					m_arrItem[(int)eSlotType::End];
-		std::shared_ptr<Material>	m_arrMaterial[(int)eSlotType::End];
-		eWeaponType					m_arrWeaponType[(int)eSlotType::End];
+		GameObject*					m_arrIcon[(int)eSlotType::End];
+		ItemScript*					m_arrItem[(int)eSlotType::End];
 
 	public:
 		void SetInventory(InventoryScript* _Inventory)
@@ -34,18 +33,27 @@ namespace Lu
 		}
 
 	public:
-		bool IsCurSlotEmpty()
+		eSlotType GetCurSlotType()	const
 		{
-			return m_arrMaterial[(int)m_CurType] == nullptr;
+			return m_CurType;
 		}
 
-	public:
-		virtual void Update() override;
+		ItemScript* GetSlotItem(eSlotType _Slot)	const
+		{
+			return m_arrItem[(int)_Slot];
+		}
+
+		bool IsCurSlotEmpty()
+		{
+			return m_arrItem[(int)m_CurType] == nullptr;
+		}
 
 	public:
 		void ChangeSlot(eSlotType _Type);
 		void ChangeSlot();	// 토글
-		void EquipWeapon(ItemScript* _Item);
+		void EquipWeapon(ItemScript* _Item);	// 자동 장착
 		void UnEquipWeapon(ItemScript* _Item);
+		void WeaponChange(eSlotType _Slot, bool _bEquip);	// 수동 장착
+		void ClearSlot(eSlotType _Slot);
 	};
 }

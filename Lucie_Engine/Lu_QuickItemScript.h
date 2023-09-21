@@ -24,6 +24,11 @@ namespace Lu
 		}
 
 	public:
+		ItemScript* GetCurItem()	const
+		{
+			return m_CurItem;
+		}
+
 		bool IsCurSlotEmpty()
 		{
 			return m_CurItem == nullptr;

@@ -17,7 +17,6 @@ namespace Lu
 		: m_Inventory(nullptr)
 		, m_CurType(eSlotType::WeaponSlot_A)
 		, m_arrItem{}
-		, m_arrMaterial{}
 	{
 		for (int i = 0; i < (int)eSlotType::End; ++i)
 		{
@@ -26,18 +25,13 @@ namespace Lu
 			if(i == (int)eSlotType::WeaponSlot_B)
 				vPos = Vector3(647.f, -335.f, 100.f);
 
-			m_arrItem[i] = object::Instantiate<GameObject>(vPos, Vector3(48.f, 48.f, 100.f), eLayerType::UI);
-			m_arrItem[i]->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			m_arrWeaponType[i] = eWeaponType::None;
-			SceneManager::DontDestroyOnLoad(m_arrItem[i]);
+			m_arrIcon[i] = object::Instantiate<GameObject>(vPos, Vector3(48.f, 48.f, 100.f), eLayerType::UI);
+			m_arrIcon[i]->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			SceneManager::DontDestroyOnLoad(m_arrIcon[i]);
 		}
 	}
 
 	WeaponSlotScript::~WeaponSlotScript()
-	{
-	}
-
-	void WeaponSlotScript::Update()
 	{
 	}
 
@@ -47,14 +41,10 @@ namespace Lu
 			return;
 
 		// 이전 슬롯(현재 슬롯)에 아이템이 등록되어 있었다면 가리기
-		if (m_arrMaterial[(int)m_CurType])
-		{
-			m_arrItem[(int)m_CurType]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
-		}
+		WeaponChange(m_CurType, false);
 
 		// 슬롯 교체
 		m_CurType = _Type;
-		m_arrItem[(int)m_CurType]->GetComponent<MeshRenderer>()->SetMaterial(m_arrMaterial[(int)m_CurType]);
 
 		// 슬롯의 재질 교체
 		if (m_CurType == eSlotType::WeaponSlot_A)
@@ -66,16 +56,8 @@ namespace Lu
 			GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture(Resources::Load<Texture>(L"weaponSlotB_Tex", L"..\\Resources\\Texture\\UI\\HUD\\weaponSlotB.png"));
 		}
 
-		// 슬롯의 아이템 렌더링 및 플레이어에 적용
-		GameObject* pPlayer = SceneManager::FindPlayer();
-		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-		if (pPlayerScript)
-		{
-			if(m_arrWeaponType[(int)m_CurType] == eWeaponType::None)
-				pPlayerScript->SetWeaponType(eWeaponType::Wand);
-			else
-				pPlayerScript->SetWeaponType(m_arrWeaponType[(int)m_CurType]);
-		}
+		// 현재 슬롯에 아이템 등록
+		WeaponChange(m_CurType, true);
 
 		// 슬롯 교체 SFX
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
@@ -97,20 +79,81 @@ namespace Lu
 
 	void WeaponSlotScript::EquipWeapon(ItemScript* _Item)
 	{
-		WeaponScript* pItemScript = (WeaponScript*)_Item;
-		m_arrWeaponType[(int)m_CurType] = pItemScript->GetWeaponType();
-		m_arrMaterial[(int)m_CurType] = _Item->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial();
-		m_arrItem[(int)m_CurType]->GetComponent<MeshRenderer>()->SetMaterial(m_arrMaterial[(int)m_CurType]);
+		// 장착한 아이템 저장
+		m_arrItem[(int)m_CurType] = _Item;
 
+		// 아이콘을 장착한 아이템으로 변경
+		m_arrIcon[(int)m_CurType]->GetComponent<MeshRenderer>()->SetMaterial(m_arrItem[(int)m_CurType]->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
+
+		// 장착한 아이템의 인벤토리 슬롯의 상태 동기화
+		m_Inventory->EquipWeapon(_Item->GetItemSlotNumber(), true);
+
+		// 장착한 아이템의 효과를 플레이어에게 적용
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+		WeaponScript* pItemScript = (WeaponScript*)_Item;
 		if (pPlayerScript)
 		{
-			pPlayerScript->SetWeaponType(m_arrWeaponType[(int)m_CurType]);
+			pPlayerScript->SetWeaponType(pItemScript->GetWeaponType());
 		}
 	}
 
 	void WeaponSlotScript::UnEquipWeapon(ItemScript* _Item)
 	{
+	}
+
+	void WeaponSlotScript::WeaponChange(eSlotType _Slot, bool _bEquip)
+	{
+		if (_bEquip)
+		{
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+
+			if (m_arrItem[(int)_Slot])
+			{
+				m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(m_arrItem[(int)_Slot]->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
+
+				m_Inventory->EquipWeapon(m_arrItem[(int)_Slot]->GetItemSlotNumber(), true);
+
+				WeaponScript* pItemScript = (WeaponScript*)m_arrItem[(int)_Slot];
+				if (pPlayerScript)
+				{
+					pPlayerScript->SetWeaponType(pItemScript->GetWeaponType());
+				}
+			}
+			else
+			{
+				if (pPlayerScript)
+				{
+					pPlayerScript->SetWeaponType(eWeaponType::Wand);
+				}
+			}
+
+		}
+		else
+		{
+			m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+
+			if(m_arrItem[(int)_Slot])
+				m_Inventory->EquipWeapon(m_arrItem[(int)_Slot]->GetItemSlotNumber(), false);
+
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+			pPlayerScript->SetWeaponType(eWeaponType::Wand);
+		}
+	}
+
+	void WeaponSlotScript::ClearSlot(eSlotType _Slot)
+	{
+		m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+
+		if (m_arrItem[(int)_Slot])
+			m_Inventory->EquipWeapon(m_arrItem[(int)_Slot]->GetItemSlotNumber(), false);
+
+		GameObject* pPlayer = SceneManager::FindPlayer();
+		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+		pPlayerScript->SetWeaponType(eWeaponType::Wand);
+
+		m_arrItem[(int)_Slot] = nullptr;
 	}
 }

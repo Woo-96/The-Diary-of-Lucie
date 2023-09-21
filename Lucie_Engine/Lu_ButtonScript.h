@@ -40,6 +40,9 @@ namespace Lu
 
 	private:
 		bool MouseCollision();
+
+	protected:
+		virtual void ButtonClickEvent() = 0;
 	};
 }
 

@@ -233,6 +233,9 @@
     <ClCompile Include="Lu_InventorySlotScript.cpp">
       <Filter>Contents\Script\05. UI\Button\InventorySlot</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_EquipLabelScript.cpp">
+      <Filter>Contents\Script\05. UI\Label\EquipLabel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -472,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="Lu_InventorySlotScript.h">
       <Filter>Contents\Script\05. UI\Button\InventorySlot</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_EquipLabelScript.h">
+      <Filter>Contents\Script\05. UI\Label\EquipLabel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -741,6 +747,9 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\Button\InventorySlot">
       <UniqueIdentifier>{e96084a1-5d3a-487e-8ceb-14fabc427099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\Label\EquipLabel">
+      <UniqueIdentifier>{245e4fd2-20de-44ed-82c9-adf9beadde9f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

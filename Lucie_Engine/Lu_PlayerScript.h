@@ -91,11 +91,11 @@ namespace Lu
 		bool					m_bInvincible;
 		bool					m_bHitEffect;
 		bool					m_bDontAnimChange;
+		bool					m_bCantHit;
 		float					m_InvincibleTime;
 		int						m_Damage;
 
 		Animator*				m_Animator;
-
 		UIScript*				m_arrUI[(int)eUI::End];
 
 	public:
@@ -117,6 +117,11 @@ namespace Lu
 		void SetWeaponType(eWeaponType _Type)
 		{
 			m_CurWeapon = _Type;
+		}
+
+		void SetCantHit(bool _b)
+		{
+			m_bCantHit = _b;
 		}
 
 	public:

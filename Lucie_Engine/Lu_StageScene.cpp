@@ -153,6 +153,9 @@ namespace Lu
 			QuickItemScript* pQuickSlot = pQuick->AddComponent<QuickItemScript>();
 			pQuickSlot->SetInventory(pInvenScript);
 			pPlayerScript->SetUI(PlayerScript::eUI::QuickItem, (UIScript*)pQuickSlot);
+
+			pInvenScript->SetWeaponSlot(pWeaponSlot);
+			pInvenScript->SetQuickSlot(pQuickSlot);
 		}
 
 		{

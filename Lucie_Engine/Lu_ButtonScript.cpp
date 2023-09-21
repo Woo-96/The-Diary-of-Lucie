@@ -34,6 +34,7 @@ namespace Lu
 				if (Input::GetKeyUp(eKeyCode::LBUTTON))
 				{
 					m_CurBtnState = eButtonState::Click;
+					ButtonClickEvent();
 				}
 				else
 				{
@@ -54,9 +55,9 @@ namespace Lu
 	bool ButtonScript::MouseCollision()
 	{
 		Transform* pTransform = GetOwner()->GetComponent<Transform>();
-		Vector3 vButtonWorldPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		Vector3 vButtonWorldPos = pTransform->GetPosition();
 		Vector2 vButtonScreenPos = SceneManager::GetActiveScene()->GetUICam()->WorldToScreen(vButtonWorldPos);
-		Vector3 vButtonSize = GetOwner()->GetComponent<Transform>()->GetScale();
+		Vector3 vButtonSize = pTransform->GetScale();
 
 		Vector2 vMousePos = Input::GetMousePos();
 
