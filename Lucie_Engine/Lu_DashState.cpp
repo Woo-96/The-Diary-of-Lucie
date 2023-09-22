@@ -42,7 +42,7 @@ namespace Lu
 		pSFX->SetClip(Resources::Load<AudioClip>(L"DashSFX", L"..\\Resources\\Sound\\SFX\\Player\\DashSFX.ogg"));
 		pSFX->Play();
 
-		GetPlayerScript()->UseStamina(20.f);
+		GetPlayerScript()->UseStamina(2.f);
 		GetPlayerScript()->SetAction(true);
 
 		// 방향 결정

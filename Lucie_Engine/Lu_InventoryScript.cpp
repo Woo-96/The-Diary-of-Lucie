@@ -11,7 +11,7 @@
 #include "Lu_QuickItemScript.h"
 #include "Lu_EquipLabelScript.h"
 #include "Lu_WeaponSlotScript.h"
-#include "Lu_FontWrapper.h"
+#include "Lu_InventoryLayoutScript.h"
 
 namespace Lu
 {
@@ -42,6 +42,8 @@ namespace Lu
 			MeshRenderer* pMeshRender = m_arrParts[(int)eParts::Layout]->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"InvenBG_Mtrl"));
+
+			m_arrParts[(int)eParts::Layout]->AddComponent<InventoryLayoutScript>()->SetInventory(this);
 		}
 
 		for (int i = (int)eParts::Slot_1; i <= (int)eParts::Slot_10; ++i)
@@ -86,6 +88,17 @@ namespace Lu
 
 			m_arrParts[(int)eParts::EquipLabel]->AddComponent<EquipLabelScript>();
 		}
+
+		{
+			m_arrParts[(int)eParts::GoldIcon] = object::Instantiate<GameObject>(Vector3(600.f, -217.f, 140.f), Vector3(31.5f, 33.f, 100.f), eLayerType::UI);
+			m_arrParts[(int)eParts::GoldIcon]->SetName(L"Inventory_GoldIcon");
+			m_arrParts[(int)eParts::GoldIcon]->SetActive(m_bActive);
+			SceneManager::DontDestroyOnLoad(m_arrParts[(int)eParts::GoldIcon]);
+
+			MeshRenderer* pMeshRender = m_arrParts[(int)eParts::GoldIcon]->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"InvenGoldIcon_Mtrl"));
+		}
 	}
 
 	void InventoryScript::Update()
@@ -103,14 +116,6 @@ namespace Lu
 		{
 			m_arrParts[(int)eParts::EquipLabel]->SetActive(false);
 		}
-	}
-
-	void InventoryScript::Render()
-	{
-		std::wstring wstrFont = L"인벤토리";
-		wchar_t Font[256];
-		wcscpy_s(Font, wstrFont.c_str());
-		FontWrapper::DrawFont(Font, 500.f, 500.f, 20.f, FONT_RGBA(255, 165, 0, 255));
 	}
 
 	void InventoryScript::InventoryOnOff()
@@ -225,6 +230,16 @@ namespace Lu
 
 		InventorySlotScript* pSlotScript = m_arrParts[_SlotNumber]->GetComponent<InventorySlotScript>();
 		pSlotScript->SetSlotState(eState);
+	}
+
+	void InventoryScript::ChangeWeaponName(std::wstring _Name)
+	{
+		if (!_Name.empty())
+		{
+			InventoryLayoutScript* pLayout = m_arrParts[(int)eParts::Layout]->GetComponent<InventoryLayoutScript>();
+			pLayout->SetText(_Name);
+			pLayout->SetTextPrint(true);
+		}
 	}
 
 	bool InventoryScript::MouseCollision()

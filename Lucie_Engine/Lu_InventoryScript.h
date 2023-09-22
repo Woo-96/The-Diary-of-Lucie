@@ -24,6 +24,7 @@ namespace Lu
 			Slot_9,
 			Slot_10,
 			EquipLabel,
+			GoldIcon,
 			End,
 		};
 
@@ -68,10 +69,19 @@ namespace Lu
 			return m_bActive;
 		}
 
+		int GetMaxCount()	const
+		{
+			return m_MaxCount;
+		}
+
+		int GetCurCount()	const
+		{
+			return m_CurCount;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
-		virtual void Render() override;
 
 	public:
 		void InventoryOnOff();
@@ -79,6 +89,7 @@ namespace Lu
 		void UsetoInventory(int _SlotNumber);
 		ItemScript* FindQuickItem();
 		void EquipWeapon(int _SlotNumber, bool _bEquip);
+		void ChangeWeaponName(std::wstring _Name);
 
 	private:
 		bool MouseCollision();

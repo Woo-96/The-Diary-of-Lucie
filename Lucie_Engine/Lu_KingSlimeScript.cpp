@@ -30,8 +30,8 @@ namespace Lu
 	{
 		SetName(L"KingSlimeScript");
 
-		GetInfo().HP = 300;
-		GetInfo().MaxHP = 300;
+		GetInfo().HP = 100;
+		GetInfo().MaxHP = 100;
 		GetInfo().MoveSpeed = 150.f;
 	}
 
@@ -109,7 +109,7 @@ namespace Lu
 			if (KingSlimeStateScript::eState::Dead == m_CurState->GetStateType())
 				return;
 
-			GetInfo().HP -= 50;
+			GetInfo().HP -= m_Target->GetPlayerDamage();
 			m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 
 			if (GetInfo().HP <= 0.f)

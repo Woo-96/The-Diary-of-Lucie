@@ -29,9 +29,6 @@
     <ClCompile Include="Lu_GameOverScene.cpp">
       <Filter>Contents\Scene\GameOver</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_InventoryScript.cpp">
-      <Filter>Contents\Script\05. UI\Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="Lu_CoinScript.cpp">
       <Filter>Contents\Script\04. Object\Item\Coin</Filter>
     </ClCompile>
@@ -236,6 +233,12 @@
     <ClCompile Include="Lu_EquipLabelScript.cpp">
       <Filter>Contents\Script\05. UI\Label\EquipLabel</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_InventoryScript.cpp">
+      <Filter>Contents\Script\05. UI\Inventory\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_InventoryLayoutScript.cpp">
+      <Filter>Contents\Script\05. UI\Inventory\Layout</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -268,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="Lu_GameOverScene.h">
       <Filter>Contents\Scene\GameOver</Filter>
-    </ClInclude>
-    <ClInclude Include="Lu_InventoryScript.h">
-      <Filter>Contents\Script\05. UI\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Lu_CoinScript.h">
       <Filter>Contents\Script\04. Object\Item\Coin</Filter>
@@ -478,6 +478,12 @@
     </ClInclude>
     <ClInclude Include="Lu_EquipLabelScript.h">
       <Filter>Contents\Script\05. UI\Label\EquipLabel</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_InventoryScript.h">
+      <Filter>Contents\Script\05. UI\Inventory\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_InventoryLayoutScript.h">
+      <Filter>Contents\Script\05. UI\Inventory\Layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -750,6 +756,12 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\Label\EquipLabel">
       <UniqueIdentifier>{245e4fd2-20de-44ed-82c9-adf9beadde9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\Inventory\Manager">
+      <UniqueIdentifier>{8053fa92-6aab-4861-8df5-c8aade753aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\Inventory\Layout">
+      <UniqueIdentifier>{e9617054-9638-462b-a7d1-30a07ace80c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

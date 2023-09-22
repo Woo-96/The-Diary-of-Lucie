@@ -28,8 +28,8 @@ namespace Lu
 	{
 		SetName(L"BigSlimeScript");
 
-		GetInfo().HP = 100;
-		GetInfo().MaxHP = 100;
+		GetInfo().HP = 50;
+		GetInfo().MaxHP = 50;
 		GetInfo().MoveSpeed = 100.f;
 	}
 
@@ -79,7 +79,7 @@ namespace Lu
 			if (BigSlimeStateScript::eState::Dead == m_CurState->GetStateType())
 				return;
 
-			GetInfo().HP -= 50;
+			GetInfo().HP -= m_Target->GetPlayerDamage();
 			m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 
 			if (GetInfo().HP <= 0.f)

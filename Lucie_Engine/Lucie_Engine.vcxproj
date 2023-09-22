@@ -178,6 +178,7 @@
     <ClInclude Include="Lu_BigSlimeIdleState.h" />
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
     <ClInclude Include="Lu_EquipLabelScript.h" />
+    <ClInclude Include="Lu_InventoryLayoutScript.h" />
     <ClInclude Include="Lu_InventorySlotScript.h" />
     <ClInclude Include="Lu_ItemScript.h" />
     <ClInclude Include="Lu_JellyScript.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Lu_BigSlimeIdleState.cpp" />
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
     <ClCompile Include="Lu_EquipLabelScript.cpp" />
+    <ClCompile Include="Lu_InventoryLayoutScript.cpp" />
     <ClCompile Include="Lu_InventorySlotScript.cpp" />
     <ClCompile Include="Lu_ItemScript.cpp" />
     <ClCompile Include="Lu_JellyScript.cpp" />

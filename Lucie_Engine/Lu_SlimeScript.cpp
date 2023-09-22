@@ -23,8 +23,8 @@ namespace Lu
 	{
 		SetName(L"SlimeScript");
 
-		GetInfo().HP = 100;
-		GetInfo().MaxHP = 100;
+		GetInfo().HP = 30;
+		GetInfo().MaxHP = 30;
 		GetInfo().DetectRange = 300.f;
 		GetInfo().AttackRange = 200.f;
 		GetInfo().MoveSpeed = 50.f;
@@ -80,7 +80,7 @@ namespace Lu
 			if (SlimeStateScript::eState::Dead == m_CurState->GetStateType())
 				return;
 
-			GetInfo().HP -= 50;
+			GetInfo().HP -= m_Target->GetPlayerDamage();
 
 			if (GetInfo().HP <= 0.f)
 			{

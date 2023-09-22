@@ -68,6 +68,7 @@ namespace Lu
 		void MaterialUpdate();
 
 	protected:
+		virtual void ButtonHoveredEvent() override;
 		virtual void ButtonClickEvent() override;
 	};
 }

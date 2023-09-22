@@ -89,9 +89,11 @@ namespace Lu
 			pObject->AddComponent<Collider2D>();
 
 			m_arrWeapon[(int)eWeaponType::Wand] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)eWeaponType::Wand]->SetItemName(L"나무지팡이");
 			m_arrWeapon[(int)eWeaponType::Wand]->SetTransform(pObject->GetComponent<Transform>());
 			m_arrWeapon[(int)eWeaponType::Wand]->SetItemState(ItemScript::eItemState::Drop);
 			m_arrWeapon[(int)eWeaponType::Wand]->SetWeaponType(eWeaponType::Wand);
+			m_arrWeapon[(int)eWeaponType::Wand]->SetItemOption(1);
 		}
 
 		{
@@ -105,9 +107,11 @@ namespace Lu
 			pObject->AddComponent<Collider2D>();
 
 			m_arrWeapon[(int)eWeaponType::Bow] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)eWeaponType::Bow]->SetItemName(L"우드보우");
 			m_arrWeapon[(int)eWeaponType::Bow]->SetTransform(pObject->GetComponent<Transform>());
 			m_arrWeapon[(int)eWeaponType::Bow]->SetItemState(ItemScript::eItemState::Drop);
 			m_arrWeapon[(int)eWeaponType::Bow]->SetWeaponType(eWeaponType::Bow);
+			m_arrWeapon[(int)eWeaponType::Bow]->SetItemOption(1);
 		}
 
 		{
@@ -121,9 +125,11 @@ namespace Lu
 			pObject->AddComponent<Collider2D>();
 
 			m_arrWeapon[(int)eWeaponType::Sword] = pObject->AddComponent<WeaponScript>();
+			m_arrWeapon[(int)eWeaponType::Sword]->SetItemName(L"목검");
 			m_arrWeapon[(int)eWeaponType::Sword]->SetTransform(pObject->GetComponent<Transform>());
 			m_arrWeapon[(int)eWeaponType::Sword]->SetItemState(ItemScript::eItemState::Drop);
 			m_arrWeapon[(int)eWeaponType::Sword]->SetWeaponType(eWeaponType::Sword);
+			m_arrWeapon[(int)eWeaponType::Sword]->SetItemOption(1);
 		}
 
 		GameObject* pPlayer = SceneManager::FindPlayer();

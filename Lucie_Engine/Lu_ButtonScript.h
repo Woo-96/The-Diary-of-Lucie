@@ -42,6 +42,7 @@ namespace Lu
 		bool MouseCollision();
 
 	protected:
+		virtual void ButtonHoveredEvent() = 0;
 		virtual void ButtonClickEvent() = 0;
 	};
 }

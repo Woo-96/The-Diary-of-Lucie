@@ -27,15 +27,22 @@ namespace Lu
 		virtual ~ItemScript();
 
 	private:
-		eItemType	m_ItemType;
-		eItemState	m_ItemState;
-		Transform*	m_Transform;
-		float		m_Time;
-		float		m_MoveDir;
-		float		m_MoveSpeed;
-		int			m_ItemSlotNumber;
+		std::wstring	m_ItemName;
+		eItemType		m_ItemType;
+		eItemState		m_ItemState;
+		Transform*		m_Transform;
+		float			m_Time;
+		float			m_MoveDir;
+		float			m_MoveSpeed;
+		int				m_ItemSlotNumber;
+		int				m_ItemOption;
 
 	public:
+		void SetItemName(std::wstring _Name)
+		{
+			m_ItemName = _Name;
+		}
+
 		void SetItemType(eItemType _Type)
 		{
 			m_ItemType = _Type;
@@ -58,7 +65,17 @@ namespace Lu
 			m_ItemSlotNumber = _Num;
 		}
 
+		void SetItemOption(int _Option)
+		{
+			m_ItemOption = _Option;
+		}
+
 	public:
+		std::wstring GetItemName()
+		{
+			return m_ItemName;
+		}
+
 		eItemType GetItemType()	const
 		{
 			return m_ItemType;
@@ -72,6 +89,11 @@ namespace Lu
 		int GetItemSlotNumber()	const
 		{
 			return m_ItemSlotNumber;
+		}
+
+		int GetItemOption()	const
+		{
+			return m_ItemOption;
 		}
 
 	public:

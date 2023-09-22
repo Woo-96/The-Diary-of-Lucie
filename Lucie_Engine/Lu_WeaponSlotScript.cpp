@@ -16,7 +16,7 @@ namespace Lu
 	WeaponSlotScript::WeaponSlotScript()
 		: m_Inventory(nullptr)
 		, m_CurType(eSlotType::WeaponSlot_A)
-		, m_arrItem{}
+		, m_arrWeapon{}
 	{
 		for (int i = 0; i < (int)eSlotType::End; ++i)
 		{
@@ -77,13 +77,13 @@ namespace Lu
 		}
 	}
 
-	void WeaponSlotScript::EquipWeapon(ItemScript* _Item)
+	void WeaponSlotScript::EquipWeapon(WeaponScript* _Item)
 	{
 		// 장착한 아이템 저장
-		m_arrItem[(int)m_CurType] = _Item;
+		m_arrWeapon[(int)m_CurType] = _Item;
 
 		// 아이콘을 장착한 아이템으로 변경
-		m_arrIcon[(int)m_CurType]->GetComponent<MeshRenderer>()->SetMaterial(m_arrItem[(int)m_CurType]->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
+		m_arrIcon[(int)m_CurType]->GetComponent<MeshRenderer>()->SetMaterial(m_arrWeapon[(int)m_CurType]->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
 
 		// 장착한 아이템의 인벤토리 슬롯의 상태 동기화
 		m_Inventory->EquipWeapon(_Item->GetItemSlotNumber(), true);
@@ -91,14 +91,11 @@ namespace Lu
 		// 장착한 아이템의 효과를 플레이어에게 적용
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-		WeaponScript* pItemScript = (WeaponScript*)_Item;
 		if (pPlayerScript)
-		{
-			pPlayerScript->SetWeaponType(pItemScript->GetWeaponType());
-		}
+			pPlayerScript->SetWeaponType(m_arrWeapon[(int)m_CurType]->GetWeaponType(), m_arrWeapon[(int)m_CurType]->GetItemOption());
 	}
 
-	void WeaponSlotScript::UnEquipWeapon(ItemScript* _Item)
+	void WeaponSlotScript::UnEquipWeapon(WeaponScript* _Item)
 	{
 	}
 
@@ -109,23 +106,23 @@ namespace Lu
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 
-			if (m_arrItem[(int)_Slot])
+			if (m_arrWeapon[(int)_Slot])
 			{
-				m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(m_arrItem[(int)_Slot]->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
+				m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(m_arrWeapon[(int)_Slot]->GetOwner()->GetComponent<MeshRenderer>()->GetMaterial());
 
-				m_Inventory->EquipWeapon(m_arrItem[(int)_Slot]->GetItemSlotNumber(), true);
+				m_Inventory->EquipWeapon(m_arrWeapon[(int)_Slot]->GetItemSlotNumber(), true);
 
-				WeaponScript* pItemScript = (WeaponScript*)m_arrItem[(int)_Slot];
+				WeaponScript* pItemScript = (WeaponScript*)m_arrWeapon[(int)_Slot];
 				if (pPlayerScript)
 				{
-					pPlayerScript->SetWeaponType(pItemScript->GetWeaponType());
+					pPlayerScript->SetWeaponType(pItemScript->GetWeaponType(), pItemScript->GetItemOption());
 				}
 			}
 			else
 			{
 				if (pPlayerScript)
 				{
-					pPlayerScript->SetWeaponType(eWeaponType::Wand);
+					pPlayerScript->SetWeaponType(eWeaponType::None, 0);
 				}
 			}
 
@@ -134,26 +131,33 @@ namespace Lu
 		{
 			m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
 
-			if(m_arrItem[(int)_Slot])
-				m_Inventory->EquipWeapon(m_arrItem[(int)_Slot]->GetItemSlotNumber(), false);
+			if (m_arrWeapon[(int)_Slot])
+			{
+				m_Inventory->EquipWeapon(m_arrWeapon[(int)_Slot]->GetItemSlotNumber(), false);
 
-			GameObject* pPlayer = SceneManager::FindPlayer();
-			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-			pPlayerScript->SetWeaponType(eWeaponType::Wand);
+				GameObject* pPlayer = SceneManager::FindPlayer();
+				PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+				pPlayerScript->SetWeaponType(m_arrWeapon[(int)_Slot]->GetWeaponType(), -m_arrWeapon[(int)_Slot]->GetItemOption());
+				pPlayerScript->SetWeaponType(eWeaponType::None, 0);
+			}
 		}
 	}
 
 	void WeaponSlotScript::ClearSlot(eSlotType _Slot)
 	{
-		m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		if (_Slot == m_CurType)
+		{
+			m_arrIcon[(int)_Slot]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
 
-		if (m_arrItem[(int)_Slot])
-			m_Inventory->EquipWeapon(m_arrItem[(int)_Slot]->GetItemSlotNumber(), false);
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+			pPlayerScript->SetWeaponType(m_arrWeapon[(int)_Slot]->GetWeaponType(), -m_arrWeapon[(int)_Slot]->GetItemOption());
+			pPlayerScript->SetWeaponType(eWeaponType::None, 0);
+		}
 
-		GameObject* pPlayer = SceneManager::FindPlayer();
-		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-		pPlayerScript->SetWeaponType(eWeaponType::Wand);
+		if (m_arrWeapon[(int)_Slot])
+			m_Inventory->EquipWeapon(m_arrWeapon[(int)_Slot]->GetItemSlotNumber(), false);
 
-		m_arrItem[(int)_Slot] = nullptr;
+		m_arrWeapon[(int)_Slot] = nullptr;
 	}
 }

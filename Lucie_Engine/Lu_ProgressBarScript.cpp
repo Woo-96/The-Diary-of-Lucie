@@ -43,20 +43,20 @@ namespace Lu
 		m_MeshRender->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_0, &ValuePercent);
 	}
 
+	void ProgressBarScript::Render()
+	{
+		if(!m_Transform)
+			return;
+	 
+		Vector3 vCenterPos = m_Transform->GetPosition();
+		Vector2 vFontPos = SceneManager::GetActiveScene()->GetUICam()->WorldToScreen(vCenterPos);
+		vFontPos.x -= 30.f;
+		vFontPos.y -= 10.f;
 
-	//void ProgressBarScript::Render()
-	//{
-	//	if(!m_Transform)
-	//		return;
-	// 
-	//	Vector3 vCenterPos = m_Transform->GetPosition();
-	//	Vector2 vFontPos = SceneManager::GetActiveScene()->GetUICam()->WorldToScreen(vCenterPos);
-	//	//Vector2 vResoultion = Vector2((float)application.GetWidth(), (float)application.GetHeight());
-	//	//Vector2 vFontPos = Vector2(vCenterPos.x + vResoultion.x / 2.f, vCenterPos.y - vResoultion.y / 2.f);
 
-	//	std::wstring bossName = m_BossName;
-	//	wchar_t Font[256];
-	//	wcscpy_s(Font, bossName.c_str());
-	//	FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
-	//}
+		std::wstring bossName = m_BossName;
+		wchar_t Font[256];
+		wcscpy_s(Font, bossName.c_str());
+		FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
+	}
 }

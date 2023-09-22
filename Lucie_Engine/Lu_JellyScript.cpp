@@ -13,7 +13,9 @@ namespace Lu
 	JellyScript::JellyScript()
 	{
 		SetName(L"JellyScript");
+		SetItemName(L"그린젤리");
 		SetItemType(eItemType::Jelly);
+		SetItemOption(1);
 	}
 
 	JellyScript::~JellyScript()
@@ -67,7 +69,7 @@ namespace Lu
 		pSFX->SetClip(Resources::Load<AudioClip>(L"RecoverySFX", L"..\\Resources\\Sound\\SFX\\Player\\RecoverySFX.ogg"));
 		pSFX->Play();
 
-		pPlayerScript->InflictDamage(-1);
+		pPlayerScript->InflictDamage(-GetItemOption());
 
 		// 인벤토리에서 제거
 		InventoryScript* pInventory = (InventoryScript*)pPlayerScript->GetUI(PlayerScript::eUI::Inventory);

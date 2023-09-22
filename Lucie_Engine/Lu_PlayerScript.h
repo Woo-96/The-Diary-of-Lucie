@@ -43,10 +43,12 @@ namespace Lu
 			int CurMP;
 			int MaxEXP;
 			int CurEXP;
-			int MaxLevel;
-			int CurLevel;
+			int Attack;
+			int Magic;
 			float MaxTP;
 			float CurTP;
+			int MaxLevel;
+			int CurLevel;
 			float TPRecoveryRate;
 			int MaxGold;
 			int CurGold;
@@ -56,12 +58,14 @@ namespace Lu
 				, CurHP(6)
 				, MaxMP(3)
 				, CurMP(3)
+				, MaxTP(10.f)
+				, CurTP(10.f)
 				, MaxEXP(100)
 				, CurEXP(0)
+				, Attack(10)
+				, Magic(10)
 				, MaxLevel(9)
 				, CurLevel(1)
-				, MaxTP(100.f)
-				, CurTP(100.f)
 				, TPRecoveryRate(10.f)
 				, MaxGold(9)
 				, CurGold(0)
@@ -114,10 +118,7 @@ namespace Lu
 			m_arrUI[(int)_UIType] = _UI;
 		}
 
-		void SetWeaponType(eWeaponType _Type)
-		{
-			m_CurWeapon = _Type;
-		}
+		void SetWeaponType(eWeaponType _Type, int _Damage);
 
 		void SetCantHit(bool _b)
 		{
@@ -149,6 +150,8 @@ namespace Lu
 		{
 			return m_arrUI[(int)_UIType];
 		}
+
+		int GetPlayerDamage();
 
 	public:
 		virtual void Initialize() override;

@@ -57,6 +57,36 @@ namespace Lu
 		m_State.clear();
 	}
 
+	void PlayerScript::SetWeaponType(eWeaponType _Type, int _Damage)
+	{
+		m_CurWeapon = _Type;
+
+		if (m_CurWeapon == eWeaponType::Wand)
+		{
+			m_PlayerInfo.Magic += _Damage;
+		}
+		else if (m_CurWeapon == eWeaponType::None)
+		{
+			m_CurWeapon = eWeaponType::Wand;
+		}
+		else
+		{
+			m_PlayerInfo.Attack += _Damage;
+		}
+	}
+
+	int PlayerScript::GetPlayerDamage()
+	{
+		if (m_CurWeapon == eWeaponType::Wand)
+		{
+			return m_PlayerInfo.Magic;
+		}
+		else
+		{
+			return m_PlayerInfo.Attack;
+		}
+	}
+
 	void PlayerScript::Initialize()
 	{
 		m_Animator = GetOwner()->GetComponent<Animator>();
@@ -462,7 +492,7 @@ namespace Lu
 		}
 
 		// 대쉬
-		if (Input::GetKeyDown(eKeyCode::SPACE) && m_PlayerInfo.CurTP > 20.f)
+		if (Input::GetKeyDown(eKeyCode::SPACE) && m_PlayerInfo.CurTP > 2.f)
 		{
 			m_PrevDir = m_Dir;
 			if (Input::GetKey(eKeyCode::A)
@@ -523,7 +553,7 @@ namespace Lu
 
 		// 공격
 		if (Input::GetKeyUp(eKeyCode::LBUTTON) 
-			&& m_PlayerInfo.CurTP > 10.f
+			&& m_PlayerInfo.CurTP > 1.f
 			&& !m_bCantHit)
 		{
 			m_PrevDir = m_Dir;
@@ -985,8 +1015,16 @@ namespace Lu
 			NumberScript* pNumScript = (NumberScript*)m_arrUI[(int)eUI::Level];
 			if (pNumScript)
 			{
+				// 레벨업
 				pNumScript->SetCurNumber(++m_PlayerInfo.CurLevel);
 
+				// HP, MP 회복
+				int iRecoveryValue = m_PlayerInfo.MaxHP - m_PlayerInfo.CurHP;
+				InflictDamage(-iRecoveryValue);
+				iRecoveryValue = m_PlayerInfo.MaxMP - m_PlayerInfo.CurMP;
+				UseMana(-iRecoveryValue);
+
+				// 레벨업 SFX
 				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 				pSFX->SetClip(Resources::Load<AudioClip>(L"LevelUpSFX", L"..\\Resources\\Sound\\SFX\\Player\\LevelUpSFX.ogg"));
 				pSFX->Play();

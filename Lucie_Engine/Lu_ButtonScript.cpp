@@ -39,6 +39,7 @@ namespace Lu
 				else
 				{
 					m_CurBtnState = eButtonState::MouseHovered;
+					ButtonHoveredEvent();
 				}
 			}
 			else

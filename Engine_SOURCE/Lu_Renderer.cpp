@@ -819,6 +819,13 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Equipped_Label_Mtrl", pMaterial);
 
+		// UI - Inventory Gold Icon
+		pTexture = Resources::Load<Texture>(L"InvenGoldIcon_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\GoldIcon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"InvenGoldIcon_Mtrl", pMaterial);
 
 #pragma endregion
 #pragma region Number Shader

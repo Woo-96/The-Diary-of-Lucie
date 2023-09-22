@@ -93,6 +93,12 @@ namespace Lu
 		}
 	}
 
+	void InventorySlotScript::ButtonHoveredEvent()
+	{
+		if(m_Item)
+			m_Inventory->ChangeWeaponName(m_Item->GetItemName());
+	}
+
 	void InventorySlotScript::ButtonClickEvent()
 	{
 		if (m_Item)
@@ -101,6 +107,8 @@ namespace Lu
 			{
 			case ItemScript::eItemType::Weapon:
 			{
+				WeaponScript* pWeapon = (WeaponScript*)m_Item;
+
 				WeaponSlotScript::eSlotType eCurSlot = m_Inventory->GetWeaponSlot()->GetCurSlotType();
 				WeaponSlotScript::eSlotType eAnotherSlot = WeaponSlotScript::eSlotType::WeaponSlot_A;
 				if (eCurSlot == WeaponSlotScript::eSlotType::WeaponSlot_A)
@@ -108,25 +116,32 @@ namespace Lu
 					eAnotherSlot = WeaponSlotScript::eSlotType::WeaponSlot_B;
 				}
 
-				// 장착하려는 무기를 이미 장착하고 있는 경우
-				if (m_Item == m_Inventory->GetWeaponSlot()->GetSlotItem(eCurSlot))
-					return;
-
-
-				// 현재 슬롯에 장착중이던 무기가 있다면 장착 해제
+				// 현재 슬롯에 무기가 장착되어 있는 경우
 				if (!m_Inventory->GetWeaponSlot()->IsCurSlotEmpty())
 				{
-					m_Inventory->GetWeaponSlot()->ClearSlot(eCurSlot);
+					// 그게 나임 : 장착 해제만 함
+					if (pWeapon == m_Inventory->GetWeaponSlot()->GetSlotItem(eCurSlot))
+						m_Inventory->GetWeaponSlot()->ClearSlot(eCurSlot);
+					// 다른 애임 : 원래 있던 애를 장착 해제하고 나를 장착함
+					else
+					{
+						m_Inventory->GetWeaponSlot()->ClearSlot(eCurSlot);
+						m_Inventory->GetWeaponSlot()->EquipWeapon(pWeapon);
+					}
 				}
-
-				// 현재 등록하려는 무기가 다른 슬롯에 등록되어 있을 경우
-				if (m_Item == m_Inventory->GetWeaponSlot()->GetSlotItem(eAnotherSlot))
+				// 내가 다른 슬롯에 등록되어 있는 경우
+				else if (pWeapon == m_Inventory->GetWeaponSlot()->GetSlotItem(eAnotherSlot))
 				{
+					// 다른 슬롯의 나를 해제함
 					m_Inventory->GetWeaponSlot()->ClearSlot(eAnotherSlot);
+					// 현재 슬롯에 나를 장착함
+					m_Inventory->GetWeaponSlot()->EquipWeapon(pWeapon);
 				}
-
-				// 무기 장착
-				m_Inventory->GetWeaponSlot()->EquipWeapon(m_Item);
+				// 그냥 빈 슬롯이었을 경우
+				else
+				{
+					m_Inventory->GetWeaponSlot()->EquipWeapon(pWeapon);
+				}
 			}
 				break;
 			case ItemScript::eItemType::Jelly: 

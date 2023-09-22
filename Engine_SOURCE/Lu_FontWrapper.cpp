@@ -12,7 +12,7 @@ namespace Lu
 			return false;
 
 		ID3D11Device* pDevice = graphics::GetDevice()->GetID3D11Device();
-		if (FAILED(m_FW1Factory->CreateFontWrapper(pDevice, L"Arial", &m_FontWrapper)))
+		if (FAILED(m_FW1Factory->CreateFontWrapper(pDevice, L"배달의민족 주아", &m_FontWrapper)))
 			return false;
 
 		return true;
