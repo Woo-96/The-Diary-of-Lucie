@@ -103,6 +103,7 @@ namespace Lu
 				pHPBarScript->SetMaxValue(pBigSlimeScript->GetInfo().MaxHP);
 				pHPBarScript->SetCurValue(pBigSlimeScript->GetInfo().HP);
 				pHPBarScript->SetBossName(L"ºò½½¶óÀÓ");
+				pHPBarScript->SetTextPrint(true);
 			}
 		}
 

@@ -31,6 +31,7 @@ namespace Lu::enums
 		MonsterProjectile,
 		PlayerProjectile,
 		Light,
+		FX,
 		UI,
 		Mouse,
 		End = 16,

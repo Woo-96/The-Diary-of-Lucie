@@ -8,6 +8,7 @@
 namespace Lu
 {
 	WandProjectile::WandProjectile()
+		: m_bChargeProjectile(false)
 	{
 		SetName(L"WandProjectileScript");
 		SetType(eWeaponType::Wand);
@@ -28,11 +29,15 @@ namespace Lu
 		pSFX->SetClip(Resources::Load<AudioClip>(L"WandSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandSFX.ogg"));
 		pSFX->Play();
 
-		ProjectileScript::OnCollisionEnter(other);
+		if (!m_bChargeProjectile)
+			ProjectileScript::OnCollisionEnter(other);
 	}
 
 	void WandProjectile::OnCollisionStay(Collider2D* other)
 	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"WandSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void WandProjectile::OnCollisionExit(Collider2D* other)

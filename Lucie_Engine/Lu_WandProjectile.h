@@ -9,6 +9,15 @@ namespace Lu
         WandProjectile();
         virtual ~WandProjectile();
 
+    private:
+        bool m_bChargeProjectile;
+
+    public:
+        void SetChargeProjectile(bool _b)
+        {
+            m_bChargeProjectile = _b;
+        }
+
     public:
         virtual void Update() override;
 

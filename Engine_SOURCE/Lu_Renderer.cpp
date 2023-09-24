@@ -474,7 +474,7 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"DiaryAnimation_Mtrl", material);
 
-		// Object - MagicCircle
+		// FX - MagicCircle
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
@@ -496,6 +496,12 @@ namespace renderer
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"StatueAnimation_Mtrl", material);
+
+		// FX - WandFullCharge
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"WandFullCharge_Mtrl", material);
 
 #pragma endregion
 #pragma region Particle Shader
@@ -676,6 +682,22 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WandProjectile_Mtrl", material);
 
+		// Projectile - WandChanneling_Small
+		texture = Resources::Load<Texture>(L"WandChanneling_A_Tex", L"..\\Resources\\Texture\\Player\\WandChanneling_A.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"WandChanneling_A_Mtrl", material);
+
+		// Projectile - WandChanneling_Big
+		texture = Resources::Load<Texture>(L"WandChanneling_B_Tex", L"..\\Resources\\Texture\\Player\\WandChanneling_B.png");
+		material = std::make_shared<Material>();
+		material->SetShader(pShader);
+		material->SetTexture(texture);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"WandChanneling_B_Mtrl", material);
+
 		// Projectile - Circle
 		texture = Resources::Load<Texture>(L"MonsterProjectile_Circle_Tex", L"..\\Resources\\Texture\\Monster\\MonsterProjectile_Circle.png");
 		material = std::make_shared<Material>();
@@ -771,6 +793,14 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Gold_A_Mtrl", pMaterial);
+
+		// UI - 채널링 레이아웃
+		pTexture = Resources::Load<Texture>(L"Shud_A_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Shud_A.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Shud_A_Mtrl", pMaterial);
 
 		// UI - Inventory BG
 		pTexture = Resources::Load<Texture>(L"InvenBG_Tex", L"..\\Resources\\Texture\\UI\\Inventory\\InvenBG.png");
@@ -906,6 +936,22 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"EXP_Meter_Mtrl", pMaterial);
+
+		// UI - 채널링 완드 게이지
+		pTexture = Resources::Load<Texture>(L"Shud_B_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Shud_B.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Shud_B_Mtrl", pMaterial);
+
+		// UI - 채널링 스킬 게이지
+		pTexture = Resources::Load<Texture>(L"Shud_C_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Shud_C.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Shud_C_Mtrl", pMaterial);
 #pragma endregion
 #pragma region Button Shader
 		pShader = Resources::Find<Shader>(L"ButtonShader");

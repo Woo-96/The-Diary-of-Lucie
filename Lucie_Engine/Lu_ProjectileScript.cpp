@@ -13,6 +13,7 @@ namespace Lu
 		, m_AttackSpeed(1000.f)
 		, m_AttackDir(Vector3::Zero)
 		, m_Time(0.f)
+		, m_Duration(0.3f)
 	{
 		SetName(L"ProjectileScript");
 	}
@@ -26,7 +27,7 @@ namespace Lu
 	{
 		m_Time += (float)Time::DeltaTime();
 
-		if (m_Time >= 0.5f)
+		if (m_Time >= m_Duration)
 		{
 			object::Destroy(GetOwner());
 		}

@@ -239,6 +239,9 @@
     <ClCompile Include="Lu_InventoryLayoutScript.cpp">
       <Filter>Contents\Script\05. UI\Inventory\Layout</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_ChannelingBarScript.cpp">
+      <Filter>Contents\Script\05. UI\HUD\ChannelingBar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -484,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="Lu_InventoryLayoutScript.h">
       <Filter>Contents\Script\05. UI\Inventory\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ChannelingBarScript.h">
+      <Filter>Contents\Script\05. UI\HUD\ChannelingBar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -762,6 +768,9 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\Inventory\Layout">
       <UniqueIdentifier>{e9617054-9638-462b-a7d1-30a07ace80c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\HUD\ChannelingBar">
+      <UniqueIdentifier>{896f4a9f-44fe-4157-9342-269693c081fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

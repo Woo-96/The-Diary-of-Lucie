@@ -17,6 +17,7 @@
 #include "Lu_QuickItemScript.h"
 #include "Lu_WeaponSlotScript.h"
 #include "Lu_InventoryScript.h"
+#include "Lu_ChannelingBarScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -38,6 +39,9 @@ namespace Lu
 		, m_bHitEffect(false)
 		, m_bDontAnimChange(false)
 		, m_bCantHit(false)
+		, m_bChanneling(false)
+		, m_bChargeAnim(false)
+		, m_ChargeGauge(0.f)
 		, m_InvincibleTime(0.f)
 		, m_Damage(1)
 		, m_Animator(nullptr)
@@ -61,13 +65,11 @@ namespace Lu
 	{
 		m_CurWeapon = _Type;
 
-		if (m_CurWeapon == eWeaponType::Wand)
+		if (m_CurWeapon == eWeaponType::None)
+			return;
+		else if (m_CurWeapon == eWeaponType::Wand)
 		{
 			m_PlayerInfo.Magic += _Damage;
-		}
-		else if (m_CurWeapon == eWeaponType::None)
-		{
-			m_CurWeapon = eWeaponType::Wand;
 		}
 		else
 		{
@@ -101,7 +103,7 @@ namespace Lu
 		m_CurState = GetStateScript(StateScript::eState::Idle);
 		m_CurState->Enter();
 
-		m_CurWeapon = eWeaponType::Wand;
+		m_CurWeapon = eWeaponType::None;
 	}
 
 	void PlayerScript::Update()
@@ -304,37 +306,129 @@ namespace Lu
 		m_Animator->CompleteEvent(L"Player_Bow_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 		// Attack - Wand
-		m_Animator->Create(L"Player_Wand_Left", pAtlas, Vector2(0.f, 5600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_Left", pAtlas, Vector2(0.f, 5600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_Left") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Left") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_Right", pAtlas, Vector2(0.f, 5700.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_Right", pAtlas, Vector2(0.f, 5700.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_Right") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Right") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_Up", pAtlas, Vector2(0.f, 5900.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_Up", pAtlas, Vector2(0.f, 5900.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_Up") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Up") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_Down", pAtlas, Vector2(0.f, 5400.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_Down", pAtlas, Vector2(0.f, 5400.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_Down") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_Down") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_LeftUp", pAtlas, Vector2(0.f, 5800.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_LeftUp", pAtlas, Vector2(0.f, 5800.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_LeftUp") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_RightUp", pAtlas, Vector2(0.f, 6000.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_RightUp", pAtlas, Vector2(0.f, 6000.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_RightUp") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_LeftDown", pAtlas, Vector2(0.f, 5300.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_LeftDown", pAtlas, Vector2(0.f, 5300.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_LeftDown") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_Wand_RightDown", pAtlas, Vector2(0.f, 5500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.07f, false);
+		m_Animator->Create(L"Player_Wand_RightDown", pAtlas, Vector2(0.f, 5500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
 		m_Animator->StartEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::AttackSFX, this);
 		m_Animator->CompleteEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
+
+
+		// Attack - WandOfMana
+		m_Animator->Create(L"Player_WandOfMana_LeftDown", pAtlas, Vector2(0.f, 400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_LeftDown") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_Down", pAtlas, Vector2(300.f, 400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_Down") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_Down") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_RightDown", pAtlas, Vector2(0.f, 500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_RightDown") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_Left", pAtlas, Vector2(300.f, 500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_Left") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_Left") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_Right", pAtlas, Vector2(0.f, 600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_Right") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_Right") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_LeftUp", pAtlas, Vector2(300.f, 600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_LeftUp") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_Up", pAtlas, Vector2(0.f, 700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_Up") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_Up") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandOfMana_RightUp", pAtlas, Vector2(300.f, 700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
+		m_Animator->StartEvent(L"Player_WandOfMana_RightUp") = std::bind(&PlayerScript::WandOfManaSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandOfMana_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+
+
+		// Attack - WandChanneling
+		m_Animator->Create(L"Player_WandChanneling_Left", pAtlas, Vector2(300.f, 1900.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_Left") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_Left") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_Right", pAtlas, Vector2(0.f, 2000.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_Right") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_Right") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_Up", pAtlas, Vector2(0.f, 2100.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_Up") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_Up") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_Down", pAtlas, Vector2(300.f, 1800.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_Down") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_Down") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_LeftUp", pAtlas, Vector2(300.f, 2000.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_LeftUp") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_RightUp", pAtlas, Vector2(300.f, 2100.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_RightUp") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_LeftDown", pAtlas, Vector2(0.f, 1800.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_LeftDown") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+
+		m_Animator->Create(L"Player_WandChanneling_RightDown", pAtlas, Vector2(0.f, 1900.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.3f, false);
+		m_Animator->StartEvent(L"Player_WandChanneling_RightDown") = std::bind(&PlayerScript::AttackSFX, this);
+		m_Animator->CompleteEvent(L"Player_WandChanneling_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
+
+
+
+		// Attack - ChannelingSkill
+		m_Animator->Create(L"Player_ChannelingSkill_Left", pAtlas, Vector2(500.f, 1900.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Right", pAtlas, Vector2(200.f, 2000.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Up", pAtlas, Vector2(200.f, 2100.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Down", pAtlas, Vector2(500.f, 1800.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_LeftUp", pAtlas, Vector2(200.f, 2000.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_RightUp", pAtlas, Vector2(500.f, 2100.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_LeftDown", pAtlas, Vector2(200.f, 1800.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_RightDown", pAtlas, Vector2(200.f, 1900.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+
+		// Attack - ChannelingSkillWalk
+		m_Animator->Create(L"Player_ChannelingSkillWalk_Left", pAtlas, Vector2(300.f, 2500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_Right", pAtlas, Vector2(0.f, 2600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_Up", pAtlas, Vector2(0.f, 2700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_Down", pAtlas, Vector2(300.f, 2400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_LeftUp", pAtlas, Vector2(300.f, 2600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_RightUp", pAtlas, Vector2(300.f, 2700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_LeftDown", pAtlas, Vector2(0.f , 2400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkillWalk_RightDown", pAtlas, Vector2(0.f, 2500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+
+
 
 		// Dead
 		m_Animator->Create(L"Player_Dead", pAtlas, Vector2(400.f, 2300.f), Vector2(100.f, 100.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 2.f, false);
@@ -552,13 +646,45 @@ namespace Lu
 		}
 
 		// °ø°Ý
-		if (Input::GetKeyUp(eKeyCode::LBUTTON) 
+		if (Input::GetKey(eKeyCode::LBUTTON)
 			&& m_PlayerInfo.CurTP > 1.f
 			&& !m_bCantHit)
 		{
-			m_PrevDir = m_Dir;
-			m_Dir = CalDirToMouse();
-			ChangeState(StateScript::eState::Attack);
+			if (m_CurWeapon == eWeaponType::Wand)
+			{
+				m_bChanneling = true;
+				ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
+				if (pChanneling)
+				{
+					pChanneling->SetChannelingType(ChannelingBarScript::eChannelingType::Charging);
+					pChanneling->ChannelingOnOff(m_bChanneling);
+				}
+			}
+			else
+			{
+				m_PrevDir = m_Dir;
+				m_Dir = CalDirToMouse();
+				ChangeState(StateScript::eState::Attack);
+			}
+		}
+
+		if (m_bChanneling)
+		{
+			if(Input::GetKeyUp(eKeyCode::LBUTTON))
+			{
+				ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
+				m_ChargeGauge = pChanneling->GetChargeGauge();
+
+				m_bChanneling = false;
+				pChanneling->ChannelingOnOff(false);
+
+				if (m_ChargeGauge > 0.167f)
+					m_bChargeAnim = true;
+
+				m_PrevDir = m_Dir;
+				m_Dir = CalDirToMouse();
+				ChangeState(StateScript::eState::Attack);
+			}
 		}
 
 		// Äü½½·Ô ¾ÆÀÌÅÛ »ç¿ë
@@ -787,7 +913,7 @@ namespace Lu
 		{
 			switch (m_CurWeapon)
 			{
-			case eWeaponType::Wand:
+			case eWeaponType::None:
 			{
 				switch (m_Dir)
 				{
@@ -815,6 +941,70 @@ namespace Lu
 				case eDir::RightDown:
 					m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
 					break;
+				}
+			}
+			break;
+			case eWeaponType::Wand:
+			{
+				if (m_bChargeAnim)
+				{
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_WandChanneling_RightDown", true);
+						break;
+					}
+				}
+				else
+				{
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_Wand_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_Wand_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_Wand_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_Wand_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_Wand_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_Wand_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_Wand_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
+						break;
+					}
 				}
 			}
 				break;
@@ -896,6 +1086,9 @@ namespace Lu
 	void PlayerScript::CompleteAction()
 	{
 		ChangeState(StateScript::eState::Idle);
+
+		if (m_bChargeAnim)
+			m_bChargeAnim = false;
 	}
 
 	void PlayerScript::AttackSFX()
@@ -903,6 +1096,10 @@ namespace Lu
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"AttackSFX", L"..\\Resources\\Sound\\SFX\\Player\\AttackSFX.ogg"));
 		pSFX->Play();
+	}
+
+	void PlayerScript::WandOfManaSFX()
+	{
 	}
 
 	void PlayerScript::MagicCircleMove()

@@ -19,6 +19,7 @@ namespace Lu
         float			m_AttackSpeed;
         Vector3			m_AttackDir;
         float           m_Time;
+        float           m_Duration;
 
     public:
         void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -44,6 +45,11 @@ namespace Lu
         void SetDir(Vector3 _Dir)
         {
             m_AttackDir = _Dir;
+        }
+
+        void SetDuration(float _Duration)
+        {
+            m_Duration = _Duration;
         }
 
     public:

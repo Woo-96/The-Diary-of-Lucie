@@ -86,6 +86,21 @@ namespace Lu
 
 	void SnabyScript::OnCollisionStay(Collider2D* _Other)
 	{
+		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
+			ChangeState(SnabyStateScript::eState::Idle);
+
+		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
+		{
+			if (SnabyStateScript::eState::Dead == m_CurState->GetStateType())
+				return;
+
+			GetInfo().HP -= m_Target->GetPlayerDamage();
+
+			if (GetInfo().HP <= 0.f)
+			{
+				ChangeState(SnabyStateScript::eState::Dead);
+			}
+		}
 	}
 
 	void SnabyScript::OnCollisionExit(Collider2D* _Other)

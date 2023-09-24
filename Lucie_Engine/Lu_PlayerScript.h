@@ -31,6 +31,7 @@ namespace Lu
 			Gold,
 			QuickItem,
 			WeaponSlot,
+			Channeling,
 			Inventory,
 			End,
 		};
@@ -96,6 +97,9 @@ namespace Lu
 		bool					m_bHitEffect;
 		bool					m_bDontAnimChange;
 		bool					m_bCantHit;
+		bool					m_bChanneling;
+		bool					m_bChargeAnim;
+		float					m_ChargeGauge;
 		float					m_InvincibleTime;
 		int						m_Damage;
 
@@ -153,6 +157,11 @@ namespace Lu
 
 		int GetPlayerDamage();
 
+		float GetChargeGauge()	const
+		{
+			return m_ChargeGauge;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -170,6 +179,7 @@ namespace Lu
 		eDir CalDirToMouse();
 		void CompleteAction();
 		void AttackSFX();
+		void WandOfManaSFX();
 		void MagicCircleMove();
 		void LookAround();
 		void StaminaRecovery();

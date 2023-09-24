@@ -12,6 +12,7 @@
 
 #include "Lu_QuickItemScript.h"
 #include "Lu_WeaponSlotScript.h"
+#include "Lu_ChannelingBarScript.h"
 #include "Lu_InventoryScript.h"
 
 namespace Lu
@@ -79,7 +80,7 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(eLayerType::UI);
 			pObject->SetName(L"UI_HeartMgr");
 			SceneManager::DontDestroyOnLoad(pObject);
 			HeartScript* pHPScript = pObject->AddComponent<HeartScript>();
@@ -89,7 +90,7 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(eLayerType::UI);
 			pObject->SetName(L"UI_ManaMgr");
 			SceneManager::DontDestroyOnLoad(pObject);
 			ManaScript* pMPScript = pObject->AddComponent<ManaScript>();
@@ -121,13 +122,13 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"TP_Meter_Mtrl"));
 			ProgressBarScript* pProgressBarScript = pObject->AddComponent<ProgressBarScript>();
 			pProgressBarScript->SetMeshRender(pMeshRender);
-			pProgressBarScript->SetMaxValue(pPlayerScript->GetPlayerInfo().MaxTP);
-			pProgressBarScript->SetCurValue(pPlayerScript->GetPlayerInfo().CurTP);
+			pProgressBarScript->SetMaxValue((int)pPlayerScript->GetPlayerInfo().MaxTP);
+			pProgressBarScript->SetCurValue((int)pPlayerScript->GetPlayerInfo().CurTP);
 			pPlayerScript->SetUI(PlayerScript::eUI::TP, (UIScript*)pProgressBarScript);
 		}
 
 		{
-			GameObject* pInven = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), eLayerType::UI);
+			GameObject* pInven = object::Instantiate<GameObject>(eLayerType::UI);
 			pInven->SetName(L"UI_Inventory");
 			SceneManager::DontDestroyOnLoad(pInven);
 			InventoryScript* pInvenScript = pInven->AddComponent<InventoryScript>();
@@ -214,6 +215,15 @@ namespace Lu
 			pNum->SetCurNumber(1);
 
 			pPlayerScript->SetUI(PlayerScript::eUI::Level, (UIScript*)pNum);
+		}
+
+		{
+			pObject = object::Instantiate<GameObject>(eLayerType::UI);
+			pObject->SetName(L"UI_Channeling");
+			SceneManager::DontDestroyOnLoad(pObject);
+			ChannelingBarScript* pChanneling = pObject->AddComponent<ChannelingBarScript>();
+			pChanneling->SetPlayerTransform(pPlayer->GetComponent<Transform>());
+			pPlayerScript->SetUI(PlayerScript::eUI::Channeling, (UIScript*)pChanneling);
 		}
 	}	
 }

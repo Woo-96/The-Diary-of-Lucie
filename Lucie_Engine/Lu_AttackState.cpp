@@ -78,23 +78,74 @@ namespace Lu
 			pBowProjectile->SetDir(GetDir());
 		}
 			break;
+		case eWeaponType::None:
 		case eWeaponType::Wand:
 		{
-			GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(50.f, 50.f, 100.f), eLayerType::PlayerProjectile);
-			pProjectile->SetName(L"WandProjectile");
+			float fChargeGauge = GetPlayerScript()->GetChargeGauge();
 
-			MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"WandProjectile_Mtrl"));
+			if (fChargeGauge <= 0.167f)
+			{
+				GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(50.f, 50.f, 100.f), eLayerType::PlayerProjectile);
+				pProjectile->SetName(L"WandProjectile");
 
-			Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
-			pCollider->SetSize(Vector2(0.6f, 0.6f));
+				MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
+				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				pMeshRender->SetMaterial(Resources::Find<Material>(L"WandProjectile_Mtrl"));
 
-			WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
-			pWandProjectile->SetPlayerScript(GetPlayerScript());
-			pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
-			pWandProjectile->SetDir(GetDir());
+				Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
+				pCollider->SetType(eColliderType::Rect);
+				pCollider->SetSize(Vector2(0.6f, 0.6f));
+
+				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
+				pWandProjectile->SetPlayerScript(GetPlayerScript());
+				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+				pWandProjectile->SetDir(GetDir());
+				pWandProjectile->SetDuration(0.4f);
+			}
+			else if (fChargeGauge >= 1.f)
+			{
+				GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(120.f, 120.f, 100.f), eLayerType::PlayerProjectile);
+				pProjectile->SetName(L"WandProjectile");
+
+				MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
+				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				pMeshRender->SetMaterial(Resources::Find<Material>(L"WandChanneling_B_Mtrl"));
+
+				Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
+				pCollider->SetType(eColliderType::Rect);
+				pCollider->SetSize(Vector2(0.6f, 0.6f));
+
+				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
+				pWandProjectile->SetPlayerScript(GetPlayerScript());
+				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+				pWandProjectile->SetDir(GetDir());
+				pWandProjectile->SetChargeProjectile(true);
+				pWandProjectile->SetSpeed(500.f);
+				pWandProjectile->SetDuration(1.f);
+			}
+			else
+			{
+				Vector2 vScale = Vector2(120.f, 120.f) * fChargeGauge;
+
+				GameObject* pProjectile = object::Instantiate<GameObject>(GetTransform()->GetPosition(), Vector3(vScale.x, vScale.y, 100.f), eLayerType::PlayerProjectile);
+				pProjectile->SetName(L"WandProjectile");
+
+				MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
+				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				pMeshRender->SetMaterial(Resources::Find<Material>(L"WandChanneling_A_Mtrl"));
+
+				Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
+				pCollider->SetType(eColliderType::Rect);
+				pCollider->SetSize(Vector2(0.6f, 0.6f));
+
+				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
+				pWandProjectile->SetPlayerScript(GetPlayerScript());
+				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+				pWandProjectile->SetDir(GetDir());
+				pWandProjectile->SetChargeProjectile(true);
+				pWandProjectile->SetSpeed(500.f);
+				pWandProjectile->SetDuration(1.f);
+			}
 		}
 			break;
 		}

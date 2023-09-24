@@ -16,6 +16,7 @@ namespace Lu
 		MeshRenderer*	m_MeshRender;
 		float			m_MaxValue;
 		float			m_CurValue;
+		bool			m_bTextPrint;
 		std::wstring	m_BossName;
 
 	public:
@@ -39,9 +40,15 @@ namespace Lu
 			m_BossName = _BossName;
 		}
 
+		void SetTextPrint(bool _b)
+		{
+			m_bTextPrint = _b;
+		}
+
 	public:
 		void SetCurValue(int _Value);
 		void SetCurValue(float _Value);
+		void SetValuePercent(float _ValuePercent);
 
 	public:
 		virtual void Update() override {}

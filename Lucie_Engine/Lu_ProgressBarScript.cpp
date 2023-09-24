@@ -13,6 +13,7 @@ namespace Lu
 		, m_MeshRender(nullptr)
 		, m_MaxValue(0.f)
 		, m_CurValue(0.f)
+		, m_bTextPrint(false)
 	{
 		SetName(L"ProgressBarScript");
 	}
@@ -43,20 +44,28 @@ namespace Lu
 		m_MeshRender->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_0, &ValuePercent);
 	}
 
+	void ProgressBarScript::SetValuePercent(float _ValuePercent)
+	{
+		m_MeshRender->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_0, &_ValuePercent);
+	}
+
 	void ProgressBarScript::Render()
 	{
-		if(!m_Transform)
-			return;
-	 
-		Vector3 vCenterPos = m_Transform->GetPosition();
-		Vector2 vFontPos = SceneManager::GetActiveScene()->GetUICam()->WorldToScreen(vCenterPos);
-		vFontPos.x -= 30.f;
-		vFontPos.y -= 10.f;
+		if (m_bTextPrint)
+		{
+			if (!m_Transform)
+				return;
+
+			Vector3 vCenterPos = m_Transform->GetPosition();
+			Vector2 vFontPos = SceneManager::GetActiveScene()->GetUICam()->WorldToScreen(vCenterPos);
+			vFontPos.x -= 30.f;
+			vFontPos.y -= 10.f;
 
 
-		std::wstring bossName = m_BossName;
-		wchar_t Font[256];
-		wcscpy_s(Font, bossName.c_str());
-		FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
+			std::wstring bossName = m_BossName;
+			wchar_t Font[256];
+			wcscpy_s(Font, bossName.c_str());
+			FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
+		}
 	}
 }
