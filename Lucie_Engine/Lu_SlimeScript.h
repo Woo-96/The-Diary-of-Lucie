@@ -19,6 +19,8 @@ namespace Lu
 
 		PlayerScript*				m_Target;
 
+		float						m_HitCoolTime;
+
 	public:
 		void SetTarget(PlayerScript* _Target)
 		{

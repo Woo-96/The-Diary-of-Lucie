@@ -38,6 +38,7 @@ namespace Lu
 			if (m_ChannelingType == eChannelingType::Charging)
 			{
 				m_arrParts[(int)eParts::Bar]->GetComponent<MeshRenderer>()->SetMaterial(Resources::Find<Material>(L"Shud_B_Mtrl"));
+				m_MaxTime = 2.f;
 			}
 			else if (m_ChannelingType == eChannelingType::Consuming)
 			{
@@ -50,12 +51,11 @@ namespace Lu
 	{
 		if (m_ChannelingType == eChannelingType::Consuming)
 		{
-			if (m_Time >= m_MaxTime)
+			if(m_Time >= m_MaxTime)
 				return true;
 		}
-		else
-
-			return false;
+		
+		return false;
 	}
 
 	float ChannelingBarScript::GetChargeGauge()
@@ -99,36 +99,91 @@ namespace Lu
 		pAnimator2->Create(L"FullChargeFX", Resources::Load<Texture>(L"WandFullCharge_Tex", L"..\\Resources\\Texture\\Player\\WandFullCharge.png")
 			, Vector2(0.f, 0.f), Vector2(160.f, 192.f), 6, Vector2(160.f, 192.f), Vector2::Zero, 0.1f);
 		pAnimator2->CompleteEvent(L"FullChargeFX") = std::bind(&ChannelingBarScript::CompleteFX, this);
-		/*m_arrParts[(int)eParts::FullChargeFX]->GetComponent<Animator>()*/pAnimator2->PlayAnimation(L"FullChargeFX", true);
+		pAnimator2->PlayAnimation(L"FullChargeFX", true);
 	}
 
 	void ChannelingBarScript::Update()
 	{
-		if (m_bActive)
+		if (m_ChannelingType == eChannelingType::Charging)
 		{
-			m_Time += (float)Time::DeltaTime();
-
-			if (m_Time > 0.5f)
+			if (m_bActive)
 			{
-				for (int i = 0; i < (int)eParts::End; ++i)
+				m_Time += (float)Time::DeltaTime();
+
+				if (m_Time > 0.5f)
+				{
+					for (int i = 0; i < (int)eParts::End; ++i)
+					{
+						if (m_arrParts[i])
+						{
+							if (!m_bFirst)
+							{
+								AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+								pSFX->SetClip(Resources::Load<AudioClip>(L"WandChargeSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandChargeSFX.ogg"));
+								pSFX->SetVolume(0.1f);
+								pSFX->Play();
+
+								if (i == (int)eParts::FullChargeFX)
+								{
+									m_bFirst = true;
+									m_bFXFirst = false;
+								}
+								else
+								{
+									m_arrParts[i]->SetActive(m_bActive);
+								}
+							}
+
+							Vector3 vPos = m_PlayerTransform->GetPosition();
+							vPos.z = 200.f;
+
+							if (i == (int)eParts::BarFram)
+							{
+								vPos.x += 5.f;
+								vPos.y += 60.f;
+							}
+							else if (i == (int)eParts::Bar)
+							{
+								vPos.y += 65.f;
+							}
+
+							m_arrParts[i]->GetComponent<Transform>()->SetPosition(vPos);
+						}
+					}
+
+					ProgressBarScript* pProgressBar = m_arrParts[(int)eParts::Bar]->GetComponent<ProgressBarScript>();
+					pProgressBar->SetValuePercent(m_Time / m_MaxTime);
+
+					if (m_Time / m_MaxTime >= 1.f && !m_bFXFirst)
+					{
+						m_arrParts[(int)eParts::FullChargeFX]->SetActive(m_bActive);
+
+						AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+						pSFX->SetClip(Resources::Load<AudioClip>(L"WandFullChargeSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandFullChargeSFX.ogg"));
+						pSFX->Play();
+
+						m_bFXFirst = true;
+					}
+				}
+			}
+		}
+		else if (m_ChannelingType == eChannelingType::Consuming)
+		{
+			if (m_bActive)
+			{
+				m_Time += (float)Time::DeltaTime();
+
+				for (int i = 0; i <= (int)eParts::Bar; ++i)
 				{
 					if (m_arrParts[i])
 					{
 						if (!m_bFirst)
 						{
-							AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-							pSFX->SetClip(Resources::Load<AudioClip>(L"WandChargeSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandChargeSFX.ogg"));
-							pSFX->SetVolume(0.1f);
-							pSFX->Play();
+							m_arrParts[i]->SetActive(m_bActive);
 
-							if (i == (int)eParts::FullChargeFX)
+							if (i == (int)eParts::Bar)
 							{
 								m_bFirst = true;
-								m_bFXFirst = false;
-							}
-							else
-							{
-								m_arrParts[i]->SetActive(m_bActive);
 							}
 						}
 
@@ -148,20 +203,8 @@ namespace Lu
 						m_arrParts[i]->GetComponent<Transform>()->SetPosition(vPos);
 					}
 
-				}
-
-				ProgressBarScript* pProgressBar = m_arrParts[(int)eParts::Bar]->GetComponent<ProgressBarScript>();
-				pProgressBar->SetValuePercent(m_Time / m_MaxTime);
-
-				if (m_Time / m_MaxTime >= 1.f && !m_bFXFirst)
-				{
-					m_arrParts[(int)eParts::FullChargeFX]->SetActive(m_bActive);
-
-					AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-					pSFX->SetClip(Resources::Load<AudioClip>(L"WandFullChargeSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandFullChargeSFX.ogg"));
-					pSFX->Play();
-
-					m_bFXFirst = true;
+					ProgressBarScript* pProgressBar = m_arrParts[(int)eParts::Bar]->GetComponent<ProgressBarScript>();
+					pProgressBar->SetValuePercent((m_MaxTime - m_Time) / m_MaxTime);
 				}
 			}
 		}

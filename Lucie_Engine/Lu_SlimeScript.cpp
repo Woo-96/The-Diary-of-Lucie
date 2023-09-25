@@ -6,6 +6,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_SceneManager.h"
+#include "Lu_Time.h"
 
 #include "Lu_SlimeIdleState.h"
 #include "Lu_SlimePatrolState.h"
@@ -20,6 +21,7 @@ namespace Lu
 		: m_CurState(nullptr)
 		, m_PrevState(SlimeStateScript::eState::End)
 		, m_Target(nullptr)
+		, m_HitCoolTime(0.f)
 	{
 		SetName(L"SlimeScript");
 
@@ -99,11 +101,18 @@ namespace Lu
 			if (SlimeStateScript::eState::Dead == m_CurState->GetStateType())
 				return;
 
-			GetInfo().HP -= m_Target->GetPlayerDamage();
+			m_HitCoolTime += (float)Time::DeltaTime();
 
-			if (GetInfo().HP <= 0.f)
+			if (m_HitCoolTime >= 0.1f)
 			{
-				ChangeState(SlimeStateScript::eState::Dead);
+				GetInfo().HP -= m_Target->GetPlayerDamage();
+
+				if (GetInfo().HP <= 0.f)
+				{
+					ChangeState(SlimeStateScript::eState::Dead);
+				}
+
+				m_HitCoolTime = 0;
 			}
 		}
 	}

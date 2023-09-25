@@ -6,6 +6,7 @@ namespace Lu
 {
     class GameObject;
     class Transform;
+    class Animator;
     class ProjectileScript : public Script
     {
     public:
@@ -13,13 +14,18 @@ namespace Lu
         virtual ~ProjectileScript();
 
     private:
-        PlayerScript*   m_PlayerScript;
-        Transform*      m_Transform;
-        eWeaponType     m_ProjectileType;
-        float			m_AttackSpeed;
-        Vector3			m_AttackDir;
-        float           m_Time;
-        float           m_Duration;
+        PlayerScript*               m_PlayerScript;
+        Transform*                  m_Transform;
+        float			            m_AttackSpeed;
+        Vector3			            m_AttackDir;
+        float                       m_Time;
+        float                       m_Duration;
+
+        // 무기 투사체 전용
+        eWeaponType                 m_WeaponType;
+
+        // 스킬 투사체 전용
+        PlayerScript::eSkillType    m_SkillType;
 
     public:
         void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -30,11 +36,6 @@ namespace Lu
         void SetTransform(Transform* _Transform)
         {
             m_Transform = _Transform;
-        }
-
-        void SetType(eWeaponType _Type)
-        {
-            m_ProjectileType = _Type;
         }
 
         void SetSpeed(float _Speed)
@@ -52,7 +53,18 @@ namespace Lu
             m_Duration = _Duration;
         }
 
-    public:
+        void SetWeaponType(eWeaponType _Type)
+        {
+            m_WeaponType = _Type;
+        }
+
+        void SetSkillType(PlayerScript::eSkillType _SkillType)
+        {
+            m_SkillType = _SkillType;
+        }
+
+    public:		
+        virtual void Initialize() override {};
         virtual void Update() override;
 
     public:

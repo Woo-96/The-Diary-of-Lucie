@@ -503,6 +503,12 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WandFullCharge_Mtrl", material);
 
+		// Skill - WandFullCharge
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"IceBall_Mtrl", material);
+
 #pragma endregion
 #pragma region Particle Shader
 		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");

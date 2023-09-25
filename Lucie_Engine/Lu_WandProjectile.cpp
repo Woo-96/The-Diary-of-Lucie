@@ -4,14 +4,16 @@
 #include "Lu_GameObject.h"
 #include "Lu_SceneManager.h"
 #include "Lu_SoundManager.h"
+#include "Lu_Time.h"
 
 namespace Lu
 {
 	WandProjectile::WandProjectile()
 		: m_bChargeProjectile(false)
+		, m_SFXTime(0.f)
 	{
 		SetName(L"WandProjectileScript");
-		SetType(eWeaponType::Wand);
+		SetWeaponType(eWeaponType::Wand);
 	}
 
 	WandProjectile::~WandProjectile()
@@ -23,24 +25,34 @@ namespace Lu
 		ProjectileScript::Update();
 	}
 
-	void WandProjectile::OnCollisionEnter(Collider2D* other)
+	void WandProjectile::OnCollisionEnter(Collider2D* _Other)
 	{
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"WandSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandSFX.ogg"));
 		pSFX->Play();
 
 		if (!m_bChargeProjectile)
-			ProjectileScript::OnCollisionEnter(other);
+			ProjectileScript::OnCollisionEnter(_Other);
 	}
 
-	void WandProjectile::OnCollisionStay(Collider2D* other)
+	void WandProjectile::OnCollisionStay(Collider2D* _Other)
 	{
-		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-		pSFX->SetClip(Resources::Load<AudioClip>(L"WandSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandSFX.ogg"));
-		pSFX->Play();
+		if ((int)eLayerType::Monster == _Other->GetOwner()->GetLayerIndex())
+		{
+			m_SFXTime += (float)Time::DeltaTime();
+
+			if (m_SFXTime >= 0.1f)
+			{
+				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+				pSFX->SetClip(Resources::Load<AudioClip>(L"WandSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandSFX.ogg"));
+				pSFX->Play();
+
+				m_SFXTime = 0.f;
+			}
+		}
 	}
 
-	void WandProjectile::OnCollisionExit(Collider2D* other)
+	void WandProjectile::OnCollisionExit(Collider2D* _Other)
 	{
 	}
 }

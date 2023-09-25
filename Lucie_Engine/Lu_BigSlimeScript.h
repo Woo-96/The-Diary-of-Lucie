@@ -22,6 +22,8 @@ namespace Lu
 		GameObject*						m_HPFrame;
 		GameObject*						m_HPBar;
 
+		float							m_HitCoolTime;
+
 	public:
 		void SetTarget(PlayerScript* _Target)
 		{

@@ -18,6 +18,8 @@
 #include "Lu_WeaponSlotScript.h"
 #include "Lu_InventoryScript.h"
 #include "Lu_ChannelingBarScript.h"
+#include "Lu_Object.h"
+#include "Lu_IceBallScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -34,6 +36,8 @@ namespace Lu
 		, m_PrevDir(eDir::None)
 		, m_MoveType(eMoveType::Walk)
 		, m_CurWeapon(eWeaponType::None)
+		//, m_CurSkill(eSkillType::End)
+		, m_CurSkill(eSkillType::IceBall)
 		, m_bAction(false)
 		, m_bInvincible(false)
 		, m_bHitEffect(false)
@@ -44,6 +48,10 @@ namespace Lu
 		, m_ChargeGauge(0.f)
 		, m_InvincibleTime(0.f)
 		, m_Damage(1)
+		, m_bSkillUse(false)
+		, m_bFirst(false)
+		, m_SkillCoolTime(0.f)
+		, m_SkillProjectileCoolTime(0.f)
 		, m_Animator(nullptr)
 		, m_arrUI{}
 	{
@@ -168,6 +176,15 @@ namespace Lu
 
 		// 이전 상태 저장
 		m_PrevState = m_CurState->GetStateType();
+
+		// 스킬 쿨타임 초기화
+		if (m_SkillCoolTime > 0.f)
+		{
+			m_SkillCoolTime -= (float)Time::DeltaTime();
+
+			if (m_SkillCoolTime <= 0.f)
+				m_SkillCoolTime = 0.f;
+		}
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* _Other)
@@ -409,24 +426,24 @@ namespace Lu
 
 
 		// Attack - ChannelingSkill
-		m_Animator->Create(L"Player_ChannelingSkill_Left", pAtlas, Vector2(500.f, 1900.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_Right", pAtlas, Vector2(200.f, 2000.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_Up", pAtlas, Vector2(200.f, 2100.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_Down", pAtlas, Vector2(500.f, 1800.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_LeftUp", pAtlas, Vector2(200.f, 2000.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_RightUp", pAtlas, Vector2(500.f, 2100.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_LeftDown", pAtlas, Vector2(200.f, 1800.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
-		m_Animator->Create(L"Player_ChannelingSkill_RightDown", pAtlas, Vector2(200.f, 1900.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_Left", pAtlas, Vector2(500.f, 1900.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_Right", pAtlas, Vector2(200.f, 2000.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_Up", pAtlas, Vector2(200.f, 2100.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_Down", pAtlas, Vector2(500.f, 1800.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_LeftUp", pAtlas, Vector2(200.f, 2000.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_RightUp", pAtlas, Vector2(500.f, 2100.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_LeftDown", pAtlas, Vector2(200.f, 1800.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
+		m_Animator->Create(L"Player_ChannelingSkill_Idle_RightDown", pAtlas, Vector2(200.f, 1900.f), Vector2(100.f, 100.f), 1, Vector2(100.f, 100.f));
 
 		// Attack - ChannelingSkillWalk
-		m_Animator->Create(L"Player_ChannelingSkillWalk_Left", pAtlas, Vector2(300.f, 2500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_Right", pAtlas, Vector2(0.f, 2600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_Up", pAtlas, Vector2(0.f, 2700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_Down", pAtlas, Vector2(300.f, 2400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_LeftUp", pAtlas, Vector2(300.f, 2600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_RightUp", pAtlas, Vector2(300.f, 2700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_LeftDown", pAtlas, Vector2(0.f , 2400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
-		m_Animator->Create(L"Player_ChannelingSkillWalk_RightDown", pAtlas, Vector2(0.f, 2500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_Left", pAtlas, Vector2(300.f, 2500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_Right", pAtlas, Vector2(0.f, 2600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_Up", pAtlas, Vector2(0.f, 2700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_Down", pAtlas, Vector2(300.f, 2400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_LeftUp", pAtlas, Vector2(300.f, 2600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_RightUp", pAtlas, Vector2(300.f, 2700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_LeftDown", pAtlas, Vector2(0.f , 2400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->Create(L"Player_ChannelingSkill_Walk_RightDown", pAtlas, Vector2(0.f, 2500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
 
 
 
@@ -560,7 +577,10 @@ namespace Lu
 		if (Input::GetKeyDown(eKeyCode::SHIFT))
 		{
 			if (eMoveType::Walk == m_MoveType)
-				m_MoveType = eMoveType::Run;
+			{
+				if(!m_bSkillUse && !m_bChanneling)
+					m_MoveType = eMoveType::Run;
+			}
 			else
 				m_MoveType = eMoveType::Walk;
 		}
@@ -648,7 +668,8 @@ namespace Lu
 		// 공격
 		if (Input::GetKey(eKeyCode::LBUTTON)
 			&& m_PlayerInfo.CurTP > 1.f
-			&& !m_bCantHit)
+			&& !m_bCantHit
+			&& !m_bSkillUse)
 		{
 			if (m_CurWeapon == eWeaponType::Wand)
 			{
@@ -659,12 +680,71 @@ namespace Lu
 					pChanneling->SetChannelingType(ChannelingBarScript::eChannelingType::Charging);
 					pChanneling->ChannelingOnOff(m_bChanneling);
 				}
+
+				m_ChargeGauge = pChanneling->GetChargeGauge();
+				if(m_ChargeGauge < 1.f)
+					UseStamina(0.0005f);
 			}
 			else
 			{
 				m_PrevDir = m_Dir;
 				m_Dir = CalDirToMouse();
 				ChangeState(StateScript::eState::Attack);
+			}
+		}
+		else if (Input::GetKey(eKeyCode::RBUTTON)
+			&& m_SkillCoolTime == 0.f)
+		{
+			if (!m_bSkillUse && m_PlayerInfo.CurMP < 3.f)
+				return;
+
+			switch (m_CurSkill)
+			{
+			case Lu::PlayerScript::eSkillType::IceBall:
+			{
+				ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
+				pChanneling->SetChannelingType(ChannelingBarScript::eChannelingType::Consuming);
+
+				if (!m_bFirst)
+				{
+					UseMana(3);
+					m_bSkillUse = true;
+					m_bChanneling = true;
+					m_bFirst = true;
+					m_MoveType = eMoveType::Walk;
+					Skill_IceBall();
+					pChanneling->SetMaxTime(1.5f);
+				}
+
+				if (pChanneling->IsComplete())
+				{
+					m_bSkillUse = false;
+					m_bChanneling = false;
+					m_bFirst = false;
+					m_SkillCoolTime = 10.f;
+					m_MoveType = eMoveType::Run;
+				}
+				else
+				{
+					m_SkillProjectileCoolTime += (float)Time::DeltaTime();
+
+					if (m_SkillProjectileCoolTime >= 0.2f)
+					{
+						Skill_IceBall();
+						m_SkillProjectileCoolTime = 0.f;
+					}
+				}
+
+				pChanneling->ChannelingOnOff(m_bChanneling);
+
+				m_PrevDir = m_Dir;
+				m_Dir = CalDirToMouse();
+			}
+				break;
+			case Lu::PlayerScript::eSkillType::End:
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -684,6 +764,20 @@ namespace Lu
 				m_PrevDir = m_Dir;
 				m_Dir = CalDirToMouse();
 				ChangeState(StateScript::eState::Attack);
+			}
+			else if (Input::GetKeyUp(eKeyCode::RBUTTON))
+			{
+				// 채널링 스킬 종료
+				if (m_CurSkill == eSkillType::IceBall)
+				{
+					m_bSkillUse = false;
+					m_bChanneling = false;
+					m_bFirst = false;
+					m_SkillCoolTime = 3.f;
+					m_MoveType = eMoveType::Run;
+					ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
+					pChanneling->ChannelingOnOff(m_bChanneling);
+				}
 			}
 		}
 
@@ -775,14 +869,46 @@ namespace Lu
 		StateScript::eState eCurState = m_CurState->GetStateType();
 
 		if (m_PrevState == eCurState
-			&& m_PrevDir == m_Dir)
+			&& m_PrevDir == m_Dir
+			&& m_bChanneling
+			&& !m_bSkillUse)
 			return;
 
 		switch (eCurState)
 		{
 		case StateScript::eState::Idle:
 		{
-			if (!m_bDontAnimChange)
+			if (m_bChanneling && m_bSkillUse && !m_bDontAnimChange)
+			{
+				switch (m_Dir)
+				{
+				case eDir::Left:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Left", true);
+					break;
+				case eDir::Right:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Right", true);
+					break;
+				case eDir::Up:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Up", true);
+					break;
+				case eDir::Down:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Down", true);
+					break;
+				case eDir::LeftUp:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_LeftUp", true);
+					break;
+				case eDir::RightUp:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_RightUp", true);
+					break;
+				case eDir::LeftDown:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_LeftDown", true);
+					break;
+				case eDir::RightDown:
+					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_RightDown", true);
+					break;
+				}
+			}
+			else if (!m_bDontAnimChange)
 			{
 				switch (m_Dir)
 				{
@@ -818,32 +944,65 @@ namespace Lu
 		{
 			if (eMoveType::Walk == m_MoveType)
 			{
-				switch (m_Dir)
+				if (m_bChanneling && m_bSkillUse)
 				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_Walk_Left", true);
-					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_Walk_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_Walk_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_Walk_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_Walk_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_Walk_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_Walk_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_Walk_RightDown", true);
-					break;
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_RightDown", true);
+						break;
+					}
+				}
+				else
+				{
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_Walk_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_Walk_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_Walk_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_Walk_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_Walk_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_Walk_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_Walk_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_Walk_RightDown", true);
+						break;
+					}
 				}
 			}
 			else
@@ -1121,7 +1280,8 @@ namespace Lu
 		if (m_PrevState == StateScript::eState::Attack
 			|| m_PrevState == StateScript::eState::Dash
 			|| eCurState == StateScript::eState::Attack
-			|| eCurState == StateScript::eState::Dash)
+			|| eCurState == StateScript::eState::Dash
+			|| m_ChargeGauge > 0.f)
 			return;
 
 		float RecoveryValue = m_PlayerInfo.TPRecoveryRate * (float)Time::DeltaTime();
@@ -1135,6 +1295,43 @@ namespace Lu
 		{
 			pTPScript->SetCurValue(m_PlayerInfo.CurTP);
 		}
+	}
+
+	void PlayerScript::Skill_IceBall()
+	{
+		Vector3 vPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		Vector2 vScreenPos = Lu::Input::GetMousePos();
+		Vector3 vMouseWorldPos = renderer::mainCamera->ScreenToWorld(vScreenPos);
+
+		Vector3 vActionDir = vMouseWorldPos - vPos;
+		vActionDir.Normalize();
+		float angle = std::atan2(vActionDir.y, vActionDir.x);
+
+		GameObject* pProjectile = object::Instantiate<GameObject>(vPos, Vector3(90.f, 49.5f, 100.f), Vector3(0.f, 0.f, angle + (PI * 2.f)), eLayerType::PlayerProjectile);
+		pProjectile->SetName(L"IceBallProjectile");
+
+		MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"IceBall_Mtrl"));
+
+		Collider2D* pCollider = pProjectile->AddComponent<Collider2D>();
+		pCollider->SetSize(Vector2(0.5f, 0.5f));
+
+		Animator* pAnimator = pProjectile->AddComponent<Animator>();
+		pAnimator->Create(L"IceBall", Resources::Load<Texture>(L"IceBall_Tex", L"..\\Resources\\Texture\\Player\\IceBall.png")
+			, Vector2(0.f, 0.f), Vector2(60.f, 33.f), 10, Vector2(60.f, 33.f), Vector2::Zero, 0.1f);
+		pAnimator->PlayAnimation(L"IceBall", true);
+
+		IceBallScript* pIceBallScript = pProjectile->AddComponent<IceBallScript>();
+		pIceBallScript->SetPlayerScript(this);
+		pIceBallScript->SetTransform(pProjectile->GetComponent<Transform>());
+		pIceBallScript->SetDir(vActionDir);
+		pIceBallScript->SetSpeed(300.f);
+		pIceBallScript->SetDuration(1.f);
+
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"IceBallSFX", L"..\\Resources\\Sound\\SFX\\Player\\IceBallSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void PlayerScript::ChangeState(StateScript::eState _NextState)

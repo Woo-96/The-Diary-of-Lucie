@@ -9,11 +9,12 @@ namespace Lu
 	ProjectileScript::ProjectileScript()
 		: m_PlayerScript(nullptr)
 		, m_Transform(nullptr)
-		, m_ProjectileType(eWeaponType::None)
 		, m_AttackSpeed(1000.f)
 		, m_AttackDir(Vector3::Zero)
 		, m_Time(0.f)
 		, m_Duration(0.3f)
+		, m_WeaponType(eWeaponType::None)
+		, m_SkillType(PlayerScript::eSkillType::End)
 	{
 		SetName(L"ProjectileScript");
 	}

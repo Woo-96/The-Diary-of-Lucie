@@ -40,7 +40,6 @@ namespace Lu
 
 	void AttackState::Enter()
 	{
-		GetPlayerScript()->UseStamina(1.f);
 		GetPlayerScript()->SetAction(true);
 		CalDirToMouse();
 
@@ -76,6 +75,8 @@ namespace Lu
 			pBowProjectile->SetPlayerScript(GetPlayerScript());
 			pBowProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 			pBowProjectile->SetDir(GetDir());
+
+			GetPlayerScript()->UseStamina(1.f);
 		}
 			break;
 		case eWeaponType::None:
@@ -101,6 +102,8 @@ namespace Lu
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetDuration(0.4f);
+
+				GetPlayerScript()->UseStamina(1.f);
 			}
 			else if (fChargeGauge >= 1.f)
 			{
@@ -146,6 +149,8 @@ namespace Lu
 				pWandProjectile->SetSpeed(500.f);
 				pWandProjectile->SetDuration(1.f);
 			}
+
+			GetPlayerScript()->ResetChargeGauge();
 		}
 			break;
 		}

@@ -6,6 +6,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_SceneManager.h"
+#include "Lu_Time.h"
 
 #include "Lu_SnabyIdleState.h"
 #include "Lu_SnabyPatrolState.h"
@@ -18,6 +19,7 @@ namespace Lu
 		: m_CurState(nullptr)
 		, m_PrevState(SnabyStateScript::eState::End)
 		, m_Target(nullptr)
+		, m_HitCoolTime(0.f)
 	{
 		SetName(L"SnabyScript");
 
@@ -94,11 +96,18 @@ namespace Lu
 			if (SnabyStateScript::eState::Dead == m_CurState->GetStateType())
 				return;
 
-			GetInfo().HP -= m_Target->GetPlayerDamage();
+			m_HitCoolTime += (float)Time::DeltaTime();
 
-			if (GetInfo().HP <= 0.f)
+			if (m_HitCoolTime >= 0.1f)
 			{
-				ChangeState(SnabyStateScript::eState::Dead);
+				GetInfo().HP -= m_Target->GetPlayerDamage();
+
+				if (GetInfo().HP <= 0.f)
+				{
+					ChangeState(SnabyStateScript::eState::Dead);
+				}
+
+				m_HitCoolTime = 0;
 			}
 		}
 	}

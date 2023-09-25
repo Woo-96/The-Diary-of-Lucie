@@ -18,6 +18,7 @@ namespace Lu
 
 		enum class eSkillType
 		{
+			IceBall,
 			End
 		};
 
@@ -89,19 +90,25 @@ namespace Lu
 
 		eMoveType				m_MoveType;
 		eWeaponType				m_CurWeapon;
+		eSkillType				m_CurSkill;
 
 		tPlayerInfo				m_PlayerInfo;
 
-		bool					m_bAction;
-		bool					m_bInvincible;
-		bool					m_bHitEffect;
-		bool					m_bDontAnimChange;
-		bool					m_bCantHit;
-		bool					m_bChanneling;
-		bool					m_bChargeAnim;
-		float					m_ChargeGauge;
-		float					m_InvincibleTime;
-		int						m_Damage;
+		bool					m_bAction;					// 특정 동작에서 키 입력 방지
+		bool					m_bInvincible;				// 대쉬 무적
+		bool					m_bHitEffect;				// 히트 시 깜빡임 여부
+		bool					m_bDontAnimChange;			// 가만히 있지만 아이들 상태로 전환되는 것을 방지
+		bool					m_bCantHit;					// 인벤토리 위에서는 공격 방지
+		bool					m_bChanneling;				// 채널링 스킬 사용중
+		bool					m_bChargeAnim;				// 채널링 끝나고 차지 애니메이션 출력용
+		float					m_ChargeGauge;				// 채널링 스킬 현재 차징 게이지
+		float					m_InvincibleTime;			// 무적 잔여 시간
+		int						m_Damage;					// 무기에 영향 받는 현재 대미지
+
+		bool					m_bSkillUse;				// 스킬 사용중
+		bool					m_bFirst;					// 스킬 사용 직후인지
+		float					m_SkillCoolTime;			// 스킬 쿨타임
+		float					m_SkillProjectileCoolTime;	// 투사체가 매 프레임 나가는 것을 방지
 
 		Animator*				m_Animator;
 		UIScript*				m_arrUI[(int)eUI::End];
@@ -129,6 +136,11 @@ namespace Lu
 			m_bCantHit = _b;
 		}
 
+		void ResetChargeGauge()
+		{
+			m_ChargeGauge = 0.f;
+		}
+
 	public:
 		eDir GetDir()	const
 		{
@@ -143,6 +155,11 @@ namespace Lu
 		eWeaponType GetWeaponType()	const
 		{
 			return m_CurWeapon;
+		}
+
+		eSkillType GetSkillType()	const
+		{
+			return m_CurSkill;
 		}
 
 		tPlayerInfo& GetPlayerInfo()
@@ -183,6 +200,7 @@ namespace Lu
 		void MagicCircleMove();
 		void LookAround();
 		void StaminaRecovery();
+		void Skill_IceBall();
 
 	public:
 		void ChangeState(StateScript::eState _NextState);

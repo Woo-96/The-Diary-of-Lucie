@@ -25,6 +25,7 @@ namespace Lu
 		, m_Target(nullptr)
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
+		, m_HitCoolTime(0.f)
 	{
 		SetName(L"BigSlimeScript");
 
@@ -99,12 +100,19 @@ namespace Lu
 			if (BigSlimeStateScript::eState::Dead == m_CurState->GetStateType())
 				return;
 
-			GetInfo().HP -= m_Target->GetPlayerDamage();
-			m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
+			m_HitCoolTime += (float)Time::DeltaTime();
 
-			if (GetInfo().HP <= 0.f)
+			if (m_HitCoolTime >= 0.1f)
 			{
-				ChangeState(BigSlimeStateScript::eState::Dead);
+				GetInfo().HP -= m_Target->GetPlayerDamage();
+				m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
+
+				if (GetInfo().HP <= 0.f)
+				{
+					ChangeState(BigSlimeStateScript::eState::Dead);
+				}
+
+				m_HitCoolTime = 0;
 			}
 		}
 	}

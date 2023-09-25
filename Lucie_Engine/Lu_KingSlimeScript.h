@@ -23,6 +23,7 @@ namespace Lu
 		GameObject*						m_HPBar;
 
 		float							m_Time;
+		float							m_HitCoolTime;
 		bool							m_bAttack;
 
 
