@@ -14,7 +14,7 @@ namespace Lu
 		, m_Time(0.f)
 		, m_Duration(0.3f)
 		, m_WeaponType(eWeaponType::None)
-		, m_SkillType(PlayerScript::eSkillType::End)
+		, m_SkillType(eSkillType::None)
 	{
 		SetName(L"ProjectileScript");
 	}

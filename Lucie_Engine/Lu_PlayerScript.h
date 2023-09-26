@@ -16,14 +16,9 @@ namespace Lu
 			Run
 		};
 
-		enum class eSkillType
-		{
-			IceBall,
-			End
-		};
-
 		enum class eUI
 		{
+			Layout,
 			HP,
 			MP,
 			EXP,
@@ -87,10 +82,10 @@ namespace Lu
 
 		eDir					m_Dir;
 		eDir					m_PrevDir;
-
 		eMoveType				m_MoveType;
+
 		eWeaponType				m_CurWeapon;
-		eSkillType				m_CurSkill;
+		tSkill					m_CurSkill;
 
 		tPlayerInfo				m_PlayerInfo;
 
@@ -107,7 +102,6 @@ namespace Lu
 
 		bool					m_bSkillUse;				// 스킬 사용중
 		bool					m_bFirst;					// 스킬 사용 직후인지
-		float					m_SkillCoolTime;			// 스킬 쿨타임
 		float					m_SkillProjectileCoolTime;	// 투사체가 매 프레임 나가는 것을 방지
 
 		Animator*				m_Animator;
@@ -141,6 +135,11 @@ namespace Lu
 			m_ChargeGauge = 0.f;
 		}
 
+		void SetCurSkill(tSkill& _Skill)
+		{
+			m_CurSkill = _Skill;
+		}
+
 	public:
 		eDir GetDir()	const
 		{
@@ -157,7 +156,7 @@ namespace Lu
 			return m_CurWeapon;
 		}
 
-		eSkillType GetSkillType()	const
+		tSkill& GetCurSkill()
 		{
 			return m_CurSkill;
 		}
@@ -206,6 +205,7 @@ namespace Lu
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
+		void LearnSkill(tSkill& _Skill);
 
 	// UI 상호 작용 관련 함수
 	public:

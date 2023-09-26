@@ -240,10 +240,13 @@
       <Filter>Contents\Script\05. UI\Inventory\Layout</Filter>
     </ClCompile>
     <ClCompile Include="Lu_ChannelingBarScript.cpp">
-      <Filter>Contents\Script\05. UI\HUD\ChannelingBar</Filter>
+      <Filter>Contents\Script\05. UI\ChannelingBar</Filter>
     </ClCompile>
     <ClCompile Include="Lu_IceBallScript.cpp">
       <Filter>Contents\Script\02. Player\Projectile\Skill\IceBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_LayoutScript.cpp">
+      <Filter>Contents\Script\05. UI\HUD\Layout</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -492,10 +495,13 @@
       <Filter>Contents\Script\05. UI\Inventory\Layout</Filter>
     </ClInclude>
     <ClInclude Include="Lu_ChannelingBarScript.h">
-      <Filter>Contents\Script\05. UI\HUD\ChannelingBar</Filter>
+      <Filter>Contents\Script\05. UI\ChannelingBar</Filter>
     </ClInclude>
     <ClInclude Include="Lu_IceBallScript.h">
       <Filter>Contents\Script\02. Player\Projectile\Skill\IceBall</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_LayoutScript.h">
+      <Filter>Contents\Script\05. UI\HUD\Layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -769,9 +775,6 @@
     <Filter Include="Contents\Script\05. UI\Inventory\Layout">
       <UniqueIdentifier>{e9617054-9638-462b-a7d1-30a07ace80c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\05. UI\HUD\ChannelingBar">
-      <UniqueIdentifier>{896f4a9f-44fe-4157-9342-269693c081fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\02. Player\Projectile\Weapon">
       <UniqueIdentifier>{5c844df5-bbf3-4dd6-bc2f-fcffecc98504}</UniqueIdentifier>
     </Filter>
@@ -786,6 +789,12 @@
     </Filter>
     <Filter Include="Contents\Script\02. Player\Projectile\Skill\IceBall">
       <UniqueIdentifier>{0a090940-05c0-4dc7-ab7e-fd5828b848e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\ChannelingBar">
+      <UniqueIdentifier>{896f4a9f-44fe-4157-9342-269693c081fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\HUD\Layout">
+      <UniqueIdentifier>{52ab7c51-77d6-4e4c-a192-0000e9302f7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

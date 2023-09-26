@@ -184,6 +184,7 @@
     <ClInclude Include="Lu_InventorySlotScript.h" />
     <ClInclude Include="Lu_ItemScript.h" />
     <ClInclude Include="Lu_JellyScript.h" />
+    <ClInclude Include="Lu_LayoutScript.h" />
     <ClInclude Include="Lu_ProgressBarScript.h" />
     <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
@@ -269,6 +270,7 @@
     <ClCompile Include="Lu_InventorySlotScript.cpp" />
     <ClCompile Include="Lu_ItemScript.cpp" />
     <ClCompile Include="Lu_JellyScript.cpp" />
+    <ClCompile Include="Lu_LayoutScript.cpp" />
     <ClCompile Include="Lu_ProgressBarScript.cpp" />
     <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />

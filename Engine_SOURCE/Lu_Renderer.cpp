@@ -863,6 +863,40 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"InvenGoldIcon_Mtrl", pMaterial);
 
+		// UI - Skill Element
+		pTexture = Resources::Load<Texture>(L"CurrentSkill_Fire_Tex", L"..\\Resources\\Texture\\UI\\HUD\\CurrentSkill_Fire.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"CurrentSkill_Fire_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"CurrentSkill_Ice_Tex", L"..\\Resources\\Texture\\UI\\HUD\\CurrentSkill_Ice.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"CurrentSkill_Ice_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"CurrentSkill_None_Tex", L"..\\Resources\\Texture\\UI\\HUD\\CurrentSkill_None.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"CurrentSkill_None_Mtrl", pMaterial);
+
+		// UI - Cur Skill
+		pTexture = Resources::Load<Texture>(L"CurrentSkill_Tex", L"..\\Resources\\Texture\\UI\\HUD\\CurrentSkill.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"CurrentSkill_Mtrl", pMaterial);
+
+		// UI - Skill Icon
+		pTexture = Resources::Load<Texture>(L"IceBallIcon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\IceBallIcon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"IceBallIcon_Mtrl", pMaterial);
+		
+
 #pragma endregion
 #pragma region Number Shader
 		// LT, Slice를 정하는 Shader

@@ -20,6 +20,7 @@
 #include "Lu_ChannelingBarScript.h"
 #include "Lu_Object.h"
 #include "Lu_IceBallScript.h"
+#include "Lu_LayoutScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -36,8 +37,7 @@ namespace Lu
 		, m_PrevDir(eDir::None)
 		, m_MoveType(eMoveType::Walk)
 		, m_CurWeapon(eWeaponType::None)
-		//, m_CurSkill(eSkillType::End)
-		, m_CurSkill(eSkillType::IceBall)
+		, m_CurSkill{}
 		, m_bAction(false)
 		, m_bInvincible(false)
 		, m_bHitEffect(false)
@@ -50,7 +50,6 @@ namespace Lu
 		, m_Damage(1)
 		, m_bSkillUse(false)
 		, m_bFirst(false)
-		, m_SkillCoolTime(0.f)
 		, m_SkillProjectileCoolTime(0.f)
 		, m_Animator(nullptr)
 		, m_arrUI{}
@@ -176,15 +175,6 @@ namespace Lu
 
 		// 이전 상태 저장
 		m_PrevState = m_CurState->GetStateType();
-
-		// 스킬 쿨타임 초기화
-		if (m_SkillCoolTime > 0.f)
-		{
-			m_SkillCoolTime -= (float)Time::DeltaTime();
-
-			if (m_SkillCoolTime <= 0.f)
-				m_SkillCoolTime = 0.f;
-		}
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* _Other)
@@ -693,21 +683,21 @@ namespace Lu
 			}
 		}
 		else if (Input::GetKey(eKeyCode::RBUTTON)
-			&& m_SkillCoolTime == 0.f)
+			&& m_CurSkill.CurCoolTime == 0.f)
 		{
-			if (!m_bSkillUse && m_PlayerInfo.CurMP < 3.f)
+			if (!m_bSkillUse && m_PlayerInfo.CurMP < m_CurSkill.NeedMana)
 				return;
 
-			switch (m_CurSkill)
+			switch (m_CurSkill.SkillType)
 			{
-			case Lu::PlayerScript::eSkillType::IceBall:
+			case eSkillType::IceBall:
 			{
 				ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
 				pChanneling->SetChannelingType(ChannelingBarScript::eChannelingType::Consuming);
 
 				if (!m_bFirst)
 				{
-					UseMana(3);
+					UseMana(m_CurSkill.NeedMana);
 					m_bSkillUse = true;
 					m_bChanneling = true;
 					m_bFirst = true;
@@ -721,7 +711,7 @@ namespace Lu
 					m_bSkillUse = false;
 					m_bChanneling = false;
 					m_bFirst = false;
-					m_SkillCoolTime = 10.f;
+					m_CurSkill.CurCoolTime = m_CurSkill.SkillCoolTime;
 					m_MoveType = eMoveType::Run;
 				}
 				else
@@ -741,7 +731,7 @@ namespace Lu
 				m_Dir = CalDirToMouse();
 			}
 				break;
-			case Lu::PlayerScript::eSkillType::End:
+			case eSkillType::None:
 				break;
 			default:
 				break;
@@ -768,12 +758,12 @@ namespace Lu
 			else if (Input::GetKeyUp(eKeyCode::RBUTTON))
 			{
 				// 채널링 스킬 종료
-				if (m_CurSkill == eSkillType::IceBall)
+				if (m_CurSkill.SkillType == eSkillType::IceBall)
 				{
 					m_bSkillUse = false;
 					m_bChanneling = false;
 					m_bFirst = false;
-					m_SkillCoolTime = 3.f;
+					m_CurSkill.CurCoolTime = m_CurSkill.SkillCoolTime;
 					m_MoveType = eMoveType::Run;
 					ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
 					pChanneling->ChannelingOnOff(m_bChanneling);
@@ -788,6 +778,33 @@ namespace Lu
 			if (pQuickSlot)
 				pQuickSlot->UseQuickSlotItem();
 		}
+
+		// 스킬
+		if (Input::GetKeyDown(eKeyCode::_1))
+		{
+			LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
+			if (pLayout)
+				pLayout->SelectSlot(1);
+		}
+		else if (Input::GetKeyDown(eKeyCode::_2))
+		{
+			LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
+			if (pLayout)
+				pLayout->SelectSlot(2);
+		}
+		else if (Input::GetKeyDown(eKeyCode::_3))
+		{
+			LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
+			if (pLayout)
+				pLayout->SelectSlot(3);
+		}
+		else if (Input::GetKeyDown(eKeyCode::_4))
+		{
+			LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
+			if (pLayout)
+				pLayout->SelectSlot(4);
+		}
+
 
 		if (!m_bAction)
 		{
@@ -1330,8 +1347,23 @@ namespace Lu
 		pIceBallScript->SetDuration(1.f);
 
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-		pSFX->SetClip(Resources::Load<AudioClip>(L"IceBallSFX", L"..\\Resources\\Sound\\SFX\\Player\\IceBallSFX.ogg"));
+		pSFX->SetClip(Resources::Load<AudioClip>(L"IceBall1SFX", L"..\\Resources\\Sound\\SFX\\Player\\IceBall1SFX.ogg"));
 		pSFX->Play();
+	}
+
+	void PlayerScript::LearnSkill(tSkill& _Skill)
+	{
+		if (_Skill.SkillType == eSkillType::None)
+			return;
+
+		LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
+		if (pLayout)
+			pLayout->LearnSkill(_Skill);
+
+		if (m_CurSkill.SkillType == eSkillType::None)
+		{
+			pLayout->SelectSlot(1);
+		}
 	}
 
 	void PlayerScript::ChangeState(StateScript::eState _NextState)

@@ -9,6 +9,7 @@
 #include "Lu_HeartScript.h"
 #include "Lu_ManaScript.h"
 #include "Lu_ProgressBarScript.h"
+#include "Lu_LayoutScript.h"
 
 #include "Lu_QuickItemScript.h"
 #include "Lu_WeaponSlotScript.h"
@@ -77,6 +78,9 @@ namespace Lu
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Layout_Mtrl"));
+			LayoutScript* pLayout = pObject->AddComponent<LayoutScript>();
+			pLayout->SetPlayerScript(pPlayerScript);
+			pPlayerScript->SetUI(PlayerScript::eUI::Layout, (UIScript*)pLayout);
 		}
 
 		{
@@ -224,6 +228,15 @@ namespace Lu
 			ChannelingBarScript* pChanneling = pObject->AddComponent<ChannelingBarScript>();
 			pChanneling->SetPlayerTransform(pPlayer->GetComponent<Transform>());
 			pPlayerScript->SetUI(PlayerScript::eUI::Channeling, (UIScript*)pChanneling);
+
+			// 테스트용. UI에서 이걸 선택했다고 가정
+			tSkill IceBall;
+			IceBall.SkillCoolTime = 10.f;
+			IceBall.ElmentType = eElementType::Ice;
+			IceBall.IconMaterialName = L"IceBallIcon_Mtrl";
+			IceBall.NeedMana = 3;
+			IceBall.SkillType = eSkillType::IceBall;
+			pPlayerScript->LearnSkill(IceBall);
 		}
 	}	
 }
