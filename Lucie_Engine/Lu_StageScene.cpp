@@ -10,6 +10,7 @@
 #include "Lu_ManaScript.h"
 #include "Lu_ProgressBarScript.h"
 #include "Lu_LayoutScript.h"
+#include "Lu_SkillScript.h"
 
 #include "Lu_QuickItemScript.h"
 #include "Lu_WeaponSlotScript.h"
@@ -228,15 +229,19 @@ namespace Lu
 			ChannelingBarScript* pChanneling = pObject->AddComponent<ChannelingBarScript>();
 			pChanneling->SetPlayerTransform(pPlayer->GetComponent<Transform>());
 			pPlayerScript->SetUI(PlayerScript::eUI::Channeling, (UIScript*)pChanneling);
+		}
 
-			// 테스트용. UI에서 이걸 선택했다고 가정
-			tSkill IceBall;
-			IceBall.SkillCoolTime = 10.f;
-			IceBall.ElmentType = eElementType::Ice;
-			IceBall.IconMaterialName = L"IceBallIcon_Mtrl";
-			IceBall.NeedMana = 3;
-			IceBall.SkillType = eSkillType::IceBall;
-			pPlayerScript->LearnSkill(IceBall);
+		{
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			pObject->SetName(L"UI_SkillMgr");
+			//pObject->SetActive(false);
+			SceneManager::DontDestroyOnLoad(pObject);
+			pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SkillBG_Mtrl"));
+			SkillScript* pSkillScript = pObject->AddComponent<SkillScript>();
+			pSkillScript->SetPlayerScript(pPlayerScript);
+			pPlayerScript->SetUI(PlayerScript::eUI::Skill, (UIScript*)pSkillScript);
 		}
 	}	
 }

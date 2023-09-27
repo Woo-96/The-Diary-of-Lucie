@@ -40,6 +40,7 @@ namespace Lu
 		, m_CurSkill{}
 		, m_bAction(false)
 		, m_bInvincible(false)
+		, m_bDashSuccess(false)
 		, m_bHitEffect(false)
 		, m_bDontAnimChange(false)
 		, m_bCantHit(false)
@@ -210,11 +211,16 @@ namespace Lu
 			}
 			else
 			{
-				if (StateScript::eState::Dash == m_CurState->GetStateType())
+				if (StateScript::eState::Dash == m_CurState->GetStateType()
+					&& !m_bDashSuccess)
 				{
+					UseMana(-1);
+
 					AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 					pSFX->SetClip(Resources::Load<AudioClip>(L"AvoidSFX", L"..\\Resources\\Sound\\SFX\\Player\\AvoidSFX.ogg"));
 					pSFX->Play();
+
+					m_bDashSuccess = true;
 				}
 			}
 		}
@@ -263,21 +269,21 @@ namespace Lu
 
 		// Dash
 		m_Animator->Create(L"Player_Dash_Left", pAtlas, Vector2(0.f, 4300.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Left") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_Left") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_Right", pAtlas, Vector2(0.f, 4400.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Right") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_Right") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_Up", pAtlas, Vector2(0.f, 4600.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Up") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_Up") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_Down", pAtlas, Vector2(0.f, 4100.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_Down") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_Down") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_LeftUp", pAtlas, Vector2(0.f, 4500.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_LeftUp") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_RightUp", pAtlas, Vector2(0.f, 4700.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_RightUp") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_LeftDown", pAtlas, Vector2(0.f, 4000.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_LeftDown") = std::bind(&PlayerScript::DashFinish, this);
 		m_Animator->Create(L"Player_Dash_RightDown", pAtlas, Vector2(0.f, 4200.f), Vector2(100.f, 100.f), 6, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->CompleteEvent(L"Player_Dash_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->CompleteEvent(L"Player_Dash_RightDown") = std::bind(&PlayerScript::DashFinish, this);
 
 		// Attack - Bow
 		m_Animator->Create(L"Player_Bow_Left", pAtlas, Vector2(300.f, 1500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
@@ -596,7 +602,7 @@ namespace Lu
 		}
 
 		// 대쉬
-		if (Input::GetKeyDown(eKeyCode::SPACE) && m_PlayerInfo.CurTP > 2.f)
+		if (Input::GetKey(eKeyCode::SPACE) && m_PlayerInfo.CurTP > 2.f)
 		{
 			m_PrevDir = m_Dir;
 			if (Input::GetKey(eKeyCode::A)
@@ -656,7 +662,7 @@ namespace Lu
 		}
 
 		// 공격
-		if (Input::GetKey(eKeyCode::LBUTTON)
+		else if (Input::GetKey(eKeyCode::LBUTTON)
 			&& m_PlayerInfo.CurTP > 1.f
 			&& !m_bCantHit
 			&& !m_bSkillUse)
@@ -1267,6 +1273,12 @@ namespace Lu
 			m_bChargeAnim = false;
 	}
 
+	void PlayerScript::DashFinish()
+	{
+		ChangeState(StateScript::eState::Idle);
+		m_bDashSuccess = false;
+	}
+
 	void PlayerScript::AttackSFX()
 	{
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
@@ -1404,6 +1416,9 @@ namespace Lu
 
 	void PlayerScript::UseMana(int _Value)
 	{
+		if (m_PlayerInfo.CurMP - _Value > m_PlayerInfo.MaxMP)
+			return;
+
 		m_PlayerInfo.CurMP -= _Value;
 		ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
 		if (pMPScript)

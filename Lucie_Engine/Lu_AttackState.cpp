@@ -25,16 +25,96 @@ namespace Lu
 	void AttackState::Initialize()
 	{
 		StateScript::Initialize();
-
-		SetSpeed(50.f);
 	}
 
 	void AttackState::Update()
 	{
 		Vector3 vPos = GetTransform()->GetPosition();
-		float Zpos = vPos.z;
-		vPos += GetDir() * GetSpeed() * (float)Time::DeltaTime();
-		vPos.z = Zpos;
+		float diagonalFactor = 1.0f / sqrt(2.0f);
+
+		if (Input::GetKey(eKeyCode::A)
+			&& Input::GetKey(eKeyCode::D))
+		{
+			SetSpeed(50.f);
+
+			float Zpos = vPos.z;
+			vPos += GetDir() * GetSpeed() * (float)Time::DeltaTime();
+			vPos.z = Zpos;
+		}
+		else if (Input::GetKey(eKeyCode::W)
+			&& Input::GetKey(eKeyCode::S))
+		{
+			SetSpeed(50.f);
+
+			float Zpos = vPos.z;
+			vPos += GetDir() * GetSpeed() * (float)Time::DeltaTime();
+			vPos.z = Zpos;
+		}
+		else if (Input::GetKey(eKeyCode::A)
+			&& Input::GetKey(eKeyCode::W))
+		{
+			SetSpeed(100.f);
+
+			vPos.x -= GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+			vPos.y += GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::A)
+			&& Input::GetKey(eKeyCode::S))
+		{
+			SetSpeed(100.f);
+
+			vPos.x -= GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+			vPos.y -= GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::D)
+			&& Input::GetKey(eKeyCode::S))
+		{
+			SetSpeed(100.f);
+
+			vPos.x += GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+			vPos.y -= GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::D)
+			&& Input::GetKey(eKeyCode::W))
+		{
+			SetSpeed(100.f);
+
+			vPos.x += GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+			vPos.y += GetSpeed() * diagonalFactor * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::A))
+		{
+			SetSpeed(100.f);
+
+			vPos.x -= GetSpeed() * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::D))
+		{
+			SetSpeed(100.f);
+
+			vPos.x += GetSpeed() * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::S))
+		{
+			SetSpeed(100.f);
+
+			vPos.y -= GetSpeed() * (float)Time::DeltaTime();
+		}
+		else if (Input::GetKey(eKeyCode::W))
+		{
+			SetSpeed(100.f);
+
+			vPos.y += GetSpeed() * (float)Time::DeltaTime();
+		}
+		else
+		{
+			SetSpeed(50.f);
+
+			float Zpos = vPos.z;
+			vPos += GetDir() * GetSpeed() * (float)Time::DeltaTime();
+			vPos.z = Zpos;
+		}
+
 		GetTransform()->SetPosition(vPos);
 	}
 

@@ -895,6 +895,29 @@ namespace renderer
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		Resources::Insert(L"IceBallIcon_Mtrl", pMaterial);
+
+
+		// UI - SkillBG
+		pTexture = Resources::Load<Texture>(L"SkillBG_Tex", L"..\\Resources\\Texture\\UI\\HUD\\SkillBG.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SkillBG_Mtrl", pMaterial);
+		
+		// UI - SkillBoxFrame1
+		pTexture = Resources::Load<Texture>(L"SkillBoxFrame_Tex", L"..\\Resources\\Texture\\UI\\HUD\\SkillBoxFrame.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"SkillBoxFrame_Mtrl", pMaterial);
+
+		// UI - SkillBoxFrame2
+		pTexture = Resources::Load<Texture>(L"LearnSkillFrame_Tex", L"..\\Resources\\Texture\\UI\\HUD\\LearnSkillFrame.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		Resources::Insert(L"LearnSkillFrame_Mtrl", pMaterial);
 		
 
 #pragma endregion

@@ -5,31 +5,34 @@
 namespace Lu
 {
 	class PlayerScript;
-	class LayoutScript : public UIScript
+	class GameObject;
+	class SkillScript :	public UIScript
 	{
-	private:
+	public:
 		enum class eParts
 		{
-			ElementIcon,
-			SkillSlot_1,
-			SkillSlot_2,
-			SkillSlot_3,
-			SkillSlot_4,
-			AroundSkillSlot,
-			CurSkillIcon,
+			LearnSkill,
+			NewSkill_1,
+			NewSkill_2,
 			End,
 		};
 
+		enum class eUIState
+		{
+			Select,
+			Learn,
+		};
+
 	public:
-		LayoutScript();
-		virtual ~LayoutScript();
+		SkillScript();
+		virtual ~SkillScript();
 
 	private:
 		PlayerScript*	m_PlayerScript;
 		GameObject*		m_arrParts[(int)eParts::End];
-		tSkill			m_arrSkill[MaxSkill];
-		int				m_SkillCount;
-		int				m_CurSlot;
+		tSkill			m_arrSkill[(int)eSkillType::None];
+		eUIState		m_CurState;
+		bool			m_bActive;
 
 	public:
 		void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -43,7 +46,8 @@ namespace Lu
 		virtual void Render() override;
 
 	public:
-		void SelectSlot(int _Num); // 1 ~ 4 스킬 슬롯 선택
-		void LearnSkill(tSkill& _Skill);
+		void SelectSkill(tSkill _Skill);
 	};
 }
+
+

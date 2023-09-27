@@ -29,6 +29,7 @@ namespace Lu
 			WeaponSlot,
 			Channeling,
 			Inventory,
+			Skill,
 			End,
 		};
 
@@ -91,6 +92,7 @@ namespace Lu
 
 		bool					m_bAction;					// 특정 동작에서 키 입력 방지
 		bool					m_bInvincible;				// 대쉬 무적
+		bool					m_bDashSuccess;				// 대쉬 후 SFX와 마나 회복이 이미 진행되었는지
 		bool					m_bHitEffect;				// 히트 시 깜빡임 여부
 		bool					m_bDontAnimChange;			// 가만히 있지만 아이들 상태로 전환되는 것을 방지
 		bool					m_bCantHit;					// 인벤토리 위에서는 공격 방지
@@ -193,12 +195,16 @@ namespace Lu
 		void StateUpdate();
 		void AnimationUpdate();
 		eDir CalDirToMouse();
+
 		void CompleteAction();
+		void DashFinish();
 		void AttackSFX();
 		void WandOfManaSFX();
 		void MagicCircleMove();
 		void LookAround();
+		
 		void StaminaRecovery();
+		
 		void Skill_IceBall();
 
 	public:

@@ -39,8 +39,8 @@ namespace Lu
 
 	enum class eSkillType
 	{
-		None,
 		IceBall,
+		None,
 	};
 
 	struct tSkill
@@ -51,6 +51,8 @@ namespace Lu
 		float			CurCoolTime;
 		int				NeedMana;
 		std::wstring	IconMaterialName;
+		std::wstring	SkillName;
+		std::wstring	SkillDescription;
 
 		tSkill()
 			: SkillType(eSkillType::None)
@@ -59,6 +61,8 @@ namespace Lu
 			, CurCoolTime(0.f)
 			, NeedMana(0)
 			, IconMaterialName{}
+			, SkillName{}
+			, SkillDescription{}
 		{
 
 		}

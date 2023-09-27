@@ -45,11 +45,13 @@ namespace Lu
 			else
 			{
 				m_CurBtnState = eButtonState::Normal;
+				ButtonNomalEvent();
 			}
 		}
 		else
 		{
 			m_CurBtnState = eButtonState::Normal;
+			ButtonNomalEvent();
 		}
 	}
 

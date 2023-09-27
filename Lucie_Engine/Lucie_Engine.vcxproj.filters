@@ -248,6 +248,12 @@
     <ClCompile Include="Lu_LayoutScript.cpp">
       <Filter>Contents\Script\05. UI\HUD\Layout</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_SkillScript.cpp">
+      <Filter>Contents\Script\05. UI\HUD\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SkillSelectScript.cpp">
+      <Filter>Contents\Script\05. UI\Button\SkillSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -502,6 +508,12 @@
     </ClInclude>
     <ClInclude Include="Lu_LayoutScript.h">
       <Filter>Contents\Script\05. UI\HUD\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SkillScript.h">
+      <Filter>Contents\Script\05. UI\HUD\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SkillSelectScript.h">
+      <Filter>Contents\Script\05. UI\Button\SkillSelect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -795,6 +807,12 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\HUD\Layout">
       <UniqueIdentifier>{52ab7c51-77d6-4e4c-a192-0000e9302f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\HUD\Skill">
+      <UniqueIdentifier>{1585802f-a181-489b-9a5d-c49bea878d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\Button\SkillSelect">
+      <UniqueIdentifier>{e84cbd6d-9c29-4ee3-b505-b17bdc8fff54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

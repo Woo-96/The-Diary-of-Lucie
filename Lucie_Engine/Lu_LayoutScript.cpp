@@ -24,21 +24,6 @@ namespace Lu
 
 	void LayoutScript::Initialize()
 	{
-		//enum class eParts
-		//{
-		//	ElementIcon,
-		//	CurSkillIcon,
-		//	SkillSlot_1,
-		//	SkillSlot_2,
-		//	SkillSlot_3,
-		//	SkillSlot_4,
-		//	AroundSkillSlot,
-		//	CoolTime,
-		//	SlotCoolTime,
-		//	End,
-		//};
-
-
 		MeshRenderer* pMeshRender;
 
 		m_arrParts[(int)eParts::ElementIcon] = object::Instantiate<GameObject>(Vector3(-8.f, -293.f, 140.f), Vector3(28.f, 28.f, 100.f), eLayerType::UI);

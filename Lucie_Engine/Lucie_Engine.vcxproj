@@ -225,6 +225,8 @@
     <ClInclude Include="Lu_PortalScript.h" />
     <ClInclude Include="Lu_ProjectileScript.h" />
     <ClInclude Include="Lu_QuickItemScript.h" />
+    <ClInclude Include="Lu_SkillScript.h" />
+    <ClInclude Include="Lu_SkillSelectScript.h" />
     <ClInclude Include="Lu_SlimeAttackState.h" />
     <ClInclude Include="Lu_SlimeDeadState.h" />
     <ClInclude Include="Lu_SlimeIdleState.h" />
@@ -311,6 +313,8 @@
     <ClCompile Include="Lu_PortalScript.cpp" />
     <ClCompile Include="Lu_ProjectileScript.cpp" />
     <ClCompile Include="Lu_QuickItemScript.cpp" />
+    <ClCompile Include="Lu_SkillScript.cpp" />
+    <ClCompile Include="Lu_SkillSelectScript.cpp" />
     <ClCompile Include="Lu_SlimeAttackState.cpp" />
     <ClCompile Include="Lu_SlimeDeadState.cpp" />
     <ClCompile Include="Lu_SlimeIdleState.cpp" />
