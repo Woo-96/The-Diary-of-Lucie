@@ -24,8 +24,9 @@ namespace Lu
 	private:
 		PlayerScript*	m_PlayerScript;
 		SkillScript*	m_SkillUI;
-		tSkill			m_Skill;
+		tSkill*			m_Skill;
 		GameObject*		m_SkillIcon[(int)eParts::End];
+		bool			m_bPrint;
 
 	public:
 		void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -38,15 +39,19 @@ namespace Lu
 			m_SkillUI = _SkillUI;
 		}
 
-		void SetSkill(tSkill _Skill);
+		void SetSkill(tSkill* _Skill);
 
 	public:
 		virtual void Update() override;
+		virtual void Render() override;
 
 	protected:
 		virtual void ButtonNomalEvent() override;
 		virtual void ButtonHoveredEvent() override;
 		virtual void ButtonClickEvent() override;
+
+	public:
+		void SetActive(bool _b);
     };
 }
 

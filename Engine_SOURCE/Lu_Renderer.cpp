@@ -749,7 +749,7 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
 		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
+		material->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Sword_Mtrl", material);
 
 		// Item - Bow
@@ -757,7 +757,7 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
 		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
+		material->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Bow_Mtrl", material);
 
 		// Item - Wand
@@ -765,7 +765,7 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
 		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
+		material->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Wand_Mtrl", material);
 
 		// UI - Layout
@@ -773,7 +773,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Layout_Mtrl", pMaterial);
 
 		// UI - QuickItem
@@ -781,7 +781,6 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"QuickItem_Mtrl", pMaterial);
 
 		// UI - WeaponSlot
@@ -789,7 +788,6 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WeaponSlot_Mtrl", pMaterial);
 
 		// UI - Gold_A
@@ -797,7 +795,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Gold_A_Mtrl", pMaterial);
 
 		// UI - 채널링 레이아웃
@@ -805,7 +803,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Shud_A_Mtrl", pMaterial);
 
 		// UI - Inventory BG
@@ -820,7 +818,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Slot_Default_Mtrl", pMaterial);
 
 		// UI - Inventory Slot Default Equipped
@@ -828,7 +826,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Slot_Default_Equipped_Mtrl", pMaterial);
 
 		// UI - Inventory Slot Hovered
@@ -836,7 +834,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Slot_Hovered_Mtrl", pMaterial);
 
 		// UI - Inventory Slot Hovered Equipped
@@ -844,7 +842,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Slot_Hovered_Equipped_Mtrl", pMaterial);
 
 		// UI - Inventory Slot Equipped Label
@@ -852,7 +850,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Equipped_Label_Mtrl", pMaterial);
 
 		// UI - Inventory Gold Icon
@@ -860,7 +858,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"InvenGoldIcon_Mtrl", pMaterial);
 
 		// UI - Skill Element
@@ -868,18 +866,21 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"CurrentSkill_Fire_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"CurrentSkill_Ice_Tex", L"..\\Resources\\Texture\\UI\\HUD\\CurrentSkill_Ice.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"CurrentSkill_Ice_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"CurrentSkill_None_Tex", L"..\\Resources\\Texture\\UI\\HUD\\CurrentSkill_None.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"CurrentSkill_None_Mtrl", pMaterial);
 
 		// UI - Cur Skill
@@ -887,6 +888,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"CurrentSkill_Mtrl", pMaterial);
 
 		// UI - Skill Icon
@@ -894,6 +896,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"IceBallIcon_Mtrl", pMaterial);
 
 
@@ -902,7 +905,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"SkillBG_Mtrl", pMaterial);
 		
 		// UI - SkillBoxFrame1
@@ -910,6 +913,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"SkillBoxFrame_Mtrl", pMaterial);
 
 		// UI - SkillBoxFrame2
@@ -917,6 +921,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"LearnSkillFrame_Mtrl", pMaterial);
 		
 
@@ -929,14 +934,14 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"Gold_B_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"LvNumber_Tex", L"..\\Resources\\Texture\\UI\\HUD\\LV_Number.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"LvNumber_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"HP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\HP_Icon.png");
@@ -948,7 +953,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"FullHeart_Icon_Mtrl", pMaterial);
 
 		pTexture = Resources::Load<Texture>(L"MP_Icon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\MP_Icon.png");
@@ -961,7 +966,7 @@ namespace renderer
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
-		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"FullMana_Icon_Mtrl", pMaterial);
 #pragma endregion
 #pragma region ProgressBar Shader

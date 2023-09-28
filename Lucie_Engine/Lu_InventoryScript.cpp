@@ -108,8 +108,6 @@ namespace Lu
 		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 		if (MouseCollision())
 			pPlayerScript->SetCantHit(true);
-		else
-			pPlayerScript->SetCantHit(false);
 
 		// 무기 슬롯에 무기가 없다면, 라벨 비활성화
 		if (m_WeaponSlot->IsCurSlotEmpty())

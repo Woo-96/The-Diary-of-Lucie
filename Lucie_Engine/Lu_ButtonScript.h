@@ -37,6 +37,7 @@ namespace Lu
 
 	public:
 		virtual void Update() override;
+		virtual void Render() override {}
 
 	private:
 		bool MouseCollision();

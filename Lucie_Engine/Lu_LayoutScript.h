@@ -27,7 +27,7 @@ namespace Lu
 	private:
 		PlayerScript*	m_PlayerScript;
 		GameObject*		m_arrParts[(int)eParts::End];
-		tSkill			m_arrSkill[MaxSkill];
+		tSkill*			m_arrSkill[MaxSkill];
 		int				m_SkillCount;
 		int				m_CurSlot;
 
@@ -44,6 +44,6 @@ namespace Lu
 
 	public:
 		void SelectSlot(int _Num); // 1 ~ 4 스킬 슬롯 선택
-		void LearnSkill(tSkill& _Skill);
+		void LearnSkill(tSkill* _Skill);
 	};
 }

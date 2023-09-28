@@ -86,7 +86,7 @@ namespace Lu
 		eMoveType				m_MoveType;
 
 		eWeaponType				m_CurWeapon;
-		tSkill					m_CurSkill;
+		tSkill*					m_CurSkill;
 
 		tPlayerInfo				m_PlayerInfo;
 
@@ -137,7 +137,7 @@ namespace Lu
 			m_ChargeGauge = 0.f;
 		}
 
-		void SetCurSkill(tSkill& _Skill)
+		void SetCurSkill(tSkill* _Skill)
 		{
 			m_CurSkill = _Skill;
 		}
@@ -158,7 +158,7 @@ namespace Lu
 			return m_CurWeapon;
 		}
 
-		tSkill& GetCurSkill()
+		tSkill* GetCurSkill()
 		{
 			return m_CurSkill;
 		}
@@ -211,7 +211,7 @@ namespace Lu
 		void ChangeState(StateScript::eState _NextState);
 		void MagicPortalMove();
 		void IdleStateEvent();
-		void LearnSkill(tSkill& _Skill);
+		void LearnSkill(tSkill* _Skill);
 
 	// UI 상호 작용 관련 함수
 	public:

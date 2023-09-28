@@ -19,6 +19,7 @@ namespace Lu
 
 		enum class eUIState
 		{
+			None,
 			Select,
 			Learn,
 		};
@@ -30,9 +31,9 @@ namespace Lu
 	private:
 		PlayerScript*	m_PlayerScript;
 		GameObject*		m_arrParts[(int)eParts::End];
-		tSkill			m_arrSkill[(int)eSkillType::None];
+		tSkill*			m_arrSkill[(int)eSkillType::None];
 		eUIState		m_CurState;
-		bool			m_bActive;
+		float			m_Time;
 
 	public:
 		void SetPlayerScript(PlayerScript* _PlayerScript)
@@ -46,7 +47,11 @@ namespace Lu
 		virtual void Render() override;
 
 	public:
-		void SelectSkill(tSkill _Skill);
+		void SkillUIOn();
+		void SelectSkill(tSkill* _Skill);
+
+	private:
+		void CreateSkill();
 	};
 }
 

@@ -176,6 +176,8 @@ namespace Lu
 
 		// 이전 상태 저장
 		m_PrevState = m_CurState->GetStateType();
+
+		m_bCantHit = false;
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* _Other)
@@ -689,12 +691,12 @@ namespace Lu
 			}
 		}
 		else if (Input::GetKey(eKeyCode::RBUTTON)
-			&& m_CurSkill.CurCoolTime == 0.f)
+			&& m_CurSkill && m_CurSkill->CurCoolTime == 0.f)
 		{
-			if (!m_bSkillUse && m_PlayerInfo.CurMP < m_CurSkill.NeedMana)
+			if (!m_bSkillUse && m_PlayerInfo.CurMP < m_CurSkill->NeedMana)
 				return;
 
-			switch (m_CurSkill.SkillType)
+			switch (m_CurSkill->SkillType)
 			{
 			case eSkillType::IceBall:
 			{
@@ -703,7 +705,7 @@ namespace Lu
 
 				if (!m_bFirst)
 				{
-					UseMana(m_CurSkill.NeedMana);
+					UseMana(m_CurSkill->NeedMana);
 					m_bSkillUse = true;
 					m_bChanneling = true;
 					m_bFirst = true;
@@ -717,7 +719,7 @@ namespace Lu
 					m_bSkillUse = false;
 					m_bChanneling = false;
 					m_bFirst = false;
-					m_CurSkill.CurCoolTime = m_CurSkill.SkillCoolTime;
+					m_CurSkill->CurCoolTime = m_CurSkill->SkillCoolTime;
 					m_MoveType = eMoveType::Run;
 				}
 				else
@@ -764,12 +766,12 @@ namespace Lu
 			else if (Input::GetKeyUp(eKeyCode::RBUTTON))
 			{
 				// 채널링 스킬 종료
-				if (m_CurSkill.SkillType == eSkillType::IceBall)
+				if (m_CurSkill && m_CurSkill->SkillType == eSkillType::IceBall)
 				{
 					m_bSkillUse = false;
 					m_bChanneling = false;
 					m_bFirst = false;
-					m_CurSkill.CurCoolTime = m_CurSkill.SkillCoolTime;
+					m_CurSkill->CurCoolTime = m_CurSkill->SkillCoolTime;
 					m_MoveType = eMoveType::Run;
 					ChannelingBarScript* pChanneling = (ChannelingBarScript*)m_arrUI[(int)eUI::Channeling];
 					pChanneling->ChannelingOnOff(m_bChanneling);
@@ -1363,16 +1365,16 @@ namespace Lu
 		pSFX->Play();
 	}
 
-	void PlayerScript::LearnSkill(tSkill& _Skill)
+	void PlayerScript::LearnSkill(tSkill* _Skill)
 	{
-		if (_Skill.SkillType == eSkillType::None)
+		if (!_Skill)
 			return;
 
 		LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
 		if (pLayout)
 			pLayout->LearnSkill(_Skill);
 
-		if (m_CurSkill.SkillType == eSkillType::None)
+		if (!m_CurSkill)
 		{
 			pLayout->SelectSlot(1);
 		}

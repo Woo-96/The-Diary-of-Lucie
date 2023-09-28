@@ -232,16 +232,16 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
 			pObject->SetName(L"UI_SkillMgr");
-			//pObject->SetActive(false);
 			SceneManager::DontDestroyOnLoad(pObject);
 			pMeshRender = pObject->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"SkillBG_Mtrl"));
 			SkillScript* pSkillScript = pObject->AddComponent<SkillScript>();
 			pSkillScript->SetPlayerScript(pPlayerScript);
 			pPlayerScript->SetUI(PlayerScript::eUI::Skill, (UIScript*)pSkillScript);
+
+			pSkillScript->SkillUIOn(); // 지워야함 레벨업하고 거기다 추가해야함 테스트용
 		}
 	}	
 }

@@ -179,6 +179,7 @@
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
     <ClInclude Include="Lu_ChannelingBarScript.h" />
     <ClInclude Include="Lu_EquipLabelScript.h" />
+    <ClInclude Include="Lu_FontScript.h" />
     <ClInclude Include="Lu_IceBallScript.h" />
     <ClInclude Include="Lu_InventoryLayoutScript.h" />
     <ClInclude Include="Lu_InventorySlotScript.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
     <ClCompile Include="Lu_ChannelingBarScript.cpp" />
     <ClCompile Include="Lu_EquipLabelScript.cpp" />
+    <ClCompile Include="Lu_FontScript.cpp" />
     <ClCompile Include="Lu_IceBallScript.cpp" />
     <ClCompile Include="Lu_InventoryLayoutScript.cpp" />
     <ClCompile Include="Lu_InventorySlotScript.cpp" />
