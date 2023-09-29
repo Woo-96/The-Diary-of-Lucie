@@ -53,6 +53,7 @@ namespace Lu
 
 	void DiaryScript::GameStart()
 	{
+		m_Animator->PlayAnimation(L"Diary_Idle", true);
 		SceneManager::LoadScene(L"WeaponChoiceScene");
 
 		GameObject* pPlayer = SceneManager::FindPlayer();

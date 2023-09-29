@@ -248,11 +248,13 @@ namespace Lu
 
 		for (int i = (int)eParts::Slot_1; i <= (int)eParts::Slot_10; ++i)
 		{
-			ItemScript* pItem = m_arrParts[i]->GetComponent<InventorySlotScript>()->GetItem();
+			InventorySlotScript* pButton = m_arrParts[i]->GetComponent<InventorySlotScript>();
+			pButton->SetSlotState(InventorySlotScript::eSlotState::Default);
+			ItemScript* pItem = pButton->GetItem();
 			if (pItem != nullptr)
 			{
 				pItem->SetItemSlotNumber(-1);
-				m_arrParts[i]->GetComponent<InventorySlotScript>()->SetItem(nullptr);
+				pButton->SetItem(nullptr);
 			}
 		}
 	}

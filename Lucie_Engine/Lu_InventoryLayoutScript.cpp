@@ -200,7 +200,7 @@ namespace Lu
 		wstrText += L".";
 		wstrText += std::to_wstring(0);
 		wcscpy_s(Font, wstrText.c_str());
-		FontWrapper::DrawFont(Font, fLeftTextX + 90.f, fY, 25.f, FONT_RGBA(255, 255, 255, 255));
+		FontWrapper::DrawFont(Font, fLeftTextX + 95.f, fY, 25.f, FONT_RGBA(255, 255, 255, 255));
 
 
 
