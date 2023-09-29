@@ -21,6 +21,7 @@
 #include "Lu_Object.h"
 #include "Lu_IceBallScript.h"
 #include "Lu_LayoutScript.h"
+#include "Lu_SkillScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -691,7 +692,8 @@ namespace Lu
 			}
 		}
 		else if (Input::GetKey(eKeyCode::RBUTTON)
-			&& m_CurSkill && m_CurSkill->CurCoolTime == 0.f)
+			&& m_CurSkill && m_CurSkill->CurCoolTime == 0.f
+			&& !m_bCantHit)
 		{
 			if (!m_bSkillUse && m_PlayerInfo.CurMP < m_CurSkill->NeedMana)
 				return;
@@ -1380,6 +1382,109 @@ namespace Lu
 		}
 	}
 
+	void PlayerScript::ResetPlayerInfo()
+	{
+		m_CurState = GetStateScript(StateScript::eState::Idle);
+		m_CurWeapon = eWeaponType::None;
+		m_PrevState = StateScript::eState::End;
+		m_Dir = eDir::Down;
+		m_PrevDir = eDir::None;
+		m_CurSkill = nullptr;
+		m_bAction = false;
+		m_bInvincible = false;
+		m_bDashSuccess = false;
+		m_bHitEffect = false;
+		m_bDontAnimChange = false;
+		m_bCantHit = false;
+		m_bChanneling = false;
+		m_bChargeAnim = false;
+		m_ChargeGauge = 0.f;
+		m_InvincibleTime = 0.f;
+		m_Damage = 1;
+		m_bSkillUse = false;
+		m_bFirst = false;
+		m_SkillProjectileCoolTime = 0.f;
+
+
+		HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
+		//MaxHP(6)
+		m_PlayerInfo.MaxHP = 6;
+		pHPScript->SetMaxHP(m_PlayerInfo.MaxHP);
+		//CurHP(6)
+		m_PlayerInfo.CurHP = 6;
+		pHPScript->SetHeart(m_PlayerInfo.CurHP);
+
+
+		ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
+		//MaxMP(3)
+		m_PlayerInfo.MaxMP = 3;
+		pMPScript->SetMaxMP(m_PlayerInfo.MaxMP);
+		//CurMP(3)
+		m_PlayerInfo.CurMP = 3;
+		pMPScript->SetMana(m_PlayerInfo.CurMP);
+
+
+		ProgressBarScript* pTPScript = (ProgressBarScript*)m_arrUI[(int)eUI::TP];
+		//MaxTP(10.f)
+		m_PlayerInfo.MaxTP = 10.f;
+		pTPScript->SetMaxValue((int)m_PlayerInfo.MaxTP);
+		//CurTP(10.f)
+		m_PlayerInfo.CurTP = 10.f;
+		pTPScript->SetCurValue((int)m_PlayerInfo.CurTP);
+
+	
+		ProgressBarScript* pEXPScript = (ProgressBarScript*)m_arrUI[(int)eUI::EXP];
+		//MaxEXP(100)
+		m_PlayerInfo.MaxEXP = 100;
+		pEXPScript->SetMaxValue(m_PlayerInfo.MaxEXP);
+		//CurEXP(0)
+		m_PlayerInfo.CurEXP = 0;
+		pEXPScript->SetCurValue(m_PlayerInfo.CurEXP);
+
+
+		//Attack(10)
+		m_PlayerInfo.Attack = 10;
+		//Magic(10)
+		m_PlayerInfo.Magic = 10;
+		
+
+		NumberScript* pNumScript = (NumberScript*)m_arrUI[(int)eUI::Level];
+		//MaxLevel(9)
+		//CurLevel(1)
+		m_PlayerInfo.CurLevel = 1;
+		pNumScript->SetCurNumber(m_PlayerInfo.CurLevel);
+
+
+		//TPRecoveryRate(10.f)
+		
+
+		pNumScript = (NumberScript*)m_arrUI[(int)eUI::Gold];
+		//MaxGold(9)
+		m_PlayerInfo.MaxGold = 9;
+		//CurGold(0)
+		m_PlayerInfo.CurGold = 0;
+		pNumScript->SetCurNumber(m_PlayerInfo.CurGold);
+
+
+		LayoutScript* pLayout = (LayoutScript*)m_arrUI[(int)eUI::Layout];
+		pLayout->ResetLayout();
+
+
+		QuickItemScript* pQuickSlot = (QuickItemScript*)m_arrUI[(int)eUI::QuickItem];
+		pQuickSlot->ResetQuickSlotItem();
+
+		WeaponSlotScript* pWeaponSlot = (WeaponSlotScript*)m_arrUI[(int)eUI::WeaponSlot];
+		pWeaponSlot->ResetWeaponSlot();
+
+
+		InventoryScript* pInven = (InventoryScript*)m_arrUI[(int)eUI::Inventory];
+		pInven->ResetInventory();
+		
+		
+		SkillScript* pSkillUI = (SkillScript*)m_arrUI[(int)eUI::Skill];
+		pSkillUI->ResetSkillUI();
+	}
+
 	void PlayerScript::ChangeState(StateScript::eState _NextState)
 	{
 		StateScript* pNextState = GetStateScript(_NextState);
@@ -1471,6 +1576,11 @@ namespace Lu
 				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 				pSFX->SetClip(Resources::Load<AudioClip>(L"LevelUpSFX", L"..\\Resources\\Sound\\SFX\\Player\\LevelUpSFX.ogg"));
 				pSFX->Play();
+
+				// ½ºÅ³ È¹µæ
+				SkillScript* pSkillUI = (SkillScript*)m_arrUI[(int)eUI::Skill];
+				if(pSkillUI)
+					pSkillUI->SkillUIOn();
 			}
 
 			m_PlayerInfo.CurEXP -= 100;

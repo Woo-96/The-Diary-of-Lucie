@@ -12,6 +12,7 @@ namespace Lu
 		enum class eParts
 		{
 			LearnSkill,
+			LearnSkillIcon,
 			NewSkill_1,
 			NewSkill_2,
 			End,
@@ -32,6 +33,7 @@ namespace Lu
 		PlayerScript*	m_PlayerScript;
 		GameObject*		m_arrParts[(int)eParts::End];
 		tSkill*			m_arrSkill[(int)eSkillType::None];
+		tSkill*			m_RecentSkill;
 		eUIState		m_CurState;
 		float			m_Time;
 
@@ -49,6 +51,7 @@ namespace Lu
 	public:
 		void SkillUIOn();
 		void SelectSkill(tSkill* _Skill);
+		void ResetSkillUI();
 
 	private:
 		void CreateSkill();

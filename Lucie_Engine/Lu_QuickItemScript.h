@@ -35,6 +35,7 @@ namespace Lu
 		}
 
 	public:
+		void ResetQuickSlotItem();
 		void SetQuickSlotItem(ItemScript* _Item);
 		void UseQuickSlotItem();
 	};

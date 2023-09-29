@@ -3,6 +3,7 @@
 
 namespace Lu
 {
+    class PlayerScript;
     class Animator;
     class MonsterScript : public Script
     {
@@ -31,11 +32,18 @@ namespace Lu
 
     private:
         Animator*       m_Animator;
+        PlayerScript*   m_Target;
         tMonsterInfo    m_MonsterInfo;
         eAnimDir		m_AnimDir;
         eAnimDir		m_PrevAnimDir;
+        float           m_HitCoolTime;
 
     public:
+        void SetTarget(PlayerScript* _Target)
+        {
+            m_Target = _Target;
+        }
+
         void SetCurDir(eAnimDir _Dir)
         {
             m_AnimDir = _Dir;
@@ -50,6 +58,11 @@ namespace Lu
         Animator* GetAnimator()
         {
             return m_Animator;
+        }
+
+        PlayerScript* GetTarget()	const
+        {
+            return m_Target;
         }
 
         tMonsterInfo& GetInfo()
@@ -72,13 +85,15 @@ namespace Lu
         virtual void Update() override;
 
     public:
-        virtual void OnCollisionEnter(Collider2D* _Other) override {}
-        virtual void OnCollisionStay(Collider2D* _Other) override {}
+        virtual void OnCollisionEnter(Collider2D* _Other) override;
+        virtual void OnCollisionStay(Collider2D* _Other) override;
         virtual void OnCollisionExit(Collider2D* _Other) override {}
 
     protected:
         virtual void CreateAnimation() {}
         virtual void AnimationUpdate() {}
+        virtual void ChangeIdleState() = 0;
+        virtual void ChangeDeadState() = 0;
     };
 }
 

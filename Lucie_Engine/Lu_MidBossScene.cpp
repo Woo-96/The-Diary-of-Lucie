@@ -105,7 +105,7 @@ namespace Lu
 	{
 		StageScene::OnEnter();
 
-		if (m_bBossAlive)
+		if (IsInBattle())
 		{
 			AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 			pBGM->Stop();

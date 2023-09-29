@@ -92,6 +92,7 @@ namespace Lu
 		m_arrParts[(int)eParts::FullChargeFX] = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 300.f), Vector3(192.f, 192.f, 100.f), eLayerType::FX);
 		m_arrParts[(int)eParts::FullChargeFX]->SetName(L"FullChargeFX");
 		m_arrParts[(int)eParts::FullChargeFX]->SetActive(m_bActive);
+		SceneManager::DontDestroyOnLoad(m_arrParts[(int)eParts::FullChargeFX]);
 		MeshRenderer* pMeshRender2 = m_arrParts[(int)eParts::FullChargeFX]->AddComponent<MeshRenderer>();
 		pMeshRender2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender2->SetMaterial(Resources::Find<Material>(L"WandFullCharge_Mtrl"));

@@ -2,7 +2,6 @@
 #include "Lu_GameObject.h"
 #include "Lu_Animator.h"
 #include "Lu_Resources.h"
-#include "Lu_PlayerScript.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Time.h"
 #include "Lu_Object.h"
@@ -22,11 +21,9 @@ namespace Lu
 	KingSlimeScript::KingSlimeScript()
 		: m_CurState(nullptr)
 		, m_PrevState(KingSlimeStateScript::eState::End)
-		, m_Target(nullptr)
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
 		, m_Time(8.f)
-		, m_HitCoolTime(0.f)
 		, m_bAttack(false)
 	{
 		SetName(L"KingSlimeScript");
@@ -103,53 +100,16 @@ namespace Lu
 
 	void KingSlimeScript::OnCollisionEnter(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			ChangeState(KingSlimeStateScript::eState::Idle);
+		MonsterScript::OnCollisionEnter(_Other);
 
-		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (KingSlimeStateScript::eState::Dead == m_CurState->GetStateType())
-				return;
-
-			GetInfo().HP -= m_Target->GetPlayerDamage();
-			m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
-
-			if (GetInfo().HP <= 0.f)
-			{
-				ChangeState(KingSlimeStateScript::eState::Dead);
-			}
-		}
+		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 	}
 
 	void KingSlimeScript::OnCollisionStay(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			ChangeState(KingSlimeStateScript::eState::Idle);
+		MonsterScript::OnCollisionStay(_Other);
 
-		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (KingSlimeStateScript::eState::Dead == m_CurState->GetStateType())
-				return;
-
-			m_HitCoolTime += (float)Time::DeltaTime();
-
-			if (m_HitCoolTime >= 0.1f)
-			{
-				GetInfo().HP -= m_Target->GetPlayerDamage();
-				m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
-
-				if (GetInfo().HP <= 0.f)
-				{
-					ChangeState(KingSlimeStateScript::eState::Dead);
-				}
-
-				m_HitCoolTime = 0;
-			}
-		}
-	}
-
-	void KingSlimeScript::OnCollisionExit(Collider2D* _Other)
-	{
+		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 	}
 
 	void KingSlimeScript::CreateAnimation()
@@ -377,6 +337,16 @@ namespace Lu
 			GetAnimator()->PlayAnimation(L"KingSlime_Dead", true);
 			break;
 		}
+	}
+
+	void KingSlimeScript::ChangeIdleState()
+	{
+		ChangeState(KingSlimeStateScript::eState::Idle);
+	}
+
+	void KingSlimeScript::ChangeDeadState()
+	{
+		ChangeState(KingSlimeStateScript::eState::Dead);
 	}
 
 	void KingSlimeScript::ChangeState(KingSlimeStateScript::eState _NextState)

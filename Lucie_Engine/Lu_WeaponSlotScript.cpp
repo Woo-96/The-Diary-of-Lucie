@@ -160,4 +160,13 @@ namespace Lu
 
 		m_arrWeapon[(int)_Slot] = nullptr;
 	}
+
+	void WeaponSlotScript::ResetWeaponSlot()
+	{
+		m_CurType = eSlotType::WeaponSlot_A;
+		m_arrIcon[(int)eSlotType::WeaponSlot_A]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		m_arrIcon[(int)eSlotType::WeaponSlot_B]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		m_arrWeapon[(int)eSlotType::WeaponSlot_A] = nullptr;
+		m_arrWeapon[(int)eSlotType::WeaponSlot_B] = nullptr;
+	}
 }

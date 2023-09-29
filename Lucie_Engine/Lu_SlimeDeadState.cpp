@@ -27,11 +27,14 @@ namespace Lu
 
 	void SlimeDeadState::Exit()
 	{
-		// 경험치 생성
-		GetTarget()->GetEXP(30);
+		if (GetSlimeScript()->GetSlimeType() == SlimeScript::eSlimeType::Nomal)
+		{
+			// 경험치 생성
+			GetTarget()->GetEXP(30);
 
-		// 젤리 아이템 드롭
-		DropItem();
+			// 젤리 아이템 드롭
+			DropItem();
+		}
 
 		// 객체 소멸
 		object::Destroy(GetSlimeScript()->GetOwner());

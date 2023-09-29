@@ -212,6 +212,7 @@ namespace Lu
 		void MagicPortalMove();
 		void IdleStateEvent();
 		void LearnSkill(tSkill* _Skill);
+		void ResetPlayerInfo();
 
 	// UI 상호 작용 관련 함수
 	public:

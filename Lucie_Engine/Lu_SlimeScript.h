@@ -9,6 +9,13 @@ namespace Lu
 	class SlimeScript : public MonsterScript
 	{
 	public:
+		enum class eSlimeType
+		{
+			Nomal,
+			Boss,
+		};
+
+	public:
 		SlimeScript();
 		virtual ~SlimeScript();
 
@@ -17,20 +24,18 @@ namespace Lu
 		SlimeStateScript*			m_CurState;
 		SlimeStateScript::eState	m_PrevState;
 
-		PlayerScript*				m_Target;
-
-		float						m_HitCoolTime;
+		eSlimeType					m_SlimeType;
 
 	public:
-		void SetTarget(PlayerScript* _Target)
+		void SetSlimeType(eSlimeType _Type)
 		{
-			m_Target = _Target;
+			m_SlimeType = _Type;
 		}
 
 	public:
-		PlayerScript* GetTarget()	const
+		eSlimeType GetSlimeType()	const
 		{
-			return m_Target;
+			return m_SlimeType;
 		}
 
 	public:
@@ -40,7 +45,6 @@ namespace Lu
 	public:
 		virtual void OnCollisionEnter(Collider2D* _Other) override;
 		virtual void OnCollisionStay(Collider2D* _Other) override;
-		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:
 		SlimeStateScript* GetStateScript(SlimeStateScript::eState _State);
@@ -53,6 +57,8 @@ namespace Lu
 	protected:
 		virtual void CreateAnimation() override;
 		virtual void AnimationUpdate() override;
+		virtual void ChangeIdleState() override;
+		virtual void ChangeDeadState() override;
 
 	public:
 		void ChangeState(SlimeStateScript::eState _NextState);

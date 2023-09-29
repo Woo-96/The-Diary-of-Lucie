@@ -2,7 +2,6 @@
 #include "Lu_GameObject.h"
 #include "Lu_Animator.h"
 #include "Lu_Resources.h"
-#include "Lu_PlayerScript.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Time.h"
 #include "Lu_Object.h"
@@ -22,10 +21,8 @@ namespace Lu
 	BigSlimeScript::BigSlimeScript()
 		: m_CurState(nullptr)
 		, m_PrevState(BigSlimeStateScript::eState::End)
-		, m_Target(nullptr)
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
-		, m_HitCoolTime(0.f)
 	{
 		SetName(L"BigSlimeScript");
 
@@ -72,53 +69,16 @@ namespace Lu
 
 	void BigSlimeScript::OnCollisionEnter(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			ChangeState(BigSlimeStateScript::eState::Idle);
+		MonsterScript::OnCollisionEnter(_Other);
 
-		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (BigSlimeStateScript::eState::Dead == m_CurState->GetStateType())
-				return;
-
-			GetInfo().HP -= m_Target->GetPlayerDamage();
-			m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
-
-			if (GetInfo().HP <= 0.f)
-			{
-				ChangeState(BigSlimeStateScript::eState::Dead);
-			}
-		}
+		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 	}
 
 	void BigSlimeScript::OnCollisionStay(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			ChangeState(BigSlimeStateScript::eState::Idle);
+		MonsterScript::OnCollisionStay(_Other);
 
-		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (BigSlimeStateScript::eState::Dead == m_CurState->GetStateType())
-				return;
-
-			m_HitCoolTime += (float)Time::DeltaTime();
-
-			if (m_HitCoolTime >= 0.1f)
-			{
-				GetInfo().HP -= m_Target->GetPlayerDamage();
-				m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
-
-				if (GetInfo().HP <= 0.f)
-				{
-					ChangeState(BigSlimeStateScript::eState::Dead);
-				}
-
-				m_HitCoolTime = 0;
-			}
-		}
-	}
-
-	void BigSlimeScript::OnCollisionExit(Collider2D* _Other)
-	{
+		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 	}
 
 	void BigSlimeScript::CreateAnimation()
@@ -288,6 +248,16 @@ namespace Lu
 			GetAnimator()->PlayAnimation(L"BigSlime_Dead", true);
 			break;
 		}
+	}
+
+	void BigSlimeScript::ChangeIdleState()
+	{
+		ChangeState(BigSlimeStateScript::eState::Idle);
+	}
+
+	void BigSlimeScript::ChangeDeadState()
+	{
+		ChangeState(BigSlimeStateScript::eState::Dead);
 	}
 
 	void BigSlimeScript::ChangeState(BigSlimeStateScript::eState _NextState)

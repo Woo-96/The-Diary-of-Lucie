@@ -477,12 +477,12 @@ namespace renderer
 		// FX - MagicCircle
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
-		material->SetRenderingMode(eRenderingMode::Transparent);
+		material->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"MagicCircleAnimation_Mtrl", material);
 
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
-		material->SetRenderingMode(eRenderingMode::Transparent);
+		material->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"MagicCircle2Animation_Mtrl", material);
 
 		// Object - Coin
@@ -907,6 +907,13 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"SkillBG_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"SkillBG2_Tex", L"..\\Resources\\Texture\\UI\\HUD\\Transparent.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
+		Resources::Insert(L"SkillBG_Transparent_Mtrl", pMaterial);
 		
 		// UI - SkillBoxFrame1
 		pTexture = Resources::Load<Texture>(L"SkillBoxFrame_Tex", L"..\\Resources\\Texture\\UI\\HUD\\SkillBoxFrame.png");

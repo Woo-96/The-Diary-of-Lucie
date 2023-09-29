@@ -22,5 +22,6 @@ namespace Lu
 
 	protected:
 		void CreateUI();
+		bool IsInBattle();
 	};
 }

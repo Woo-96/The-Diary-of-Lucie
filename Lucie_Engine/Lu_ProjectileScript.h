@@ -25,7 +25,7 @@ namespace Lu
         eWeaponType                 m_WeaponType;
 
         // 스킬 투사체 전용
-        eSkillType    m_SkillType;
+        eSkillType                  m_SkillType;
 
     public:
         void SetPlayerScript(PlayerScript* _PlayerScript)

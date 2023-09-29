@@ -90,6 +90,7 @@ namespace Lu
 		ItemScript* FindQuickItem();
 		void EquipWeapon(int _SlotNumber, bool _bEquip);
 		void ChangeWeaponName(std::wstring _Name);
+		void ResetInventory();
 
 	private:
 		bool MouseCollision();

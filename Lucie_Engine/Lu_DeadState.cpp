@@ -27,8 +27,6 @@ namespace Lu
 
 	void DeadState::Exit()
 	{
-		//object::Destroy(GetPlayerScript()->GetOwner());
-		GetPlayerScript()->GetOwner()->SetActive(false);
 		SceneManager::LoadScene(L"GameOverScene");
 	}
 }

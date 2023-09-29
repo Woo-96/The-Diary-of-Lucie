@@ -240,8 +240,13 @@ namespace Lu
 			SkillScript* pSkillScript = pObject->AddComponent<SkillScript>();
 			pSkillScript->SetPlayerScript(pPlayerScript);
 			pPlayerScript->SetUI(PlayerScript::eUI::Skill, (UIScript*)pSkillScript);
-
-			pSkillScript->SkillUIOn(); // 지워야함 레벨업하고 거기다 추가해야함 테스트용
 		}
-	}	
+	}
+
+	bool StageScene::IsInBattle()
+	{
+		std::vector<GameObject*> Monsters = GetLayer(eLayerType::Monster).GetGameObjects();
+		return !Monsters.empty();
+	}
+
 }

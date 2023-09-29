@@ -56,6 +56,8 @@ namespace Lu
 			Animator* pAnimator = pObject->AddComponent<Animator>();
 			SlimeScript* pSlimeScript = pObject->AddComponent<SlimeScript>();
 			pSlimeScript->SetTarget(GetTarget());
+			pSlimeScript->SetSlimeType(SlimeScript::eSlimeType::Boss);
+			pSlimeScript->GetInfo().DetectRange = 500.f;
 		}
 
 		object::Destroy(GetBigSlimeScript()->GetHPFrame());

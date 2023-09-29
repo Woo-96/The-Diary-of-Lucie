@@ -18,27 +18,14 @@ namespace Lu
 		KingSlimeStateScript*			m_CurState;
 		KingSlimeStateScript::eState	m_PrevState;
 
-		PlayerScript*					m_Target;
 		GameObject*						m_HPFrame;
 		GameObject*						m_HPBar;
 
 		float							m_Time;
-		float							m_HitCoolTime;
 		bool							m_bAttack;
 
 
 	public:
-		void SetTarget(PlayerScript* _Target)
-		{
-			m_Target = _Target;
-		}
-
-	public:
-		PlayerScript* GetTarget()	const
-		{
-			return m_Target;
-		}
-
 		GameObject* GetHPFrame()	const
 		{
 			return m_HPFrame;
@@ -56,7 +43,6 @@ namespace Lu
 	public:
 		virtual void OnCollisionEnter(Collider2D* _Other) override;
 		virtual void OnCollisionStay(Collider2D* _Other) override;
-		virtual void OnCollisionExit(Collider2D* _Other) override;
 
 	private:
 		KingSlimeStateScript* GetStateScript(KingSlimeStateScript::eState _State);
@@ -70,6 +56,8 @@ namespace Lu
 	protected:
 		virtual void CreateAnimation() override;
 		virtual void AnimationUpdate() override;
+		virtual void ChangeIdleState() override;
+		virtual void ChangeDeadState() override;
 
 	public:
 		void ChangeState(KingSlimeStateScript::eState _NextState);

@@ -2,11 +2,9 @@
 #include "Lu_GameObject.h"
 #include "Lu_Animator.h"
 #include "Lu_Resources.h"
-#include "Lu_PlayerScript.h"
 #include "Lu_AudioSource.h"
 #include "Lu_SoundManager.h"
 #include "Lu_SceneManager.h"
-#include "Lu_Time.h"
 
 #include "Lu_SlimeIdleState.h"
 #include "Lu_SlimePatrolState.h"
@@ -20,8 +18,7 @@ namespace Lu
 	SlimeScript::SlimeScript()
 		: m_CurState(nullptr)
 		, m_PrevState(SlimeStateScript::eState::End)
-		, m_Target(nullptr)
-		, m_HitCoolTime(0.f)
+		, m_SlimeType(eSlimeType::Nomal)
 	{
 		SetName(L"SlimeScript");
 
@@ -60,7 +57,8 @@ namespace Lu
 
 	void SlimeScript::Update()
 	{
-		MonsterScript::Update();
+		if(m_SlimeType == eSlimeType::Nomal)
+			MonsterScript::Update();
 
 		if (GetOwner()->IsDead())
 			return;
@@ -74,51 +72,12 @@ namespace Lu
 
 	void SlimeScript::OnCollisionEnter(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			ChangeState(SlimeStateScript::eState::Idle);
-
-		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (SlimeStateScript::eState::Dead == m_CurState->GetStateType())
-				return;
-
-			GetInfo().HP -= m_Target->GetPlayerDamage();
-
-			if (GetInfo().HP <= 0.f)
-			{
-				ChangeState(SlimeStateScript::eState::Dead);
-			}
-		}
+		MonsterScript::OnCollisionEnter(_Other);			
 	}
 
 	void SlimeScript::OnCollisionStay(Collider2D* _Other)
 	{
-		if ((int)eLayerType::Immovable == _Other->GetOwner()->GetLayerIndex())
-			ChangeState(SlimeStateScript::eState::Idle);
-
-		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (SlimeStateScript::eState::Dead == m_CurState->GetStateType())
-				return;
-
-			m_HitCoolTime += (float)Time::DeltaTime();
-
-			if (m_HitCoolTime >= 0.1f)
-			{
-				GetInfo().HP -= m_Target->GetPlayerDamage();
-
-				if (GetInfo().HP <= 0.f)
-				{
-					ChangeState(SlimeStateScript::eState::Dead);
-				}
-
-				m_HitCoolTime = 0;
-			}
-		}
-	}
-
-	void SlimeScript::OnCollisionExit(Collider2D* _Other)
-	{
+		MonsterScript::OnCollisionStay(_Other);
 	}
 
 	void SlimeScript::CreateAnimation()
@@ -323,6 +282,16 @@ namespace Lu
 			GetAnimator()->PlayAnimation(L"Slime_Dead", true);
 			break;
 		}
+	}
+
+	void SlimeScript::ChangeIdleState()
+	{
+		ChangeState(SlimeStateScript::eState::Idle);
+	}
+
+	void SlimeScript::ChangeDeadState()
+	{
+		ChangeState(SlimeStateScript::eState::Dead);
 	}
 
 	void SlimeScript::ChangeState(SlimeStateScript::eState _NextState)

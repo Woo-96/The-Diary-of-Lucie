@@ -39,11 +39,11 @@ namespace Lu
 
 	public:
 		virtual void Initialize() override;
-		virtual void Update() override;
 		virtual void Render() override;
 
 	public:
 		void SelectSlot(int _Num); // 1 ~ 4 스킬 슬롯 선택
 		void LearnSkill(tSkill* _Skill);
+		void ResetLayout();
 	};
 }

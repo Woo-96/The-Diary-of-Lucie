@@ -55,5 +55,6 @@ namespace Lu
 		void UnEquipWeapon(WeaponScript* _Item);
 		void WeaponChange(eSlotType _Slot, bool _bEquip);	// ¼öµ¿ ÀåÂø
 		void ClearSlot(eSlotType _Slot);
+		void ResetWeaponSlot();
 	};
 }

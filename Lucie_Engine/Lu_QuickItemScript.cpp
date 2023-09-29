@@ -23,6 +23,12 @@ namespace Lu
 
 	}
 
+	void QuickItemScript::ResetQuickSlotItem()
+	{
+		m_CurItem = nullptr;
+		m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+	}
+
 	void QuickItemScript::SetQuickSlotItem(ItemScript* _Item)
 	{
 		m_CurItem = _Item;
@@ -46,8 +52,7 @@ namespace Lu
 				}
 				else
 				{
-					m_CurItem = nullptr;
-					m_CurIcon->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+					ResetQuickSlotItem();
 				}
 			}
 		}

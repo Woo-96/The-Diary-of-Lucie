@@ -240,6 +240,23 @@ namespace Lu
 		}
 	}
 
+	void InventoryScript::ResetInventory()
+	{
+		if(m_bActive)
+			InventoryOnOff();
+		m_CurCount = 0;
+
+		for (int i = (int)eParts::Slot_1; i <= (int)eParts::Slot_10; ++i)
+		{
+			ItemScript* pItem = m_arrParts[i]->GetComponent<InventorySlotScript>()->GetItem();
+			if (pItem != nullptr)
+			{
+				pItem->SetItemSlotNumber(-1);
+				m_arrParts[i]->GetComponent<InventorySlotScript>()->SetItem(nullptr);
+			}
+		}
+	}
+
 	bool InventoryScript::MouseCollision()
 	{
 		Transform* pTransform = m_arrParts[(int)eParts::Layout]->GetComponent<Transform>();

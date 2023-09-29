@@ -72,11 +72,6 @@ namespace Lu
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 	}
 
-	void LayoutScript::Update()
-	{
-
-	}
-
 	void LayoutScript::Render()
 	{
 		if (0 < m_CurSlot && m_CurSlot < 5)
@@ -214,5 +209,29 @@ namespace Lu
 			std::wstring Name = m_arrSkill[m_SkillCount]->IconMaterialName;
 			m_arrParts[++m_SkillCount]->GetComponent<MeshRenderer>()->SetMaterial(Resources::Find<Material>(Name));
 		}
+	}
+
+	void LayoutScript::ResetLayout()
+	{
+		m_arrParts[(int)eParts::ElementIcon]->GetComponent<MeshRenderer>()->SetMaterial(Resources::Find<Material>(L"CurrentSkill_None_Mtrl"));
+		m_arrParts[(int)eParts::AroundSkillSlot]->SetActive(false);
+		m_arrParts[(int)eParts::SkillSlot_1]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		m_arrParts[(int)eParts::SkillSlot_2]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		m_arrParts[(int)eParts::SkillSlot_3]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		m_arrParts[(int)eParts::SkillSlot_4]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+		m_arrParts[(int)eParts::CurSkillIcon]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+
+
+		for (int i = 0; i < MaxSkill; ++i)
+		{
+			if(m_arrSkill[i])
+			{
+				m_arrSkill[i]->CurCoolTime = 0.f;
+				m_arrSkill[i] = nullptr;
+			}
+		}
+
+		m_SkillCount = 0;
+		m_CurSlot = 0;
 	}
 }
