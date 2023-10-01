@@ -8,6 +8,7 @@
 #include "Lu_CameraScript.h"
 #include "Lu_Renderer.h"
 #include "Lu_PortalScript.h"
+#include "Lu_WoodScript.h"
 
 namespace Lu
 {
@@ -132,10 +133,17 @@ namespace Lu
 			m_arrWeapon[(int)eWeaponType::Sword]->SetItemOption(1);
 		}
 
+		// 카메라 설정
 		GameObject* pPlayer = SceneManager::FindPlayer();
 		CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 		pMainCamScript->SetWorldResolution(Vector2(2016.f - 400.f, 1344.f - 200.f));
 		pMainCamScript->SetTarget(pPlayer);
+
+		// 바닥 재질
+		GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -40.f, 900.f), Vector3(840.f, 620.f, 500.f), eLayerType::Immovable);
+		pObject->SetName(L"Wood");
+		pObject->AddComponent<Collider2D>();
+		pObject->AddComponent<WoodScript>()->SetPlayer(pPlayer->GetComponent<PlayerScript>());
 	}
 
 	void WeaponChoiceScene::Update()

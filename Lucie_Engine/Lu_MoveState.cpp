@@ -1,6 +1,10 @@
 #include "Lu_MoveState.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_Time.h"
+#include "Lu_AudioSource.h"
+#include "Lu_SceneManager.h"
+#include "Lu_Resources.h"
+#include "Lu_SoundManager.h"
 
 namespace Lu
 {
@@ -32,7 +36,7 @@ namespace Lu
         eDir eCurDir = GetPlayerScript()->GetDir();
         Vector3 vPos = GetTransform()->GetPosition();
 
-        float diagonalFactor = 1.0f / sqrt(2.0f); // Normalize the diagonal movement vector
+        float diagonalFactor = 1.0f / sqrt(2.0f);
 
         switch (eCurDir)
         {
@@ -80,11 +84,34 @@ namespace Lu
 
 	void MoveState::Enter()
 	{
-
+        if (GetPlayerScript()->GetWood())
+        {
+            m_SFX = Resources::Load<AudioClip>(L"WoodRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\WoodRunSFX.ogg");
+            m_SFX->Play();
+            m_SFX->SetVolume(0.3f);
+            m_SFX->SetLoop(true);
+        }
+        else
+        {
+            if (PlayerScript::eMoveType::Walk == GetPlayerScript()->GetMoveType())
+            {
+                m_SFX = Resources::Load<AudioClip>(L"GrassWalkSFX", L"..\\Resources\\Sound\\SFX\\Player\\GrassWalkSFX.ogg");
+                m_SFX->Play();
+                m_SFX->SetVolume(0.3f);
+                m_SFX->SetLoop(true);
+            }
+            else
+            {
+                m_SFX = Resources::Load<AudioClip>(L"GrassRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\GrassRunSFX.ogg");
+                m_SFX->Play();
+                m_SFX->SetVolume(0.3f);
+                m_SFX->SetLoop(true);
+            }
+        }
 	}
 
 	void MoveState::Exit()
 	{
-
+        m_SFX->Stop();
 	}
 }

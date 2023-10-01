@@ -53,6 +53,7 @@ namespace Lu
 		, m_bSkillUse(false)
 		, m_bFirst(false)
 		, m_SkillProjectileCoolTime(0.f)
+		, m_bWood(false)
 		, m_Animator(nullptr)
 		, m_arrUI{}
 	{

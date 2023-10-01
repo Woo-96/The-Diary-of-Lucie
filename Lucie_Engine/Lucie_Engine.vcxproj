@@ -255,6 +255,7 @@
     <ClInclude Include="Lu_SnabyScript.h" />
     <ClInclude Include="Lu_ScriptEnums.h" />
     <ClInclude Include="Lu_MonsterScript.h" />
+    <ClInclude Include="Lu_WoodScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Engine_SOURCE\Lu_CameraScript.cpp" />
@@ -343,6 +344,7 @@
     <ClCompile Include="Lu_WeaponSlotScript.cpp" />
     <ClCompile Include="Lu_SnabyScript.cpp" />
     <ClCompile Include="Lu_MonsterScript.cpp" />
+    <ClCompile Include="Lu_WoodScript.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

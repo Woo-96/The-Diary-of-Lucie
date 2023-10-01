@@ -257,6 +257,9 @@
     <ClCompile Include="Lu_FontScript.cpp">
       <Filter>Contents\Script\05. UI\Font</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_WoodScript.cpp">
+      <Filter>Contents\Script\04. Object\Wood</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="Lu_FontScript.h">
       <Filter>Contents\Script\05. UI\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_WoodScript.h">
+      <Filter>Contents\Script\04. Object\Wood</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -822,6 +828,9 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\Font">
       <UniqueIdentifier>{af94a90a-0747-4336-85b0-26dda0c65960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Wood">
+      <UniqueIdentifier>{a02ab23a-7b29-452d-91ac-bc23f541b9b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

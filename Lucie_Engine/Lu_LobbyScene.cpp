@@ -11,6 +11,7 @@
 #include "Lu_AudioSource.h"
 #include "Lu_DiaryScript.h"
 #include "Lu_SoundManager.h"
+#include "Lu_WoodScript.h"
 
 namespace Lu
 {
@@ -62,11 +63,20 @@ namespace Lu
 			pCollider->SetSize(Vector2(0.1f, 0.1f));
 
 			pPlayer->AddComponent<Animator>();
-			pPlayer->AddComponent<PlayerScript>();
+			PlayerScript* pPlayerScript = pPlayer->AddComponent<PlayerScript>();
 
+
+			// 카메라 월드 설정
 			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 			pMainCamScript->SetWorldResolution(Vector2(1008.f + 440.f, 1056.f * 1.5f - 600.f));
 			pMainCamScript->SetTarget(pPlayer);
+
+			
+			// 바닥 재질
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -140.f, 900.f), Vector3(970.f, 580.f, 500.f), eLayerType::Immovable);
+			pObject->SetName(L"Wood");
+			pObject->AddComponent<Collider2D>();
+			pObject->AddComponent<WoodScript>()->SetPlayer(pPlayerScript);
 		}
 
 		// 벽

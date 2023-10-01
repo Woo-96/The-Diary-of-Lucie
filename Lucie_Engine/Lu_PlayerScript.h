@@ -106,6 +106,8 @@ namespace Lu
 		bool					m_bFirst;					// 스킬 사용 직후인지
 		float					m_SkillProjectileCoolTime;	// 투사체가 매 프레임 나가는 것을 방지
 
+		bool					m_bWood;
+
 		Animator*				m_Animator;
 		UIScript*				m_arrUI[(int)eUI::End];
 
@@ -140,6 +142,11 @@ namespace Lu
 		void SetCurSkill(tSkill* _Skill)
 		{
 			m_CurSkill = _Skill;
+		}
+
+		void SetWood(bool _b)
+		{
+			m_bWood = _b;
 		}
 
 	public:
@@ -178,6 +185,11 @@ namespace Lu
 		float GetChargeGauge()	const
 		{
 			return m_ChargeGauge;
+		}
+
+		bool GetWood()	const
+		{
+			return m_bWood;
 		}
 
 	public:

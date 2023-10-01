@@ -121,8 +121,8 @@ namespace Lu
 							{
 								AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 								pSFX->SetClip(Resources::Load<AudioClip>(L"WandChargeSFX", L"..\\Resources\\Sound\\SFX\\Player\\WandChargeSFX.ogg"));
-								pSFX->SetVolume(0.1f);
 								pSFX->Play();
+								pSFX->SetVolume(0.1f);
 
 								if (i == (int)eParts::FullChargeFX)
 								{

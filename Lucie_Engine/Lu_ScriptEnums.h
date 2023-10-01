@@ -40,6 +40,7 @@ namespace Lu
 	enum class eSkillType
 	{
 		IceBall,
+		FireStrike
 		None,
 	};
 

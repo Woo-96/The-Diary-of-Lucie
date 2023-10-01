@@ -7,6 +7,8 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_FontScript.h"
+#include "Lu_SoundManager.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
@@ -137,6 +139,10 @@ namespace Lu
         if (m_SkillUI && m_Skill)
         {
             m_SkillUI->SelectSkill(m_Skill);
+
+            AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+            pSFX->SetClip(Resources::Load<AudioClip>(L"ButtonClickSFX", L"..\\Resources\\Sound\\SFX\\Player\\ButtonClickSFX.ogg"));
+            pSFX->Play();
         }
     }
 

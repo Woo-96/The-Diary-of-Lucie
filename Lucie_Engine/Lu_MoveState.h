@@ -3,11 +3,15 @@
 
 namespace Lu
 {
+	class AudioClip;
 	class MoveState : public StateScript
 	{
 	public:
 		MoveState();
 		virtual ~MoveState();
+
+	private:
+		std::shared_ptr<AudioClip>	m_SFX;
 
 	public:
 		virtual void Initialize() override;
