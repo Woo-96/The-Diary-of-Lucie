@@ -260,6 +260,12 @@
     <ClCompile Include="Lu_WoodScript.cpp">
       <Filter>Contents\Script\04. Object\Wood</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_FireStrikeScript.cpp">
+      <Filter>Contents\Script\02. Player\Projectile\Skill\FireStrike</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_SkillCastScript.cpp">
+      <Filter>Contents\Script\02. Player\FX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -526,6 +532,12 @@
     </ClInclude>
     <ClInclude Include="Lu_WoodScript.h">
       <Filter>Contents\Script\04. Object\Wood</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_FireStrikeScript.h">
+      <Filter>Contents\Script\02. Player\Projectile\Skill\FireStrike</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_SkillCastScript.h">
+      <Filter>Contents\Script\02. Player\FX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -831,6 +843,12 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Wood">
       <UniqueIdentifier>{a02ab23a-7b29-452d-91ac-bc23f541b9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\02. Player\Projectile\Skill\FireStrike">
+      <UniqueIdentifier>{5e113fad-ca15-4d16-8e97-9173291ae674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\02. Player\FX">
+      <UniqueIdentifier>{87641145-be70-4b7f-9880-4172db9900bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

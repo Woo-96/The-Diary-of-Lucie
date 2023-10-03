@@ -4,6 +4,8 @@ namespace Lu
 {
 	Animator::Animator()
 		: Component(eComponentType::Animator)
+		, m_ActiveAnimation(nullptr)
+		, m_bLoop(true)
 	{
 		SetName(L"Animator");
 	}

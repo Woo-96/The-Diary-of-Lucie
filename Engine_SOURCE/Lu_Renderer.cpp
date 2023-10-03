@@ -503,11 +503,23 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"WandFullCharge_Mtrl", material);
 
-		// Skill - WandFullCharge
+		// Skill - IceBall
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"IceBall_Mtrl", material);
+
+		// Skill - FireStrike
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"FireStrike_Mtrl", material);
+
+		// Skill - Cast
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SkillCast_Mtrl", material);
 
 #pragma endregion
 #pragma region Particle Shader
@@ -741,7 +753,7 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(pShader);
 		material->SetTexture(texture);
-		material->SetRenderingMode(eRenderingMode::Transparent);
+		material->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"GreenJelly_Mtrl", material);
 
 		// Item - Sword
@@ -898,6 +910,13 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"IceBallIcon_Mtrl", pMaterial);
+
+		pTexture = Resources::Load<Texture>(L"FireStrikeIcon_Tex", L"..\\Resources\\Texture\\UI\\HUD\\FireStrikeIcon.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
+		Resources::Insert(L"FireStrikeIcon_Mtrl", pMaterial);
 
 
 		// UI - SkillBG

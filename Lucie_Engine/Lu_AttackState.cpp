@@ -152,13 +152,12 @@ namespace Lu
 			pCollider->SetSize(Vector2(0.3f, 0.6f));
 
 			BowProjectile* pBowProjectile = pProjectile->AddComponent<BowProjectile>();
-			pBowProjectile->SetPlayerScript(GetPlayerScript());
 			pBowProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 			pBowProjectile->SetDir(GetDir());
 
 			GetPlayerScript()->UseStamina(1.f);
 		}
-			break;
+		break;
 		case eWeaponType::None:
 		case eWeaponType::Wand:
 		{
@@ -178,7 +177,6 @@ namespace Lu
 				pCollider->SetSize(Vector2(0.6f, 0.6f));
 
 				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
-				pWandProjectile->SetPlayerScript(GetPlayerScript());
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetDuration(0.4f);
@@ -199,7 +197,6 @@ namespace Lu
 				pCollider->SetSize(Vector2(0.6f, 0.6f));
 
 				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
-				pWandProjectile->SetPlayerScript(GetPlayerScript());
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetChargeProjectile(true);
@@ -222,7 +219,6 @@ namespace Lu
 				pCollider->SetSize(Vector2(0.6f, 0.6f));
 
 				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
-				pWandProjectile->SetPlayerScript(GetPlayerScript());
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetChargeProjectile(true);
@@ -232,7 +228,7 @@ namespace Lu
 
 			GetPlayerScript()->ResetChargeGauge();
 		}
-			break;
+		break;
 		}
 	}
 }

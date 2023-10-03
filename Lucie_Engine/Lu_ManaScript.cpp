@@ -28,13 +28,13 @@ namespace Lu
 			if (i < MaxMana)
 			{
 				m_arrManaPos[i] = Vector2(63.f + (i * 36) + (i * 5.f), -280.f);
-				m_arrMana[i] = object::Instantiate<GameObject>(Vector3(m_arrManaPos[i].x, m_arrManaPos[i].y, 100.f), Vector3(36.f, 36.f, 100.f), eLayerType::UI);
+				m_arrMana[i] = object::Instantiate<GameObject>(Vector3(m_arrManaPos[i].x, m_arrManaPos[i].y, 200.f), Vector3(36.f, 36.f, 100.f), eLayerType::UI);
 			}
 
 			// 5 ~ 9¹ø : Full
 			else
 			{
-				m_arrMana[i] = object::Instantiate<GameObject>(Vector3(m_arrManaPos[i - 5].x, m_arrManaPos[i - 5].y, 100.f), Vector3(36.f, 36.f, 100.f), eLayerType::UI);
+				m_arrMana[i] = object::Instantiate<GameObject>(Vector3(m_arrManaPos[i - 5].x, m_arrManaPos[i - 5].y, 200.f), Vector3(36.f, 36.f, 100.f), eLayerType::UI);
 			}
 
 			m_arrMana[i]->SetName(L"Mana");

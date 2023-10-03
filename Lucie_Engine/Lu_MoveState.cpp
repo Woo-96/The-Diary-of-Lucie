@@ -84,7 +84,7 @@ namespace Lu
 
 	void MoveState::Enter()
 	{
-        if (GetPlayerScript()->GetWood())
+        if (GetPlayerScript()->IsWoodGround())
         {
             m_SFX = Resources::Load<AudioClip>(L"WoodRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\WoodRunSFX.ogg");
             m_SFX->Play();

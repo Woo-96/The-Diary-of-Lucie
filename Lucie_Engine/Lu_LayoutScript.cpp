@@ -123,6 +123,10 @@ namespace Lu
 					{
 						FontWrapper::DrawFont(Font, vSlotPos.x, vSlotPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
 					}
+					else if (CoolTime >= 10)
+					{
+						FontWrapper::DrawFont(Font, vSlotPos.x - 6.f, vSlotPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
+					}
 					else
 					{
 						FontWrapper::DrawFont(Font, vSlotPos.x, vSlotPos.y, 20.f, FONT_RGBA(255, 0, 0, 255));
@@ -134,6 +138,10 @@ namespace Lu
 					if (CoolTime <= 5)
 					{
 						FontWrapper::DrawFont(Font, 703.f, 653.f, 30.f, FONT_RGBA(255, 255, 255, 255));
+					}
+					else if (CoolTime >= 10)
+					{
+						FontWrapper::DrawFont(Font, 703.f - 7.f, 653.f, 30.f, FONT_RGBA(255, 0, 0, 255));
 					}
 					else
 					{

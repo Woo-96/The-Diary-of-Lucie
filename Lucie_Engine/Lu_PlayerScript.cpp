@@ -22,6 +22,7 @@
 #include "Lu_IceBallScript.h"
 #include "Lu_LayoutScript.h"
 #include "Lu_SkillScript.h"
+#include "Lu_SkillCastScript.h"
 
 #include "Lu_IdleState.h"
 #include "Lu_MoveState.h"
@@ -356,38 +357,38 @@ namespace Lu
 		m_Animator->CompleteEvent(L"Player_Wand_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
 
-		// Attack - WandOfMana
-		m_Animator->Create(L"Player_WandOfMana_LeftDown", pAtlas, Vector2(0.f, 400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_LeftDown") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
+		// Attack - SkillCast
+		m_Animator->Create(L"Player_SkillCast_LeftDown", pAtlas, Vector2(0.f, 7200.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_LeftDown") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_LeftDown") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_Down", pAtlas, Vector2(300.f, 400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_Down") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_Down") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_Down", pAtlas, Vector2(300.f, 7200.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_Down") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_Down") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_RightDown", pAtlas, Vector2(0.f, 500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_RightDown") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_RightDown", pAtlas, Vector2(0.f, 7300.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_RightDown") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_RightDown") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_Left", pAtlas, Vector2(300.f, 500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_Left") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_Left") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_Left", pAtlas, Vector2(300.f, 7300.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_Left") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_Left") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_Right", pAtlas, Vector2(0.f, 600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_Right") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_Right") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_Right", pAtlas, Vector2(0.f, 7400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_Right") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_Right") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_LeftUp", pAtlas, Vector2(300.f, 600.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_LeftUp") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_LeftUp", pAtlas, Vector2(300.f, 7400.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_LeftUp") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_LeftUp") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_Up", pAtlas, Vector2(0.f, 700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_Up") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_Up") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_Up", pAtlas, Vector2(0.f, 7500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_Up") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_Up") = std::bind(&PlayerScript::CompleteAction, this);
 
-		m_Animator->Create(L"Player_WandOfMana_RightUp", pAtlas, Vector2(300.f, 700.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f, false);
-		m_Animator->StartEvent(L"Player_WandOfMana_RightUp") = std::bind(&PlayerScript::WandOfManaSFX, this);
-		m_Animator->CompleteEvent(L"Player_WandOfMana_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
+		m_Animator->Create(L"Player_SkillCast_RightUp", pAtlas, Vector2(300.f, 7500.f), Vector2(100.f, 100.f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f, false);
+		m_Animator->StartEvent(L"Player_SkillCast_RightUp") = std::bind(&PlayerScript::Skill_Cast, this);
+		m_Animator->CompleteEvent(L"Player_SkillCast_RightUp") = std::bind(&PlayerScript::CompleteAction, this);
 
 
 		// Attack - WandChanneling
@@ -742,7 +743,15 @@ namespace Lu
 				m_Dir = CalDirToMouse();
 			}
 				break;
-			case eSkillType::None:
+			case eSkillType::FireStrike:
+			{
+				UseMana(m_CurSkill->NeedMana);
+				m_bAction = true;
+				m_bSkillUse = true;
+				m_PrevDir = m_Dir;
+				m_Dir = CalDirToMouse();
+				ChangeState(StateScript::eState::Idle);
+			}
 				break;
 			default:
 				break;
@@ -902,268 +911,239 @@ namespace Lu
 			&& !m_bSkillUse)
 			return;
 
-		switch (eCurState)
-		{
-		case StateScript::eState::Idle:
-		{
-			if (m_bChanneling && m_bSkillUse && !m_bDontAnimChange)
-			{
-				switch (m_Dir)
-				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Left", true);
-					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_RightDown", true);
-					break;
-				}
-			}
-			else if (!m_bDontAnimChange)
-			{
-				switch (m_Dir)
-				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_Idle_Left", true);
-					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_Idle_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_Idle_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_Idle_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_Idle_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_Idle_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_Idle_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_Idle_RightDown", true);
-					break;
-				}
-			}		
-		}
-			break;
-		case StateScript::eState::Move:
-		{
-			if (eMoveType::Walk == m_MoveType)
-			{
-				if (m_bChanneling && m_bSkillUse)
-				{
-					switch (m_Dir)
-					{
-					case eDir::Left:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Left", true);
-						break;
-					case eDir::Right:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Right", true);
-						break;
-					case eDir::Up:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Up", true);
-						break;
-					case eDir::Down:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Down", true);
-						break;
-					case eDir::LeftUp:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_LeftUp", true);
-						break;
-					case eDir::RightUp:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_RightUp", true);
-						break;
-					case eDir::LeftDown:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_LeftDown", true);
-						break;
-					case eDir::RightDown:
-						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_RightDown", true);
-						break;
-					}
-				}
-				else
-				{
-					switch (m_Dir)
-					{
-					case eDir::Left:
-						m_Animator->PlayAnimation(L"Player_Walk_Left", true);
-						break;
-					case eDir::Right:
-						m_Animator->PlayAnimation(L"Player_Walk_Right", true);
-						break;
-					case eDir::Up:
-						m_Animator->PlayAnimation(L"Player_Walk_Up", true);
-						break;
-					case eDir::Down:
-						m_Animator->PlayAnimation(L"Player_Walk_Down", true);
-						break;
-					case eDir::LeftUp:
-						m_Animator->PlayAnimation(L"Player_Walk_LeftUp", true);
-						break;
-					case eDir::RightUp:
-						m_Animator->PlayAnimation(L"Player_Walk_RightUp", true);
-						break;
-					case eDir::LeftDown:
-						m_Animator->PlayAnimation(L"Player_Walk_LeftDown", true);
-						break;
-					case eDir::RightDown:
-						m_Animator->PlayAnimation(L"Player_Walk_RightDown", true);
-						break;
-					}
-				}
-			}
-			else
-			{
-				switch (m_Dir)
-				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_Run_Left", true);
-					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_Run_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_Run_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_Run_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_Run_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_Run_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_Run_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_Run_RightDown", true);
-					break;
-				}
-			}
-		}
-			break;
-		case StateScript::eState::Dash:
+		if (m_bSkillUse && m_bAction
+			&& m_CurSkill->SkillType == eSkillType::FireStrike
+			&& eCurState != StateScript::eState::Dead)
 		{
 			switch (m_Dir)
 			{
 			case eDir::Left:
-				m_Animator->PlayAnimation(L"Player_Dash_Left", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_Left", true);
 				break;
 			case eDir::Right:
-				m_Animator->PlayAnimation(L"Player_Dash_Right", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_Right", true);
 				break;
 			case eDir::Up:
-				m_Animator->PlayAnimation(L"Player_Dash_Up", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_Up", true);
 				break;
 			case eDir::Down:
-				m_Animator->PlayAnimation(L"Player_Dash_Down", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_Down", true);
 				break;
 			case eDir::LeftUp:
-				m_Animator->PlayAnimation(L"Player_Dash_LeftUp", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_LeftUp", true);
 				break;
 			case eDir::RightUp:
-				m_Animator->PlayAnimation(L"Player_Dash_RightUp", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_RightUp", true);
 				break;
 			case eDir::LeftDown:
-				m_Animator->PlayAnimation(L"Player_Dash_LeftDown", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_LeftDown", true);
 				break;
 			case eDir::RightDown:
-				m_Animator->PlayAnimation(L"Player_Dash_RightDown", true);
+				m_Animator->PlayAnimation(L"Player_SkillCast_RightDown", true);
 				break;
 			}
 		}
-		break;
-		case StateScript::eState::Attack:
+		else
 		{
-			switch (m_CurWeapon)
+			switch (eCurState)
 			{
-			case eWeaponType::None:
+			case StateScript::eState::Idle:
 			{
-				switch (m_Dir)
-				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_Wand_Left", true);
-					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_Wand_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_Wand_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_Wand_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_Wand_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_Wand_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_Wand_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
-					break;
-				}
-			}
-			break;
-			case eWeaponType::Wand:
-			{
-				if (m_bChargeAnim)
+				if (m_bChanneling && m_bSkillUse && !m_bDontAnimChange)
 				{
 					switch (m_Dir)
 					{
 					case eDir::Left:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_Left", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Left", true);
 						break;
 					case eDir::Right:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_Right", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Right", true);
 						break;
 					case eDir::Up:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_Up", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Up", true);
 						break;
 					case eDir::Down:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_Down", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_Down", true);
 						break;
 					case eDir::LeftUp:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_LeftUp", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_LeftUp", true);
 						break;
 					case eDir::RightUp:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_RightUp", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_RightUp", true);
 						break;
 					case eDir::LeftDown:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_LeftDown", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_LeftDown", true);
 						break;
 					case eDir::RightDown:
-						m_Animator->PlayAnimation(L"Player_WandChanneling_RightDown", true);
+						m_Animator->PlayAnimation(L"Player_ChannelingSkill_Idle_RightDown", true);
 						break;
 					}
 				}
+				else if (!m_bDontAnimChange)
+				{
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_Idle_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_Idle_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_Idle_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_Idle_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_Idle_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_Idle_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_Idle_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_Idle_RightDown", true);
+						break;
+					}
+				}
+			}
+			break;
+			case StateScript::eState::Move:
+			{
+				if (eMoveType::Walk == m_MoveType)
+				{
+					if (m_bChanneling && m_bSkillUse)
+					{
+						switch (m_Dir)
+						{
+						case eDir::Left:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Left", true);
+							break;
+						case eDir::Right:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Right", true);
+							break;
+						case eDir::Up:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Up", true);
+							break;
+						case eDir::Down:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_Down", true);
+							break;
+						case eDir::LeftUp:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_LeftUp", true);
+							break;
+						case eDir::RightUp:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_RightUp", true);
+							break;
+						case eDir::LeftDown:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_LeftDown", true);
+							break;
+						case eDir::RightDown:
+							m_Animator->PlayAnimation(L"Player_ChannelingSkill_Walk_RightDown", true);
+							break;
+						}
+					}
+					else
+					{
+						switch (m_Dir)
+						{
+						case eDir::Left:
+							m_Animator->PlayAnimation(L"Player_Walk_Left", true);
+							break;
+						case eDir::Right:
+							m_Animator->PlayAnimation(L"Player_Walk_Right", true);
+							break;
+						case eDir::Up:
+							m_Animator->PlayAnimation(L"Player_Walk_Up", true);
+							break;
+						case eDir::Down:
+							m_Animator->PlayAnimation(L"Player_Walk_Down", true);
+							break;
+						case eDir::LeftUp:
+							m_Animator->PlayAnimation(L"Player_Walk_LeftUp", true);
+							break;
+						case eDir::RightUp:
+							m_Animator->PlayAnimation(L"Player_Walk_RightUp", true);
+							break;
+						case eDir::LeftDown:
+							m_Animator->PlayAnimation(L"Player_Walk_LeftDown", true);
+							break;
+						case eDir::RightDown:
+							m_Animator->PlayAnimation(L"Player_Walk_RightDown", true);
+							break;
+						}
+					}
+				}
 				else
+				{
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_Run_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_Run_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_Run_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_Run_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_Run_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_Run_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_Run_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_Run_RightDown", true);
+						break;
+					}
+				}
+			}
+			break;
+			case StateScript::eState::Dash:
+			{
+				switch (m_Dir)
+				{
+				case eDir::Left:
+					m_Animator->PlayAnimation(L"Player_Dash_Left", true);
+					break;
+				case eDir::Right:
+					m_Animator->PlayAnimation(L"Player_Dash_Right", true);
+					break;
+				case eDir::Up:
+					m_Animator->PlayAnimation(L"Player_Dash_Up", true);
+					break;
+				case eDir::Down:
+					m_Animator->PlayAnimation(L"Player_Dash_Down", true);
+					break;
+				case eDir::LeftUp:
+					m_Animator->PlayAnimation(L"Player_Dash_LeftUp", true);
+					break;
+				case eDir::RightUp:
+					m_Animator->PlayAnimation(L"Player_Dash_RightUp", true);
+					break;
+				case eDir::LeftDown:
+					m_Animator->PlayAnimation(L"Player_Dash_LeftDown", true);
+					break;
+				case eDir::RightDown:
+					m_Animator->PlayAnimation(L"Player_Dash_RightDown", true);
+					break;
+				}
+			}
+			break;
+			case StateScript::eState::Attack:
+			{
+				switch (m_CurWeapon)
+				{
+				case eWeaponType::None:
 				{
 					switch (m_Dir)
 					{
@@ -1193,49 +1173,113 @@ namespace Lu
 						break;
 					}
 				}
-			}
 				break;
-			case eWeaponType::Bow:
-			{
-				switch (m_Dir)
+				case eWeaponType::Wand:
 				{
-				case eDir::Left:
-					m_Animator->PlayAnimation(L"Player_Bow_Left", true);
+					if (m_bChargeAnim)
+					{
+						switch (m_Dir)
+						{
+						case eDir::Left:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_Left", true);
+							break;
+						case eDir::Right:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_Right", true);
+							break;
+						case eDir::Up:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_Up", true);
+							break;
+						case eDir::Down:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_Down", true);
+							break;
+						case eDir::LeftUp:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_LeftUp", true);
+							break;
+						case eDir::RightUp:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_RightUp", true);
+							break;
+						case eDir::LeftDown:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_LeftDown", true);
+							break;
+						case eDir::RightDown:
+							m_Animator->PlayAnimation(L"Player_WandChanneling_RightDown", true);
+							break;
+						}
+					}
+					else
+					{
+						switch (m_Dir)
+						{
+						case eDir::Left:
+							m_Animator->PlayAnimation(L"Player_Wand_Left", true);
+							break;
+						case eDir::Right:
+							m_Animator->PlayAnimation(L"Player_Wand_Right", true);
+							break;
+						case eDir::Up:
+							m_Animator->PlayAnimation(L"Player_Wand_Up", true);
+							break;
+						case eDir::Down:
+							m_Animator->PlayAnimation(L"Player_Wand_Down", true);
+							break;
+						case eDir::LeftUp:
+							m_Animator->PlayAnimation(L"Player_Wand_LeftUp", true);
+							break;
+						case eDir::RightUp:
+							m_Animator->PlayAnimation(L"Player_Wand_RightUp", true);
+							break;
+						case eDir::LeftDown:
+							m_Animator->PlayAnimation(L"Player_Wand_LeftDown", true);
+							break;
+						case eDir::RightDown:
+							m_Animator->PlayAnimation(L"Player_Wand_RightDown", true);
+							break;
+						}
+					}
+				}
+				break;
+				case eWeaponType::Bow:
+				{
+					switch (m_Dir)
+					{
+					case eDir::Left:
+						m_Animator->PlayAnimation(L"Player_Bow_Left", true);
+						break;
+					case eDir::Right:
+						m_Animator->PlayAnimation(L"Player_Bow_Right", true);
+						break;
+					case eDir::Up:
+						m_Animator->PlayAnimation(L"Player_Bow_Up", true);
+						break;
+					case eDir::Down:
+						m_Animator->PlayAnimation(L"Player_Bow_Down", true);
+						break;
+					case eDir::LeftUp:
+						m_Animator->PlayAnimation(L"Player_Bow_LeftUp", true);
+						break;
+					case eDir::RightUp:
+						m_Animator->PlayAnimation(L"Player_Bow_RightUp", true);
+						break;
+					case eDir::LeftDown:
+						m_Animator->PlayAnimation(L"Player_Bow_LeftDown", true);
+						break;
+					case eDir::RightDown:
+						m_Animator->PlayAnimation(L"Player_Bow_RightDown", true);
+						break;
+					}
+				}
+				break;
+				case eWeaponType::Sword:
 					break;
-				case eDir::Right:
-					m_Animator->PlayAnimation(L"Player_Bow_Right", true);
-					break;
-				case eDir::Up:
-					m_Animator->PlayAnimation(L"Player_Bow_Up", true);
-					break;
-				case eDir::Down:
-					m_Animator->PlayAnimation(L"Player_Bow_Down", true);
-					break;
-				case eDir::LeftUp:
-					m_Animator->PlayAnimation(L"Player_Bow_LeftUp", true);
-					break;
-				case eDir::RightUp:
-					m_Animator->PlayAnimation(L"Player_Bow_RightUp", true);
-					break;
-				case eDir::LeftDown:
-					m_Animator->PlayAnimation(L"Player_Bow_LeftDown", true);
-					break;
-				case eDir::RightDown:
-					m_Animator->PlayAnimation(L"Player_Bow_RightDown", true);
+				default:
 					break;
 				}
 			}
-				break;
-			case eWeaponType::Sword:
-				break;
-			default:
+			break;
+			case StateScript::eState::Dead:
+				m_Animator->PlayAnimation(L"Player_Dead", true);
 				break;
 			}
-		}
-			break;
-		case StateScript::eState::Dead:
-			m_Animator->PlayAnimation(L"Player_Dead", true);
-			break;
 		}
 	}
 
@@ -1276,6 +1320,13 @@ namespace Lu
 
 		if (m_bChargeAnim)
 			m_bChargeAnim = false;
+
+		if (m_bSkillUse)
+		{
+			m_bAction = false;
+			m_bSkillUse = false;
+			m_CurSkill->CurCoolTime = m_CurSkill->SkillCoolTime;
+		}
 	}
 
 	void PlayerScript::DashFinish()
@@ -1289,10 +1340,6 @@ namespace Lu
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"AttackSFX", L"..\\Resources\\Sound\\SFX\\Player\\AttackSFX.ogg"));
 		pSFX->Play();
-	}
-
-	void PlayerScript::WandOfManaSFX()
-	{
 	}
 
 	void PlayerScript::MagicCircleMove()
@@ -1357,7 +1404,6 @@ namespace Lu
 		pAnimator->PlayAnimation(L"IceBall", true);
 
 		IceBallScript* pIceBallScript = pProjectile->AddComponent<IceBallScript>();
-		pIceBallScript->SetPlayerScript(this);
 		pIceBallScript->SetTransform(pProjectile->GetComponent<Transform>());
 		pIceBallScript->SetDir(vActionDir);
 		pIceBallScript->SetSpeed(300.f);
@@ -1366,6 +1412,71 @@ namespace Lu
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"IceBall1SFX", L"..\\Resources\\Sound\\SFX\\Player\\IceBall1SFX.ogg"));
 		pSFX->Play();
+	}
+
+	void PlayerScript::Skill_Cast()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"SkillCastSFX", L"..\\Resources\\Sound\\SFX\\Player\\SkillCastSFX.ogg"));
+		pSFX->Play();
+
+		Vector3 vPos = GetOwner()->GetComponent<Transform>()->GetPosition();
+		GameObject* pObject = object::Instantiate<GameObject>(Vector3(vPos.x, vPos.y + 60.f, vPos.z), Vector3(288.f, 288.f, 100.f), eLayerType::FX);
+		pObject->SetName(L"SkillCastFX");
+		MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"SkillCast_Mtrl"));
+		pObject->AddComponent<Animator>();
+
+		switch (m_Dir)
+		{
+		case Lu::eDir::None:
+			break;
+		case Lu::eDir::Left:
+			vPos.x -= 300.f;
+			break;
+		case Lu::eDir::Right:
+			vPos.x += 300.f;
+			break;
+		case Lu::eDir::Up:
+			vPos.y += 300.f;
+			break;
+		case Lu::eDir::Down:
+			vPos.y -= 300.f;
+			break;
+		case Lu::eDir::LeftUp:
+		{
+			float diagonalFactor = 1.0f / sqrt(2.0f);
+			vPos.x -= 300.f * diagonalFactor;
+			vPos.y += 300.f * diagonalFactor;
+		}
+			break;
+		case Lu::eDir::RightUp:
+		{
+			float diagonalFactor = 1.0f / sqrt(2.0f);
+			vPos.x += 300.f * diagonalFactor;
+			vPos.y += 300.f * diagonalFactor;
+		}
+			break;
+		case Lu::eDir::LeftDown:
+		{
+			float diagonalFactor = 1.0f / sqrt(2.0f);
+			vPos.x -= 300.f * diagonalFactor;
+			vPos.y -= 300.f * diagonalFactor;
+		}
+			break;
+		case Lu::eDir::RightDown:
+		{
+			float diagonalFactor = 1.0f / sqrt(2.0f);
+			vPos.x += 300.f * diagonalFactor;
+			vPos.y -= 300.f * diagonalFactor;
+		}
+			break;
+		default:
+			break;
+		}
+
+		pObject->AddComponent<SkillCastScript>()->SetSpawnPos(vPos);
 	}
 
 	void PlayerScript::LearnSkill(tSkill* _Skill)

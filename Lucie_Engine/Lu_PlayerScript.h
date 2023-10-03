@@ -187,9 +187,14 @@ namespace Lu
 			return m_ChargeGauge;
 		}
 
-		bool GetWood()	const
+		bool IsWoodGround()	const
 		{
 			return m_bWood;
+		}
+
+		bool IsSkillUse()	const
+		{
+			return m_bSkillUse;
 		}
 
 	public:
@@ -211,13 +216,13 @@ namespace Lu
 		void CompleteAction();
 		void DashFinish();
 		void AttackSFX();
-		void WandOfManaSFX();
 		void MagicCircleMove();
 		void LookAround();
 		
 		void StaminaRecovery();
 		
 		void Skill_IceBall();
+		void Skill_Cast();
 
 	public:
 		void ChangeState(StateScript::eState _NextState);

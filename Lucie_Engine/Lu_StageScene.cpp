@@ -140,7 +140,7 @@ namespace Lu
 			pPlayerScript->SetUI(PlayerScript::eUI::Inventory, (UIScript*)pInvenScript);
 
 
-			GameObject* pWeapon = object::Instantiate<GameObject>(Vector3(640.f, -330.f, 100.f), Vector3(105.f, 102.f, 100.f), eLayerType::UI);
+			GameObject* pWeapon = object::Instantiate<GameObject>(Vector3(640.f, -330.f, 100.f), Vector3(105.f, 102.f, 150.f), eLayerType::UI);
 			pWeapon->SetName(L"UI_WeaponSlot");
 			SceneManager::DontDestroyOnLoad(pWeapon);
 			pMeshRender = pWeapon->AddComponent<MeshRenderer>();
@@ -150,7 +150,7 @@ namespace Lu
 			pWeaponSlot->SetInventory(pInvenScript);
 			pPlayerScript->SetUI(PlayerScript::eUI::WeaponSlot, (UIScript*)pWeaponSlot);
 
-			GameObject* pQuick = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(66.f, 66.f, 100.f), eLayerType::UI);
+			GameObject* pQuick = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(66.f, 66.f, 150.f), eLayerType::UI);
 			pQuick->SetName(L"UI_QuickItem");
 			SceneManager::DontDestroyOnLoad(pQuick);
 			pMeshRender = pQuick->AddComponent<MeshRenderer>();

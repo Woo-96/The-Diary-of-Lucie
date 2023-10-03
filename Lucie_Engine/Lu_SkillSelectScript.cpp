@@ -75,7 +75,21 @@ namespace Lu
 
         FontScript* pFont = m_SkillIcon[(int)eParts::SkillElement]->AddComponent<FontScript>();
         pFont->SetText(std::to_wstring(m_Skill->NeedMana));
-        pFont->SetPos(Vector2(571.f, 467.f));
+
+        switch (m_Skill->SkillType)
+        {
+        case eSkillType::IceBall:
+            pFont->SetPos(Vector2(571.f, 467.f));
+            break;
+        case eSkillType::FireStrike:
+            pFont->SetPos(Vector2(830.f, 467.f));
+            break;
+        case eSkillType::None:
+            break;
+        default:
+            break;
+        }
+
         pFont->SetSize(30.f);
         pFont->SetRGB(FONT_RGBA(255, 215, 0, 255));
     }
@@ -87,19 +101,47 @@ namespace Lu
 
     void SkillSelectScript::Render()
     {
-        // 스킬 이름
+        // 스킬 이름 & 설명
         if (m_Skill)
         {
+            // 스킬 이름
             std::wstring wstrText = m_Skill->SkillName;
             wchar_t Font[256];
             wcscpy_s(Font, wstrText.c_str());
-            FontWrapper::DrawFont(Font, 532.f, 510.f, 30.f, FONT_RGBA(255, 255, 255, 255));
 
+            switch (m_Skill->SkillType)
+            {
+            case eSkillType::IceBall:
+                FontWrapper::DrawFont(Font, 532.f, 510.f, 30.f, FONT_RGBA(255, 255, 255, 255));
+                break;
+            case eSkillType::FireStrike:
+                FontWrapper::DrawFont(Font, 752.f, 510.f, 27.f, FONT_RGBA(255, 255, 255, 255));
+                break;
+            case eSkillType::None:
+                break;
+            default:
+                break;
+            }
+            
             if (m_bPrint)
             {
                 wstrText = m_Skill->SkillName;
                 wcscpy_s(Font, wstrText.c_str());
-                FontWrapper::DrawFont(Font, 660.f, 700.f, 30.f, FONT_RGBA(255, 215, 0, 255));
+
+                switch (m_Skill->SkillType)
+                {
+                case eSkillType::IceBall:
+                    FontWrapper::DrawFont(Font, 660.f, 700.f, 30.f, FONT_RGBA(255, 215, 0, 255));
+                    break;
+                case eSkillType::FireStrike:
+                    FontWrapper::DrawFont(Font, 620.f, 700.f, 30.f, FONT_RGBA(255, 215, 0, 255));
+                    break;
+                case eSkillType::None:
+                    break;
+                default:
+                    break;
+                }
+
 
                 size_t lineBreakPos = m_Skill->SkillDescription.find(L"\n");
                 std::wstring firstLine, secondLine;
@@ -116,10 +158,36 @@ namespace Lu
                 }
 
                 wcscpy_s(Font, firstLine.c_str());
-                FontWrapper::DrawFont(Font, 610.f, 740.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+
+                switch (m_Skill->SkillType)
+                {
+                case eSkillType::IceBall:
+                    FontWrapper::DrawFont(Font, 620.f, 740.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+                    break;
+                case eSkillType::FireStrike:
+                    FontWrapper::DrawFont(Font, 600.f, 740.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+                    break;
+                case eSkillType::None:
+                    break;
+                default:
+                    break;
+                }
 
                 wcscpy_s(Font, secondLine.c_str());
-                FontWrapper::DrawFont(Font, 530.f, 770.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+
+                switch (m_Skill->SkillType)
+                {
+                case eSkillType::IceBall:
+                    FontWrapper::DrawFont(Font, 530.f, 770.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+                    break;
+                case eSkillType::FireStrike:
+                    FontWrapper::DrawFont(Font, 575.f, 770.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+                    break;
+                case eSkillType::None:
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }

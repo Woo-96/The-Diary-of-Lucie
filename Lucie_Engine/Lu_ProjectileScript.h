@@ -1,6 +1,6 @@
 #pragma once
 #include "..\\Engine_SOURCE\\Lu_Script.h"
-#include "Lu_PlayerScript.h"
+#include "Lu_ScriptEnums.h"
 
 namespace Lu
 {
@@ -14,7 +14,6 @@ namespace Lu
         virtual ~ProjectileScript();
 
     private:
-        PlayerScript*               m_PlayerScript;
         Transform*                  m_Transform;
         float			            m_AttackSpeed;
         Vector3			            m_AttackDir;
@@ -28,11 +27,6 @@ namespace Lu
         eSkillType                  m_SkillType;
 
     public:
-        void SetPlayerScript(PlayerScript* _PlayerScript)
-        {
-            m_PlayerScript = _PlayerScript;
-        }
-
         void SetTransform(Transform* _Transform)
         {
             m_Transform = _Transform;
@@ -48,6 +42,11 @@ namespace Lu
             m_AttackDir = _Dir;
         }
 
+        void SetTime(float _Time)
+        {
+            m_Time = _Time;
+        }
+
         void SetDuration(float _Duration)
         {
             m_Duration = _Duration;
@@ -61,6 +60,17 @@ namespace Lu
         void SetSkillType(eSkillType _SkillType)
         {
             m_SkillType = _SkillType;
+        }
+
+    public:
+        float GetTime() const
+        {
+            return m_Time;
+        }
+
+        float GetDuration() const
+        {
+            return m_Duration;
         }
 
     public:		

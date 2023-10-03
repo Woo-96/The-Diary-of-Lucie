@@ -13,7 +13,7 @@ namespace Lu
 	{
 		SetName(L"QuickItemScript");
 
-		m_CurIcon = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(48.f, 48.f, 100.f), eLayerType::UI);
+		m_CurIcon = object::Instantiate<GameObject>(Vector3(540.f, -345.f, 100.f), Vector3(48.f, 48.f, 140.f), eLayerType::UI);
 		m_CurIcon->AddComponent<MeshRenderer>()->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		SceneManager::DontDestroyOnLoad(m_CurIcon);
 	}

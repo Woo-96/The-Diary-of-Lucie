@@ -32,14 +32,14 @@ namespace Lu
 			if (i < MaxHeart)
 			{
 				m_arrHeartPos[i] = Vector2(-80.f - (i * 36) - (i * 5.f), -280.f);
-				m_arrHeart[i] = object::Instantiate<GameObject>(Vector3(m_arrHeartPos[i].x, m_arrHeartPos[i].y, 100.f), Vector3(36.f, 33.f, 100.f), eLayerType::UI);
+				m_arrHeart[i] = object::Instantiate<GameObject>(Vector3(m_arrHeartPos[i].x, m_arrHeartPos[i].y, 200.f), Vector3(36.f, 33.f, 100.f), eLayerType::UI);
 				m_arrHeart[i]->SetName(L"Empty_Heart");
 			}
 
 			// 5 ~ 9¹ø : Full Heart
 			else
 			{
-				m_arrHeart[i] = object::Instantiate<GameObject>(Vector3(m_arrHeartPos[i - 5].x, m_arrHeartPos[i - 5].y, 100.f), Vector3(36.f, 33.f, 100.f), eLayerType::UI);
+				m_arrHeart[i] = object::Instantiate<GameObject>(Vector3(m_arrHeartPos[i - 5].x, m_arrHeartPos[i - 5].y, 200.f), Vector3(36.f, 33.f, 100.f), eLayerType::UI);
 				m_arrHeart[i]->SetName(L"Full_Heart");
 			}
 

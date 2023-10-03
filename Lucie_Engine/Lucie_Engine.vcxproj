@@ -179,6 +179,7 @@
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
     <ClInclude Include="Lu_ChannelingBarScript.h" />
     <ClInclude Include="Lu_EquipLabelScript.h" />
+    <ClInclude Include="Lu_FireStrikeScript.h" />
     <ClInclude Include="Lu_FontScript.h" />
     <ClInclude Include="Lu_IceBallScript.h" />
     <ClInclude Include="Lu_InventoryLayoutScript.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Lu_PortalScript.h" />
     <ClInclude Include="Lu_ProjectileScript.h" />
     <ClInclude Include="Lu_QuickItemScript.h" />
+    <ClInclude Include="Lu_SkillCastScript.h" />
     <ClInclude Include="Lu_SkillScript.h" />
     <ClInclude Include="Lu_SkillSelectScript.h" />
     <ClInclude Include="Lu_SlimeAttackState.h" />
@@ -269,6 +271,7 @@
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
     <ClCompile Include="Lu_ChannelingBarScript.cpp" />
     <ClCompile Include="Lu_EquipLabelScript.cpp" />
+    <ClCompile Include="Lu_FireStrikeScript.cpp" />
     <ClCompile Include="Lu_FontScript.cpp" />
     <ClCompile Include="Lu_IceBallScript.cpp" />
     <ClCompile Include="Lu_InventoryLayoutScript.cpp" />
@@ -316,6 +319,7 @@
     <ClCompile Include="Lu_PortalScript.cpp" />
     <ClCompile Include="Lu_ProjectileScript.cpp" />
     <ClCompile Include="Lu_QuickItemScript.cpp" />
+    <ClCompile Include="Lu_SkillCastScript.cpp" />
     <ClCompile Include="Lu_SkillScript.cpp" />
     <ClCompile Include="Lu_SkillSelectScript.cpp" />
     <ClCompile Include="Lu_SlimeAttackState.cpp" />

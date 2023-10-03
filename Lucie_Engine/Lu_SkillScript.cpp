@@ -79,6 +79,7 @@ namespace Lu
 		pSkillBtn = m_arrParts[(int)eParts::NewSkill_2]->AddComponent<SkillSelectScript>();
 		pSkillBtn->SetPlayerScript(m_PlayerScript);
 		pSkillBtn->SkillUI(this);
+		pSkillBtn->SetSkill(m_arrSkill[(int)eSkillType::FireStrike]);
 	}
 
 	void SkillScript::Update()
@@ -118,7 +119,21 @@ namespace Lu
 			wstrText = L"Lv.1 ";
 			wstrText +=	m_RecentSkill->SkillName;
 			wcscpy_s(Font, wstrText.c_str());
-			FontWrapper::DrawFont(Font, 640.f, 80.f, 30.f, FONT_RGBA(255, 255, 255, 255));
+
+			switch (m_RecentSkill->SkillType)
+			{
+			case eSkillType::IceBall:
+				FontWrapper::DrawFont(Font, 640.f, 80.f, 30.f, FONT_RGBA(255, 255, 255, 255));
+				break;
+			case eSkillType::FireStrike:
+				FontWrapper::DrawFont(Font, 600.f, 80.f, 30.f, FONT_RGBA(255, 255, 255, 255));
+				break;
+			case eSkillType::None:
+				break;
+			default:
+				break;
+			}
+
 
 			size_t lineBreakPos = m_RecentSkill->SkillDescription.find(L"\n");
 			std::wstring firstLine, secondLine;
@@ -135,10 +150,37 @@ namespace Lu
 			}
 
 			wcscpy_s(Font, firstLine.c_str());
-			FontWrapper::DrawFont(Font, 620.f, 135.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+
+			switch (m_RecentSkill->SkillType)
+			{
+			case eSkillType::IceBall:
+				FontWrapper::DrawFont(Font, 620.f, 135.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+				break;
+			case eSkillType::FireStrike:
+				FontWrapper::DrawFont(Font, 605.f, 135.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+				break;
+			case eSkillType::None:
+				break;
+			default:
+				break;
+			}
+
 
 			wcscpy_s(Font, secondLine.c_str());
-			FontWrapper::DrawFont(Font, 530.f, 170.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+
+			switch (m_RecentSkill->SkillType)
+			{
+			case eSkillType::IceBall:
+				FontWrapper::DrawFont(Font, 530.f, 170.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+				break;
+			case eSkillType::FireStrike:
+				FontWrapper::DrawFont(Font, 575.f, 170.f, 25.f, FONT_RGBA(255, 255, 255, 255));
+				break;
+			case eSkillType::None:
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -169,7 +211,20 @@ namespace Lu
 		m_arrParts[(int)eParts::LearnSkill]->SetActive(true);
 		m_arrParts[(int)eParts::LearnSkillIcon]->SetActive(true);
 		m_arrParts[(int)eParts::LearnSkillIcon]->GetComponent<MeshRenderer>()->SetMaterial(Resources::Find<Material>(m_RecentSkill->IconMaterialName));
-		
+		switch (m_RecentSkill->SkillType)
+		{
+		case eSkillType::IceBall:
+			m_arrParts[(int)eParts::LearnSkillIcon]->GetComponent<Transform>()->SetPosition(Vector3(-120.f, 310.f, 150.f));
+			break;
+		case eSkillType::FireStrike:
+			m_arrParts[(int)eParts::LearnSkillIcon]->GetComponent<Transform>()->SetPosition(Vector3(-157.f, 310.f, 150.f));
+			break;
+		case eSkillType::None:
+			break;
+		default:
+			break;
+		}
+
 		GetOwner()->GetComponent<MeshRenderer>()->SetMaterial(Resources::Find<Material>(L"SkillBG_Transparent_Mtrl"));
 
 		m_PlayerScript->LearnSkill(_Skill);
@@ -204,5 +259,16 @@ namespace Lu
 		m_arrSkill[(int)eSkillType::IceBall]->IconMaterialName = L"IceBallIcon_Mtrl";
 		m_arrSkill[(int)eSkillType::IceBall]->SkillName = L"아이스볼";
 		m_arrSkill[(int)eSkillType::IceBall]->SkillDescription = L"스킬을 유지하는 동안\n얼음 덩어리를 발사해 마법대미지를 준다.";
+
+		// 파이어스트라이크
+		m_arrSkill[(int)eSkillType::FireStrike] = new tSkill;
+		m_arrSkill[(int)eSkillType::FireStrike]->SkillType = eSkillType::FireStrike;;
+		m_arrSkill[(int)eSkillType::FireStrike]->ElmentType = eElementType::Fire;
+		m_arrSkill[(int)eSkillType::FireStrike]->SkillCoolTime = 25.f;
+		m_arrSkill[(int)eSkillType::FireStrike]->CurCoolTime = 0.f;
+		m_arrSkill[(int)eSkillType::FireStrike]->NeedMana = 4;
+		m_arrSkill[(int)eSkillType::FireStrike]->IconMaterialName = L"FireStrikeIcon_Mtrl";
+		m_arrSkill[(int)eSkillType::FireStrike]->SkillName = L"파이어 스트라이크";
+		m_arrSkill[(int)eSkillType::FireStrike]->SkillDescription = L"바닥에서 화염을 끌어올려\n넓은 범위에 마법대미지를 준다.";
 	}
 }
