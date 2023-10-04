@@ -4,6 +4,7 @@
 #include "Lu_Renderer.h"
 #include "Lu_PlayerScript.h"
 #include "Lu_Time.h"
+#include "Lu_ProjectileScript.h"
 
 namespace Lu
 {
@@ -70,7 +71,7 @@ namespace Lu
 
 			if (m_HitCoolTime >= 0.1f)
 			{
-				GetInfo().HP -= GetTarget()->GetPlayerDamage();
+				GetInfo().HP -= m_Target->GetPlayerDamage();
 
 				if (GetInfo().HP <= 0.f)
 				{

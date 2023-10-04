@@ -22,6 +22,7 @@ namespace Lu::enums
 	{
 		Default,
 		BackGround,
+		Ground,
 		Immovable,
 		Portal,
 		Statue,

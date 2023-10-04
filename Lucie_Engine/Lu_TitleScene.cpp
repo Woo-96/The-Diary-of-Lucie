@@ -8,6 +8,7 @@
 #include "Lu_MouseScript.h"
 #include "Lu_SoundManager.h"
 #include "Lu_CollisionManager.h"
+#include "Lu_LabelScript.h"
 
 namespace Lu
 {
@@ -100,8 +101,23 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Title_Mtrl"));
 		}
 
+		// Press any key
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -150.f, 100.f), Vector3(960.f, 540.f, 100.f), eLayerType::UI);
+			pObject->SetName(L"PressKey");
+
+			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"PressKey_Mtrl"));
+
+			LabelScript* pLabel = pObject->AddComponent<LabelScript>();
+			pLabel->SetMeshRender(pMeshRender);
+			pLabel->SetBlink(true);
+		}
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Immovable, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterProjectile, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Immovable, true);

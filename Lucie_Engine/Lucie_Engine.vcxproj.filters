@@ -266,6 +266,9 @@
     <ClCompile Include="Lu_SkillCastScript.cpp">
       <Filter>Contents\Script\02. Player\FX</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_ChestScript.cpp">
+      <Filter>Contents\Script\04. Object\Chest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -538,6 +541,9 @@
     </ClInclude>
     <ClInclude Include="Lu_SkillCastScript.h">
       <Filter>Contents\Script\02. Player\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ChestScript.h">
+      <Filter>Contents\Script\04. Object\Chest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -849,6 +855,9 @@
     </Filter>
     <Filter Include="Contents\Script\02. Player\FX">
       <UniqueIdentifier>{87641145-be70-4b7f-9880-4172db9900bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Chest">
+      <UniqueIdentifier>{1bbb6216-7687-4513-b16c-f7deabe0a53b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

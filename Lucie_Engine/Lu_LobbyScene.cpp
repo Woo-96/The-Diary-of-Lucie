@@ -73,7 +73,7 @@ namespace Lu
 
 			
 			// ¹Ù´Ú ÀçÁú
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -140.f, 900.f), Vector3(970.f, 580.f, 500.f), eLayerType::Immovable);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -140.f, 900.f), Vector3(970.f, 580.f, 500.f), eLayerType::Ground);
 			pObject->SetName(L"Wood");
 			pObject->AddComponent<Collider2D>();
 			pObject->AddComponent<WoodScript>()->SetPlayer(pPlayerScript);

@@ -42,7 +42,7 @@ namespace Lu
 		MeshRenderer* pMeshRender = pProjectile->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		pMeshRender->SetMaterial(Resources::Find<Material>(L"FireStrike_Mtrl"));
-		pProjectile->AddComponent<Collider2D>(); //->SetSize(Vector2(0.3f, 0.6f));
+		pProjectile->AddComponent<Collider2D>()->SetSize(Vector2(0.5f, 0.5f));
 		pProjectile->AddComponent<Animator>();
 		pProjectile->AddComponent<FireStrikeScript>();
 

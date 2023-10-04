@@ -248,5 +248,4 @@ namespace Lu
 		std::vector<GameObject*> Monsters = GetLayer(eLayerType::Monster).GetGameObjects();
 		return !Monsters.empty();
 	}
-
 }

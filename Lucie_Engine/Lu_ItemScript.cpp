@@ -14,6 +14,7 @@ namespace Lu
 		, m_MoveSpeed(30.f)
 		, m_ItemSlotNumber(-1)
 		, m_ItemOption(0)
+		, m_bDrop(false)
 	{
 		SetName(L"ItemScript");
 	}
@@ -94,17 +95,42 @@ namespace Lu
 			if (!m_Transform)
 				return;
 
-			m_Time += (float)Time::DeltaTime();
-
-			if (m_Time >= 0.5f)
+			if (m_bDrop)
 			{
-				m_MoveDir *= -1.f;
-				m_Time = 0.f;
-			}
+				m_Time += (float)Time::DeltaTime();
 
-			Vector3 vPos = m_Transform->GetPosition();
-			vPos.y += m_MoveDir * m_MoveSpeed * (float)Time::DeltaTime();
-			m_Transform->SetPosition(vPos);
+				if (m_Time <= 0.1f)
+				{
+					Vector3 vPos = m_Transform->GetPosition();
+					vPos.y += 100.f * (float)Time::DeltaTime();
+					m_Transform->SetPosition(vPos);
+				}
+				else if (m_Time >= 0.5f)
+				{
+					m_bDrop = false;
+					m_Time = 0.f;
+				}
+				else
+				{
+					Vector3 vPos = m_Transform->GetPosition();
+					vPos.y -= 300.f * (float)Time::DeltaTime();
+					m_Transform->SetPosition(vPos);
+				}
+			}
+			else
+			{
+				m_Time += (float)Time::DeltaTime();
+
+				if (m_Time >= 0.5f)
+				{
+					m_MoveDir *= -1.f;
+					m_Time = 0.f;
+				}
+
+				Vector3 vPos = m_Transform->GetPosition();
+				vPos.y += m_MoveDir * m_MoveSpeed * (float)Time::DeltaTime();
+				m_Transform->SetPosition(vPos);
+			}
 		}
 			break;
 		case Lu::ItemScript::eItemState::Icon:

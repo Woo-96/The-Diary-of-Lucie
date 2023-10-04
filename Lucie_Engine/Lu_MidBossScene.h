@@ -10,14 +10,10 @@ namespace Lu
 		virtual ~MidBossScene();
 
 	private:
-		bool	m_bBossAlive;
-
-	public:
-		void BossDead()
-		{
-			m_bBossAlive = false;
-		}
-
+		GameObject* m_ChestFX;
+		bool		m_bBossAlive;
+		float		m_Time;
+	
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -28,5 +24,9 @@ namespace Lu
 	public:
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
+
+	private:
+		void CreateBossReward();
+		void ChestOpenFXComplete();
 	};
 }

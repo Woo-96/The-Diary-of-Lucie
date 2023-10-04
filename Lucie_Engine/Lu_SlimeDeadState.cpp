@@ -30,7 +30,7 @@ namespace Lu
 		if (GetSlimeScript()->GetSlimeType() == SlimeScript::eSlimeType::Nomal)
 		{
 			// 경험치 생성
-			GetTarget()->GetEXP(30);
+			GetTarget()->GetEXP(50);
 
 			// 젤리 아이템 드롭
 			DropItem();

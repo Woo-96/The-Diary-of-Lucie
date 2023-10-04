@@ -521,6 +521,25 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SkillCast_Mtrl", material);
 
+
+		// Object - Chest
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::CutOut);
+		Resources::Insert(L"Chest_Mtrl", material);
+
+		// FX - ChestOpenFX1
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"ChestOpenFX1_Mtrl", material);
+
+		// FX - ChestOpenFX2
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		Resources::Insert(L"ChestOpenFX2_Mtrl", material);
+
+
 #pragma endregion
 #pragma region Particle Shader
 		std::shared_ptr<Shader> particleShader = Resources::Find<Shader>(L"ParticleShader");
@@ -949,6 +968,14 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::CutOut);
 		Resources::Insert(L"LearnSkillFrame_Mtrl", pMaterial);
+
+		// UI - Press any key
+		pTexture = Resources::Load<Texture>(L"PressKey_Tex", L"..\\Resources\\Texture\\Map\\Title\\PressKey.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"PressKey_Mtrl", pMaterial);
 		
 
 #pragma endregion

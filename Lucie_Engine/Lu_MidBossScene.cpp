@@ -12,11 +12,15 @@
 #include "Lu_SoundManager.h"
 #include "Lu_PortalScript.h"
 #include "Lu_LabelScript.h"
+#include "Lu_ChestScript.h"
+#include "Lu_ImmovableScript.h"
 
 namespace Lu
 {
 	MidBossScene::MidBossScene()
-		: m_bBossAlive(true)
+		: m_ChestFX(nullptr)
+		, m_bBossAlive(true)
+		, m_Time(0.f)
 	{
 		SetName(L"MidBossSceneScript");
 	}
@@ -84,6 +88,22 @@ namespace Lu
 	void MidBossScene::Update()
 	{
 		StageScene::Update();
+
+		if (m_bBossAlive)
+		{
+			if (!IsInBattle())
+			{
+				m_bBossAlive = false;
+				CreateBossReward();
+
+				AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+				pBGM->Stop();
+
+				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+				pSFX->SetClip(Resources::Load<AudioClip>(L"BossDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\BossDeadSFX.ogg"));
+				pSFX->Play();
+			}
+		}
 	}
 
 	void MidBossScene::LateUpdate()
@@ -137,5 +157,42 @@ namespace Lu
 
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->Stop();
+	}
+
+	void MidBossScene::CreateBossReward()
+	{
+		// 상자 등장 효과
+		m_ChestFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 500.f), Vector3(288.f, 288.f, 200.f), eLayerType::FX);
+		m_ChestFX->SetName(L"ChestOpenFX1");
+		MeshRenderer* pMeshRender = m_ChestFX->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"ChestOpenFX1_Mtrl"));
+		Animator* pAnimator = m_ChestFX->AddComponent<Animator>();
+		pAnimator->Create(L"ChestOpenFX1", Resources::Load<Texture>(L"ChestFX1_Tex", L"..\\Resources\\Texture\\Map\\Stage\\ChestFX1.png")
+			, Vector2::Zero, Vector2(192.f, 192.f), 5, Vector2(192.f, 192.f));
+		pAnimator->CompleteEvent(L"ChestOpenFX1") = std::bind(&MidBossScene::ChestOpenFXComplete, this);
+		pAnimator->PlayAnimation(L"ChestOpenFX1", true);
+
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"ChestSFX", L"..\\Resources\\Sound\\SFX\\ChestSFX.ogg"));
+		pSFX->Play();
+	}
+
+	void MidBossScene::ChestOpenFXComplete()
+	{
+		object::Destroy(m_ChestFX);
+		m_ChestFX = nullptr;
+
+		GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 70.f, 500.f), Vector3(144.f, 144.f, 200.f), eLayerType::Item);
+		pObject->SetName(L"Chest");
+		MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"Chest_Mtrl"));
+		Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+		pCollider->SetSize(Vector2(0.4f, 0.4f));
+		pCollider->SetCenter(Vector2(0.f, -30.f));
+		pObject->AddComponent<Animator>();
+		pObject->AddComponent<ChestScript>();
+		pObject->AddComponent<ImmovableScript>();
 	}
 }

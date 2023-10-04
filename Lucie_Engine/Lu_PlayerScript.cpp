@@ -501,17 +501,17 @@ namespace Lu
 			if (pHPScript)
 			{
 				pHPScript->SetMaxHP(--m_PlayerInfo.MaxHP);
-				pHPScript->SetHeart(m_PlayerInfo.CurHP);
+
+				if(m_PlayerInfo.MaxHP < m_PlayerInfo.CurHP)
+					pHPScript->SetHeart(m_PlayerInfo.MaxHP);
+				else
+					pHPScript->SetHeart(m_PlayerInfo.CurHP);
 			}
 		}
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
 		{
-			HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
-			if (pHPScript)
-			{
-				pHPScript->SetHeart(--m_PlayerInfo.CurHP);
-			}
+			InflictDamage(1);
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_1))
@@ -520,53 +520,40 @@ namespace Lu
 			if (pHPScript)
 			{
 				pHPScript->SetMaxHP(++m_PlayerInfo.MaxHP);
-				pHPScript->SetHeart(m_PlayerInfo.CurHP);
+
+				if (m_PlayerInfo.MaxHP < m_PlayerInfo.CurHP)
+					pHPScript->SetHeart(m_PlayerInfo.MaxHP);
+				else
+					pHPScript->SetHeart(m_PlayerInfo.CurHP);
 			}
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_2))
 		{
-			HeartScript* pHPScript = (HeartScript*)m_arrUI[(int)eUI::HP];
-			if (pHPScript)
-			{
-				pHPScript->SetHeart(++m_PlayerInfo.CurHP);
-			}
+			InflictDamage(-1);
 		}
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_3))
 		{
-			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
-			if (pMPScript)
-			{
-				pMPScript->SetMaxMP(--m_PlayerInfo.MaxMP);
-			}
+			GetMaxMana(-1);
+
+			if (m_PlayerInfo.MaxMP < m_PlayerInfo.CurMP)
+				UseMana(1);
 		}
 
 		if (Input::GetKey(eKeyCode::LEFT_BRACKET) && Input::GetKeyDown(eKeyCode::_4))
 		{
-			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
-			if (pMPScript)
-			{
-				pMPScript->SetMana(--m_PlayerInfo.CurMP);
-			}
+			UseMana(1);
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_3))
 		{
-			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
-			if (pMPScript)
-			{
-				pMPScript->SetMaxMP(++m_PlayerInfo.MaxMP);
-			}
+			GetMaxMana(1);
 		}
 
 		if (Input::GetKey(eKeyCode::RIGHT_BRACKET) && Input::GetKeyDown(eKeyCode::_4))
 		{
-			ManaScript* pMPScript = (ManaScript*)m_arrUI[(int)eUI::MP];
-			if (pMPScript)
-			{
-				pMPScript->SetMana(++m_PlayerInfo.CurMP);
-			}
+			UseMana(-1);
 		}
 
 		StateScript::eState eCurState = m_CurState->GetStateType();
@@ -1670,7 +1657,7 @@ namespace Lu
 	{
 		m_PlayerInfo.CurEXP += _Value;
 
-		if (m_PlayerInfo.CurEXP > 100)
+		if (m_PlayerInfo.CurEXP >= 100)
 		{
 			NumberScript* pNumScript = (NumberScript*)m_arrUI[(int)eUI::Level];
 			if (pNumScript)

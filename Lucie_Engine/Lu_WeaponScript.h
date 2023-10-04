@@ -29,7 +29,7 @@ namespace Lu
         virtual void Update() override;
 
     public:
-        virtual void OnCollisionEnter(Collider2D* _Other) override;
+        virtual void OnCollisionStay(Collider2D* _Other) override;
 
     public:
         virtual bool ItemEfficacy() override;

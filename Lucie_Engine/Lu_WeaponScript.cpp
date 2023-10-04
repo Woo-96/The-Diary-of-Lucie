@@ -9,6 +9,7 @@
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
 #include "Lu_Resources.h"
+#include "Lu_Input.h"
 
 namespace Lu
 {
@@ -35,12 +36,15 @@ namespace Lu
 		}
 	}
 
-	void WeaponScript::OnCollisionEnter(Collider2D* _Other)
+	void WeaponScript::OnCollisionStay(Collider2D* _Other)
 	{
-		GameObject* pPlayer = _Other->GetOwner();
-		if (pPlayer->GetLayerIndex() == (int)eLayerType::Player)
+		if (Input::GetKeyDown(eKeyCode::F))
 		{
-			ItemEfficacy();
+			GameObject* pPlayer = _Other->GetOwner();
+			if (pPlayer->GetLayerIndex() == (int)eLayerType::Player)
+			{
+				ItemEfficacy();
+			}
 		}
 	}
 

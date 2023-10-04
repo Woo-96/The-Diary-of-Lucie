@@ -43,14 +43,4 @@ namespace Lu
 	{
 		object::Destroy(GetOwner());
 	}
-
-	void ProjectileScript::OnCollisionStay(Collider2D* _Other)
-	{
-
-	}
-
-	void ProjectileScript::OnCollisionExit(Collider2D* _Other)
-	{
-
-	}
 }

@@ -14,6 +14,7 @@ namespace Lu
 		MeshRenderer*	m_MeshRender;
 		float			m_Time;
 		float			m_Duration;
+		bool			m_bBlink;
 
 	public:
 		void SetMeshRender(MeshRenderer* _MeshRender)
@@ -24,6 +25,11 @@ namespace Lu
 		void SetDuration(float _Duration)
 		{
 			m_Duration = _Duration;
+		}
+
+		void SetBlink(bool _b)
+		{
+			m_bBlink = _b;
 		}
 
 	public:

@@ -140,7 +140,7 @@ namespace Lu
 		pMainCamScript->SetTarget(pPlayer);
 
 		// ¹Ù´Ú ÀçÁú
-		GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -40.f, 900.f), Vector3(840.f, 620.f, 500.f), eLayerType::Immovable);
+		GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -40.f, 900.f), Vector3(840.f, 620.f, 500.f), eLayerType::Ground);
 		pObject->SetName(L"Wood");
 		pObject->AddComponent<Collider2D>();
 		pObject->AddComponent<WoodScript>()->SetPlayer(pPlayer->GetComponent<PlayerScript>());

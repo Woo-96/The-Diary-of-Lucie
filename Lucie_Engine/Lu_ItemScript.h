@@ -37,6 +37,8 @@ namespace Lu
 		int				m_ItemSlotNumber;
 		int				m_ItemOption;
 
+		bool			m_bDrop;
+
 	public:
 		void SetItemName(std::wstring _Name)
 		{
@@ -68,6 +70,11 @@ namespace Lu
 		void SetItemOption(int _Option)
 		{
 			m_ItemOption = _Option;
+		}
+
+		void SetDrop(bool _b)
+		{
+			m_bDrop = _b;
 		}
 
 	public:
