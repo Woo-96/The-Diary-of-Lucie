@@ -130,13 +130,15 @@ namespace Lu
 	{
 		Scene::Update();
 
-		// 새 게임 : 
-		if (Input::GetKeyUp(eKeyCode::ENTER))
+		// 아무 키나 누르면 다음 씬으로 이동
+		for (int i = 1; i <= 255; i++)
 		{
-			SceneManager::LoadScene(L"LobbyScene");
+			if (GetAsyncKeyState(i) & 0x8001)
+			{
+				SceneManager::LoadScene(L"LobbyScene");
+				break;  // 아무 키를 눌렀으므로 루프 종료
+			}
 		}
-
-		// 종료 : 게임 종료
 	}
 
 	void TitleScene::LateUpdate()

@@ -153,6 +153,7 @@ namespace Lu
 
 			BowProjectile* pBowProjectile = pProjectile->AddComponent<BowProjectile>();
 			pBowProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+			pBowProjectile->SetPlayerScript(GetPlayerScript());
 			pBowProjectile->SetDir(GetDir());
 
 			GetPlayerScript()->UseStamina(1.f);
@@ -178,6 +179,7 @@ namespace Lu
 
 				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+				pWandProjectile->SetPlayerScript(GetPlayerScript());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetDuration(0.4f);
 
@@ -198,8 +200,10 @@ namespace Lu
 
 				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+				pWandProjectile->SetPlayerScript(GetPlayerScript());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetChargeProjectile(true);
+				pWandProjectile->SetFullCharge(true);
 				pWandProjectile->SetSpeed(500.f);
 				pWandProjectile->SetDuration(1.f);
 			}
@@ -220,6 +224,7 @@ namespace Lu
 
 				WandProjectile* pWandProjectile = pProjectile->AddComponent<WandProjectile>();
 				pWandProjectile->SetTransform(pProjectile->GetComponent<Transform>());
+				pWandProjectile->SetPlayerScript(GetPlayerScript());
 				pWandProjectile->SetDir(GetDir());
 				pWandProjectile->SetChargeProjectile(true);
 				pWandProjectile->SetSpeed(500.f);

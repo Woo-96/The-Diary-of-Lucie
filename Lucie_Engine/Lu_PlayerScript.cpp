@@ -90,13 +90,21 @@ namespace Lu
 
 	int PlayerScript::GetPlayerDamage()
 	{
-		if (m_CurWeapon == eWeaponType::Wand)
+		switch (m_CurWeapon)
 		{
+		case Lu::eWeaponType::Wand:
 			return m_PlayerInfo.Magic;
-		}
-		else
-		{
+			break;
+		case Lu::eWeaponType::Bow:
 			return m_PlayerInfo.Attack;
+			break;
+		case Lu::eWeaponType::Sword:
+			break;
+		case Lu::eWeaponType::None:
+			return m_PlayerInfo.Magic / 2;
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -1392,6 +1400,7 @@ namespace Lu
 
 		IceBallScript* pIceBallScript = pProjectile->AddComponent<IceBallScript>();
 		pIceBallScript->SetTransform(pProjectile->GetComponent<Transform>());
+		pIceBallScript->SetPlayerScript(this);
 		pIceBallScript->SetDir(vActionDir);
 		pIceBallScript->SetSpeed(300.f);
 		pIceBallScript->SetDuration(1.f);
@@ -1582,6 +1591,22 @@ namespace Lu
 		
 		SkillScript* pSkillUI = (SkillScript*)m_arrUI[(int)eUI::Skill];
 		pSkillUI->ResetSkillUI();
+	}
+
+	void PlayerScript::Stop(bool _b)
+	{
+		if (_b)
+		{
+			m_bAction = _b;
+			m_bCantHit = _b;
+
+			ChangeState(StateScript::eState::Idle);
+		}
+		else
+		{
+			m_bAction = _b;
+			m_bCantHit = _b;
+		}
 	}
 
 	void PlayerScript::ChangeState(StateScript::eState _NextState)

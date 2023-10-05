@@ -44,7 +44,7 @@ namespace Lu
 		pMeshRender->SetMaterial(Resources::Find<Material>(L"FireStrike_Mtrl"));
 		pProjectile->AddComponent<Collider2D>()->SetSize(Vector2(0.5f, 0.5f));
 		pProjectile->AddComponent<Animator>();
-		pProjectile->AddComponent<FireStrikeScript>();
+		pProjectile->AddComponent<FireStrikeScript>()->SetPlayerScript(SceneManager::FindPlayer()->GetComponent<PlayerScript>());
 
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"FireStrikeSFX", L"..\\Resources\\Sound\\SFX\\Player\\FireStrikeSFX.ogg"));

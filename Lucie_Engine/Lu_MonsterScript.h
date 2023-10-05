@@ -89,6 +89,9 @@ namespace Lu
         virtual void OnCollisionStay(Collider2D* _Other) override;
         virtual void OnCollisionExit(Collider2D* _Other) override {}
 
+    private:
+        void InflictDamage(int _Damage);
+
     protected:
         virtual void CreateAnimation() {}
         virtual void AnimationUpdate() {}

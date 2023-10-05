@@ -11,6 +11,7 @@ namespace Lu
 
     private:
         bool    m_bChargeProjectile;
+        bool    m_bFullCharge;
         float   m_SFXTime;
 
     public:
@@ -19,12 +20,19 @@ namespace Lu
             m_bChargeProjectile = _b;
         }
 
+        void SetFullCharge(bool _b)
+        {
+            m_bFullCharge = _b;
+        }
+
     public:
         virtual void Update() override;
 
     public:
         virtual void OnCollisionEnter(Collider2D* _Other) override;
         virtual void OnCollisionStay(Collider2D* _Other) override;
-        virtual void OnCollisionExit(Collider2D* _Other) override;
+
+    public:
+        virtual int GetProjectileDamage() override;
     };
 }

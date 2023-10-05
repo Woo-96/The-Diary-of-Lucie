@@ -84,8 +84,11 @@ namespace Lu
 
 	void SkillScript::Update()
 	{
-		if(m_CurState == eUIState::Select)
-			m_PlayerScript->SetCantHit(true);
+		if (m_CurState == eUIState::Select)
+		{
+			m_PlayerScript->Stop(true);
+		}
+			
 
 		if (m_CurState == eUIState::Learn)
 		{
@@ -201,7 +204,7 @@ namespace Lu
 		m_CurState = eUIState::Learn;
 		m_RecentSkill = _Skill;
 
-		m_PlayerScript->SetCantHit(false);
+		m_PlayerScript->Stop(false);
 
 		m_arrParts[(int)eParts::NewSkill_1]->SetActive(false);
 		m_arrParts[(int)eParts::NewSkill_1]->GetComponent<SkillSelectScript>()->SetActive(false);

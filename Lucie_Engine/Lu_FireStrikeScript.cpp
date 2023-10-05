@@ -37,4 +37,12 @@ namespace Lu
 	{
 		object::Destroy(GetOwner());
 	}
+
+	int FireStrikeScript::GetProjectileDamage()
+	{
+		int iMin = 3;
+		int iMax = 5;
+
+		return std::rand() % (iMax - iMin + 1) + iMin;
+	}
 }

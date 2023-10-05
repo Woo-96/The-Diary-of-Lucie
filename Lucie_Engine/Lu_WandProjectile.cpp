@@ -5,11 +5,13 @@
 #include "Lu_SceneManager.h"
 #include "Lu_SoundManager.h"
 #include "Lu_Time.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
 	WandProjectile::WandProjectile()
 		: m_bChargeProjectile(false)
+		, m_bFullCharge(false)
 		, m_SFXTime(0.f)
 	{
 		SetName(L"WandProjectileScript");
@@ -52,7 +54,23 @@ namespace Lu
 		}
 	}
 
-	void WandProjectile::OnCollisionExit(Collider2D* _Other)
+	int WandProjectile::GetProjectileDamage()
 	{
+		if (GetPlayerScript()->GetWeaponType() == eWeaponType::None)
+			return GetPlayerScript()->GetPlayerDamage();
+		else
+		{
+			if (m_bChargeProjectile)
+			{
+				if (m_bFullCharge)
+					return GetPlayerScript()->GetPlayerDamage() / 1.5f;
+				else
+					return GetPlayerScript()->GetPlayerDamage() / 3;
+			}
+			else
+				return GetPlayerScript()->GetPlayerDamage();
+		}
+
+		return 0;
 	}
 }

@@ -33,6 +33,7 @@ namespace Lu::enums
 		PlayerProjectile,
 		Light,
 		FX,
+		DamageFont,
 		UI,
 		Mouse,
 		End = 16,

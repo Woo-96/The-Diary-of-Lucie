@@ -230,6 +230,7 @@ namespace Lu
 		void IdleStateEvent();
 		void LearnSkill(tSkill* _Skill);
 		void ResetPlayerInfo();
+		void Stop(bool _b);
 
 	// UI 상호 작용 관련 함수
 	public:

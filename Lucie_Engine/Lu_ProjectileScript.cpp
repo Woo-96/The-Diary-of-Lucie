@@ -8,6 +8,7 @@ namespace Lu
 {
 	ProjectileScript::ProjectileScript()
 		: m_Transform(nullptr)
+		, m_PlayerScript(nullptr)
 		, m_AttackSpeed(1000.f)
 		, m_AttackDir(Vector3::Zero)
 		, m_Time(0.f)

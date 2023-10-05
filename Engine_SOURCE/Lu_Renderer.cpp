@@ -976,6 +976,14 @@ namespace renderer
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"PressKey_Mtrl", pMaterial);
+
+		// UI - DamageFont ¿ë
+		pTexture = Resources::Load<Texture>(L"DamageFont_Tex", L"..\\Resources\\Texture\\UI\\DamageFont.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"DamageFont_Mtrl", pMaterial);
 		
 
 #pragma endregion

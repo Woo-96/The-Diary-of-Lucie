@@ -14,6 +14,9 @@ namespace Lu
 
     public:
         virtual void OnCollisionEnter(Collider2D* _Other) override;
+
+    public:
+        virtual int GetProjectileDamage() override;
 	};
 }
 

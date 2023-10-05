@@ -22,6 +22,9 @@ namespace Lu
 
     private:
         void CompleteAnimation();
+
+    public:
+        virtual int GetProjectileDamage() override;
     };
 }
 

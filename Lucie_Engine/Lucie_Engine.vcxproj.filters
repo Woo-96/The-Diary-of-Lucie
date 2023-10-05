@@ -269,6 +269,9 @@
     <ClCompile Include="Lu_ChestScript.cpp">
       <Filter>Contents\Script\04. Object\Chest</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_DamageFontScript.cpp">
+      <Filter>Contents\Script\05. UI\DamageFont</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -544,6 +547,9 @@
     </ClInclude>
     <ClInclude Include="Lu_ChestScript.h">
       <Filter>Contents\Script\04. Object\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_DamageFontScript.h">
+      <Filter>Contents\Script\05. UI\DamageFont</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -858,6 +864,9 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Chest">
       <UniqueIdentifier>{1bbb6216-7687-4513-b16c-f7deabe0a53b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\05. UI\DamageFont">
+      <UniqueIdentifier>{dd0c5d18-9a2b-4f29-a125-b12c43ac2b08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

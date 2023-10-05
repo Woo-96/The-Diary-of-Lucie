@@ -29,4 +29,12 @@ namespace Lu
 		pSFX->Play();
 		ProjectileScript::OnCollisionEnter(_Other);
 	}
+
+	int IceBallScript::GetProjectileDamage()
+	{
+		int iMin = 10;
+		int iMax = 15;
+
+		return std::rand() % (iMax - iMin + 1) + iMin;
+	}
 }

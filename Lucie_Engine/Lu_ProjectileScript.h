@@ -4,8 +4,8 @@
 
 namespace Lu
 {
-    class GameObject;
     class Transform;
+    class PlayerScript;
     class Animator;
     class ProjectileScript : public Script
     {
@@ -15,6 +15,7 @@ namespace Lu
 
     private:
         Transform*                  m_Transform;
+        PlayerScript*               m_PlayerScript;
         float			            m_AttackSpeed;
         Vector3			            m_AttackDir;
         float                       m_Time;
@@ -30,6 +31,11 @@ namespace Lu
         void SetTransform(Transform* _Transform)
         {
             m_Transform = _Transform;
+        }
+
+        void SetPlayerScript(PlayerScript* _Player)
+        {
+            m_PlayerScript = _Player;
         }
 
         void SetSpeed(float _Speed)
@@ -63,6 +69,11 @@ namespace Lu
         }
 
     public:
+        PlayerScript* GetPlayerScript() const
+        {
+            return m_PlayerScript;
+        }
+
         float GetTime() const
         {
             return m_Time;
@@ -81,5 +92,8 @@ namespace Lu
         virtual void OnCollisionEnter(Collider2D* _Other) override;
         virtual void OnCollisionStay(Collider2D* _Other) override {}
         virtual void OnCollisionExit(Collider2D* _Other) override {}
+    
+    public:
+        virtual int GetProjectileDamage() = 0;
     };
 }
