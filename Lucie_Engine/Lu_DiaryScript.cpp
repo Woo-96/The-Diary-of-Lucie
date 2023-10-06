@@ -6,11 +6,19 @@
 #include "Lu_Input.h"
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
+#include "Lu_Renderer.h"
+#include "Lu_Camera.h"
+#include "Lu_CameraScript.h"
+#include "Lu_Time.h"
+#include "Lu_Object.h"
+#include "Lu_MeshRenderer.h"
 
 namespace Lu
 {
 	DiaryScript::DiaryScript()
 		: m_Animator(nullptr)
+		, m_DramaFX(nullptr)
+		, m_bCameraMove(false)
 	{
 		SetName(L"DiaryScript");
 	}
@@ -28,6 +36,16 @@ namespace Lu
 		m_Animator->PlayAnimation(L"Diary_Idle", true);
 	}
 
+	void DiaryScript::Update()
+	{
+		if (m_bCameraMove)
+		{
+			float fScale = renderer::mainCamera->GetScale();
+			fScale += (float)Time::DeltaTime() / 2.f;
+			renderer::mainCamera->SetScale(fScale);
+		}
+	}
+
 	void DiaryScript::OnCollisionStay(Collider2D* _Other)
 	{
 		if (Input::GetKeyDown(eKeyCode::F))
@@ -36,6 +54,8 @@ namespace Lu
 			if ((int)eLayerType::Player == iLayer)
 			{
 				m_Animator->PlayAnimation(L"Diary_Active", true);
+				m_bCameraMove = true;
+				renderer::mainCamera->GetOwner()->GetComponent<CameraScript>()->SetTarget(GetOwner());
 			}
 		}
 	}
@@ -60,11 +80,15 @@ namespace Lu
 		pPlayer->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, 500.f));
 		PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
 		pPlayerScript->MagicPortalMove();
-		
 
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"floorStart", L"..\\Resources\\Sound\\SFX\\floorStart.ogg"));
 		pSFX->Play();
+
+		m_bCameraMove = false;
+
+		object::Destroy(m_DramaFX);
+		m_DramaFX = nullptr;
 	}
 
 	void DiaryScript::DiarySFX()
@@ -72,5 +96,12 @@ namespace Lu
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"DiarySFX", L"..\\Resources\\Sound\\SFX\\DiarySFX.ogg"));
 		pSFX->Play();
+
+		m_DramaFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+		m_DramaFX->SetName(L"DramaFX");
+
+		MeshRenderer* pMeshRender = m_DramaFX->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"Drama_Mtrl"));
 	}
 }

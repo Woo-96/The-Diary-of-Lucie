@@ -10,8 +10,11 @@ namespace Lu
 		virtual ~MidBossScene();
 
 	private:
+		GameObject* m_Boss;
+		GameObject*	m_DramaFX;
 		GameObject* m_ChestFX;
 		bool		m_bBossAlive;
+		bool		m_bCameraMove;
 		float		m_Time;
 	
 	public:

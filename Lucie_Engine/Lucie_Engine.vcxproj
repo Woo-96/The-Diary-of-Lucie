@@ -180,6 +180,7 @@
     <ClInclude Include="Lu_ChannelingBarScript.h" />
     <ClInclude Include="Lu_ChestScript.h" />
     <ClInclude Include="Lu_DamageFontScript.h" />
+    <ClInclude Include="Lu_EndingScene.h" />
     <ClInclude Include="Lu_EquipLabelScript.h" />
     <ClInclude Include="Lu_FireStrikeScript.h" />
     <ClInclude Include="Lu_FontScript.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="Lu_ChannelingBarScript.cpp" />
     <ClCompile Include="Lu_ChestScript.cpp" />
     <ClCompile Include="Lu_DamageFontScript.cpp" />
+    <ClCompile Include="Lu_EndingScene.cpp" />
     <ClCompile Include="Lu_EquipLabelScript.cpp" />
     <ClCompile Include="Lu_FireStrikeScript.cpp" />
     <ClCompile Include="Lu_FontScript.cpp" />

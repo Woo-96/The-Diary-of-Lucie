@@ -15,11 +15,16 @@
 #include "Lu_ChestScript.h"
 #include "Lu_ImmovableScript.h"
 
+#include "Lu_Input.h"
+
 namespace Lu
 {
 	MidBossScene::MidBossScene()
-		: m_ChestFX(nullptr)
+		: m_Boss(nullptr)
+		, m_DramaFX(nullptr)
+		, m_ChestFX(nullptr)
 		, m_bBossAlive(true)
+		, m_bCameraMove(false)
 		, m_Time(0.f)
 	{
 		SetName(L"MidBossSceneScript");
@@ -54,20 +59,19 @@ namespace Lu
 
 
 			// Boss
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 200.f, 500.f), Vector3(720.f, 720.f, 100.f), eLayerType::Monster);
-			pObject->SetName(L"KingSlime");
+			m_Boss = object::Instantiate<GameObject>(Vector3(0.f, 200.f, 500.f), Vector3(720.f, 720.f, 100.f), eLayerType::Monster);
+			m_Boss->SetName(L"KingSlime");
 
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			MeshRenderer* pMeshRender = m_Boss->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"SlimeAnimation_Mtrl"));
 
-			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
+			Collider2D* pCollider = m_Boss->AddComponent<Collider2D>();
 			pCollider->SetCenter(Vector2(0.f, -200.f));
 			pCollider->SetSize(Vector2(0.5f, 0.4f));
 
-			Animator* pAnimator = pObject->AddComponent<Animator>();
-			KingSlimeScript* pKingSlimeScript = pObject->AddComponent<KingSlimeScript>();
+			Animator* pAnimator = m_Boss->AddComponent<Animator>();
+			KingSlimeScript* pKingSlimeScript = m_Boss->AddComponent<KingSlimeScript>();
 			pKingSlimeScript->SetTarget(pPlayerScript);
 		}
 
@@ -89,6 +93,31 @@ namespace Lu
 	{
 		StageScene::Update();
 
+		if (m_bCameraMove)
+		{
+			m_Time += (float)Time::DeltaTime();
+			if (m_Time >= 3.f)
+			{
+				m_bCameraMove = false;
+				GameObject* pPlayer = SceneManager::FindPlayer();
+				CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+				pMainCam->SetTarget(pPlayer);
+				pMainCam->SetOffset(Vector2(0.f, 0.f));
+				renderer::mainCamera->SetScale(1.f);
+
+				object::Destroy(m_DramaFX);
+				m_DramaFX = nullptr;
+
+				m_Time = 0.f;
+			}
+			else
+			{
+				float fScale = renderer::mainCamera->GetScale();
+				fScale += (float)Time::DeltaTime() / 10.f;
+				renderer::mainCamera->SetScale(fScale);
+			}
+		}
+
 		if (m_bBossAlive)
 		{
 			if (!IsInBattle())
@@ -102,6 +131,13 @@ namespace Lu
 				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 				pSFX->SetClip(Resources::Load<AudioClip>(L"BossDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\BossDeadSFX.ogg"));
 				pSFX->Play();
+			}
+		}
+		else
+		{
+			if (Input::GetKeyUp(eKeyCode::ENTER))
+			{
+				SceneManager::LoadScene(L"EndingScene");
 			}
 		}
 	}
@@ -127,6 +163,12 @@ namespace Lu
 
 		if (IsInBattle())
 		{
+			// 카메라 설정
+			m_bCameraMove = true;
+			CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+			pMainCam->SetTarget(m_Boss);
+			pMainCam->SetOffset(Vector2(0.f, -200.f));
+
 			AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 			pBGM->Stop();
 
@@ -136,18 +178,24 @@ namespace Lu
 			pBGM->SetVolume(0.3f);
 
 			// 보스 이름 UI : 원본 크기 1.5배
-			{
-				GameObject* pBossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
-				pBossName->SetName(L"MidBoss_Name");
+			GameObject* pBossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			pBossName->SetName(L"MidBoss_Name");
 
-				MeshRenderer* pMeshRender = pBossName->AddComponent<MeshRenderer>();
-				pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
+			MeshRenderer* pMeshRender = pBossName->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"MidBossName_Mtrl"));
 
-				LabelScript* pLabel = pBossName->AddComponent<LabelScript>();
-				pLabel->SetMeshRender(pMeshRender);
-				pLabel->SetDuration(3.f);
-			}
+			LabelScript* pLabel = pBossName->AddComponent<LabelScript>();
+			pLabel->SetMeshRender(pMeshRender);
+			pLabel->SetDuration(3.f);
+
+			// 드라마 FX
+			m_DramaFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			m_DramaFX->SetName(L"DramaFX");
+
+			pMeshRender = m_DramaFX->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"Drama_Mtrl"));
 		}
 	}
 

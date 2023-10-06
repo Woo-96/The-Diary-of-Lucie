@@ -189,6 +189,11 @@ namespace Lu
 	{
 		Scene::OnExit();
 
+		// 카메라 원상 복구
+		GameObject* pPlayer = SceneManager::FindPlayer();
+		renderer::mainCamera->GetOwner()->GetComponent<CameraScript>()->SetTarget(pPlayer);
+		renderer::mainCamera->SetScale(1.f);
+
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
 		pBGM->Stop();
 

@@ -15,6 +15,7 @@ namespace Lu
 		Vector2         m_WindowResolution;
 		Vector2         m_WorldResolution;
 		float			m_Speed;
+		Vector2			m_Offset;
 
 	public:
 		void SetWindowResolution(Vector2 _WindowResolution)
@@ -28,6 +29,11 @@ namespace Lu
 		}
 
 		void SetTarget(GameObject* _Target);
+
+		void SetOffset(Vector2 _Offset)
+		{
+			m_Offset = _Offset;
+		}
 
 	public:
 		virtual void Initialize() override;

@@ -272,6 +272,9 @@
     <ClCompile Include="Lu_DamageFontScript.cpp">
       <Filter>Contents\Script\05. UI\DamageFont</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_EndingScene.cpp">
+      <Filter>Contents\Scene\Ending</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -550,6 +553,9 @@
     </ClInclude>
     <ClInclude Include="Lu_DamageFontScript.h">
       <Filter>Contents\Script\05. UI\DamageFont</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_EndingScene.h">
+      <Filter>Contents\Scene\Ending</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -867,6 +873,9 @@
     </Filter>
     <Filter Include="Contents\Script\05. UI\DamageFont">
       <UniqueIdentifier>{dd0c5d18-9a2b-4f29-a125-b12c43ac2b08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\Ending">
+      <UniqueIdentifier>{1c21fcea-dab5-4c8d-bd9a-a436e9077e86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

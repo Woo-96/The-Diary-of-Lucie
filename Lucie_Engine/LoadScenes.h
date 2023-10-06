@@ -11,6 +11,7 @@
 #include "Lu_NextFloorScene.h"
 #include "Lu_BossWayScene.h"
 #include "Lu_BossScene.h"
+#include "Lu_EndingScene.h"
 
 #include "Lu_GameOverScene.h"
 
@@ -36,8 +37,8 @@ namespace Lu
 		//SceneManager::CreateScene<NextFloorScene>(L"NextFloorScene");
 		//SceneManager::CreateScene<BossWayScene>(L"BossWayScene");
 		//SceneManager::CreateScene<BossScene>(L"BossScene");
-
 		SceneManager::CreateScene<GameOverScene>(L"GameOverScene");
+		SceneManager::CreateScene<EndingScene>(L"EndingScene");
 
 		SceneManager::LoadScene(L"TitleScene");
 	}

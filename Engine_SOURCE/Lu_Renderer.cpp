@@ -593,13 +593,21 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Ione_Mtrl", pMaterial);
 
-		// Title Tex
+		// Title BG
 		pTexture = Resources::Load<Texture>(L"Title_Tex", L"..\\Resources\\Texture\\Map\\Title\\Title.png");
 		pMaterial = std::make_shared<Material>();
 		pMaterial->SetShader(pShader);
 		pMaterial->SetTexture(pTexture);
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Title_Mtrl", pMaterial);
+
+		// Ending BG
+		pTexture = Resources::Load<Texture>(L"Ending_Tex", L"..\\Resources\\Texture\\Map\\Ending\\Ending.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Ending_Mtrl", pMaterial);
 
 		// LobbyScene BG
 		pTexture = Resources::Load<Texture>(L"Room_Tex", L"..\\Resources\\Texture\\Map\\Lobby\\Room.png");
@@ -985,6 +993,13 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"DamageFont_Mtrl", pMaterial);
 		
+		// BG - CameraFX ¿ë
+		pTexture = Resources::Load<Texture>(L"Drama_Tex", L"..\\Resources\\Texture\\Map\\Drama.png");
+		pMaterial = std::make_shared<Material>();
+		pMaterial->SetShader(pShader);
+		pMaterial->SetTexture(pTexture);
+		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Drama_Mtrl", pMaterial);
 
 #pragma endregion
 #pragma region Number Shader

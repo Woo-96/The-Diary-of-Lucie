@@ -11,10 +11,13 @@ namespace Lu
 		virtual ~DiaryScript();
 
 	private:
-		Animator* m_Animator;
+		Animator*	m_Animator;
+		GameObject* m_DramaFX;
+		bool		m_bCameraMove;
 
 	public:
 		virtual void Initialize() override;
+		virtual void Update() override;
 
 	public:
 		virtual void OnCollisionStay(Collider2D* _Other);

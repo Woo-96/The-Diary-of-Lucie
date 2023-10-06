@@ -15,6 +15,7 @@ namespace Lu
 		, m_WindowResolution(Vector2::Zero)
 		, m_WorldResolution(Vector2::Zero)
 		, m_Target(nullptr)
+		, m_Offset(Vector2::Zero)
 	{
 		SetName(L"CameraScript");
 	}
@@ -33,10 +34,12 @@ namespace Lu
 		if (m_Target != nullptr)
 		{
 			Transform* pCameraTransform = GetOwner()->GetComponent<Transform>();
-			Vector3 vPlayerPos = m_Target->GetComponent<Transform>()->GetPosition();
+			Vector3 vTargetPos = m_Target->GetComponent<Transform>()->GetPosition();
+			vTargetPos.x += m_Offset.x;
+			vTargetPos.y += m_Offset.y;
 
 			// 카메라 위치 설정
-			pCameraTransform->SetPosition(vPlayerPos);
+			pCameraTransform->SetPosition(vTargetPos);
 		}
 	}
 
@@ -90,9 +93,11 @@ namespace Lu
 
 		else
 		{
-			Vector3 vPlayerPos = m_Target->GetComponent<Transform>()->GetPosition();
+			Vector3 vTargetPos = m_Target->GetComponent<Transform>()->GetPosition();
+			vTargetPos.x += m_Offset.x;
+			vTargetPos.y += m_Offset.y;
 			Vector3 vPos = GetOwner()->GetComponent<Transform>()->GetPosition();
-			Vector3 vMoveDist = vPlayerPos - vPos;
+			Vector3 vMoveDist = vTargetPos - vPos;
 			if (abs(vMoveDist.x) <= 30.f && abs(vMoveDist.y) <= 30.f)
 			{
 				vMoveDist.x = 0.f;
