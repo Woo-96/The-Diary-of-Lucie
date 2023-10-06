@@ -468,6 +468,39 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SlimeJumpAnimation_Mtrl", material);
 
+		// Monster - Ent
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"EntAnimation_Mtrl", material);
+
+		// Monster - Ent Attack
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Ent_Attack_1_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Ent_Attack_2_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Ent_Attack_3_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Ent_Attack_4_Mtrl", material);
+
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"Ent_Attack_5_Mtrl", material);
+
+
 		// Object - Diary
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
@@ -497,7 +530,12 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"StatueAnimation_Mtrl", material);
 
-		// FX - WandFullCharge
+		// FX - Wand Charge
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"WandCharge_Mtrl", material);
+
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
@@ -538,6 +576,12 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		Resources::Insert(L"ChestOpenFX2_Mtrl", material);
+
+		// FX - Player Appear
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"AppearFX_Mtrl", material);
 
 
 #pragma endregion

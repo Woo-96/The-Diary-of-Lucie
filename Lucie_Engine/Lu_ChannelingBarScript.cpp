@@ -89,18 +89,31 @@ namespace Lu
 		m_arrParts[(int)eParts::Bar]->AddComponent<ProgressBarScript>()->SetMeshRender(pMeshRender);
 
 
+		m_arrParts[(int)eParts::ChargeFX] = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 300.f), Vector3(192.f, 192.f, 100.f), eLayerType::FX);
+		m_arrParts[(int)eParts::ChargeFX]->SetName(L"ChargeFX");
+		m_arrParts[(int)eParts::ChargeFX]->SetActive(m_bActive);
+		SceneManager::DontDestroyOnLoad(m_arrParts[(int)eParts::ChargeFX]);
+		pMeshRender = m_arrParts[(int)eParts::ChargeFX]->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"WandCharge_Mtrl"));
+		Animator* pAnimator = m_arrParts[(int)eParts::ChargeFX]->AddComponent<Animator>();
+		pAnimator->Create(L"ChargeFX", Resources::Load<Texture>(L"WandCharge_Tex", L"..\\Resources\\Texture\\Player\\WandCharge.png")
+			, Vector2(0.f, 0.f), Vector2(192.f, 192.f), 10, Vector2(192.f, 192.f), Vector2::Zero, 0.1f);
+		pAnimator->PlayAnimation(L"ChargeFX", true);
+
+
 		m_arrParts[(int)eParts::FullChargeFX] = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 300.f), Vector3(192.f, 192.f, 100.f), eLayerType::FX);
 		m_arrParts[(int)eParts::FullChargeFX]->SetName(L"FullChargeFX");
 		m_arrParts[(int)eParts::FullChargeFX]->SetActive(m_bActive);
 		SceneManager::DontDestroyOnLoad(m_arrParts[(int)eParts::FullChargeFX]);
-		MeshRenderer* pMeshRender2 = m_arrParts[(int)eParts::FullChargeFX]->AddComponent<MeshRenderer>();
-		pMeshRender2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender2->SetMaterial(Resources::Find<Material>(L"WandFullCharge_Mtrl"));
-		Animator* pAnimator2 = m_arrParts[(int)eParts::FullChargeFX]->AddComponent<Animator>();
-		pAnimator2->Create(L"FullChargeFX", Resources::Load<Texture>(L"WandFullCharge_Tex", L"..\\Resources\\Texture\\Player\\WandFullCharge.png")
+		pMeshRender = m_arrParts[(int)eParts::FullChargeFX]->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"WandFullCharge_Mtrl"));
+		pAnimator = m_arrParts[(int)eParts::FullChargeFX]->AddComponent<Animator>();
+		pAnimator->Create(L"FullChargeFX", Resources::Load<Texture>(L"WandFullCharge_Tex", L"..\\Resources\\Texture\\Player\\WandFullCharge.png")
 			, Vector2(0.f, 0.f), Vector2(160.f, 192.f), 6, Vector2(160.f, 192.f), Vector2::Zero, 0.1f);
-		pAnimator2->CompleteEvent(L"FullChargeFX") = std::bind(&ChannelingBarScript::CompleteFX, this);
-		pAnimator2->PlayAnimation(L"FullChargeFX", true);
+		pAnimator->CompleteEvent(L"FullChargeFX") = std::bind(&ChannelingBarScript::CompleteFX, this);
+		pAnimator->PlayAnimation(L"FullChargeFX", true);
 	}
 
 	void ChannelingBarScript::Update()
@@ -146,6 +159,10 @@ namespace Lu
 							else if (i == (int)eParts::Bar)
 							{
 								vPos.y += 65.f;
+							}
+							else if (i == (int)eParts::ChargeFX)
+							{
+								vPos.y -= 35.f;
 							}
 
 							m_arrParts[i]->GetComponent<Transform>()->SetPosition(vPos);

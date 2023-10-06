@@ -11,6 +11,7 @@ namespace Lu
 		{
 			BarFram,
 			Bar,
+			ChargeFX,
 			FullChargeFX,
 			End,
 		};
