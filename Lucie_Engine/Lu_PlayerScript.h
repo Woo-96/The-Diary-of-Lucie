@@ -107,6 +107,7 @@ namespace Lu
 		float					m_SkillProjectileCoolTime;	// 투사체가 매 프레임 나가는 것을 방지
 
 		bool					m_bWood;
+		GameObject*				m_AppearFX;
 
 		Animator*				m_Animator;
 		UIScript*				m_arrUI[(int)eUI::End];
@@ -218,6 +219,7 @@ namespace Lu
 		void AttackSFX();
 		void MagicCircleMove();
 		void LookAround();
+		void AppearFXFinished();
 		
 		void StaminaRecovery();
 		

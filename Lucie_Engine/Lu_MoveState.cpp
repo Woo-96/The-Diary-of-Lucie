@@ -79,12 +79,47 @@ namespace Lu
         }
 
         GetTransform()->SetPosition(vPos);
+
+        bool b = GetPlayerScript()->IsWoodGround();
+        if (m_bWood != b)
+        {
+            m_bWood = b;
+            if (m_SFX)
+                m_SFX->Stop();
+
+            if (m_bWood)
+            {
+                m_SFX = Resources::Load<AudioClip>(L"WoodRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\WoodRunSFX.ogg");
+                m_SFX->Play();
+                m_SFX->SetVolume(0.3f);
+                m_SFX->SetLoop(true);
+            }
+            else
+            {
+                if (PlayerScript::eMoveType::Walk == GetPlayerScript()->GetMoveType())
+                {
+                    m_SFX = Resources::Load<AudioClip>(L"GrassWalkSFX", L"..\\Resources\\Sound\\SFX\\Player\\GrassWalkSFX.ogg");
+                    m_SFX->Play();
+                    m_SFX->SetVolume(0.5f);
+                    m_SFX->SetLoop(true);
+                }
+                else
+                {
+                    m_SFX = Resources::Load<AudioClip>(L"GrassRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\GrassRunSFX.ogg");
+                    m_SFX->Play();
+                    m_SFX->SetVolume(0.5f);
+                    m_SFX->SetLoop(true);
+                }
+            }
+        }
     }
 
 
 	void MoveState::Enter()
 	{
-        if (GetPlayerScript()->IsWoodGround())
+        m_bWood = GetPlayerScript()->IsWoodGround();
+
+        if (m_bWood)
         {
             m_SFX = Resources::Load<AudioClip>(L"WoodRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\WoodRunSFX.ogg");
             m_SFX->Play();
@@ -97,14 +132,14 @@ namespace Lu
             {
                 m_SFX = Resources::Load<AudioClip>(L"GrassWalkSFX", L"..\\Resources\\Sound\\SFX\\Player\\GrassWalkSFX.ogg");
                 m_SFX->Play();
-                m_SFX->SetVolume(0.3f);
+                m_SFX->SetVolume(0.5f);
                 m_SFX->SetLoop(true);
             }
             else
             {
                 m_SFX = Resources::Load<AudioClip>(L"GrassRunSFX", L"..\\Resources\\Sound\\SFX\\Player\\GrassRunSFX.ogg");
                 m_SFX->Play();
-                m_SFX->SetVolume(0.3f);
+                m_SFX->SetVolume(0.5f);
                 m_SFX->SetLoop(true);
             }
         }

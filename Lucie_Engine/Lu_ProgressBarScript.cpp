@@ -63,6 +63,10 @@ namespace Lu
 
 
 			std::wstring bossName = m_BossName;
+
+			if (m_BossName == L"이그드라실")
+				vFontPos.x -= 10.f;
+
 			wchar_t Font[256];
 			wcscpy_s(Font, bossName.c_str());
 			FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));

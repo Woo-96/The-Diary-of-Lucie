@@ -9,6 +9,9 @@ namespace Lu
 		BossScene();
 		virtual ~BossScene();
 
+	private:
+		GameObject* m_Boss;
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;

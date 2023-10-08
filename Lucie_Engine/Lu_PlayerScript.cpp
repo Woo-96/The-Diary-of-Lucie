@@ -55,6 +55,7 @@ namespace Lu
 		, m_bFirst(false)
 		, m_SkillProjectileCoolTime(0.f)
 		, m_bWood(false)
+		, m_AppearFX(nullptr)
 		, m_Animator(nullptr)
 		, m_arrUI{}
 	{
@@ -189,6 +190,7 @@ namespace Lu
 		m_PrevState = m_CurState->GetStateType();
 
 		m_bCantHit = false;
+		m_bWood = false;
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* _Other)
@@ -1349,6 +1351,15 @@ namespace Lu
 		m_bDontAnimChange = false;
 	}
 
+	void PlayerScript::AppearFXFinished()
+	{
+		if (m_AppearFX)
+		{
+			object::Destroy(m_AppearFX);
+			m_AppearFX = nullptr;
+		}
+	}
+
 	void PlayerScript::StaminaRecovery()
 	{
 		StateScript::eState eCurState = m_CurState->GetStateType();
@@ -1628,6 +1639,19 @@ namespace Lu
 		m_bAction = true;
 		m_Dir = eDir::Down;
 		m_Animator->PlayAnimation(L"Player_MagicCircleMove", true);
+
+		m_AppearFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 400.f), Vector3(120.f, 120.f, 100.f), eLayerType::FX);
+		m_AppearFX->SetName(L"AppearFX");
+
+		MeshRenderer* pMeshRender = m_AppearFX->AddComponent<MeshRenderer>();
+		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		pMeshRender->SetMaterial(Resources::Find<Material>(L"AppearFX_Mtrl"));
+
+		Animator* pAnimator = m_AppearFX->AddComponent<Animator>();
+		pAnimator->Create(L"AppearFX", Resources::Load<Texture>(L"AppearFX_Tex", L"..\\Resources\\Texture\\Player\\AppearFX.png")
+			, Vector2::Zero, Vector2(192.f, 192.f), 15, Vector2(192.f, 192.f));
+		pAnimator->CompleteEvent(L"AppearFX") = std::bind(&PlayerScript::AppearFXFinished, this);
+		pAnimator->PlayAnimation(L"AppearFX", true);
 	}
 
 	void PlayerScript::IdleStateEvent()

@@ -181,6 +181,9 @@
     <ClInclude Include="Lu_ChestScript.h" />
     <ClInclude Include="Lu_DamageFontScript.h" />
     <ClInclude Include="Lu_EndingScene.h" />
+    <ClInclude Include="Lu_EntIdleState.h" />
+    <ClInclude Include="Lu_EntScript.h" />
+    <ClInclude Include="Lu_EntStateScript.h" />
     <ClInclude Include="Lu_EquipLabelScript.h" />
     <ClInclude Include="Lu_FireStrikeScript.h" />
     <ClInclude Include="Lu_FontScript.h" />
@@ -190,6 +193,7 @@
     <ClInclude Include="Lu_ItemScript.h" />
     <ClInclude Include="Lu_JellyScript.h" />
     <ClInclude Include="Lu_LayoutScript.h" />
+    <ClInclude Include="Lu_MagicCircleScript.h" />
     <ClInclude Include="Lu_ProgressBarScript.h" />
     <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
@@ -276,6 +280,9 @@
     <ClCompile Include="Lu_ChestScript.cpp" />
     <ClCompile Include="Lu_DamageFontScript.cpp" />
     <ClCompile Include="Lu_EndingScene.cpp" />
+    <ClCompile Include="Lu_EntIdleState.cpp" />
+    <ClCompile Include="Lu_EntScript.cpp" />
+    <ClCompile Include="Lu_EntStateScript.cpp" />
     <ClCompile Include="Lu_EquipLabelScript.cpp" />
     <ClCompile Include="Lu_FireStrikeScript.cpp" />
     <ClCompile Include="Lu_FontScript.cpp" />
@@ -285,6 +292,7 @@
     <ClCompile Include="Lu_ItemScript.cpp" />
     <ClCompile Include="Lu_JellyScript.cpp" />
     <ClCompile Include="Lu_LayoutScript.cpp" />
+    <ClCompile Include="Lu_MagicCircleScript.cpp" />
     <ClCompile Include="Lu_ProgressBarScript.cpp" />
     <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />

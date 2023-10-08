@@ -69,7 +69,7 @@ namespace Lu
 			}
 			else if (L"MidBossScene" == m_NextSceneName)
 			{
-				m_SpawnPos = Vector2(800.f, -100.f);
+				m_SpawnPos = Vector2(-750.f, -100.f);
 			}
 			//else if (L"StoreScene" == m_NextSceneName)
 			//{
@@ -91,16 +91,32 @@ namespace Lu
 		{
 			if (L"Nomal2Scene" == m_NextSceneName)
 			{
-				m_SpawnPos = Vector2(-700.f, -30.f);
+				m_SpawnPos = Vector2(700.f, -30.f);
 			}
 			//if (L"StoreScene" == m_NextSceneName)
 			//{
 			//	m_SpawnPos = Vector2(0.f, -600.f);
 			//}
-			//else if (L"NextFloorScene" == m_NextSceneName)
-			//{
-			//	m_SpawnPos = Vector2(0.f, 600.f);
-			//}
+			else if (L"NextFloorScene" == m_NextSceneName)
+			{
+				m_SpawnPos = Vector2(0.f, 450.f);
+			}
+		}
+
+		else if (L"NextFloorScene" == m_CurSceneName)
+		{
+			if (L"MidBossScene" == m_NextSceneName)
+			{
+				m_SpawnPos = Vector2(0.f, -750.f);
+			}
+		}
+
+		else if (L"BossWayScene" == m_CurSceneName)
+		{
+			if (L"BossScene" == m_NextSceneName)
+			{
+				m_SpawnPos = Vector2(-45.f, -800.f);
+			}
 		}
 	}
 

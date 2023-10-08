@@ -82,19 +82,13 @@ namespace Lu
 		{
 			GameObject* pObj = object::Instantiate<GameObject>(Vector3(20.f, 50.f, 500.f), Vector3(80.f, 180.f, 100.f), eLayerType::Immovable);
 			pObj->SetName(L"RootOfTree_Big");
-
-			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
-
+			pObj->AddComponent<Collider2D>();
 			pObj->AddComponent<ImmovableScript>();
 		}
 		{
 			GameObject* pObj = object::Instantiate<GameObject>(Vector3(75.f, -30.f, 500.f), Vector3(80.f, 80.f, 100.f), eLayerType::Immovable);
 			pObj->SetName(L"RootOfTree_Small");
-
-			Collider2D* pCollider = pObj->AddComponent<Collider2D>();
-			pCollider->SetType(eColliderType::Rect);
-
+			pObj->AddComponent<Collider2D>();
 			pObj->AddComponent<ImmovableScript>();
 		}
 

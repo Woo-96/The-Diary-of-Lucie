@@ -13,21 +13,12 @@ namespace Lu
 	{
 	}
 
-	void WoodScript::OnCollisionEnter(Collider2D* _Other)
+	void WoodScript::OnCollisionStay(Collider2D* _Other)
 	{
 		if ((int)eLayerType::Player == _Other->GetOwner()->GetLayerIndex())
 		{
 			if (m_Player)
 				m_Player->SetWood(true);
-		}
-	}
-
-	void WoodScript::OnCollisionExit(Collider2D* _Other)
-	{
-		if ((int)eLayerType::Player == _Other->GetOwner()->GetLayerIndex())
-		{
-			if (m_Player)
-				m_Player->SetWood(false);
 		}
 	}
 }

@@ -583,6 +583,12 @@ namespace renderer
 		material->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"AppearFX_Mtrl", material);
 
+		// Object - Portal
+		material = std::make_shared<Material>();
+		material->SetShader(animationShader);
+		material->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"PortalAnimation_Mtrl", material);
+
 
 #pragma endregion
 #pragma region Particle Shader

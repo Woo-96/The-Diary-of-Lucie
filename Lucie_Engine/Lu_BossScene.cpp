@@ -4,10 +4,15 @@
 #include "Lu_Resources.h"
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
+#include "Lu_CameraScript.h"
+#include "Lu_Renderer.h"
+#include "Lu_Input.h"
+#include "Lu_EntScript.h"
 
 namespace Lu
 {
 	BossScene::BossScene()
+		: m_Boss(nullptr)
 	{
 		SetName(L"BossSceneScript");
 	}
@@ -30,38 +35,40 @@ namespace Lu
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossBG_Mtrl"));
 		}
 
-		// UI : 크기 원본 1.5배
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(759.f, 48.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"Boss_HP_Frame");
+			// 카메라 설정
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			CameraScript* pMainCamScript = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+			pMainCamScript->SetWorldResolution(Vector2(2688.f, 2400.f));
+			pMainCamScript->SetTarget(pPlayer);
 
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
+			// Boss
+			m_Boss = object::Instantiate<GameObject>(Vector3(-50.f, 600.f, 500.f), Vector3(483.f, 525.f, 100.f), eLayerType::Monster);
+			m_Boss->SetName(L"Ent");
+
+			MeshRenderer* pMeshRender = m_Boss->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossHPFrame_Mtrl"));
-		}
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"EntAnimation_Mtrl"));
 
-		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(720.f, 30.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"Boss_HP");
+			Collider2D* pCollider = m_Boss->AddComponent<Collider2D>();
+			pCollider->SetCenter(Vector2(0.f, -200.f));
+			pCollider->SetSize(Vector2(0.5f, 0.4f));
 
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"Ent_BossHP_Mtrl"));
-		}
+			m_Boss->AddComponent<Animator>();
 
-		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
-			pObject->SetName(L"Boss_Name");
-
-			MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
-			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRender->SetMaterial(Resources::Find<Material>(L"BossName_Mtrl"));
+			EntScript* pEntScript = m_Boss->AddComponent<EntScript>();
+			pEntScript->SetTarget(pPlayer->GetComponent<PlayerScript>());
 		}
 	}
 
 	void BossScene::Update()
 	{
 		StageScene::Update();
+
+		if (Input::GetKeyUp(eKeyCode::ENTER))
+		{
+			SceneManager::LoadScene(L"EndingScene");
+		}	
 	}
 
 	void BossScene::LateUpdate()

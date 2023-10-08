@@ -15,8 +15,6 @@
 #include "Lu_ChestScript.h"
 #include "Lu_ImmovableScript.h"
 
-#include "Lu_Input.h"
-
 namespace Lu
 {
 	MidBossScene::MidBossScene()
@@ -76,7 +74,7 @@ namespace Lu
 		}
 
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(870.f, -110.f, 500.f), Vector3(20.f, 180.f, 100.f), eLayerType::Portal);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(-870.f, -95.f, 500.f), Vector3(20.f, 180.f, 100.f), eLayerType::Portal);
 			pObject->SetName(L"Portal");
 
 			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
@@ -85,6 +83,19 @@ namespace Lu
 			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
 			pPortal->SetCurSceneName(L"MidBossScene");
 			pPortal->SetNextSceneName(L"Nomal2Scene");
+			pPortal->Initialize();
+		}
+
+		{
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -820.f, 500.f), Vector3(240.f, 20.f, 100.f), eLayerType::Portal);
+			pObject->SetName(L"Portal2");
+
+			Collider2D* pCollider = pObject->AddComponent<Collider2D>();
+			pCollider->SetType(eColliderType::Rect);
+
+			PortalScript* pPortal = pObject->AddComponent<PortalScript>();
+			pPortal->SetCurSceneName(L"MidBossScene");
+			pPortal->SetNextSceneName(L"NextFloorScene");
 			pPortal->Initialize();
 		}
 	}
@@ -131,13 +142,6 @@ namespace Lu
 				AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 				pSFX->SetClip(Resources::Load<AudioClip>(L"BossDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\BossDeadSFX.ogg"));
 				pSFX->Play();
-			}
-		}
-		else
-		{
-			if (Input::GetKeyUp(eKeyCode::ENTER))
-			{
-				SceneManager::LoadScene(L"EndingScene");
 			}
 		}
 	}

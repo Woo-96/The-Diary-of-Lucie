@@ -12,6 +12,7 @@ namespace Lu
 
 	private:
 		std::shared_ptr<AudioClip>	m_SFX;
+		bool						m_bWood;
 
 	public:
 		virtual void Initialize() override;

@@ -20,8 +20,7 @@ namespace Lu
 		}
 
 	public:
-		virtual void OnCollisionEnter(Collider2D* _Other);
-		virtual void OnCollisionExit(Collider2D* _Other);
+		virtual void OnCollisionStay(Collider2D* _Other);
 	};
 }
 
