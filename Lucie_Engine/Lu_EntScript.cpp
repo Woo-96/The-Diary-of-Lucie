@@ -3,6 +3,8 @@
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
 #include "Lu_ProgressBarScript.h"
+#include "Lu_SoundManager.h"
+#include "Lu_AudioSource.h"
 
 #include "Lu_EntIdleState.h"
 
@@ -14,6 +16,8 @@ namespace Lu
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
 		, m_CurPhase(ePhase::Phase_1)
+		, m_bWakeUp(false)
+		, m_bHowling(false)
 	{
 		SetName(L"EntScript");
 
@@ -35,6 +39,8 @@ namespace Lu
 	void EntScript::Initialize()
 	{
 		MonsterScript::Initialize();
+
+		GetAnimator()->PlayAnimation(L"Ent_Sleep", true);
 
 		// º¸½º HP
 		{
@@ -122,6 +128,12 @@ namespace Lu
 	void EntScript::CompleteAction()
 	{
 		ChangeState(EntStateScript::eState::Idle);
+
+		if(!m_bWakeUp)
+			m_bWakeUp = true;
+
+		if (m_bHowling)
+			m_bHowling = false;
 	}
 
 	void EntScript::AttackSFX()
@@ -138,8 +150,18 @@ namespace Lu
 			= Resources::Load<Texture>(L"EntSprite", L"..\\Resources\\Texture\\Monster\\Boss\\Boss_Ent.png");
 
 		// Idle
-		GetAnimator()->Create(L"Ent_Phase1_Idle", pAtlas, Vector2(0.f, 350.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Ent_Phase2_Idle", pAtlas, Vector2(0.f, 350.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Ent_Phase1_Idle", pAtlas, Vector2(0.f, 350.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Ent_Phase2_Idle", pAtlas, Vector2(0.f, 350.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+
+		// Sleep
+		GetAnimator()->Create(L"Ent_Sleep", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
+
+		// WakeUp
+		GetAnimator()->Create(L"Ent_WakeUp_1", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Ent_WakeUp_1") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_WakeUp_2", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Ent_WakeUp_2") = std::bind(&EntScript::CompleteAction, this);
+
 
 		// Attack
 		GetAnimator()->Create(L"Ent_Phase1_Attack_Left", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 1.f);
@@ -170,8 +192,7 @@ namespace Lu
 		EntStateScript::eState eCurState = m_CurState->GetStateType();
 		eAnimDir eCurDir = GetCurDir();
 
-		if (m_PrevState == eCurState
-			&& GetPrevDir() == eCurDir)
+		if (!m_bWakeUp || m_bHowling)
 			return;
 
 		switch (eCurState)
@@ -211,7 +232,7 @@ namespace Lu
 					break;
 				}
 			}
-				break;
+			break;
 			case Lu::EntScript::ePhase::Phase_2:
 			{
 				switch (eCurDir)
@@ -226,7 +247,7 @@ namespace Lu
 					break;
 				}
 			}
-				break;
+			break;
 			case Lu::EntScript::ePhase::End:
 				break;
 			default:
@@ -261,5 +282,24 @@ namespace Lu
 		m_PrevState = m_CurState->GetStateType();
 		m_CurState = pNextState;
 		m_CurState->Enter();
+	}
+
+	void EntScript::WakeUp()
+	{
+		if(!m_bWakeUp)
+			GetAnimator()->PlayAnimation(L"Ent_WakeUp_1", true);
+	}
+
+	void EntScript::Howling()
+	{
+		if (!m_bHowling)
+		{
+			m_bHowling = true;
+			GetAnimator()->PlayAnimation(L"Ent_WakeUp_2", true);
+
+			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+			pSFX->SetClip(Resources::Load<AudioClip>(L"EntHowlingSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntHowlingSFX.ogg"));
+			pSFX->Play();
+		}
 	}
 }

@@ -14,6 +14,7 @@
 #include "Lu_LabelScript.h"
 #include "Lu_ChestScript.h"
 #include "Lu_ImmovableScript.h"
+#include "Lu_PlayerScript.h"
 
 namespace Lu
 {
@@ -109,8 +110,10 @@ namespace Lu
 			m_Time += (float)Time::DeltaTime();
 			if (m_Time >= 3.f)
 			{
-				m_bCameraMove = false;
 				GameObject* pPlayer = SceneManager::FindPlayer();
+				PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+				pPlayerScript->SetAction(false);
+
 				CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 				pMainCam->SetTarget(pPlayer);
 				pMainCam->SetOffset(Vector2(0.f, 0.f));
@@ -118,7 +121,7 @@ namespace Lu
 
 				object::Destroy(m_DramaFX);
 				m_DramaFX = nullptr;
-
+				m_bCameraMove = false;
 				m_Time = 0.f;
 			}
 			else
@@ -169,6 +172,12 @@ namespace Lu
 		{
 			// 카메라 설정
 			m_bCameraMove = true;
+
+			GameObject* pPlayer = SceneManager::FindPlayer();
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+			pPlayerScript->SetAction(true);
+			pPlayerScript->ChangeState(StateScript::eState::Idle);
+
 			CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 			pMainCam->SetTarget(m_Boss);
 			pMainCam->SetOffset(Vector2(0.f, -200.f));
@@ -182,7 +191,7 @@ namespace Lu
 			pBGM->SetVolume(0.3f);
 
 			// 보스 이름 UI : 원본 크기 1.5배
-			GameObject* pBossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 0.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			GameObject* pBossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 50.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
 			pBossName->SetName(L"MidBoss_Name");
 
 			MeshRenderer* pMeshRender = pBossName->AddComponent<MeshRenderer>();
@@ -194,12 +203,17 @@ namespace Lu
 			pLabel->SetDuration(3.f);
 
 			// 드라마 FX
-			m_DramaFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 10.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+			m_DramaFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 100.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
 			m_DramaFX->SetName(L"DramaFX");
 
 			pMeshRender = m_DramaFX->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Drama_Mtrl"));
+
+			// 드라마 재질은 트랜스퍼런트인데 UI가 안가려지는 이상한 버그가 있어서 재질 2개로 생성
+			pMeshRender = m_DramaFX->AddComponent<MeshRenderer>();
+			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			pMeshRender->SetMaterial(Resources::Find<Material>(L"SkillBG_Mtrl"));
 		}
 	}
 

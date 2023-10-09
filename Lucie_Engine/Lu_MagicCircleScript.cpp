@@ -36,6 +36,8 @@ namespace Lu
 
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			pPlayer->GetComponent<Transform>()->SetPosition(Vector3(0.f, -750.f, 500.f));
+			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+			pPlayerScript->MagicPortalMove();
 
 			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 			pSFX->SetClip(Resources::Load<AudioClip>(L"floorStart", L"..\\Resources\\Sound\\SFX\\floorStart.ogg"));

@@ -255,7 +255,7 @@
       <Filter>Contents\Script\05. UI\Font</Filter>
     </ClCompile>
     <ClCompile Include="Lu_WoodScript.cpp">
-      <Filter>Contents\Script\04. Object\Wood</Filter>
+      <Filter>Contents\Script\04. Object\Ground\Wood</Filter>
     </ClCompile>
     <ClCompile Include="Lu_FireStrikeScript.cpp">
       <Filter>Contents\Script\02. Player\Projectile\Skill\FireStrike</Filter>
@@ -286,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="Lu_EntIdleState.cpp">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_TriggerScript.cpp">
+      <Filter>Contents\Script\04. Object\Ground\BossTrigger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -549,7 +552,7 @@
       <Filter>Contents\Script\05. UI\Font</Filter>
     </ClInclude>
     <ClInclude Include="Lu_WoodScript.h">
-      <Filter>Contents\Script\04. Object\Wood</Filter>
+      <Filter>Contents\Script\04. Object\Ground\Wood</Filter>
     </ClInclude>
     <ClInclude Include="Lu_FireStrikeScript.h">
       <Filter>Contents\Script\02. Player\Projectile\Skill\FireStrike</Filter>
@@ -580,6 +583,9 @@
     </ClInclude>
     <ClInclude Include="Lu_EntIdleState.h">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TriggerScript.h">
+      <Filter>Contents\Script\04. Object\Ground\BossTrigger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -883,9 +889,6 @@
     <Filter Include="Contents\Script\05. UI\Font">
       <UniqueIdentifier>{af94a90a-0747-4336-85b0-26dda0c65960}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\04. Object\Wood">
-      <UniqueIdentifier>{a02ab23a-7b29-452d-91ac-bc23f541b9b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\02. Player\Projectile\Skill\FireStrike">
       <UniqueIdentifier>{5e113fad-ca15-4d16-8e97-9173291ae674}</UniqueIdentifier>
     </Filter>
@@ -912,6 +915,15 @@
     </Filter>
     <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack">
       <UniqueIdentifier>{4b25bf55-4119-4b0b-8778-5ed1361ffe32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Ground">
+      <UniqueIdentifier>{06d3fb89-a023-41ef-87f2-98ac5deba975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Ground\Wood">
+      <UniqueIdentifier>{a02ab23a-7b29-452d-91ac-bc23f541b9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\04. Object\Ground\BossTrigger">
+      <UniqueIdentifier>{78088c99-4fdc-48be-944b-8043250b78a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -106,11 +106,15 @@ namespace Lu
 	{
 		StageScene::OnEnter();
 
+		CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+		renderer::mainCamera->SetScale(1.2f);
+
 		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->Stop();
+		
 		pBGM->SetClip(Resources::Find<AudioClip>(L"BossWayBGM"));
 		pBGM->Play();
 		pBGM->SetLoop(true);
-		pBGM->SetVolume(0.3f);
 
 		SceneManager::DontUseOnLoad(eLayerType::UI);
 	}

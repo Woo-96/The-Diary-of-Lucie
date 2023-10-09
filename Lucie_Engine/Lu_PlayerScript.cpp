@@ -1638,6 +1638,7 @@ namespace Lu
 		m_bDontAnimChange = true;
 		m_bAction = true;
 		m_Dir = eDir::Down;
+		ChangeState(StateScript::eState::Idle);
 		m_Animator->PlayAnimation(L"Player_MagicCircleMove", true);
 
 		m_AppearFX = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 400.f), Vector3(120.f, 120.f, 100.f), eLayerType::FX);

@@ -11,6 +11,9 @@ namespace Lu
 
 	private:
 		GameObject* m_Boss;
+		GameObject* m_DramaFX;
+		bool		m_bBossWakeUp;
+		float		m_Time;
 
 	public:
 		virtual void Initialize() override;
@@ -22,5 +25,8 @@ namespace Lu
 	public:
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
+
+	public:
+		void BossWakeUp();
 	};
 }

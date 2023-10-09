@@ -17,6 +17,8 @@ namespace Lu
 		float			m_Speed;
 		Vector2			m_Offset;
 
+		bool			m_bTargetMove;	// 카메라를 타겟에게 즉시 이동하는지 여부
+
 	public:
 		void SetWindowResolution(Vector2 _WindowResolution)
 		{
@@ -33,6 +35,16 @@ namespace Lu
 		void SetOffset(Vector2 _Offset)
 		{
 			m_Offset = _Offset;
+		}
+
+		void SetSpeed(float _Speed)
+		{
+			m_Speed = _Speed;
+		}
+
+		void SetTargetMove(bool _b)
+		{
+			m_bTargetMove = _b;
 		}
 
 	public:

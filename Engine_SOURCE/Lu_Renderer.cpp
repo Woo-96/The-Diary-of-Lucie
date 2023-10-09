@@ -1051,6 +1051,7 @@ namespace renderer
 		pMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"Drama_Mtrl", pMaterial);
 
+
 #pragma endregion
 #pragma region Number Shader
 		// LT, Slice를 정하는 Shader

@@ -31,6 +31,9 @@ namespace Lu
 
 		ePhase						m_CurPhase;
 
+		bool						m_bWakeUp;
+		bool						m_bHowling;
+
 
 	public:
 		GameObject* GetHPFrame()	const
@@ -67,6 +70,10 @@ namespace Lu
 
 	public:
 		void ChangeState(EntStateScript::eState _NextState);
+
+	public:
+		void WakeUp();
+		void Howling();
 	};
 }
 

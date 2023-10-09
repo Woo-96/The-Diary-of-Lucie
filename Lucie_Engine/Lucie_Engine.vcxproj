@@ -256,6 +256,7 @@
     <ClInclude Include="Lu_StatueScript.h" />
     <ClInclude Include="Lu_StoreScene.h" />
     <ClInclude Include="Lu_TitleScene.h" />
+    <ClInclude Include="Lu_TriggerScript.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
     <ClInclude Include="Lu_WeaponChoiceScene.h" />
@@ -355,6 +356,7 @@
     <ClCompile Include="Lu_StatueScript.cpp" />
     <ClCompile Include="Lu_StoreScene.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
+    <ClCompile Include="Lu_TriggerScript.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />
     <ClCompile Include="Lu_WeaponChoiceScene.cpp" />

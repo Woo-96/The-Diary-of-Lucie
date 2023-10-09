@@ -16,6 +16,7 @@ namespace Lu
 		, m_WorldResolution(Vector2::Zero)
 		, m_Target(nullptr)
 		, m_Offset(Vector2::Zero)
+		, m_bTargetMove(true)
 	{
 		SetName(L"CameraScript");
 	}
@@ -31,7 +32,7 @@ namespace Lu
 
 		m_Speed = 3.f;
 
-		if (m_Target != nullptr)
+		if (m_Target != nullptr && m_bTargetMove)
 		{
 			Transform* pCameraTransform = GetOwner()->GetComponent<Transform>();
 			Vector3 vTargetPos = m_Target->GetComponent<Transform>()->GetPosition();

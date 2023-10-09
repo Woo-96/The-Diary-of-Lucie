@@ -10,6 +10,8 @@
 #include "Lu_PortalScript.h"
 #include "Lu_WoodScript.h"
 
+#include "Lu_Input.h"
+
 namespace Lu
 {
 	WeaponChoiceScene::WeaponChoiceScene()
@@ -149,6 +151,12 @@ namespace Lu
 	void WeaponChoiceScene::Update()
 	{
 		StageScene::Update();
+
+		// 테스트용
+		if (Input::GetKeyDown(eKeyCode::ENTER))
+		{
+			SceneManager::LoadScene(L"NextFloorScene");
+		}
 	}
 
 	void WeaponChoiceScene::LateUpdate()
