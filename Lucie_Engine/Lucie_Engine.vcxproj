@@ -181,6 +181,7 @@
     <ClInclude Include="Lu_ChestScript.h" />
     <ClInclude Include="Lu_DamageFontScript.h" />
     <ClInclude Include="Lu_EndingScene.h" />
+    <ClInclude Include="Lu_EntDeadState.h" />
     <ClInclude Include="Lu_EntIdleState.h" />
     <ClInclude Include="Lu_EntScript.h" />
     <ClInclude Include="Lu_EntStateScript.h" />
@@ -281,6 +282,7 @@
     <ClCompile Include="Lu_ChestScript.cpp" />
     <ClCompile Include="Lu_DamageFontScript.cpp" />
     <ClCompile Include="Lu_EndingScene.cpp" />
+    <ClCompile Include="Lu_EntDeadState.cpp" />
     <ClCompile Include="Lu_EntIdleState.cpp" />
     <ClCompile Include="Lu_EntScript.cpp" />
     <ClCompile Include="Lu_EntStateScript.cpp" />

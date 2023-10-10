@@ -22,11 +22,6 @@ namespace Lu
 
 	}
 
-	void KingSlimeDeadState::Update()
-	{
-
-	}
-
 	void KingSlimeDeadState::Enter()
 	{
 		if (!(GetKingSlimeScript()->GetOwner()->DeleteComponent<Collider2D>()))

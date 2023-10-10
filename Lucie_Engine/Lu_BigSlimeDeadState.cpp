@@ -19,11 +19,6 @@ namespace Lu
 
 	}
 
-	void BigSlimeDeadState::Update()
-	{
-
-	}
-
 	void BigSlimeDeadState::Enter()
 	{
 		if (!(GetBigSlimeScript()->GetOwner()->DeleteComponent<Collider2D>()))

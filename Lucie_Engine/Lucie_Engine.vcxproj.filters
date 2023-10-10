@@ -290,6 +290,9 @@
     <ClCompile Include="Lu_TriggerScript.cpp">
       <Filter>Contents\Script\04. Object\Ground\BossTrigger</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_EntDeadState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Dead</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -586,6 +589,9 @@
     </ClInclude>
     <ClInclude Include="Lu_TriggerScript.h">
       <Filter>Contents\Script\04. Object\Ground\BossTrigger</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_EntDeadState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Dead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -924,6 +930,9 @@
     </Filter>
     <Filter Include="Contents\Script\04. Object\Ground\BossTrigger">
       <UniqueIdentifier>{78088c99-4fdc-48be-944b-8043250b78a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Dead">
+      <UniqueIdentifier>{28163ed0-8aba-4fd2-93ea-0a48ca827a03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

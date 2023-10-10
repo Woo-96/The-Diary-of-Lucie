@@ -5,8 +5,11 @@
 #include "Lu_ProgressBarScript.h"
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
+#include "Lu_Renderer.h"
+#include "Lu_CameraScript.h"
 
 #include "Lu_EntIdleState.h"
+#include "Lu_EntDeadState.h"
 
 namespace Lu
 {
@@ -72,7 +75,7 @@ namespace Lu
 		// 상태
 		AddState(new EntIdleState);
 		//AddState(new EntAttackState);
-		//AddState(new EntDeadState);
+		AddState(new EntDeadState);
 
 		m_CurState = GetStateScript(EntStateScript::eState::Idle);
 		m_CurState->Enter();
@@ -95,6 +98,12 @@ namespace Lu
 		MonsterScript::OnCollisionEnter(_Other);
 
 		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
+
+		if (m_CurPhase == ePhase::Phase_1
+			&& GetInfo().HP / GetInfo().MaxHP <= 0.25f)
+		{
+			m_CurPhase = ePhase::Phase_2;
+		}
 	}
 
 	void EntScript::OnCollisionStay(Collider2D* _Other)
@@ -102,6 +111,12 @@ namespace Lu
 		MonsterScript::OnCollisionStay(_Other);
 
 		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
+	
+		if (m_CurPhase == ePhase::Phase_1
+			&& GetInfo().HP / GetInfo().MaxHP <= 0.25f)
+		{
+			m_CurPhase = ePhase::Phase_2;
+		}
 	}
 
 	EntStateScript* EntScript::GetStateScript(EntStateScript::eState _State)
@@ -136,12 +151,28 @@ namespace Lu
 			m_bHowling = false;
 	}
 
+	void EntScript::HowlingSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"EntHowlingSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntHowlingSFX.ogg"));
+		pSFX->Play();
+
+		// 카메라 쉐이킹
+		renderer::mainCamera->GetOwner()->GetComponent<CameraScript>()->RequestCameraShaking(10.f, 1.5f);
+	}
+
 	void EntScript::AttackSFX()
 	{
 	}
 
 	void EntScript::DeadSFX()
 	{
+		AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+		pBGM->Stop();
+
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"EntDeadSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntDeadSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void EntScript::CreateAnimation()
@@ -159,7 +190,8 @@ namespace Lu
 		// WakeUp
 		GetAnimator()->Create(L"Ent_WakeUp_1", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Ent_WakeUp_1") = std::bind(&EntScript::CompleteAction, this);
-		GetAnimator()->Create(L"Ent_WakeUp_2", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Ent_WakeUp_2", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+		GetAnimator()->StartEvent(L"Ent_WakeUp_2") = std::bind(&EntScript::HowlingSFX, this);
 		GetAnimator()->CompleteEvent(L"Ent_WakeUp_2") = std::bind(&EntScript::CompleteAction, this);
 
 
@@ -296,10 +328,6 @@ namespace Lu
 		{
 			m_bHowling = true;
 			GetAnimator()->PlayAnimation(L"Ent_WakeUp_2", true);
-
-			AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
-			pSFX->SetClip(Resources::Load<AudioClip>(L"EntHowlingSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntHowlingSFX.ogg"));
-			pSFX->Play();
 		}
 	}
 }

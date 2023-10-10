@@ -11,6 +11,7 @@
 #include "Lu_TriggerScript.h"
 #include "Lu_Time.h"
 #include "Lu_PlayerScript.h"
+#include "Lu_LabelScript.h"
 
 namespace Lu
 {
@@ -18,7 +19,9 @@ namespace Lu
 		: m_Boss(nullptr)
 		, m_DramaFX(nullptr)
 		, m_bBossWakeUp(false)
+		, m_bFirst(false)
 		, m_Time(0.f)
+		, m_CameraScale(0.f)
 	{
 		SetName(L"BossSceneScript");
 	}
@@ -68,7 +71,7 @@ namespace Lu
 
 		// 보스를 깨우는 트리거
 		{
-			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -500.f, 900.f), Vector3(2000.f, 10.f, 50.f), eLayerType::Ground);
+			GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, -300.f, 900.f), Vector3(2000.f, 10.f, 50.f), eLayerType::Ground);
 			pObject->SetName(L"Boss_Trigger");
 
 			pObject->AddComponent<Collider2D>();
@@ -85,52 +88,78 @@ namespace Lu
 		{
 			m_Time += (float)Time::DeltaTime();
 
-			if (m_Time >= 2.f && m_Time < 2.3f)
+			if (m_Time >= 2.f && m_Time < 2.1f)
 			{
-				// 보스 눈 뜸
 				m_Boss->GetComponent<EntScript>()->WakeUp();
 			}
-			//else if (m_Time >= 1.0f && m_Time < 1.1f)
-			//{
-			//	// 카메라 쉐이킹
+			else if (m_Time >= 4.0f && m_Time < 4.1f)
+			{
+				if (!m_bFirst)
+				{
+					// 보스 소리 지름
+					m_Boss->GetComponent<EntScript>()->Howling();
 
+					m_bFirst = true;
+				}
+			}
+			else if (m_Time >= 5.5f)
+			{
+				if (m_bFirst)
+				{
+					// 드라마 FX 제거
+					object::Destroy(m_DramaFX);
+					m_DramaFX = nullptr;
 
-			//	// 보스 소리 지름
-			//	m_Boss->GetComponent<EntScript>()->Howling();
+					// 보스 이름 UI : 원본 크기 1.5배
+					GameObject* pBossName = object::Instantiate<GameObject>(Vector3(0.f, 0.f, 50.f), Vector3(1440.f, 810.f, 100.f), eLayerType::UI);
+					pBossName->SetName(L"Boss_Name");
 
-			//}
-			//else if (m_Time >= 2.5f)
-			//{
-			//	// 드라마 FX 제거
-			//	object::Destroy(m_DramaFX);
-			//	m_DramaFX = nullptr;
+					MeshRenderer* pMeshRender = pBossName->AddComponent<MeshRenderer>();
+					pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+					pMeshRender->SetMaterial(Resources::Find<Material>(L"BossName_Mtrl"));
 
-			//	// 플레이어 정상화
-			//	GameObject* pPlayer = SceneManager::FindPlayer();
-			//	PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
-			//	pPlayerScript->SetAction(false);
+					LabelScript* pLabel = pBossName->AddComponent<LabelScript>();
+					pLabel->SetMeshRender(pMeshRender);
+					pLabel->SetDuration(3.f);
 
-			//	// 카메라 타겟 및 타겟 이동 변경
-			//	Camera* pCamera = renderer::mainCamera;
-			//	pCamera->SetScale(1.f);
-			//	CameraScript* pMainCam = pCamera->GetOwner()->GetComponent<CameraScript>();
-			//	pMainCam->SetTarget(pPlayer);
-			//	pMainCam->SetTargetMove(true);
+					// 플레이어 정상화
+					GameObject* pPlayer = SceneManager::FindPlayer();
+					PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
+					pPlayerScript->SetAction(false);
 
-			//	// BGM 재생
-			//	AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
-			//	pBGM->SetClip(Resources::Find<AudioClip>(L"BossBGM"));
-			//	pBGM->Play();
-			//	pBGM->SetLoop(true);
-			//	pBGM->SetVolume(0.3f);
+					// 카메라 타겟 및 타겟 이동 변경
+					CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
+					pMainCam->SetTarget(pPlayer);
 
+					// BGM 재생
+					AudioSource* pBGM = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetBGM();
+					pBGM->SetClip(Resources::Find<AudioClip>(L"BossBGM"));
+					pBGM->Play();
+					pBGM->SetLoop(true);
+					pBGM->SetVolume(0.3f);
 
-			//	// 보스 이름 라벨은?
-			//	// 카메라 점점 멀어져야지..
+					m_CameraScale = 1.2f;
+					m_bFirst = false;
+				}
 
-			//	m_Time = 0.f;
-			//	m_bBossWakeUp = false;
-			//}
+				// 카메라 배율 원상 복구
+				m_CameraScale -= (float)Time::DeltaTime();
+				if (m_CameraScale <= 1.f)
+				{
+					Camera* pCamera = renderer::mainCamera;
+					pCamera->SetScale(1.f);
+					CameraScript* pMainCam = pCamera->GetOwner()->GetComponent<CameraScript>();
+					pMainCam->SetTargetMove(true);
+					pMainCam->SetOffset(Vector2(0.f, 200.f));
+
+					m_bBossWakeUp = false;
+					m_Time = 0.f;
+				}
+				else
+				{
+					renderer::mainCamera->SetScale(m_CameraScale);
+				}
+			}
 		}
 
 		if (Input::GetKeyUp(eKeyCode::ENTER))

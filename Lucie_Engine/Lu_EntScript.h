@@ -59,6 +59,7 @@ namespace Lu
 		void AddState(EntStateScript* _State);
 		void CompleteAction();
 
+		void HowlingSFX();
 		void AttackSFX();
 		void DeadSFX();
 

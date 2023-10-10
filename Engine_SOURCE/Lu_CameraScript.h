@@ -19,6 +19,14 @@ namespace Lu
 
 		bool			m_bTargetMove;	// 카메라를 타겟에게 즉시 이동하는지 여부
 
+		// Camera Shaking
+		bool			m_bCameraShaking;
+		float			m_ShakeIntensity;   
+		float			m_ShakeDuration;
+		float			m_ShakeTime;
+		int				m_ShakeDir;
+
+
 	public:
 		void SetWindowResolution(Vector2 _WindowResolution)
 		{
@@ -47,8 +55,15 @@ namespace Lu
 			m_bTargetMove = _b;
 		}
 
+		void RequestCameraShaking(float _Intensity, float _Duration);
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
+
+	private:
+		void CameraMove();
+		void FollowTarget();
+		void CameraShaking();
 	};
 }

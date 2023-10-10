@@ -105,6 +105,7 @@ namespace Lu
 			return m_PlayerInfo.Magic / 2;
 			break;
 		default:
+			return 0;
 			break;
 		}
 	}

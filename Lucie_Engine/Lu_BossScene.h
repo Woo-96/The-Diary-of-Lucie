@@ -13,7 +13,9 @@ namespace Lu
 		GameObject* m_Boss;
 		GameObject* m_DramaFX;
 		bool		m_bBossWakeUp;
+		bool		m_bFirst;
 		float		m_Time;
+		float		m_CameraScale;
 
 	public:
 		virtual void Initialize() override;
