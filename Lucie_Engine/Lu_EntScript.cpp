@@ -186,11 +186,16 @@ namespace Lu
 		// WakeUp
 		GetAnimator()->Create(L"Ent_WakeUp", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Ent_WakeUp") = std::bind(&EntScript::CompleteAction, this);
+
+		// Howling & Attack - Crater + Thorn(얘는 차징 이펙트 있음)
 		GetAnimator()->Create(L"Ent_Howling", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
 		GetAnimator()->StartEvent(L"Ent_Howling") = std::bind(&EntScript::HowlingSFX, this);
 		GetAnimator()->CompleteEvent(L"Ent_Howling") = std::bind(&EntScript::CompleteAction, this);
 
+		// 크레이터랑 가시도 새로 만들어야하나?
 
+
+		// 토마토 빼고 모든 공격과 공격 사이에 눈 질끈 감았다가 뜸
 		// Attack - WindBreath
 		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase1", pAtlas, Vector2(644.f, 1050.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
 		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase2", pAtlas, Vector2(2898.f, 1050.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
@@ -202,7 +207,7 @@ namespace Lu
 		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_End", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
 		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase2_End", pAtlas, Vector2(0.f, 2080.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
 
-		// Attack - PoisonBreath (플레이하기 전에 Ent_Howling 출력해야함.. 왼->오 혹은 오->왼 다 출력해야함..)
+		// Attack - PoisonBreath (왼->오 혹은 오->왼 다 출력해야함..)
 		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Left", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
 		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Right", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f, true);
 		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Left", pAtlas, Vector2(0.f, 3150.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);

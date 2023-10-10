@@ -17,6 +17,16 @@ namespace Lu
 			End,
 		};
 
+		enum class eAttackType
+		{
+			Thorn,
+			PoisonBreath,
+			WindBreath,
+			TomatoBoom,
+			Crater,
+			End,
+		};
+
 	public:
 		EntScript();
 		virtual ~EntScript();
@@ -30,10 +40,16 @@ namespace Lu
 		GameObject*					m_HPBar;
 
 		ePhase						m_CurPhase;
+		eAttackType					m_CurAttack;
 
 		bool						m_bWakeUp;
 		bool						m_bHowling;
 
+	public:
+		void SetAttackType(eAttackType _Type)
+		{
+			m_CurAttack = _Type;
+		}
 
 	public:
 		GameObject* GetHPFrame()	const
