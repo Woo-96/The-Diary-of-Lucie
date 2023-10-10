@@ -99,6 +99,9 @@ namespace Lu
 					// 보스 소리 지름
 					m_Boss->GetComponent<EntScript>()->Howling();
 
+					// 카메라 쉐이킹
+					renderer::mainCamera->GetOwner()->GetComponent<CameraScript>()->RequestCameraShaking(10.f, 1.5f);
+
 					m_bFirst = true;
 				}
 			}

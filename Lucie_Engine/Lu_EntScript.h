@@ -46,6 +46,11 @@ namespace Lu
 			return m_HPBar;
 		}
 
+		ePhase GetPhase()	const
+		{
+			return m_CurPhase;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;

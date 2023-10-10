@@ -5,8 +5,6 @@
 #include "Lu_ProgressBarScript.h"
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
-#include "Lu_Renderer.h"
-#include "Lu_CameraScript.h"
 
 #include "Lu_EntIdleState.h"
 #include "Lu_EntDeadState.h"
@@ -19,6 +17,7 @@ namespace Lu
 		, m_HPFrame(nullptr)
 		, m_HPBar(nullptr)
 		, m_CurPhase(ePhase::Phase_1)
+		, m_CurAttack(eAttackType::End)
 		, m_bWakeUp(false)
 		, m_bHowling(false)
 	{
@@ -156,9 +155,6 @@ namespace Lu
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"EntHowlingSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntHowlingSFX.ogg"));
 		pSFX->Play();
-
-		// 카메라 쉐이킹
-		renderer::mainCamera->GetOwner()->GetComponent<CameraScript>()->RequestCameraShaking(10.f, 1.5f);
 	}
 
 	void EntScript::AttackSFX()
@@ -188,29 +184,29 @@ namespace Lu
 		GetAnimator()->Create(L"Ent_Sleep", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
 
 		// WakeUp
-		GetAnimator()->Create(L"Ent_WakeUp_1", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
-		GetAnimator()->CompleteEvent(L"Ent_WakeUp_1") = std::bind(&EntScript::CompleteAction, this);
-		GetAnimator()->Create(L"Ent_WakeUp_2", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
-		GetAnimator()->StartEvent(L"Ent_WakeUp_2") = std::bind(&EntScript::HowlingSFX, this);
-		GetAnimator()->CompleteEvent(L"Ent_WakeUp_2") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_WakeUp", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->CompleteEvent(L"Ent_WakeUp") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_Howling", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+		GetAnimator()->StartEvent(L"Ent_Howling") = std::bind(&EntScript::HowlingSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Howling") = std::bind(&EntScript::CompleteAction, this);
 
 
-		// Attack
-		GetAnimator()->Create(L"Ent_Phase1_Attack_Left", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 1.f);
-		GetAnimator()->StartEvent(L"Ent_Phase1_Attack_Left") = std::bind(&EntScript::AttackSFX, this);
-		GetAnimator()->CompleteEvent(L"Ent_Phase1_Attack_Left") = std::bind(&EntScript::CompleteAction, this);
+		// Attack - WindBreath
+		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase1", pAtlas, Vector2(644.f, 1050.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
+		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase2", pAtlas, Vector2(2898.f, 1050.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
 
-		GetAnimator()->Create(L"Ent_Phase1_Attack_Right", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 1.f);
-		GetAnimator()->StartEvent(L"Ent_Phase1_Attack_Right") = std::bind(&EntScript::AttackSFX, this);
-		GetAnimator()->CompleteEvent(L"Ent_Phase1_Attack_Right") = std::bind(&EntScript::CompleteAction, this);
+		// Attack - TomatoBoom (2번째 프레임에서 멈춰있어야 함.. 끝나면 다시 반대로 출력해야함..)
+		// 반복 false로 재생했을 때 마지막 프레임에서 안멈추면 2번째 프레임만 있는 애니메이션 만들어야함
+		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_Start", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase2_Start", pAtlas, Vector2(0.f, 2080.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_End", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
+		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase2_End", pAtlas, Vector2(0.f, 2080.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
 
-		GetAnimator()->Create(L"Ent_Phase2_Attack_Left", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 1.f);
-		GetAnimator()->StartEvent(L"Ent_Phase2_Attack_Left") = std::bind(&EntScript::AttackSFX, this);
-		GetAnimator()->CompleteEvent(L"Ent_Phase2_Attack_Left") = std::bind(&EntScript::CompleteAction, this);
-
-		GetAnimator()->Create(L"Ent_Phase2_Attack_Right", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 1.f);
-		GetAnimator()->StartEvent(L"Ent_Phase2_Attack_Right") = std::bind(&EntScript::AttackSFX, this);
-		GetAnimator()->CompleteEvent(L"Ent_Phase2_Attack_Right") = std::bind(&EntScript::CompleteAction, this);
+		// Attack - PoisonBreath (플레이하기 전에 Ent_Howling 출력해야함.. 왼->오 혹은 오->왼 다 출력해야함..)
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Left", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Right", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f, true);
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Left", pAtlas, Vector2(0.f, 3150.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Right", pAtlas, Vector2(0.f, 3150.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f, true);
 
 
 		// Dead
@@ -248,41 +244,84 @@ namespace Lu
 		break;
 		case EntStateScript::eState::Attack:
 		{
-			switch (m_CurPhase)
+			switch (m_CurAttack)
 			{
-			case Lu::EntScript::ePhase::Phase_1:
+			case Lu::EntScript::eAttackType::Thorn:
 			{
-				switch (eCurDir)
+				switch (m_CurPhase)
 				{
-				case Lu::MonsterScript::eAnimDir::Left:
-					GetAnimator()->PlayAnimation(L"Ent_Phase1_Attack_Left", true);
+				case Lu::EntScript::ePhase::Phase_1:
+				{
+
+				}
 					break;
-				case Lu::MonsterScript::eAnimDir::Right:
-					GetAnimator()->PlayAnimation(L"Ent_Phase1_Attack_Right", true);
-					break;
-				default:
+				case Lu::EntScript::ePhase::Phase_2:
+				{
+
+				}
 					break;
 				}
 			}
-			break;
-			case Lu::EntScript::ePhase::Phase_2:
-			{
-				switch (eCurDir)
-				{
-				case Lu::MonsterScript::eAnimDir::Left:
-					GetAnimator()->PlayAnimation(L"Ent_Phase2_Attack_Left", true);
-					break;
-				case Lu::MonsterScript::eAnimDir::Right:
-					GetAnimator()->PlayAnimation(L"Ent_Phase2_Attack_Right", true);
-					break;
-				default:
-					break;
-				}
-			}
-			break;
-			case Lu::EntScript::ePhase::End:
 				break;
-			default:
+			case Lu::EntScript::eAttackType::PoisonBreath:
+			{
+				switch (m_CurPhase)
+				{
+				case Lu::EntScript::ePhase::Phase_1:
+				{
+
+				}
+				break;
+				case Lu::EntScript::ePhase::Phase_2:
+				{
+
+				}
+				break;
+				}
+			}
+				break;
+			case Lu::EntScript::eAttackType::WindBreath:
+			{
+				switch (m_CurPhase)
+				{
+				case Lu::EntScript::ePhase::Phase_1:
+					GetAnimator()->PlayAnimation(L"Ent_Attack_WindBreath_Phase1", true);
+					break;
+				case Lu::EntScript::ePhase::Phase_2:
+					GetAnimator()->PlayAnimation(L"Ent_Attack_WindBreath_Phase2", true);
+					break;
+				}
+			}
+				break;
+			case Lu::EntScript::eAttackType::TomatoBoom:
+			{
+				switch (m_CurPhase)
+				{
+				case Lu::EntScript::ePhase::Phase_1:
+					GetAnimator()->PlayAnimation(L"Ent_Attack_TomatoBoom_Phase1", false);
+					break;
+				case Lu::EntScript::ePhase::Phase_2:
+					GetAnimator()->PlayAnimation(L"Ent_Attack_TomatoBoom_Phase2", true);
+					break;
+				}
+			}
+				break;
+			case Lu::EntScript::eAttackType::Crater:
+			{
+				switch (m_CurPhase)
+				{
+				case Lu::EntScript::ePhase::Phase_1:
+				{
+
+				}
+				break;
+				case Lu::EntScript::ePhase::Phase_2:
+				{
+
+				}
+				break;
+				}
+			}
 				break;
 			}
 		}
@@ -319,7 +358,7 @@ namespace Lu
 	void EntScript::WakeUp()
 	{
 		if(!m_bWakeUp)
-			GetAnimator()->PlayAnimation(L"Ent_WakeUp_1", true);
+			GetAnimator()->PlayAnimation(L"Ent_WakeUp", true);
 	}
 
 	void EntScript::Howling()
@@ -327,7 +366,7 @@ namespace Lu
 		if (!m_bHowling)
 		{
 			m_bHowling = true;
-			GetAnimator()->PlayAnimation(L"Ent_WakeUp_2", true);
+			GetAnimator()->PlayAnimation(L"Ent_Howling", true);
 		}
 	}
 }

@@ -293,6 +293,9 @@
     <ClCompile Include="Lu_EntDeadState.cpp">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Dead</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_EntAttackState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -592,6 +595,9 @@
     </ClInclude>
     <ClInclude Include="Lu_EntDeadState.h">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Dead</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_EntAttackState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

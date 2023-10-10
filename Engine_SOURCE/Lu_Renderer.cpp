@@ -478,27 +478,27 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Ent_Attack_1_Mtrl", material);
+		Resources::Insert(L"Ent_Attack_Thorn_Mtrl", material);
 
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Ent_Attack_2_Mtrl", material);
+		Resources::Insert(L"Ent_Attack_PoisonBreath_Mtrl", material);
 
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Ent_Attack_3_Mtrl", material);
+		Resources::Insert(L"Ent_Attack_WindBreath_Mtrl", material);
 
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Ent_Attack_4_Mtrl", material);
+		Resources::Insert(L"Ent_Attack_TomatoBoom_Mtrl", material);
 
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Ent_Attack_5_Mtrl", material);
+		Resources::Insert(L"Ent_Attack_Crater_Mtrl", material);
 
 
 		// Object - Diary
