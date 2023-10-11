@@ -12,11 +12,6 @@ namespace Lu
 
 	}
 
-	void CircleProjectile::Initialize()
-	{
-
-	}
-
 	void CircleProjectile::Update()
 	{
 		MonsterProjectileScript::Update();
@@ -25,15 +20,5 @@ namespace Lu
 	void CircleProjectile::OnCollisionEnter(Collider2D* other)
 	{
 		MonsterProjectileScript::OnCollisionEnter(other);
-	}
-
-	void CircleProjectile::OnCollisionStay(Collider2D* other)
-	{
-
-	}
-
-	void CircleProjectile::OnCollisionExit(Collider2D* other)
-	{
-
 	}
 }

@@ -44,6 +44,10 @@ namespace Lu
 
 		bool						m_bWakeUp;
 		bool						m_bHowling;
+		bool						m_bPatternStart;
+
+		bool						m_bRandomAttack;
+		int							m_AttackNumber;
 
 	public:
 		void SetAttackType(eAttackType _Type)
@@ -67,6 +71,21 @@ namespace Lu
 			return m_CurPhase;
 		}
 
+		bool IsRandomAttack()	const
+		{
+			return m_bRandomAttack;
+		}
+
+		int GetAttackNumber()	const
+		{
+			return m_AttackNumber;
+		}
+
+		bool IsPatternStart()	const
+		{
+			return m_bPatternStart;
+		}
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -84,6 +103,8 @@ namespace Lu
 		void AttackSFX();
 		void DeadSFX();
 
+		void Cheat();
+
 	protected:
 		virtual void CreateAnimation() override;
 		virtual void AnimationUpdate() override;
@@ -92,6 +113,7 @@ namespace Lu
 
 	public:
 		void ChangeState(EntStateScript::eState _NextState);
+		void PatternStart();
 
 	public:
 		void WakeUp();

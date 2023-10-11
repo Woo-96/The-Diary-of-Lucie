@@ -1,11 +1,14 @@
 #include "Lu_JumpProjectile.h"
 #include "Lu_Time.h"
 #include "Lu_Object.h"
+#include "Lu_Resources.h"
+#include "Lu_Animator.h"
 
 namespace Lu
 {
 	JumpProjectile::JumpProjectile()
 	{
+		SetName(L"JumpProjectileScript");
 	}
 
 	JumpProjectile::~JumpProjectile()
@@ -14,6 +17,7 @@ namespace Lu
 
 	void JumpProjectile::Initialize()
 	{
+		MonsterProjectileScript::Initialize();
 	}
 
 	void JumpProjectile::Update()
@@ -26,15 +30,12 @@ namespace Lu
 		}
 	}
 
-	void JumpProjectile::OnCollisionEnter(Collider2D* other)
+	void JumpProjectile::CreateProjectileAnimation()
 	{
-	}
+		std::shared_ptr<Texture> pAtlas
+			= Resources::Load<Texture>(L"BigSlimeJump_TEX", L"..\\Resources\\Texture\\Monster\\MidBoss\\BigSlimeJump.png");
 
-	void JumpProjectile::OnCollisionStay(Collider2D* other)
-	{
-	}
-
-	void JumpProjectile::OnCollisionExit(Collider2D* other)
-	{
+		GetAnimator()->Create(L"BigSlime_JumpProjectile", pAtlas, Vector2(0.f, 0.f), Vector2(192.f, 192.f), 7, Vector2(192.f, 192.f), Vector2::Zero, 0.1f);
+		GetAnimator()->PlayAnimation(L"BigSlime_JumpProjectile", false);
 	}
 }

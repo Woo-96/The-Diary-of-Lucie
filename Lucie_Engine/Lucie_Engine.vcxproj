@@ -179,6 +179,8 @@
     <ClInclude Include="Lu_BigSlimeTraceState.h" />
     <ClInclude Include="Lu_ChannelingBarScript.h" />
     <ClInclude Include="Lu_ChestScript.h" />
+    <ClInclude Include="Lu_CraterProjectile.h" />
+    <ClInclude Include="Lu_CraterState.h" />
     <ClInclude Include="Lu_DamageFontScript.h" />
     <ClInclude Include="Lu_EndingScene.h" />
     <ClInclude Include="Lu_EntAttackState.h" />
@@ -196,6 +198,8 @@
     <ClInclude Include="Lu_JellyScript.h" />
     <ClInclude Include="Lu_LayoutScript.h" />
     <ClInclude Include="Lu_MagicCircleScript.h" />
+    <ClInclude Include="Lu_PoisonBreathProjectile.h" />
+    <ClInclude Include="Lu_PoisonBreathState.h" />
     <ClInclude Include="Lu_ProgressBarScript.h" />
     <ClInclude Include="Lu_DiaryScript.h" />
     <ClInclude Include="Lu_BossCircleProjectile.h" />
@@ -257,7 +261,11 @@
     <ClInclude Include="Lu_StateScript.h" />
     <ClInclude Include="Lu_StatueScript.h" />
     <ClInclude Include="Lu_StoreScene.h" />
+    <ClInclude Include="Lu_ThornProjectile.h" />
+    <ClInclude Include="Lu_ThornState.h" />
     <ClInclude Include="Lu_TitleScene.h" />
+    <ClInclude Include="Lu_TomatoBoomProjectile.h" />
+    <ClInclude Include="Lu_TomatoBoomState.h" />
     <ClInclude Include="Lu_TriggerScript.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
@@ -267,6 +275,8 @@
     <ClInclude Include="Lu_SnabyScript.h" />
     <ClInclude Include="Lu_ScriptEnums.h" />
     <ClInclude Include="Lu_MonsterScript.h" />
+    <ClInclude Include="Lu_WindBreathProjectile.h" />
+    <ClInclude Include="Lu_WindBreathState.h" />
     <ClInclude Include="Lu_WoodScript.h" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +291,8 @@
     <ClCompile Include="Lu_BigSlimeTraceState.cpp" />
     <ClCompile Include="Lu_ChannelingBarScript.cpp" />
     <ClCompile Include="Lu_ChestScript.cpp" />
+    <ClCompile Include="Lu_CraterProjectile.cpp" />
+    <ClCompile Include="Lu_CraterState.cpp" />
     <ClCompile Include="Lu_DamageFontScript.cpp" />
     <ClCompile Include="Lu_EndingScene.cpp" />
     <ClCompile Include="Lu_EntAttackState.cpp" />
@@ -298,6 +310,8 @@
     <ClCompile Include="Lu_JellyScript.cpp" />
     <ClCompile Include="Lu_LayoutScript.cpp" />
     <ClCompile Include="Lu_MagicCircleScript.cpp" />
+    <ClCompile Include="Lu_PoisonBreathProjectile.cpp" />
+    <ClCompile Include="Lu_PoisonBreathState.cpp" />
     <ClCompile Include="Lu_ProgressBarScript.cpp" />
     <ClCompile Include="Lu_DiaryScript.cpp" />
     <ClCompile Include="Lu_BossCircleProjectile.cpp" />
@@ -359,7 +373,11 @@
     <ClCompile Include="Lu_StateScript.cpp" />
     <ClCompile Include="Lu_StatueScript.cpp" />
     <ClCompile Include="Lu_StoreScene.cpp" />
+    <ClCompile Include="Lu_ThornProjectile.cpp" />
+    <ClCompile Include="Lu_ThornState.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
+    <ClCompile Include="Lu_TomatoBoomProjectile.cpp" />
+    <ClCompile Include="Lu_TomatoBoomState.cpp" />
     <ClCompile Include="Lu_TriggerScript.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />
@@ -368,6 +386,8 @@
     <ClCompile Include="Lu_WeaponSlotScript.cpp" />
     <ClCompile Include="Lu_SnabyScript.cpp" />
     <ClCompile Include="Lu_MonsterScript.cpp" />
+    <ClCompile Include="Lu_WindBreathProjectile.cpp" />
+    <ClCompile Include="Lu_WindBreathState.cpp" />
     <ClCompile Include="Lu_WoodScript.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

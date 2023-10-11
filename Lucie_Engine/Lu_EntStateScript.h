@@ -11,7 +11,11 @@ namespace Lu
 		enum class eState
 		{
 			Idle,
-			Attack,
+			Attack_Thorn,
+			Attack_PoisonBreath,
+			Attack_WindBreath,
+			Attack_TomatoBoom,
+			Attack_Crater,
 			Dead,
 			End
 		};
@@ -91,7 +95,7 @@ namespace Lu
 		virtual void Exit() = 0;
 
 	protected:
-		void ChangeStateAfterTime(float _Time, eState _State);
+		void RandomAttack(float _CoolTime);
 		Vector2 CalDirToPlayer();
     };
 }

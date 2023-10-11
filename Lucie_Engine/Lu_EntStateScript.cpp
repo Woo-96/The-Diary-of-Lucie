@@ -31,14 +31,40 @@ namespace Lu
 		m_Transform = GetEntScript()->GetOwner()->GetComponent<Transform>();
 	}
 
-	void EntStateScript::ChangeStateAfterTime(float _Time, eState _State)
+	void EntStateScript::RandomAttack(float _CoolTime)
 	{
 		m_Time += (float)Time::DeltaTime();
 
-		if (m_Time >= _Time)
+		if (m_Time >= _CoolTime)
 		{
 			m_Time = 0.f;
-			m_EntScript->ChangeState(_State);
+
+			int iRand = -1;
+			if (GetEntScript()->IsRandomAttack())
+				iRand = std::rand() % 5;
+			else
+				iRand = GetEntScript()->GetAttackNumber();
+
+			switch ((EntScript::eAttackType)3/*(EntScript::eAttackType)iRand*/)
+			{
+			case EntScript::eAttackType::Thorn:
+				m_EntScript->ChangeState(eState::Attack_Thorn);
+				break;
+			case EntScript::eAttackType::PoisonBreath:
+				m_EntScript->ChangeState(eState::Attack_PoisonBreath);
+				break;
+			case EntScript::eAttackType::WindBreath:
+				m_EntScript->ChangeState(eState::Attack_WindBreath);
+				break;
+			case EntScript::eAttackType::TomatoBoom:
+				m_EntScript->ChangeState(eState::Attack_TomatoBoom);
+				break;
+			case EntScript::eAttackType::Crater:
+				m_EntScript->ChangeState(eState::Attack_Crater);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

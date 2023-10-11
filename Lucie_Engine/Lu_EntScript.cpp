@@ -5,8 +5,14 @@
 #include "Lu_ProgressBarScript.h"
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
+#include "Lu_Input.h"
 
 #include "Lu_EntIdleState.h"
+#include "Lu_ThornState.h"
+#include "Lu_PoisonBreathState.h"
+#include "Lu_WindBreathState.h"
+#include "Lu_TomatoBoomState.h"
+#include "Lu_CraterState.h"
 #include "Lu_EntDeadState.h"
 
 namespace Lu
@@ -20,6 +26,9 @@ namespace Lu
 		, m_CurAttack(eAttackType::End)
 		, m_bWakeUp(false)
 		, m_bHowling(false)
+		, m_bRandomAttack(true)
+		, m_AttackNumber(-1)
+		, m_bPatternStart(false)
 	{
 		SetName(L"EntScript");
 
@@ -73,7 +82,11 @@ namespace Lu
 
 		// 상태
 		AddState(new EntIdleState);
-		//AddState(new EntAttackState);
+		AddState(new ThornState);
+		AddState(new PoisonBreathState);
+		AddState(new WindBreathState);
+		AddState(new TomatoBoomState);
+		AddState(new CraterState);
 		AddState(new EntDeadState);
 
 		m_CurState = GetStateScript(EntStateScript::eState::Idle);
@@ -85,7 +98,8 @@ namespace Lu
 		if (GetOwner()->IsDead())
 			return;
 
-		m_CurState->Update();
+		if(m_bPatternStart)
+			m_CurState->Update();
 		AnimationUpdate();
 
 		m_PrevState = m_CurState->GetStateType();
@@ -150,6 +164,12 @@ namespace Lu
 			m_bHowling = false;
 	}
 
+	void EntScript::PatternStart()
+	{
+		if (!m_bPatternStart)
+			m_bPatternStart = true;
+	}
+
 	void EntScript::HowlingSFX()
 	{
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
@@ -171,6 +191,35 @@ namespace Lu
 		pSFX->Play();
 	}
 
+	void EntScript::Cheat()
+	{
+		if (Input::GetKeyDown(eKeyCode::O))
+		{
+			if (m_bRandomAttack)
+				m_bRandomAttack = false;
+			else
+				m_bRandomAttack = true;
+		}
+
+		if (!m_bRandomAttack)
+		{
+			if (Input::GetKeyDown(eKeyCode::_5))
+				m_AttackNumber = (int)eAttackType::Thorn;
+
+			else if (Input::GetKeyDown(eKeyCode::_6))
+				m_AttackNumber = (int)eAttackType::PoisonBreath;
+
+			else if (Input::GetKeyDown(eKeyCode::_7))
+				m_AttackNumber = (int)eAttackType::WindBreath;
+
+			else if (Input::GetKeyDown(eKeyCode::_8))
+				m_AttackNumber = (int)eAttackType::TomatoBoom;
+
+			if (Input::GetKeyDown(eKeyCode::_9))
+				m_AttackNumber = (int)eAttackType::Crater;
+		}
+	}
+
 	void EntScript::CreateAnimation()
 	{
 		std::shared_ptr<Texture> pAtlas
@@ -187,12 +236,10 @@ namespace Lu
 		GetAnimator()->Create(L"Ent_WakeUp", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
 		GetAnimator()->CompleteEvent(L"Ent_WakeUp") = std::bind(&EntScript::CompleteAction, this);
 
-		// Howling & Attack - Crater + Thorn(얘는 차징 이펙트 있음)
+		// Howling & Attack - Crater
 		GetAnimator()->Create(L"Ent_Howling", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
 		GetAnimator()->StartEvent(L"Ent_Howling") = std::bind(&EntScript::HowlingSFX, this);
 		GetAnimator()->CompleteEvent(L"Ent_Howling") = std::bind(&EntScript::CompleteAction, this);
-
-		// 크레이터랑 가시도 새로 만들어야하나?
 
 
 		// 토마토 빼고 모든 공격과 공격 사이에 눈 질끈 감았다가 뜸
@@ -202,6 +249,7 @@ namespace Lu
 
 		// Attack - TomatoBoom (2번째 프레임에서 멈춰있어야 함.. 끝나면 다시 반대로 출력해야함..)
 		// 반복 false로 재생했을 때 마지막 프레임에서 안멈추면 2번째 프레임만 있는 애니메이션 만들어야함
+		// 이거에다가 차징 = 가시 공격
 		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_Start", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
 		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase2_Start", pAtlas, Vector2(0.f, 2080.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
 		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_End", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
@@ -223,7 +271,6 @@ namespace Lu
 	void EntScript::AnimationUpdate()
 	{
 		EntStateScript::eState eCurState = m_CurState->GetStateType();
-		eAnimDir eCurDir = GetCurDir();
 
 		if (!m_bWakeUp || m_bHowling)
 			return;
@@ -246,91 +293,7 @@ namespace Lu
 				break;
 			}
 		}
-		break;
-		case EntStateScript::eState::Attack:
-		{
-			switch (m_CurAttack)
-			{
-			case Lu::EntScript::eAttackType::Thorn:
-			{
-				switch (m_CurPhase)
-				{
-				case Lu::EntScript::ePhase::Phase_1:
-				{
-
-				}
-					break;
-				case Lu::EntScript::ePhase::Phase_2:
-				{
-
-				}
-					break;
-				}
-			}
-				break;
-			case Lu::EntScript::eAttackType::PoisonBreath:
-			{
-				switch (m_CurPhase)
-				{
-				case Lu::EntScript::ePhase::Phase_1:
-				{
-
-				}
-				break;
-				case Lu::EntScript::ePhase::Phase_2:
-				{
-
-				}
-				break;
-				}
-			}
-				break;
-			case Lu::EntScript::eAttackType::WindBreath:
-			{
-				switch (m_CurPhase)
-				{
-				case Lu::EntScript::ePhase::Phase_1:
-					GetAnimator()->PlayAnimation(L"Ent_Attack_WindBreath_Phase1", true);
-					break;
-				case Lu::EntScript::ePhase::Phase_2:
-					GetAnimator()->PlayAnimation(L"Ent_Attack_WindBreath_Phase2", true);
-					break;
-				}
-			}
-				break;
-			case Lu::EntScript::eAttackType::TomatoBoom:
-			{
-				switch (m_CurPhase)
-				{
-				case Lu::EntScript::ePhase::Phase_1:
-					GetAnimator()->PlayAnimation(L"Ent_Attack_TomatoBoom_Phase1", false);
-					break;
-				case Lu::EntScript::ePhase::Phase_2:
-					GetAnimator()->PlayAnimation(L"Ent_Attack_TomatoBoom_Phase2", true);
-					break;
-				}
-			}
-				break;
-			case Lu::EntScript::eAttackType::Crater:
-			{
-				switch (m_CurPhase)
-				{
-				case Lu::EntScript::ePhase::Phase_1:
-				{
-
-				}
-				break;
-				case Lu::EntScript::ePhase::Phase_2:
-				{
-
-				}
-				break;
-				}
-			}
-				break;
-			}
-		}
-		break;
+			break;
 		case EntStateScript::eState::Dead:
 			GetAnimator()->PlayAnimation(L"Ent_Dead", true);
 			break;

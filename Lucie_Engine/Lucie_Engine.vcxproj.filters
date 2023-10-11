@@ -126,7 +126,7 @@
       <Filter>Contents\Script\03. Monster\MonsterProjectile</Filter>
     </ClCompile>
     <ClCompile Include="Lu_CircleProjectile.cpp">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\Circle</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Common\Circle</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeStateScript.cpp">
       <Filter>Contents\Script\03. Monster\Boss\KingSlime\KingSlime\KingSlime_FSM</Filter>
@@ -144,10 +144,10 @@
       <Filter>Contents\Script\03. Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Dead</Filter>
     </ClCompile>
     <ClCompile Include="Lu_BubbleProjectile.cpp">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\Bubble</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Slime\Bubble</Filter>
     </ClCompile>
     <ClCompile Include="Lu_BossCircleProjectile.cpp">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\BossCircle</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Slime\BossCircle</Filter>
     </ClCompile>
     <ClCompile Include="Lu_KingSlimeScript.cpp">
       <Filter>Contents\Script\03. Monster\Boss\KingSlime\KingSlime</Filter>
@@ -195,7 +195,7 @@
       <Filter>Contents\Script\03. Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack</Filter>
     </ClCompile>
     <ClCompile Include="Lu_JumpProjectile.cpp">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\BigSlimeJump</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Slime\BigSlimeJump</Filter>
     </ClCompile>
     <ClCompile Include="Lu_DiaryScript.cpp">
       <Filter>Contents\Script\04. Object\Portal\Diary</Filter>
@@ -295,6 +295,36 @@
     </ClCompile>
     <ClCompile Include="Lu_EntAttackState.cpp">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_ThornProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\Thorn</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_PoisonBreathProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\PoisonBreath</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_WindBreathProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\WindBreath</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_TomatoBoomProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBoom</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_CraterProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\Crater</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_CraterState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Crater</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_ThornState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Thorn</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_PoisonBreathState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\PoisonBreath</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_WindBreathState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\WindBreath</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_TomatoBoomState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBoom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -429,7 +459,7 @@
       <Filter>Contents\Script\03. Monster\MonsterProjectile</Filter>
     </ClInclude>
     <ClInclude Include="Lu_CircleProjectile.h">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\Circle</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Common\Circle</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeStateScript.h">
       <Filter>Contents\Script\03. Monster\Boss\KingSlime\KingSlime\KingSlime_FSM</Filter>
@@ -447,10 +477,10 @@
       <Filter>Contents\Script\03. Monster\Boss\KingSlime\KingSlime\KingSlime_FSM\KingSlime_Dead</Filter>
     </ClInclude>
     <ClInclude Include="Lu_BubbleProjectile.h">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\Bubble</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Slime\Bubble</Filter>
     </ClInclude>
     <ClInclude Include="Lu_BossCircleProjectile.h">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\BossCircle</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Slime\BossCircle</Filter>
     </ClInclude>
     <ClInclude Include="Lu_KingSlimeScript.h">
       <Filter>Contents\Script\03. Monster\Boss\KingSlime\KingSlime</Filter>
@@ -498,7 +528,7 @@
       <Filter>Contents\Script\03. Monster\Nomal\Slime\Slime_FSM\Slime_JumpAttack</Filter>
     </ClInclude>
     <ClInclude Include="Lu_JumpProjectile.h">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\BigSlimeJump</Filter>
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Slime\BigSlimeJump</Filter>
     </ClInclude>
     <ClInclude Include="Lu_DiaryScript.h">
       <Filter>Contents\Script\04. Object\Portal\Diary</Filter>
@@ -598,6 +628,36 @@
     </ClInclude>
     <ClInclude Include="Lu_EntAttackState.h">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ThornProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\Thorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_PoisonBreathProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\PoisonBreath</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_WindBreathProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\WindBreath</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TomatoBoomProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBoom</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_CraterProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\Crater</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_CraterState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Crater</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_ThornState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Thorn</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_PoisonBreathState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\PoisonBreath</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_WindBreathState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\WindBreath</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TomatoBoomState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBoom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -720,18 +780,6 @@
     </Filter>
     <Filter Include="Contents\Script\03. Monster\MonsterProjectile">
       <UniqueIdentifier>{c8f1a89d-13a2-4201-8afe-f1aac4ebdbea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Circle">
-      <UniqueIdentifier>{2f9e9898-e3d1-4932-955a-6aa993ef3970}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Bubble">
-      <UniqueIdentifier>{56de495d-b637-4eb9-af6a-00a37ac84c50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\BossCircle">
-      <UniqueIdentifier>{a014b8bc-313a-4118-b0b3-971058c9e489}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\BigSlimeJump">
-      <UniqueIdentifier>{538460ea-98cf-4702-a61a-591085898a9d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\03. Monster\Nomal">
       <UniqueIdentifier>{cf009c60-5ecb-4838-8c6e-bbd00e0f9bd5}</UniqueIdentifier>
@@ -939,6 +987,57 @@
     </Filter>
     <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Dead">
       <UniqueIdentifier>{28163ed0-8aba-4fd2-93ea-0a48ca827a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Slime">
+      <UniqueIdentifier>{ba03ffb1-2a36-487e-b666-f0c17eac067a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Common">
+      <UniqueIdentifier>{f5b0a287-1c6d-4e9e-bff4-d1782715ad15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Slime\Bubble">
+      <UniqueIdentifier>{56de495d-b637-4eb9-af6a-00a37ac84c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Common\Circle">
+      <UniqueIdentifier>{2f9e9898-e3d1-4932-955a-6aa993ef3970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Slime\BossCircle">
+      <UniqueIdentifier>{a014b8bc-313a-4118-b0b3-971058c9e489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Slime\BigSlimeJump">
+      <UniqueIdentifier>{538460ea-98cf-4702-a61a-591085898a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent">
+      <UniqueIdentifier>{71d94de2-56b0-4011-b661-649b89e87ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\Thorn">
+      <UniqueIdentifier>{d4481915-1009-4e9a-b2f2-9d83038d699f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\PoisonBreath">
+      <UniqueIdentifier>{1ef59c45-d064-4740-b0ce-48bb510a0178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\WindBreath">
+      <UniqueIdentifier>{6700bfb0-39bd-46eb-aed9-4802ee1c3ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBoom">
+      <UniqueIdentifier>{c5a69fee-3205-4902-8433-c95bccc4d16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\Crater">
+      <UniqueIdentifier>{bce4d066-b19c-4c5c-b384-701d269a72a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Crater">
+      <UniqueIdentifier>{42559da8-e34e-4e4d-b397-36e5c586b167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBoom">
+      <UniqueIdentifier>{f0b58b28-0662-40c8-8fae-47fbed887c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\WindBreath">
+      <UniqueIdentifier>{4dfa522e-dc11-421b-8527-d36f33c2a223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\PoisonBreath">
+      <UniqueIdentifier>{63c35102-2432-4e6c-b921-91a0ee3099ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Thorn">
+      <UniqueIdentifier>{fa328530-937c-4959-9938-27c60aac5d52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -17,11 +17,6 @@ namespace Lu
 
 	}
 
-	void BubbleProjectile::Initialize()
-	{
-
-	}
-
 	void BubbleProjectile::Update()
 	{
 		Vector3 vPos = GetTransform()->GetPosition();
@@ -73,15 +68,5 @@ namespace Lu
 	void BubbleProjectile::OnCollisionEnter(Collider2D* other)
 	{
 		MonsterProjectileScript::OnCollisionEnter(other);
-	}
-
-	void BubbleProjectile::OnCollisionStay(Collider2D* other)
-	{
-
-	}
-
-	void BubbleProjectile::OnCollisionExit(Collider2D* other)
-	{
-
 	}
 }

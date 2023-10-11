@@ -5,6 +5,7 @@
 namespace Lu
 {
     class Transform;
+    class Animator;
     class MonsterProjectileScript : public Script
     {
     public:
@@ -14,9 +15,11 @@ namespace Lu
     private:
         MonsterScript*  m_MonsterScript;
         Transform*      m_Transform;
+        Animator*       m_Animator;
         float		    m_AttackSpeed;
         Vector3		    m_AttackDir;
         float           m_Time;
+        float           m_Duration;
 
     public:
         void SetMonsterScript(MonsterScript* _MonsterScript)
@@ -44,6 +47,11 @@ namespace Lu
             m_Time = _Time;
         }
 
+        void SetDuration(float _Duration)
+        {
+            m_Duration = _Duration;
+        }
+
     public:
         MonsterScript* GetMonsterScript() const
         {
@@ -53,6 +61,11 @@ namespace Lu
         Transform* GetTransform()   const
         {
             return m_Transform;
+        }
+
+        Animator* GetAnimator() const
+        {
+            return m_Animator;
         }
 
         float GetSpeed()    const
@@ -70,13 +83,21 @@ namespace Lu
             return m_Time;
         }
 
+        float GetDuration() const
+        {
+            return m_Duration;
+        }
+
     public:
         virtual void Initialize() override;
         virtual void Update() override;
 
     public:
         virtual void OnCollisionEnter(Collider2D* _Other) override;
-        virtual void OnCollisionStay(Collider2D* _Other) override;
-        virtual void OnCollisionExit(Collider2D* _Other) override;
+        virtual void OnCollisionStay(Collider2D* _Other) override {}
+        virtual void OnCollisionExit(Collider2D* _Other) override {}
+
+    protected:
+        virtual void CreateProjectileAnimation() = 0;
     };
 }

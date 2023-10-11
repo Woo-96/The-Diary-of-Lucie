@@ -10,12 +10,12 @@ namespace Lu
 		virtual ~CircleProjectile();
 
     public:
-        virtual void Initialize() override;
         virtual void Update() override;
 
     public:
         virtual void OnCollisionEnter(Collider2D* other) override;
-        virtual void OnCollisionStay(Collider2D* other) override;
-        virtual void OnCollisionExit(Collider2D* other) override;
+
+    protected:
+        virtual void CreateProjectileAnimation() override {}
 	};
 }

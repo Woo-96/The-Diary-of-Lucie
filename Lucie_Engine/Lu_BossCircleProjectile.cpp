@@ -14,11 +14,6 @@ namespace Lu
 
 	}
 
-	void BossCircleProjectile::Initialize()
-	{
-
-	}
-
 	void BossCircleProjectile::Update()
 	{
 		SetTime(GetTime() + (float)Time::DeltaTime());
@@ -56,15 +51,5 @@ namespace Lu
 	void BossCircleProjectile::OnCollisionEnter(Collider2D* other)
 	{
 		MonsterProjectileScript::OnCollisionEnter(other);
-	}
-
-	void BossCircleProjectile::OnCollisionStay(Collider2D* other)
-	{
-
-	}
-
-	void BossCircleProjectile::OnCollisionExit(Collider2D* other)
-	{
-
 	}
 }

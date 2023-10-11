@@ -155,6 +155,8 @@ namespace Lu
 					pMainCam->SetTargetMove(true);
 					pMainCam->SetOffset(Vector2(0.f, 200.f));
 
+					m_Boss->GetComponent<EntScript>()->PatternStart();
+
 					m_bBossWakeUp = false;
 					m_Time = 0.f;
 				}

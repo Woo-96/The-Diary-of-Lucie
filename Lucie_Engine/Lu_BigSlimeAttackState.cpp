@@ -37,13 +37,7 @@ namespace Lu
 		pCollider->SetType(eColliderType::Rect);
 		pCollider->SetSize(Vector2(0.5f, 0.3f));
 
-		Animator* pAnimator = pProjectile->AddComponent<Animator>();
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"BigSlimeJump_TEX", L"..\\Resources\\Texture\\Monster\\MidBoss\\BigSlimeJump.png");
-
-		pAnimator->Create(L"BigSlime_JumpProjectile", pAtlas, Vector2(0.f, 0.f), Vector2(192.f, 192.f), 7, Vector2(192.f, 192.f), Vector2::Zero, 0.1f);
-		pAnimator->PlayAnimation(L"BigSlime_JumpProjectile", false);
-
+		pProjectile->AddComponent<Animator>();
 		pProjectile->AddComponent<JumpProjectile>();
 	}
 

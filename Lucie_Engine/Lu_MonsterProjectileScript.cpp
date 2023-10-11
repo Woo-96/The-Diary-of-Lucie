@@ -9,9 +9,11 @@ namespace Lu
 	MonsterProjectileScript::MonsterProjectileScript()
 		: m_MonsterScript(nullptr)
 		, m_Transform(nullptr)
+		, m_Animator(nullptr)
 		, m_AttackSpeed(200.f)
 		, m_AttackDir(Vector3::Zero)
 		, m_Time(0.f)
+		, m_Duration(2.5f)
 	{
 		SetName(L"MonsterProjectileScript");
 	}
@@ -22,14 +24,17 @@ namespace Lu
 
 	void MonsterProjectileScript::Initialize()
 	{
+		m_Animator = GetOwner()->GetComponent<Animator>();
 
+		if (m_Animator)
+			CreateProjectileAnimation();
 	}
 
 	void MonsterProjectileScript::Update()
 	{
 		m_Time += (float)Time::DeltaTime();
 
-		if (m_Time >= 2.5f)
+		if (m_Time >= m_Duration)
 		{
 			object::Destroy(GetOwner());
 		}
@@ -44,15 +49,5 @@ namespace Lu
 	void MonsterProjectileScript::OnCollisionEnter(Collider2D* _Other)
 	{
 		object::Destroy(GetOwner());
-	}
-
-	void MonsterProjectileScript::OnCollisionStay(Collider2D* _Other)
-	{
-
-	}
-
-	void MonsterProjectileScript::OnCollisionExit(Collider2D* _Other)
-	{
-
 	}
 }
