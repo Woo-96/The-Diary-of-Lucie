@@ -16,7 +16,7 @@ namespace Lu
 	void EntIdleState::Update()
 	{
 		if(GetEntScript()->IsPatternStart())
-			RandomAttack(1.5f);
+			RandomAttack(3.f);
 	}
 
 	void EntIdleState::Enter()
