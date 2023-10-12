@@ -186,6 +186,7 @@
     <ClInclude Include="Lu_EntAttackState.h" />
     <ClInclude Include="Lu_EntDeadState.h" />
     <ClInclude Include="Lu_EntIdleState.h" />
+    <ClInclude Include="Lu_EntRageState.h" />
     <ClInclude Include="Lu_EntScript.h" />
     <ClInclude Include="Lu_EntStateScript.h" />
     <ClInclude Include="Lu_EquipLabelScript.h" />
@@ -264,8 +265,8 @@
     <ClInclude Include="Lu_ThornProjectile.h" />
     <ClInclude Include="Lu_ThornState.h" />
     <ClInclude Include="Lu_TitleScene.h" />
-    <ClInclude Include="Lu_TomatoBoomProjectile.h" />
-    <ClInclude Include="Lu_TomatoBoomState.h" />
+    <ClInclude Include="Lu_TomatoBombProjectile.h" />
+    <ClInclude Include="Lu_TomatoBombState.h" />
     <ClInclude Include="Lu_TriggerScript.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
@@ -298,6 +299,7 @@
     <ClCompile Include="Lu_EntAttackState.cpp" />
     <ClCompile Include="Lu_EntDeadState.cpp" />
     <ClCompile Include="Lu_EntIdleState.cpp" />
+    <ClCompile Include="Lu_EntRageState.cpp" />
     <ClCompile Include="Lu_EntScript.cpp" />
     <ClCompile Include="Lu_EntStateScript.cpp" />
     <ClCompile Include="Lu_EquipLabelScript.cpp" />
@@ -376,8 +378,8 @@
     <ClCompile Include="Lu_ThornProjectile.cpp" />
     <ClCompile Include="Lu_ThornState.cpp" />
     <ClCompile Include="Lu_TitleScene.cpp" />
-    <ClCompile Include="Lu_TomatoBoomProjectile.cpp" />
-    <ClCompile Include="Lu_TomatoBoomState.cpp" />
+    <ClCompile Include="Lu_TomatoBombProjectile.cpp" />
+    <ClCompile Include="Lu_TomatoBombState.cpp" />
     <ClCompile Include="Lu_TriggerScript.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />

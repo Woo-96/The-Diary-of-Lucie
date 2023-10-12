@@ -305,8 +305,8 @@
     <ClCompile Include="Lu_WindBreathProjectile.cpp">
       <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\WindBreath</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_TomatoBoomProjectile.cpp">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBoom</Filter>
+    <ClCompile Include="Lu_TomatoBombProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBomb</Filter>
     </ClCompile>
     <ClCompile Include="Lu_CraterProjectile.cpp">
       <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\Crater</Filter>
@@ -323,8 +323,11 @@
     <ClCompile Include="Lu_WindBreathState.cpp">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\WindBreath</Filter>
     </ClCompile>
-    <ClCompile Include="Lu_TomatoBoomState.cpp">
-      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBoom</Filter>
+    <ClCompile Include="Lu_TomatoBombState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBomb</Filter>
+    </ClCompile>
+    <ClCompile Include="Lu_EntRageState.cpp">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Rage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -638,8 +641,8 @@
     <ClInclude Include="Lu_WindBreathProjectile.h">
       <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\WindBreath</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_TomatoBoomProjectile.h">
-      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBoom</Filter>
+    <ClInclude Include="Lu_TomatoBombProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBomb</Filter>
     </ClInclude>
     <ClInclude Include="Lu_CraterProjectile.h">
       <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\Crater</Filter>
@@ -656,8 +659,11 @@
     <ClInclude Include="Lu_WindBreathState.h">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\WindBreath</Filter>
     </ClInclude>
-    <ClInclude Include="Lu_TomatoBoomState.h">
-      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBoom</Filter>
+    <ClInclude Include="Lu_TomatoBombState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBomb</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_EntRageState.h">
+      <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Rage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1018,17 +1024,11 @@
     <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\WindBreath">
       <UniqueIdentifier>{6700bfb0-39bd-46eb-aed9-4802ee1c3ea0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBoom">
-      <UniqueIdentifier>{c5a69fee-3205-4902-8433-c95bccc4d16f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\Crater">
       <UniqueIdentifier>{bce4d066-b19c-4c5c-b384-701d269a72a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Crater">
       <UniqueIdentifier>{42559da8-e34e-4e4d-b397-36e5c586b167}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBoom">
-      <UniqueIdentifier>{f0b58b28-0662-40c8-8fae-47fbed887c47}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\WindBreath">
       <UniqueIdentifier>{4dfa522e-dc11-421b-8527-d36f33c2a223}</UniqueIdentifier>
@@ -1038,6 +1038,15 @@
     </Filter>
     <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\Thorn">
       <UniqueIdentifier>{fa328530-937c-4959-9938-27c60aac5d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Rage">
+      <UniqueIdentifier>{95ed7079-9d30-4db4-998f-28735f18a5f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Attack\TomatoBomb">
+      <UniqueIdentifier>{f0b58b28-0662-40c8-8fae-47fbed887c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBomb">
+      <UniqueIdentifier>{c5a69fee-3205-4902-8433-c95bccc4d16f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

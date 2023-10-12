@@ -3,15 +3,16 @@
 
 namespace Lu
 {
-    class TomatoBoomProjectile : public MonsterProjectileScript
+    class TomatoBombProjectile : public MonsterProjectileScript
     {
     public:
-        TomatoBoomProjectile();
-        virtual ~TomatoBoomProjectile();
+        TomatoBombProjectile();
+        virtual ~TomatoBombProjectile();
 
     private:
         int     m_HP;
         float   m_HitCoolTime;
+        Vector2 m_Random;
 
     public:
         virtual void Initialize() override;
@@ -26,6 +27,6 @@ namespace Lu
 
     private:
         void InflictDamage(int _Damage);
-        void Boom();
+        void Bomb();
     };
 }

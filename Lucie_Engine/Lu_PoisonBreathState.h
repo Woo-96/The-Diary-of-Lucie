@@ -6,8 +6,18 @@ namespace Lu
 	class PoisonBreathState : public EntAttackState
 	{
 	public:
+		enum class ePoisonDir
+		{
+			Left,
+			Right,
+		};
+
+	public:
 		PoisonBreathState();
 		virtual ~PoisonBreathState();
+
+	private:
+		ePoisonDir	m_StartDir;
 
 	public:
 		virtual void Initialize() override;

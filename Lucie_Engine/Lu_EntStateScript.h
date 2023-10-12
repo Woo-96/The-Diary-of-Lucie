@@ -14,8 +14,9 @@ namespace Lu
 			Attack_Thorn,
 			Attack_PoisonBreath,
 			Attack_WindBreath,
-			Attack_TomatoBoom,
+			Attack_TomatoBomb,
 			Attack_Crater,
+			Rage,
 			Dead,
 			End
 		};

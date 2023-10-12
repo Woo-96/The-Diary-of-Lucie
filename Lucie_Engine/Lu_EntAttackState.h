@@ -35,6 +35,5 @@ namespace Lu
 	protected:
 		virtual void ChangeAnimation() = 0;
 		virtual void CreateProjectile() = 0;
-		virtual void AttackFinished();
 	};
 }

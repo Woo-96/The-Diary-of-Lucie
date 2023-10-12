@@ -22,7 +22,7 @@ namespace Lu
 			Thorn,
 			PoisonBreath,
 			WindBreath,
-			TomatoBoom,
+			TomatoBomb,
 			Crater,
 			End,
 		};
@@ -100,7 +100,9 @@ namespace Lu
 		void CompleteAction();
 
 		void HowlingSFX();
-		void AttackSFX();
+		void AttackPoisonBreathSFX();
+		void AttackWindBreathSFX();
+		void RageSFX();
 		void DeadSFX();
 
 		void Cheat();

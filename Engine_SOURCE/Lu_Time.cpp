@@ -22,7 +22,7 @@ namespace Lu
 		QueryPerformanceCounter(&m_PrevFrequency);
 
 		// 난수 생성기 초기화
-		std::srand(static_cast<unsigned int>(std::time(nullptr)));
+		std::srand((unsigned int)(std::time(nullptr)));
 		int rand = std::rand(); // 처음꺼는 버리기
 	}
 

@@ -1,4 +1,4 @@
-#include "Lu_TomatoBoomProjectile.h"
+#include "Lu_TomatoBombProjectile.h"
 #include "Lu_Object.h"
 #include "Lu_MeshRenderer.h"
 #include "Lu_Resources.h"
@@ -6,41 +6,59 @@
 #include "Lu_ProjectileScript.h"
 #include "Lu_Time.h"
 #include "Lu_CircleProjectile.h"
+#include "Lu_SoundManager.h"
+#include "Lu_AudioSource.h"
 
 namespace Lu
 {
-	TomatoBoomProjectile::TomatoBoomProjectile()
+	TomatoBombProjectile::TomatoBombProjectile()
 		: m_HP(30)
 		, m_HitCoolTime(0.f)
+		, m_Random(Vector2::Zero)
 	{
-		SetName(L"TomatoBoomProjectileScript");
+		SetName(L"TomatoBombProjectileScript");
 	}
 
-	TomatoBoomProjectile::~TomatoBoomProjectile()
+	TomatoBombProjectile::~TomatoBombProjectile()
 	{
 	}
 
-	void TomatoBoomProjectile::Initialize()
+	void TomatoBombProjectile::Initialize()
 	{
 		MonsterProjectileScript::Initialize();
+
+		m_Random.x = (float)(std::rand() % 601 - 300);
+		m_Random.y = (float)(std::rand() % (500 - 350 + 1) + 350);
 	}
 
-	void TomatoBoomProjectile::Update()
+	void TomatoBombProjectile::Update()
 	{
 		SetTime(GetTime() + (float)Time::DeltaTime());
 
-		if (GetTime() >= 1.f && GetTime() < 1.5f)
+		if (GetTime() <= 0.5f)
 		{
-			GetAnimator()->PlayAnimation(L"TomatoBoom_Blink", true);
+			Vector3 vPos = GetTransform()->GetPosition();
+			vPos.y += 100.f * (float)Time::DeltaTime();
+			GetTransform()->SetPosition(vPos);
 		}
-
-		else if (GetTime() >= 1.5f)
+		else if (0.5f < GetTime() && GetTime() <= 2.f)
 		{
-			GetAnimator()->PlayAnimation(L"TomatoBoom_Boom", true);
+			Vector3 vPos = GetTransform()->GetPosition();
+			vPos.x -= m_Random.x * (float)Time::DeltaTime();
+			vPos.y -= m_Random.y * (float)Time::DeltaTime();
+			GetTransform()->SetPosition(vPos);
+		}
+		else if (GetTime() > 5.f && GetTime() < 6.f)
+		{
+			GetAnimator()->PlayAnimation(L"TomatoBomb_Blink", true);
+		}
+		else if (GetTime() >= 6.f)
+		{
+			GetAnimator()->PlayAnimation(L"TomatoBomb_Bomb", true);
 		}
 	}
 
-	void TomatoBoomProjectile::OnCollisionEnter(Collider2D* _Other)
+	void TomatoBombProjectile::OnCollisionEnter(Collider2D* _Other)
 	{
 		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
 		{
@@ -54,7 +72,7 @@ namespace Lu
 		}
 	}
 
-	void TomatoBoomProjectile::OnCollisionStay(Collider2D* _Other)
+	void TomatoBombProjectile::OnCollisionStay(Collider2D* _Other)
 	{
 		if ((int)eLayerType::PlayerProjectile == _Other->GetOwner()->GetLayerIndex())
 		{
@@ -75,20 +93,20 @@ namespace Lu
 		}
 	}
 
-	void TomatoBoomProjectile::CreateProjectileAnimation()
+	void TomatoBombProjectile::CreateProjectileAnimation()
 	{
 		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"TomatoBoom_TEX", L"..\\Resources\\Texture\\Monster\\Boss\\TomatoBoom.png");
+			= Resources::Load<Texture>(L"TomatoBomb_TEX", L"..\\Resources\\Texture\\Monster\\Boss\\TomatoBomb.png");
 
-		GetAnimator()->Create(L"TomatoBoom_Idle", pAtlas, Vector2(0.f, 0.f), Vector2(27.f, 27.f), 1, Vector2(27.f, 27.f));
-		GetAnimator()->Create(L"TomatoBoom_Blink", pAtlas, Vector2(27.f, 0.f), Vector2(27.f, 27.f), 2, Vector2(27.f, 27.f), Vector2::Zero, 0.2f);
-		GetAnimator()->Create(L"TomatoBoom_Boom", pAtlas, Vector2(27.f, 0.f), Vector2(27.f, 27.f), 3, Vector2(27.f, 27.f), Vector2::Zero, 0.2f);
-		GetAnimator()->CompleteEvent(L"TomatoBoom_Boom") = std::bind(&TomatoBoomProjectile::Boom, this);
+		GetAnimator()->Create(L"TomatoBomb_Idle", pAtlas, Vector2(0.f, 0.f), Vector2(27.f, 27.f), 1, Vector2(27.f, 27.f));
+		GetAnimator()->Create(L"TomatoBomb_Blink", pAtlas, Vector2(27.f, 0.f), Vector2(27.f, 27.f), 2, Vector2(27.f, 27.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"TomatoBomb_Bomb", pAtlas, Vector2(27.f, 0.f), Vector2(27.f, 27.f), 3, Vector2(27.f, 27.f), Vector2::Zero, 0.2f);
+		GetAnimator()->CompleteEvent(L"TomatoBomb_Bomb") = std::bind(&TomatoBombProjectile::Bomb, this);
 
-		GetAnimator()->PlayAnimation(L"TomatoBoom_Idle", true);
+		GetAnimator()->PlayAnimation(L"TomatoBomb_Idle", true);
 	}
 
-	void TomatoBoomProjectile::InflictDamage(int _Damage)
+	void TomatoBombProjectile::InflictDamage(int _Damage)
 	{
 		// 피해 적용
 		m_HP -= _Damage;
@@ -106,7 +124,7 @@ namespace Lu
 		pDamageFont->SetDamage(_Damage);
 	}
 
-	void TomatoBoomProjectile::Boom()
+	void TomatoBombProjectile::Bomb()
 	{
 		const int numProjectiles = 8;
 		const float angleIncrement = 360.0f / numProjectiles; // 8방향으로 퍼지도록 각도 간격 계산
@@ -137,6 +155,10 @@ namespace Lu
 			Vector3 forwardDirection(cosAngle, sinAngle, 0.f); // 투사체가 전진할 방향 벡터 계산
 			pProjectileScript->SetDir(forwardDirection);
 		}
+
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"EntTomatoBombSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntTomatoBombSFX.ogg"));
+		pSFX->Play();
 
 
 		object::Destroy(GetOwner());

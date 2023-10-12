@@ -9,6 +9,10 @@ namespace Lu
 		ThornState();
 		virtual ~ThornState();
 
+	private:
+		bool		m_bFirst;
+		GameObject* m_FX;
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -20,5 +24,9 @@ namespace Lu
 	protected:
 		virtual void ChangeAnimation() override;
 		virtual void CreateProjectile() override;
+
+	private:
+		void StartFX();
+		void FinishedFX();
 	};
 }

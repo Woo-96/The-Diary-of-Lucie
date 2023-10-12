@@ -3,11 +3,11 @@
 
 namespace Lu
 {
-	class TomatoBoomState : public EntAttackState
+	class TomatoBombState : public EntAttackState
 	{
 	public:
-		TomatoBoomState();
-		virtual ~TomatoBoomState();
+		TomatoBombState();
+		virtual ~TomatoBombState();
 
 	public:
 		virtual void Initialize() override;

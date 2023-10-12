@@ -493,7 +493,7 @@ namespace renderer
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);
 		material->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"Ent_Attack_TomatoBoom_Mtrl", material);
+		Resources::Insert(L"Ent_Attack_TomatoBomb_Mtrl", material);
 
 		material = std::make_shared<Material>();
 		material->SetShader(animationShader);

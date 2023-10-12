@@ -2,10 +2,12 @@
 #include "Lu_Animator.h"
 #include "Lu_Resources.h"
 #include "Lu_Object.h"
+#include "Lu_Time.h"
 
 namespace Lu
 {
 	ThornProjectile::ThornProjectile()
+		: m_bFirst(false)
 	{
 		SetName(L"ThornProjectileScript");
 	}
@@ -17,6 +19,19 @@ namespace Lu
 	void ThornProjectile::Initialize()
 	{
 		MonsterProjectileScript::Initialize();
+	}
+
+	void ThornProjectile::Update()
+	{
+		if (!m_bFirst)
+		{
+			SetTime(GetTime() + (float)Time::DeltaTime());
+			if (GetTime() >= 0.6f)
+			{
+				GetOwner()->AddComponent<Collider2D>()->SetSize(Vector2(0.5f, 0.5f));
+				m_bFirst = true;
+			}
+		}
 	}
 
 	void ThornProjectile::CreateProjectileAnimation()

@@ -27,9 +27,4 @@ namespace Lu
 	{
 		SetTime(0.f);
 	}
-
-	void EntAttackState::AttackFinished()
-	{
-		GetEntScript()->ChangeState(eState::Idle);
-	}
 }

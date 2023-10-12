@@ -6,13 +6,16 @@
 #include "Lu_SoundManager.h"
 #include "Lu_AudioSource.h"
 #include "Lu_Input.h"
+#include "Lu_Renderer.h"
+#include "Lu_CameraScript.h"
 
 #include "Lu_EntIdleState.h"
 #include "Lu_ThornState.h"
 #include "Lu_PoisonBreathState.h"
 #include "Lu_WindBreathState.h"
-#include "Lu_TomatoBoomState.h"
+#include "Lu_TomatoBombState.h"
 #include "Lu_CraterState.h"
+#include "Lu_EntRageState.h"
 #include "Lu_EntDeadState.h"
 
 namespace Lu
@@ -85,8 +88,9 @@ namespace Lu
 		AddState(new ThornState);
 		AddState(new PoisonBreathState);
 		AddState(new WindBreathState);
-		AddState(new TomatoBoomState);
+		AddState(new TomatoBombState);
 		AddState(new CraterState);
+		AddState(new EntRageState);
 		AddState(new EntDeadState);
 
 		m_CurState = GetStateScript(EntStateScript::eState::Idle);
@@ -112,10 +116,13 @@ namespace Lu
 
 		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 
-		if (m_CurPhase == ePhase::Phase_1
-			&& GetInfo().HP / GetInfo().MaxHP <= 0.25f)
+		float fCurHP = GetInfo().HP;
+		float fMaxHP = GetInfo().MaxHP;
+		float fHPPer = (fCurHP / fMaxHP) * 100.0f;
+		if (m_CurPhase == ePhase::Phase_1 && fHPPer < 25.f)
 		{
 			m_CurPhase = ePhase::Phase_2;
+			ChangeState(EntStateScript::eState::Rage);
 		}
 	}
 
@@ -125,10 +132,13 @@ namespace Lu
 
 		m_HPBar->GetComponent<ProgressBarScript>()->SetCurValue(GetInfo().HP);
 	
-		if (m_CurPhase == ePhase::Phase_1
-			&& GetInfo().HP / GetInfo().MaxHP <= 0.25f)
+		float fCurHP = GetInfo().HP;
+		float fMaxHP = GetInfo().MaxHP;
+		float fHPPer = (fCurHP / fMaxHP) * 100.0f;
+		if (m_CurPhase == ePhase::Phase_1 && fHPPer < 25.f)
 		{
 			m_CurPhase = ePhase::Phase_2;
+			ChangeState(EntStateScript::eState::Rage);
 		}
 	}
 
@@ -175,10 +185,30 @@ namespace Lu
 		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
 		pSFX->SetClip(Resources::Load<AudioClip>(L"EntHowlingSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntHowlingSFX.ogg"));
 		pSFX->Play();
+
+		// 카메라 쉐이킹
+		renderer::mainCamera->GetOwner()->GetComponent<CameraScript>()->RequestCameraShaking(10.f, 1.5f);
 	}
 
-	void EntScript::AttackSFX()
+	void EntScript::AttackPoisonBreathSFX()
 	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"EntPoisonBreathSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntPoisonBreathSFX.ogg"));
+		pSFX->Play();
+	}
+
+	void EntScript::AttackWindBreathSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"EntWindBreathSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntWindBreathSFX.ogg"));
+		pSFX->Play();
+	}
+
+	void EntScript::RageSFX()
+	{
+		AudioSource* pSFX = SceneManager::FindSoundMgr()->GetComponent<SoundManager>()->GetSFX();
+		pSFX->SetClip(Resources::Load<AudioClip>(L"EntRageSFX", L"..\\Resources\\Sound\\SFX\\Monster\\Ent\\EntRageSFX.ogg"));
+		pSFX->Play();
 	}
 
 	void EntScript::DeadSFX()
@@ -213,7 +243,7 @@ namespace Lu
 				m_AttackNumber = (int)eAttackType::WindBreath;
 
 			else if (Input::GetKeyDown(eKeyCode::_8))
-				m_AttackNumber = (int)eAttackType::TomatoBoom;
+				m_AttackNumber = (int)eAttackType::TomatoBomb;
 
 			if (Input::GetKeyDown(eKeyCode::_9))
 				m_AttackNumber = (int)eAttackType::Crater;
@@ -227,7 +257,7 @@ namespace Lu
 
 		// Idle
 		GetAnimator()->Create(L"Ent_Phase1_Idle", pAtlas, Vector2(0.f, 350.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
-		GetAnimator()->Create(L"Ent_Phase2_Idle", pAtlas, Vector2(0.f, 350.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Ent_Phase2_Idle", pAtlas, Vector2(0.f, 2100.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
 
 		// Sleep
 		GetAnimator()->Create(L"Ent_Sleep", pAtlas, Vector2(0.f, 0.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
@@ -241,29 +271,55 @@ namespace Lu
 		GetAnimator()->StartEvent(L"Ent_Howling") = std::bind(&EntScript::HowlingSFX, this);
 		GetAnimator()->CompleteEvent(L"Ent_Howling") = std::bind(&EntScript::CompleteAction, this);
 
+		GetAnimator()->Create(L"Ent_Howling_Phase2", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+		GetAnimator()->StartEvent(L"Ent_Howling_Phase2") = std::bind(&EntScript::HowlingSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Howling_Phase2") = std::bind(&EntScript::CompleteAction, this);
 
-		// 토마토 빼고 모든 공격과 공격 사이에 눈 질끈 감았다가 뜸
+
+		// Attack - TomatoBomb
+		GetAnimator()->Create(L"Ent_Attack_TomatoBomb_Phase1_Start", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Ent_Attack_TomatoBomb_Phase2_Start", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
+		GetAnimator()->Create(L"Ent_Attack_TomatoBomb_Phase1_End", pAtlas, Vector2(966.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.4f);
+		GetAnimator()->CompleteEvent(L"Ent_Attack_TomatoBomb_Phase1_End") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_Attack_TomatoBomb_Phase2_End", pAtlas, Vector2(966.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.4f);
+		GetAnimator()->CompleteEvent(L"Ent_Attack_TomatoBomb_Phase2_End") = std::bind(&EntScript::CompleteAction, this);
+
+
+		// Attack Change & Attack - Thorn
+		GetAnimator()->Create(L"Ent_Attack_Change_Phase1", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+		GetAnimator()->Create(L"Ent_Attack_Change_Phase2", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+
+
+		// Attack - PoisonBreath
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Left", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 5, Vector2(322.f, 350.f), Vector2::Zero, 1.2f);
+		GetAnimator()->StartEvent(L"Ent_Attack_PoisonBreath_Phase1_Left") = std::bind(&EntScript::AttackPoisonBreathSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Attack_PoisonBreath_Phase1_Left") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Right", pAtlas, Vector2(0.f, 1400.f), Vector2(322.f, 350.f), 5, Vector2(322.f, 350.f), Vector2::Zero, 1.2f);
+		GetAnimator()->StartEvent(L"Ent_Attack_PoisonBreath_Phase1_Right") = std::bind(&EntScript::AttackPoisonBreathSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Attack_PoisonBreath_Phase1_Right") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Left", pAtlas, Vector2(0.f, 3150.f), Vector2(322.f, 350.f), 5, Vector2(322.f, 350.f), Vector2::Zero, 1.2f);
+		GetAnimator()->StartEvent(L"Ent_Attack_PoisonBreath_Phase2_Left") = std::bind(&EntScript::AttackPoisonBreathSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Attack_PoisonBreath_Phase2_Left") = std::bind(&EntScript::CompleteAction, this);
+		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Right", pAtlas, Vector2(0.f, 3500.f), Vector2(322.f, 350.f), 5, Vector2(322.f, 350.f), Vector2::Zero, 1.2f);
+		GetAnimator()->StartEvent(L"Ent_Attack_PoisonBreath_Phase2_Right") = std::bind(&EntScript::AttackPoisonBreathSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Attack_PoisonBreath_Phase2_Right") = std::bind(&EntScript::CompleteAction, this);
+
+
 		// Attack - WindBreath
-		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase1", pAtlas, Vector2(644.f, 1050.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
-		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase2", pAtlas, Vector2(2898.f, 1050.f), Vector2(322.f, 350.f), 1, Vector2(322.f, 350.f));
+		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase1", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+		GetAnimator()->StartEvent(L"Ent_Attack_WindBreath_Phase1") = std::bind(&EntScript::AttackWindBreathSFX, this);
+		GetAnimator()->Create(L"Ent_Attack_WindBreath_Phase2", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
+		GetAnimator()->StartEvent(L"Ent_Attack_WindBreath_Phase2") = std::bind(&EntScript::AttackWindBreathSFX, this);
 
-		// Attack - TomatoBoom (2번째 프레임에서 멈춰있어야 함.. 끝나면 다시 반대로 출력해야함..)
-		// 반복 false로 재생했을 때 마지막 프레임에서 안멈추면 2번째 프레임만 있는 애니메이션 만들어야함
-		// 이거에다가 차징 = 가시 공격
-		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_Start", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase2_Start", pAtlas, Vector2(0.f, 2080.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f);
-		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase1_End", pAtlas, Vector2(0.f, 700.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
-		GetAnimator()->Create(L"Ent_Attack_TomatoBoom_Phase2_End", pAtlas, Vector2(0.f, 2080.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 0.3f, true);
 
-		// Attack - PoisonBreath (왼->오 혹은 오->왼 다 출력해야함..)
-		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Left", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
-		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase1_Right", pAtlas, Vector2(0.f, 1050.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f, true);
-		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Left", pAtlas, Vector2(0.f, 3150.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
-		GetAnimator()->Create(L"Ent_Attack_PoisonBreath_Phase2_Right", pAtlas, Vector2(0.f, 3150.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f, true);
+		// Rage
+		GetAnimator()->Create(L"Ent_Rage", pAtlas, Vector2(0.f, 1750.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+		GetAnimator()->StartEvent(L"Ent_Rage") = std::bind(&EntScript::RageSFX, this);
+		GetAnimator()->CompleteEvent(L"Ent_Rage") = std::bind(&EntScript::CompleteAction, this);
 
 
 		// Dead
-		GetAnimator()->Create(L"Ent_Dead", pAtlas, Vector2(0.f, 2800.f), Vector2(322.f, 350.f), 2, Vector2(322.f, 350.f), Vector2::Zero, 1.f);
+		GetAnimator()->Create(L"Ent_Dead", pAtlas, Vector2(644.f, 2450.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
 		GetAnimator()->StartEvent(L"Ent_Dead") = std::bind(&EntScript::DeadSFX, this);
 		GetAnimator()->CompleteEvent(L"Ent_Dead") = std::bind(&EntScript::CompleteAction, this);
 	}
@@ -293,6 +349,9 @@ namespace Lu
 				break;
 			}
 		}
+			break;
+		case EntStateScript::eState::Rage:
+			GetAnimator()->PlayAnimation(L"Ent_Rage", true);
 			break;
 		case EntStateScript::eState::Dead:
 			GetAnimator()->PlayAnimation(L"Ent_Dead", true);

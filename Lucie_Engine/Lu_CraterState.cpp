@@ -1,5 +1,6 @@
 #include "Lu_CraterState.h"
 #include "Lu_EntScript.h"
+#include "Lu_Animator.h"
 
 namespace Lu
 {
@@ -35,6 +36,15 @@ namespace Lu
 
 	void CraterState::ChangeAnimation()
 	{
+		switch (GetEntScript()->GetPhase())
+		{
+		case EntScript::ePhase::Phase_1:
+			GetEntScript()->GetAnimator()->PlayAnimation(L"Ent_Howling", true);
+			break;
+		case EntScript::ePhase::Phase_2:
+			GetEntScript()->GetAnimator()->PlayAnimation(L"Ent_Howling_Phase2", true);
+			break;
+		}
 	}
 
 	void CraterState::CreateProjectile()

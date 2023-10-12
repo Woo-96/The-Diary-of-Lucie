@@ -45,7 +45,7 @@ namespace Lu
 			else
 				iRand = GetEntScript()->GetAttackNumber();
 
-			switch ((EntScript::eAttackType)3/*(EntScript::eAttackType)iRand*/)
+			switch ((EntScript::eAttackType)iRand)
 			{
 			case EntScript::eAttackType::Thorn:
 				m_EntScript->ChangeState(eState::Attack_Thorn);
@@ -56,8 +56,8 @@ namespace Lu
 			case EntScript::eAttackType::WindBreath:
 				m_EntScript->ChangeState(eState::Attack_WindBreath);
 				break;
-			case EntScript::eAttackType::TomatoBoom:
-				m_EntScript->ChangeState(eState::Attack_TomatoBoom);
+			case EntScript::eAttackType::TomatoBomb:
+				m_EntScript->ChangeState(eState::Attack_TomatoBomb);
 				break;
 			case EntScript::eAttackType::Crater:
 				m_EntScript->ChangeState(eState::Attack_Crater);
