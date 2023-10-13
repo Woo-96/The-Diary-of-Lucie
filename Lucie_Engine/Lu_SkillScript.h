@@ -55,6 +55,9 @@ namespace Lu
 
 	private:
 		void CreateSkill();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }
 

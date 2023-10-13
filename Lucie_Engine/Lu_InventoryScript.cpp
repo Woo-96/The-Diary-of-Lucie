@@ -287,4 +287,19 @@ namespace Lu
 
 		return true;
 	}
+
+	void InventoryScript::SetActive(bool _b)
+	{
+		for (int i = 0; i < (int)eParts::End; ++i)
+		{
+			if (m_arrParts[i])
+			{
+				m_arrParts[i]->SetActive(_b);
+				if (m_arrParts[i]->GetComponent<InventorySlotScript>())
+					m_arrParts[i]->GetComponent<InventorySlotScript>()->SetActive(_b);
+			}
+		}
+
+		GetOwner()->SetActive(_b);
+	}
 }

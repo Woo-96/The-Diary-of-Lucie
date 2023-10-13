@@ -45,5 +45,8 @@ namespace Lu
 	private:
 		void ChangeHeartColor(int _Index, eHeartColor _Color);
 		void ChangeHeartSize(int _Index, eHeartSize _Size);
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

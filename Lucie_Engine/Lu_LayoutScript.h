@@ -45,5 +45,8 @@ namespace Lu
 		void SelectSlot(int _Num); // 1 ~ 4 스킬 슬롯 선택
 		void LearnSkill(tSkill* _Skill);
 		void ResetLayout();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

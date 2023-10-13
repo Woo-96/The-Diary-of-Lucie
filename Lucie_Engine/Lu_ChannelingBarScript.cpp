@@ -249,4 +249,9 @@ namespace Lu
 		m_arrParts[(int)eParts::FullChargeFX]->GetComponent<Animator>()->FindAnimation(L"FullChargeFX")->Reset();
 		m_arrParts[(int)eParts::FullChargeFX]->SetActive(false);
 	}
+
+	void ChannelingBarScript::SetActive(bool _b)
+	{
+		GetOwner()->SetActive(_b);
+	}
 }

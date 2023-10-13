@@ -50,6 +50,9 @@ namespace Lu
 
     public:
         void Binds();
+
+    public:
+        virtual void SetActive(bool _b) override;
     };
 }
 

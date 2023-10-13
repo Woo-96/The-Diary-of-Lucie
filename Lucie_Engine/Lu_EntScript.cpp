@@ -60,6 +60,7 @@ namespace Lu
 		{
 			m_HPFrame = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(759.f, 48.f, 100.f), eLayerType::UI);
 			m_HPFrame->SetName(L"Ent_HPFrame");
+			m_HPFrame->SetActive(false);
 
 			MeshRenderer* pMeshRender = m_HPFrame->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -69,6 +70,7 @@ namespace Lu
 		{
 			m_HPBar = object::Instantiate<GameObject>(Vector3(0.f, 350.f, 100.f), Vector3(720.f, 30.f, 100.f), eLayerType::UI);
 			m_HPBar->SetName(L"Ent_HPBar");
+			m_HPBar->SetActive(false);
 
 			MeshRenderer* pMeshRender = m_HPBar->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -178,6 +180,12 @@ namespace Lu
 	{
 		if (!m_bPatternStart)
 			m_bPatternStart = true;
+
+		if (m_HPFrame)
+			m_HPFrame->SetActive(true);
+
+		if (m_HPBar)
+			m_HPBar->SetActive(true);
 	}
 
 	void EntScript::HowlingSFX()

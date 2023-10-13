@@ -274,4 +274,15 @@ namespace Lu
 		m_arrSkill[(int)eSkillType::FireStrike]->SkillName = L"파이어 스트라이크";
 		m_arrSkill[(int)eSkillType::FireStrike]->SkillDescription = L"바닥에서 화염을 끌어올려\n넓은 범위에 마법대미지를 준다.";
 	}
+
+	void SkillScript::SetActive(bool _b)
+	{
+		for (int i = 0; i < (int)eParts::End; ++i)
+		{
+			if (m_arrParts[i])
+				m_arrParts[i]->SetActive(_b);
+		}
+
+		GetOwner()->SetActive(_b);
+	}
 }

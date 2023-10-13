@@ -72,4 +72,9 @@ namespace Lu
 			FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 20.f, FONT_RGBA(255, 255, 255, 255));
 		}
 	}
+
+	void ProgressBarScript::SetActive(bool _b)
+	{
+		GetOwner()->SetActive(_b);
+	}
 }

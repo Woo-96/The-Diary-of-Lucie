@@ -172,4 +172,15 @@ namespace Lu
 			m_arrHeart[_Index]->GetComponent<Transform>()->SetScale(Vector3(36.f, 33.f, 100.f));
 		}
 	}
+
+	void HeartScript::SetActive(bool _b)
+	{
+		for (int i = 0; i < (int)MaxHeart * 2; ++i)
+		{
+			if (m_arrHeart[i])
+				m_arrHeart[i]->SetActive(_b);
+		}
+
+		GetOwner()->SetActive(_b);
+	}
 }

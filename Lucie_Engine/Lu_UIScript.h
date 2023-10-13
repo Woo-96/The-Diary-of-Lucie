@@ -14,5 +14,8 @@ namespace Lu
 		virtual void Update() override {}
 		virtual void LateUpdate() override {}
 		virtual void Render() override {}
+
+	public:
+		virtual void SetActive(bool _b) = 0;
 	};
 }

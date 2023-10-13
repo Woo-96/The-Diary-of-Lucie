@@ -9,6 +9,9 @@ namespace Lu
 		StageScene();
 		virtual ~StageScene();
 
+	private:
+		static GameObject* m_GoldTex;
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -23,5 +26,7 @@ namespace Lu
 	protected:
 		void CreateUI();
 		bool IsInBattle();
+		void HideHUD();
+		void ShowHUD();
 	};
 }

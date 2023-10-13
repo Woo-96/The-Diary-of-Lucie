@@ -45,7 +45,7 @@ namespace Lu
 			else
 				iRand = GetEntScript()->GetAttackNumber();
 
-			switch ((EntScript::eAttackType)iRand)
+			switch (EntScript::eAttackType::WindBreath/*(EntScript::eAttackType)iRand*/)
 			{
 			case EntScript::eAttackType::Thorn:
 				m_EntScript->ChangeState(eState::Attack_Thorn);

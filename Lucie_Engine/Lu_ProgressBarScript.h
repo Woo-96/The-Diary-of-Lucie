@@ -53,5 +53,8 @@ namespace Lu
 	public:
 		virtual void Update() override {}
 		virtual void Render() override;
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

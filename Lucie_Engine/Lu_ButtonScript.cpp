@@ -83,4 +83,9 @@ namespace Lu
 
 		return true;
 	}
+
+	void ButtonScript::SetActive(bool _b)
+	{
+		GetOwner()->SetActive(_b);
+	}
 }

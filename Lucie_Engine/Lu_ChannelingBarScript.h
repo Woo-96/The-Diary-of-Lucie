@@ -63,6 +63,9 @@ namespace Lu
 
 	private:
 		void CompleteFX();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }
 

@@ -59,4 +59,9 @@ namespace Lu
 		wcscpy_s(Font, wstrFont.c_str());
 		FontWrapper::DrawFont(Font, vFontPos.x, vFontPos.y, 50.f, FONT_RGBA(255, 255, 255, 255));
 	}
+
+	void DamageFontScript::SetActive(bool _b)
+	{
+		GetOwner()->SetActive(_b);
+	}
 }

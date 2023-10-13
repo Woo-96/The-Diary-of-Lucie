@@ -56,5 +56,8 @@ namespace Lu
 		void WeaponChange(eSlotType _Slot, bool _bEquip);	// ¼öµ¿ ÀåÂø
 		void ClearSlot(eSlotType _Slot);
 		void ResetWeaponSlot();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

@@ -1752,4 +1752,25 @@ namespace Lu
 			pNumScript->SetCurNumber(m_PlayerInfo.CurGold);
 		}
 	}
+
+	void PlayerScript::HideHUD()
+	{
+		for (int i = 0; i < (int)eUI::End; ++i)
+		{
+			if (i == (int)eUI::Channeling)
+				continue;
+
+			if (m_arrUI[i])
+				m_arrUI[i]->SetActive(false);
+		}
+	}
+
+	void PlayerScript::ShowHUD()
+	{
+		for (int i = 0; i < (int)eUI::Channeling; ++i)
+		{
+			if (m_arrUI[i])
+				m_arrUI[i]->SetActive(true);
+		}
+	}
 }

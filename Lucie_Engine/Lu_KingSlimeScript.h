@@ -61,6 +61,7 @@ namespace Lu
 
 	public:
 		void ChangeState(KingSlimeStateScript::eState _NextState);
+		void ShowHUD();
 	};
 }
 

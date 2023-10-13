@@ -169,4 +169,12 @@ namespace Lu
 		m_arrWeapon[(int)eSlotType::WeaponSlot_A] = nullptr;
 		m_arrWeapon[(int)eSlotType::WeaponSlot_B] = nullptr;
 	}
+
+	void WeaponSlotScript::SetActive(bool _b)
+	{
+		if (m_arrIcon[(int)m_CurType])
+			m_arrIcon[(int)m_CurType]->SetActive(_b);
+
+		GetOwner()->SetActive(_b);
+	}
 }

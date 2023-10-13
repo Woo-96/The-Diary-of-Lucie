@@ -57,4 +57,12 @@ namespace Lu
 			}
 		}
 	}
+
+	void QuickItemScript::SetActive(bool _b)
+	{
+		if (m_CurIcon)
+			m_CurIcon->SetActive(_b);
+
+		GetOwner()->SetActive(_b);
+	}
 }

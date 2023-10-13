@@ -48,4 +48,9 @@ namespace Lu
 		GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_0, &vLT);
 		GetOwner()->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::VEC2_1, &vSlice);
 	}
+
+	void NumberScript::SetActive(bool _b)
+	{
+		GetOwner()->SetActive(_b);
+	}
 }

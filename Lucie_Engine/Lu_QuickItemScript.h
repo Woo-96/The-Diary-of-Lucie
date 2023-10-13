@@ -38,5 +38,8 @@ namespace Lu
 		void ResetQuickSlotItem();
 		void SetQuickSlotItem(ItemScript* _Item);
 		void UseQuickSlotItem();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

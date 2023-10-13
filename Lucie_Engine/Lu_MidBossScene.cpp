@@ -119,6 +119,9 @@ namespace Lu
 				pMainCam->SetOffset(Vector2(0.f, 0.f));
 				renderer::mainCamera->SetScale(1.f);
 
+				ShowHUD();
+				m_Boss->GetComponent<KingSlimeScript>()->ShowHUD();
+
 				object::Destroy(m_DramaFX);
 				m_DramaFX = nullptr;
 				m_bCameraMove = false;
@@ -172,6 +175,7 @@ namespace Lu
 		{
 			// 카메라 설정
 			m_bCameraMove = true;
+			HideHUD();
 
 			GameObject* pPlayer = SceneManager::FindPlayer();
 			PlayerScript* pPlayerScript = pPlayer->GetComponent<PlayerScript>();
@@ -249,7 +253,7 @@ namespace Lu
 		object::Destroy(m_ChestFX);
 		m_ChestFX = nullptr;
 
-		GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 70.f, 500.f), Vector3(144.f, 144.f, 200.f), eLayerType::Item);
+		GameObject* pObject = object::Instantiate<GameObject>(Vector3(0.f, 70.f, 500.f), Vector3(144.f, 144.f, 200.f), eLayerType::Immovable);
 		pObject->SetName(L"Chest");
 		MeshRenderer* pMeshRender = pObject->AddComponent<MeshRenderer>();
 		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -259,6 +263,6 @@ namespace Lu
 		pCollider->SetCenter(Vector2(0.f, -30.f));
 		pObject->AddComponent<Animator>();
 		pObject->AddComponent<ChestScript>();
-		pObject->AddComponent<ImmovableScript>();
+		//pObject->AddComponent<ImmovableScript>(); // 껴서 지웠음
 	}
 }

@@ -222,4 +222,9 @@ namespace Lu
 		wcscpy_s(Font, wstrText.c_str());
 		FontWrapper::DrawFont(Font, 1340.f, 610.f, 25.f, FONT_RGBA(255, 191, 0, 255));
 	}
+
+	void InventoryLayoutScript::SetActive(bool _b)
+	{
+		GetOwner()->SetActive(_b);
+	}
 }

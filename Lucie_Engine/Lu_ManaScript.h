@@ -37,5 +37,8 @@ namespace Lu
 
 	private:
 		void ChangeManaColor(int _Index, eManaColor _Color);
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

@@ -9,6 +9,9 @@ namespace Lu
 		WindBreathState();
 		virtual ~WindBreathState();
 
+	private:
+		Vector3 m_BreathDir;
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;

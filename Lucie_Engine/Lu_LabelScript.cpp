@@ -61,4 +61,9 @@ namespace Lu
             m_MeshRender->GetMaterial()->SetScalarParam(Lu::graphics::SCALAR_PARAM::FLOAT_3, &fAlpha);
         }
     }
+
+    void LabelScript::SetActive(bool _b)
+    {
+        GetOwner()->SetActive(_b);
+    }
 }

@@ -106,4 +106,15 @@ namespace Lu
 	{
 		m_arrMana[_Index]->GetComponent<MeshRenderer>()->SetMaterial(m_arrMaterial[(int)_Color]);
 	}
+
+	void ManaScript::SetActive(bool _b)
+	{
+		for (int i = 0; i < (int)MaxMana *2; ++i)
+		{
+			if (m_arrMana[i])
+				m_arrMana[i]->SetActive(_b);
+		}
+
+		GetOwner()->SetActive(_b);
+	}
 }

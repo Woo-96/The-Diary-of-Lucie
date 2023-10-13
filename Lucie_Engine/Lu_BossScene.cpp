@@ -152,6 +152,7 @@ namespace Lu
 					pMainCam->SetOffset(Vector2(0.f, 200.f));
 
 					m_Boss->GetComponent<EntScript>()->PatternStart();
+					ShowHUD();
 
 					m_bBossWakeUp = false;
 					m_Time = 0.f;
@@ -190,6 +191,8 @@ namespace Lu
 
 		CameraScript* pMainCam = renderer::mainCamera->GetOwner()->GetComponent<CameraScript>();
 		renderer::mainCamera->SetScale(1.2f);
+
+		HideHUD();
 	}
 
 	void BossScene::OnExit()

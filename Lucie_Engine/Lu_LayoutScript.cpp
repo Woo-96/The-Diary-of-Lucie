@@ -242,4 +242,18 @@ namespace Lu
 		m_SkillCount = 0;
 		m_CurSlot = 0;
 	}
+
+	void LayoutScript::SetActive(bool _b)
+	{
+		for (int i = 0; i < (int)eParts::End; ++i)
+		{
+			if (i == (int)eParts::AroundSkillSlot && 0 == m_CurSlot)
+				continue;
+				
+			if (m_arrParts[i])
+				m_arrParts[i]->SetActive(_b);
+		}
+
+		GetOwner()->SetActive(_b);
+	}
 }

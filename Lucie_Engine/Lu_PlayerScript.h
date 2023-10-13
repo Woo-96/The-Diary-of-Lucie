@@ -242,6 +242,9 @@ namespace Lu
 		void UseStamina(float _Value);
 		void GetEXP(int _Value);
 		void GetCoin(int _Value);
+
+		void HideHUD();
+		void ShowHUD();
 	};
 }
 

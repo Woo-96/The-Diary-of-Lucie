@@ -19,6 +19,8 @@
 
 namespace Lu
 {
+	GameObject* StageScene::m_GoldTex = nullptr;
+
 	StageScene::StageScene()
 	{
 		SetName(L"StageSceneScript");
@@ -165,10 +167,10 @@ namespace Lu
 		}
 
 		{
-			pObject = object::Instantiate<GameObject>(Vector3(685.f, 355.f, 100.f), Vector3(21.f, 28.5f, 100.f), eLayerType::UI);
-			pObject->SetName(L"UI_Gold_G");
-			SceneManager::DontDestroyOnLoad(pObject);
-			pMeshRender = pObject->AddComponent<MeshRenderer>();
+			m_GoldTex = object::Instantiate<GameObject>(Vector3(685.f, 355.f, 100.f), Vector3(21.f, 28.5f, 100.f), eLayerType::UI);
+			m_GoldTex->SetName(L"UI_Gold_G");
+			SceneManager::DontDestroyOnLoad(m_GoldTex);
+			pMeshRender = m_GoldTex->AddComponent<MeshRenderer>();
 			pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			pMeshRender->SetMaterial(Resources::Find<Material>(L"Gold_A_Mtrl"));
 		}
@@ -247,5 +249,21 @@ namespace Lu
 	{
 		std::vector<GameObject*> Monsters = GetLayer(eLayerType::Monster).GetGameObjects();
 		return !Monsters.empty();
+	}
+
+	void StageScene::HideHUD()
+	{
+		SceneManager::FindPlayer()->GetComponent<PlayerScript>()->HideHUD();
+
+		if (m_GoldTex)
+			m_GoldTex->SetActive(false);
+	}
+
+	void StageScene::ShowHUD()
+	{
+		SceneManager::FindPlayer()->GetComponent<PlayerScript>()->ShowHUD();
+
+		if (m_GoldTex)
+			m_GoldTex->SetActive(true);
 	}
 }

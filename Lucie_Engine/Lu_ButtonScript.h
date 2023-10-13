@@ -46,6 +46,9 @@ namespace Lu
 		virtual void ButtonNomalEvent() = 0;
 		virtual void ButtonHoveredEvent() = 0;
 		virtual void ButtonClickEvent() = 0;
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }
 

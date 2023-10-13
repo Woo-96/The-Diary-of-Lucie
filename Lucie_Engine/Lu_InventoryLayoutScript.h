@@ -38,5 +38,8 @@ namespace Lu
 	private:
 		void TextPrint();
 		void PlayerInfoPrint();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }

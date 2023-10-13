@@ -94,5 +94,8 @@ namespace Lu
 
 	private:
 		bool MouseCollision();
+
+	public:
+		virtual void SetActive(bool _b) override;
 	};
 }
