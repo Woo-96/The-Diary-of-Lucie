@@ -181,6 +181,6 @@ namespace Lu
 				m_arrHeart[i]->SetActive(_b);
 		}
 
-		GetOwner()->SetActive(_b);
+		//GetOwner()->SetActive(_b);
 	}
 }

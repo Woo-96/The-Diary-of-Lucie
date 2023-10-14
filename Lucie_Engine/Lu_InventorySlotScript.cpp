@@ -166,7 +166,5 @@ namespace Lu
 	{
 		if (m_Item)
 			m_Item->GetOwner()->SetActive(_b);
-
-		GetOwner()->SetActive(_b);
 	}
 }

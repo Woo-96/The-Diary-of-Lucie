@@ -71,11 +71,13 @@ namespace Lu
 		{
 			if (i < m_MaxCount)
 			{
+				m_arrMana[i]->SetActive(true);
 				ChangeManaColor(i, eManaColor::Empty);
 			}
 			else
 			{
-				m_arrMana[i]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+				m_arrMana[i]->SetActive(false);
+				//m_arrMana[i]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
 			}
 		}
 	}
@@ -93,11 +95,13 @@ namespace Lu
 		{
 			if (i < _CurMP)
 			{
+				m_arrMana[i + MaxMana]->SetActive(true);
 				ChangeManaColor(i + MaxMana, eManaColor::Full);
 			}
 			else
 			{
-				m_arrMana[i + MaxMana]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+				//m_arrMana[i + MaxMana]->GetComponent<MeshRenderer>()->SetMaterial(nullptr);
+				m_arrMana[i + MaxMana]->SetActive(false);
 			}
 		}
 	}
@@ -109,12 +113,12 @@ namespace Lu
 
 	void ManaScript::SetActive(bool _b)
 	{
-		for (int i = 0; i < (int)MaxMana *2; ++i)
+		for (int i = 0; i < (int)MaxMana * 2; ++i)
 		{
 			if (m_arrMana[i])
 				m_arrMana[i]->SetActive(_b);
 		}
 
-		GetOwner()->SetActive(_b);
+		//GetOwner()->SetActive(_b);
 	}
 }

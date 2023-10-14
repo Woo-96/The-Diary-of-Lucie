@@ -14,6 +14,9 @@ namespace Lu
 		virtual void Initialize() override;
 		virtual void Update() override;
 
+	public:
+		virtual void OnCollisionEnter(Collider2D* _Other) override {}
+
 	protected:
 		virtual void CreateProjectileAnimation() override;
 	};
