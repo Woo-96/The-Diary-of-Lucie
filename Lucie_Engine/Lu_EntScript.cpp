@@ -35,8 +35,8 @@ namespace Lu
 	{
 		SetName(L"EntScript");
 
-		GetInfo().HP = 200;
-		GetInfo().MaxHP = 200;
+		GetInfo().HP = 500;
+		GetInfo().MaxHP = 500;
 	}
 
 	EntScript::~EntScript()
@@ -121,7 +121,7 @@ namespace Lu
 		float fCurHP = GetInfo().HP;
 		float fMaxHP = GetInfo().MaxHP;
 		float fHPPer = (fCurHP / fMaxHP) * 100.0f;
-		if (m_CurPhase == ePhase::Phase_1 && fHPPer < 25.f)
+		if (m_CurPhase == ePhase::Phase_1 && fHPPer < 50.f)
 		{
 			m_CurPhase = ePhase::Phase_2;
 			ChangeState(EntStateScript::eState::Rage);
@@ -137,7 +137,7 @@ namespace Lu
 		float fCurHP = GetInfo().HP;
 		float fMaxHP = GetInfo().MaxHP;
 		float fHPPer = (fCurHP / fMaxHP) * 100.0f;
-		if (m_CurPhase == ePhase::Phase_1 && fHPPer < 25.f)
+		if (m_CurPhase == ePhase::Phase_1 && fHPPer < 50.f)
 		{
 			m_CurPhase = ePhase::Phase_2;
 			ChangeState(EntStateScript::eState::Rage);
@@ -321,7 +321,7 @@ namespace Lu
 
 
 		// Rage
-		GetAnimator()->Create(L"Ent_Rage", pAtlas, Vector2(0.f, 1750.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.5f);
+		GetAnimator()->Create(L"Ent_Rage", pAtlas, Vector2(0.f, 1750.f), Vector2(322.f, 350.f), 3, Vector2(322.f, 350.f), Vector2::Zero, 0.2f);
 		GetAnimator()->StartEvent(L"Ent_Rage") = std::bind(&EntScript::RageSFX, this);
 		GetAnimator()->CompleteEvent(L"Ent_Rage") = std::bind(&EntScript::CompleteAction, this);
 

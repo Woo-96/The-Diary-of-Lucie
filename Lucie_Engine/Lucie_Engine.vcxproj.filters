@@ -329,6 +329,9 @@
     <ClCompile Include="Lu_EntRageState.cpp">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Rage</Filter>
     </ClCompile>
+    <ClCompile Include="Lu_TraceCircleProjectile.cpp">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TraceCircle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -664,6 +667,9 @@
     </ClInclude>
     <ClInclude Include="Lu_EntRageState.h">
       <Filter>Contents\Script\03. Monster\Boss\Ent\Ent_FSM\Ent_Rage</Filter>
+    </ClInclude>
+    <ClInclude Include="Lu_TraceCircleProjectile.h">
+      <Filter>Contents\Script\03. Monster\MonsterProjectile\Ent\TraceCircle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1047,6 +1053,9 @@
     </Filter>
     <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\TomatoBomb">
       <UniqueIdentifier>{c5a69fee-3205-4902-8433-c95bccc4d16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\03. Monster\MonsterProjectile\Ent\TraceCircle">
+      <UniqueIdentifier>{10e8889c-f5ab-482e-b14d-c2c0507d75e9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

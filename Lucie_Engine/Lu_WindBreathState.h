@@ -11,6 +11,7 @@ namespace Lu
 
 	private:
 		Vector3 m_BreathDir;
+		float	m_OffsetAngle;
 
 	public:
 		virtual void Initialize() override;

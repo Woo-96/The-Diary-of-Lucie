@@ -18,6 +18,7 @@ namespace Lu
 
 	private:
 		ePoisonDir	m_StartDir;
+		float		m_CoolTime;
 
 	public:
 		virtual void Initialize() override;

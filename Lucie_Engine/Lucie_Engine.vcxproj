@@ -267,6 +267,7 @@
     <ClInclude Include="Lu_TitleScene.h" />
     <ClInclude Include="Lu_TomatoBombProjectile.h" />
     <ClInclude Include="Lu_TomatoBombState.h" />
+    <ClInclude Include="Lu_TraceCircleProjectile.h" />
     <ClInclude Include="Lu_TriggerScript.h" />
     <ClInclude Include="Lu_UIScript.h" />
     <ClInclude Include="Lu_WandProjectile.h" />
@@ -380,6 +381,7 @@
     <ClCompile Include="Lu_TitleScene.cpp" />
     <ClCompile Include="Lu_TomatoBombProjectile.cpp" />
     <ClCompile Include="Lu_TomatoBombState.cpp" />
+    <ClCompile Include="Lu_TraceCircleProjectile.cpp" />
     <ClCompile Include="Lu_TriggerScript.cpp" />
     <ClCompile Include="Lu_UIScript.cpp" />
     <ClCompile Include="Lu_WandProjectile.cpp" />

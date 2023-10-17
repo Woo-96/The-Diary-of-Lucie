@@ -28,8 +28,8 @@ namespace Lu
 	{
 		SetName(L"KingSlimeScript");
 
-		GetInfo().HP = 100;
-		GetInfo().MaxHP = 100;
+		GetInfo().HP = 200;
+		GetInfo().MaxHP = 200;
 		GetInfo().MoveSpeed = 150.f;
 	}
 
