@@ -9,6 +9,9 @@ namespace Lu
 		CraterState();
 		virtual ~CraterState();
 
+	private:
+		bool	m_bFirst;
+
 	public:
 		virtual void Initialize() override;
 		virtual void Update() override;
